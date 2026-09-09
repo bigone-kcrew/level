@@ -1,6 +1,12 @@
+---
+layout: default
+key: benchmark
+title: 03. 타기관 비교
+description: 공공기관 40여 곳의 근무평정 내규·단체협약 대조
+---
+
 # 03. 타기관 비교
 
-[← 목록](../README.md) · [진단](diagnosis.md) · [개정안](amendments.md)
 
 공공기관 40여 곳의 근무평정 관련 내규·단체협약을 경영공시 기반으로 대조했습니다.
 중소벤처기업부 산하 기관은 **굵게** 표시했습니다.

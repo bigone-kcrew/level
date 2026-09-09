@@ -1,6 +1,12 @@
+---
+layout: default
+key: bargaining
+title: 04. 노동조합의 요구사항과 근거
+description: 요구사항 10개와 규정 근거, 사측 개편안에 대한 의견
+---
+
 # 04. 노동조합의 요구사항과 근거
 
-[← 목록](../README.md) · [진단](diagnosis.md) · [개정안](amendments.md) · [타기관 비교](benchmark.md)
 
 이 문서는 창업진흥원노동조합이 근무평정제도 개편 논의에서 제시하는 요구사항과 그 근거를 정리한 것입니다.
 공개를 전제로 작성했습니다.

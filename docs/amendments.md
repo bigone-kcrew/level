@@ -1,6 +1,12 @@
+---
+layout: default
+key: amendments
+title: 02. 규정 개정안
+description: 근무평정규칙·인사규정 신구대조표와 사후 표준화 산식
+---
+
 # 02. 규정 개정안 (신구대조표)
 
-[← 목록](../README.md) · [진단](diagnosis.md) · [타기관 비교](benchmark.md)
 
 ---
 

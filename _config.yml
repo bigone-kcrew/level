@@ -1,6 +1,10 @@
 title: 창업진흥원 근무평정제도 개편 자료
 description: 현행 근무평정제도 진단, 규정 개정안, 타기관 비교, 인터랙티브 시뮬레이터
-theme: null
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
 plugins: []
 exclude:
   - sim/
