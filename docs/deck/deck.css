@@ -412,7 +412,10 @@ tbody tr.hl td:first-child { font-weight: 700; }
   height: 1px; background: var(--hair-2);
 }
 .pageno {
-  position: absolute; right: var(--pad-x); top: calc(3.4vh - 1.9em);
+  /* 상단 규칙선(3.4vh) 바로 위에 붙이되, 화면이 낮아도 위로 벗어나지 않게
+     max() 로 바닥을 둔다. --fs-micro 하한이 15px 이므로 1.9em ≈ 28.5px 이고
+     1280×720 에서 3.4vh = 24.5px 라 그냥 빼면 음수가 된다. */
+  position: absolute; right: var(--pad-x); top: max(6px, calc(3.4vh - 1.9em));
   font-family: var(--mono); font-size: var(--fs-micro); color: var(--ink-3);
   font-variant-numeric: tabular-nums; letter-spacing: .04em;
 }
