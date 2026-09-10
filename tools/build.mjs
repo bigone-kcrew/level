@@ -13,6 +13,8 @@ const NAV = [
   ['bargaining', '04 교섭'],
   ['plan', '05 계획'],
   ['union', '06 전임자'],
+  ['plan2027', '07 시행계획'],
+  ['guide', '08 세부지침'],
 ];
 
 function frontMatter(src) {
