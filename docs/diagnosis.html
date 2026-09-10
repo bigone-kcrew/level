@@ -5,98 +5,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>01. 제도 진단 — 창업진흥원 근무평정 제도개선</title>
 <meta name="description" content="근무평정·내부평가·부서평가가 승진과 성과급으로 이어지는 경로와 그 구조적 결함">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#FBFAF9">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="compare.css">
 <style>
+/* 토큰 이름은 발표덱(docs/deck/deck.css)과 같은 체계를 쓴다.
+   문서는 오래 읽는 것이므로 밝은 바탕을 기본으로 하고, 시스템 설정이
+   어두운 화면이면 자동으로 뒤집는다. 본문 대비는 두 모드 모두 7:1 이상. */
 :root{
-  color-scheme:light;
-  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
-  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
-  --line:#D8E0EC; --line-2:#B9C6DA;
-  --brand:#1D4ED8; --brand-soft:#E8EEFD;
-  --accent:#C2410C; --accent-soft:#FDEBE0;
-  --danger:#B91C1C; --ok:#15803D;
-  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
-  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  color-scheme:light dark;
+  --bg:#FBFAF9; --card:#FFFFFF; --card-2:#F4F4F6;
+  --bg-2:#F1F1F4;
+  --ink:#111114;    /* 18.9:1 */
+  --ink-2:#36363C;  /* 12.0:1 */
+  --ink-3:#4A4A52;  /*  8.8:1 */
+  --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
+  --line:var(--hair-2); --line-2:var(--hair);
+  --accent:#005075;      /*  8.7:1 */
+  --accent-2:#003F5C;
+  --accent-soft:#EAF1F6;
+  --brand:var(--accent); --brand-soft:var(--accent-soft);
+  --danger:#96201A; --ok:#136B30;
+  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --chip-ink:#FFFFFF;
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
+         "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
+  --mono:"SF Mono",ui-monospace,"D2Coding",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
+    --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
+    --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
+    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --danger:#FF453A; --ok:#30D158;
+    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
+    --chip-ink:#00131C;
+  }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
-  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+  font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-optical-sizing:auto;
 }
 header{
-  position:sticky;top:0;z-index:20;background:var(--card);
-  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--hair-2);
 }
-.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.bm{display:flex;flex-direction:column;padding:11px 0}
-.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
-.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
-nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px}
+.bm{display:flex;flex-direction:column;padding:11px 0;flex:0 0 auto}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.018em;white-space:nowrap}
+.bm .s{font-size:15.5px;color:var(--ink-3);font-weight:400;letter-spacing:.012em;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 0;min-width:0;overflow-x:auto;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
 nav a{
-  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  font-size:16.5px;font-weight:600;color:var(--ink-3);text-decoration:none;
   padding:0 15px;min-height:52px;display:flex;align-items:center;
   border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
 }
 nav a:hover{color:var(--ink);background:var(--card-2)}
-nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
-nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
 .cta{
-  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
-  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
+  display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
 article{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+  background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
+  padding:clamp(24px,4vw,62px);
 }
 article>*{max-width:80ch}
 article>table,article>.tw{max-width:none}
-h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
-h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
-h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
-h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
-h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
-h4{font-size:19px;margin:24px 0 8px}
+h1,h2,h3,h4{font-weight:700}
+h1{font-size:clamp(32px,3.6vw,50px);line-height:1.14;letter-spacing:-.030em;margin:0 0 28px}
+h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
+   margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
+h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
+   margin:36px 0 12px;color:var(--accent)}
+h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
 p{margin:0 0 17px}
 ul,ol{margin:0 0 17px;padding-left:26px}
 li{margin:6px 0}
 blockquote{
-  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
-  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+  margin:26px 0;padding:18px 24px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);border-radius:0;font-size:.97em;
+  line-height:1.66;
 }
 blockquote p:last-child{margin:0}
-hr{border:0;border-top:2px solid var(--line);margin:44px 0}
-a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
-a:hover{background:var(--brand-soft)}
+hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--accent-soft)}
 code{
-  font-family:var(--mono);font-size:.9em;background:var(--card-2);
-  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+  font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
+  border:1px solid var(--hair-2);border-radius:4px;padding:2px 6px;
+  letter-spacing:0;
 }
 pre{
-  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
-  overflow-x:auto;font-size:16px;line-height:1.6;
+  background:#111114;color:#F5F5F7;border-radius:6px;padding:22px 24px;
+  overflow-x:auto;font-size:16px;line-height:1.62;letter-spacing:0;
 }
 pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
-.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--hair-2);border-radius:6px}
 table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
-th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--hair-2);vertical-align:top}
+th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowrap;
+   font-size:15.5px;letter-spacing:.03em}
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
-footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
+  font-size:15.5px;line-height:1.62;letter-spacing:.010em}
+@media (max-width:900px){ .cta{display:none} }
 @media (max-width:760px){
   body{font-size:17.5px}
   .bm .t{font-size:17px}
   main{padding:22px 14px 70px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--card-2:#f4f4f4;--ink:#000;--ink-2:#1a1a1a;--ink-3:#3d3d3d;
+        --hair:rgba(0,0,0,.32);--hair-2:rgba(0,0,0,.15);--accent:#004260;--accent-soft:#f2f6f8}
+  header,footer .no-print,.cta{display:none!important}
+  body{font-size:11.5pt;line-height:1.6}
+  article{border:0;padding:0}
+  h2{break-after:avoid}
+  table,blockquote,pre,.tw{break-inside:avoid}
+  pre{background:#f4f4f4;color:#000;border:1px solid #bbb}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.82em;color:#555}
+}
 </style>
 </head>
 <body>
@@ -105,7 +154,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html" class="on" aria-current="page">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a></nav>
+  <nav><a href="diagnosis.html" class="on" aria-current="page">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
 <main><article><h1>01. 제도 진단</h1>
@@ -375,8 +424,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
 <hr>
 <h2>3. 사전조정계수가 평정자의 성향을 결과로 옮긴다</h2>
 <h3>3-1. 제도의 작동</h3>
-<p>업적·역량평가는 60<del>100점 구간에서 부여하되 <strong>피평가자 그룹의 평균점수를 80점 이내</strong>로
-설정합니다(연도별 계획). 2023년까지는 평균 85점 이내에 부여구간이 부서장 78</del>92점이었고,
+<p>업적·역량평가는 60~100점 구간에서 부여하되 <strong>피평가자 그룹의 평균점수를 80점 이내</strong>로
+설정합니다(연도별 계획). 2023년까지는 평균 85점 이내에 부여구간이 부서장 78~92점이었고,
 2024년부터 평균 80점 이내에 구간 60~100점으로 바뀌었습니다. <strong>압축이 강화된 방향입니다.</strong></p>
 <p>평균이 상한이므로 &quot;누군가는 반드시 낮은 점수를 받는다&quot;는 명제는 성립하지 않습니다.
 정확한 명제는 이것입니다 — <strong>한 명에게 100점을 주려면 나머지의 평균이
@@ -426,7 +475,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
 평정자를 별도 유형으로 두기 어렵습니다.</strong> 본부 5개 중 극단 성향이 2개, 균등 성향이 3개입니다.</p>
 <blockquote>
 <p><strong>고지</strong> 어느 본부가 어느 유형인지는 이 문서에 담지 않으며, 시뮬레이션에서도 <strong>계산할 때마다
-무작위로 배정</strong>합니다. 조합의 관찰은 유형의 <strong>개수</strong>에 관한 것이고 특정 본부에 관한 확정 자료가
+무작위로 배정<b>합니다. 조합의 관찰은 유형의 </b>개수</strong>에 관한 것이고 특정 본부에 관한 확정 자료가
 아닙니다. 특정 본부를 지목하면 공개 자료에서 개인이 유추될 수 있습니다.</p>
 </blockquote>
 <p>영향 인원은 소부서 문제보다 훨씬 많습니다. 그리고 결정적으로 —
@@ -434,7 +483,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
 2차 평가 단계의 좁은 부여폭은 &quot;집단이 실제로 비슷했다&quot;로 설명되지 않습니다.</p>
 <h3>3-2의2. 근본 목적 — 개인이 자기 성과로 평가받는가</h3>
 <p>근무평정의 근본 목적은 「S등급이 나오는가」가 아닙니다.
-**「개인이 외부요인의 영향을 적게 받고 자기 성과로 평가받는가」**입니다.</p>
+<b>「개인이 외부요인의 영향을 적게 받고 자기 성과로 평가받는가」</b>입니다.</p>
 <p>여기서 외부요인은 부서장·본부장의 평정 성향, 전보, 부서원 수, 부서 내 승진자 수, 기간제·직급 구성,
 승진대상자 수 등 <strong>피평가자가 통제할 수 없는 모든 요인</strong>을 말합니다.</p>
 <p>그래서 대표 지표를 이렇게 정합니다 —
@@ -471,7 +520,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
 <p><strong>정직하게 함께 밝힙니다 — 개선안은 제거 가능한 외부요인 영향의 약 30%만 제거합니다.</strong>
 나머지 70%는 평가자가 실력을 완전히 관측하지 못하는 데서 오며, <strong>제도 설계로 해소되지 않습니다.</strong>
 「완전 해결」이라고 말할 수 없습니다.
-다면평가 확대(개정 14·15)를 함께 적용하면 **40.9%**까지 오릅니다
+다면평가 확대(개정 14·15)를 함께 적용하면 <b>40.9%</b>까지 오릅니다
 *(이 값은 <strong>다면 모형 조건</strong>의 실행값으로 위 표와 실행 조건이 다르므로, 두 수치를 같은 눈금으로
 비교하지 않습니다. 조건별 값은 〈02 규정 개정안〉 개정 14에 있습니다.)*</p>
 <p><strong>역전 조건은 찾지 못했습니다.</strong> 가정을 바꾸어 가며 계산했으나, <strong>현행이 개선안보다 이 지표에서 나은
@@ -646,8 +695,8 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 합니다.</strong></p>
 <h3>3-6. 이 개정이 사측에 주는 이익</h3>
 <p>이 문서는 조합의 문서이지만, 이 절은 <strong>사측의 이익</strong>을 적습니다. 협의 자리에서 필요한 부분입니다.</p>
-<p><strong>핵심은 이것입니다</strong> — 사측이 원하는 것은 「잘할 사람에게 잘 주기」보다 **「실제 저성과자를 낮게
-평가하기」**인데, <strong>현행 제도에서는 그것이 작동하지 않습니다.</strong></p>
+<p><strong>핵심은 이것입니다</strong> — 사측이 원하는 것은 「잘할 사람에게 잘 주기」보다 <strong>「실제 저성과자를 낮게
+평가하기」<b>인데, </b>현행 제도에서는 그것이 작동하지 않습니다.</strong></p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -676,7 +725,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <p><strong>균등 성향 부서에서는 최하위 실력자도 열 명 중 아홉 명이 B 이상을 받습니다.
 그리고 부서의 절반이 이 상태입니다.</strong></p>
 <p><strong>이것은 가정이 아니라 산술입니다.</strong> 부여폭 2점 부서에서 최하위자는 부서 평균에서 약 3점 아래,
-곧 약 77점입니다. 부여폭 13점 부서의 최하위는 60점입니다. C 정원은 **직급별 전사 10%**로 배정되므로
+곧 약 77점입니다. 부여폭 13점 부서의 최하위는 60점입니다. C 정원은 <b>직급별 전사 10%</b>로 배정되므로
 <strong>C는 거의 전부 극단 성향 부서에서 나옵니다.</strong> 균등 성향 부서장이 아무리 문제 직원을 낮게 주려 해도,
 부서 평균 80점 제약 안에서 2점 폭으로는 전사 하위 10%에 넣을 방법이 없습니다.
 <strong>부서장의 의지 문제가 아니라 제도가 막고 있습니다.</strong></p>
@@ -1196,7 +1245,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <td>복직 1명 + 신규 2명</td>
 </tr>
 </tbody></table></div>
-<p>5명에 S 20% / A 30% / B 40% / C 10%를 적용하면 S 1명, A 1<del>2명, B 2명, C 0</del>1명이고,
+<p>5명에 S 20% / A 30% / B 40% / C 10%를 적용하면 S 1명, A 1~2명, B 2명, C 0~1명이고,
 반올림에 따라 C가 1명 나오면 <strong>한 사람이 20%를 뒤집어씁니다.</strong>
 <strong>재직자가 1명인 시점에는 강제배분이 아예 성립하지 않습니다.</strong>
 집단 크기가 1~5명 사이에서 움직이는 배정군에 상대평가를 적용하는 것은

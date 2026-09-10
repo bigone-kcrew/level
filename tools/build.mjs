@@ -16,6 +16,7 @@ const NAV = [
   ['plan2027', '07 시행계획'],
   ['guide', '08 세부지침'],
   ['method', '09 근거'],
+  ['compare', '10 대비'],
 ];
 
 function frontMatter(src) {
@@ -31,6 +32,20 @@ function frontMatter(src) {
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 marked.setOptions({ gfm: true, breaks: false });
+
+/* GFM 취소선은 물결 하나로도 열린다. 이 문서들은 숫자 범위에 물결을 쓰므로
+   (83~85점, 11~19%, 70.01~70 등) 한 문단에 물결이 홀수 개면 그 사이가
+   취소선으로 변하고 강조(**...**)까지 삼켜 버린다.
+   취소선은 `~~두 개~~`로만 인정하도록 내장 토크나이저를 교체한다. */
+marked.use({
+  tokenizer: {
+    del(src) {
+      const m = /^~~(?=\S)([\s\S]*?\S)~~/.exec(src);
+      if (!m) return;
+      return { type: 'del', raw: m[0], text: m[1], tokens: this.lexer.inlineTokens(m[1]) };
+    }
+  }
+});
 
 let built = 0;
 for (const f of fs.readdirSync(DOCS)) {

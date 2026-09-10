@@ -5,98 +5,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>02. 규정 개정안 — 창업진흥원 근무평정 제도개선</title>
 <meta name="description" content="인사규정은 그대로 두고 근무평정 규칙과 평정계획만 바로잡는 신구대조표">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#FBFAF9">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="compare.css">
 <style>
+/* 토큰 이름은 발표덱(docs/deck/deck.css)과 같은 체계를 쓴다.
+   문서는 오래 읽는 것이므로 밝은 바탕을 기본으로 하고, 시스템 설정이
+   어두운 화면이면 자동으로 뒤집는다. 본문 대비는 두 모드 모두 7:1 이상. */
 :root{
-  color-scheme:light;
-  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
-  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
-  --line:#D8E0EC; --line-2:#B9C6DA;
-  --brand:#1D4ED8; --brand-soft:#E8EEFD;
-  --accent:#C2410C; --accent-soft:#FDEBE0;
-  --danger:#B91C1C; --ok:#15803D;
-  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
-  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  color-scheme:light dark;
+  --bg:#FBFAF9; --card:#FFFFFF; --card-2:#F4F4F6;
+  --bg-2:#F1F1F4;
+  --ink:#111114;    /* 18.9:1 */
+  --ink-2:#36363C;  /* 12.0:1 */
+  --ink-3:#4A4A52;  /*  8.8:1 */
+  --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
+  --line:var(--hair-2); --line-2:var(--hair);
+  --accent:#005075;      /*  8.7:1 */
+  --accent-2:#003F5C;
+  --accent-soft:#EAF1F6;
+  --brand:var(--accent); --brand-soft:var(--accent-soft);
+  --danger:#96201A; --ok:#136B30;
+  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --chip-ink:#FFFFFF;
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
+         "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
+  --mono:"SF Mono",ui-monospace,"D2Coding",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
+    --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
+    --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
+    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --danger:#FF453A; --ok:#30D158;
+    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
+    --chip-ink:#00131C;
+  }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
-  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+  font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-optical-sizing:auto;
 }
 header{
-  position:sticky;top:0;z-index:20;background:var(--card);
-  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--hair-2);
 }
-.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.bm{display:flex;flex-direction:column;padding:11px 0}
-.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
-.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
-nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px}
+.bm{display:flex;flex-direction:column;padding:11px 0;flex:0 0 auto}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.018em;white-space:nowrap}
+.bm .s{font-size:15.5px;color:var(--ink-3);font-weight:400;letter-spacing:.012em;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 0;min-width:0;overflow-x:auto;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
 nav a{
-  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  font-size:16.5px;font-weight:600;color:var(--ink-3);text-decoration:none;
   padding:0 15px;min-height:52px;display:flex;align-items:center;
   border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
 }
 nav a:hover{color:var(--ink);background:var(--card-2)}
-nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
-nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
 .cta{
-  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
-  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
+  display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
 article{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+  background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
+  padding:clamp(24px,4vw,62px);
 }
 article>*{max-width:80ch}
 article>table,article>.tw{max-width:none}
-h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
-h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
-h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
-h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
-h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
-h4{font-size:19px;margin:24px 0 8px}
+h1,h2,h3,h4{font-weight:700}
+h1{font-size:clamp(32px,3.6vw,50px);line-height:1.14;letter-spacing:-.030em;margin:0 0 28px}
+h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
+   margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
+h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
+   margin:36px 0 12px;color:var(--accent)}
+h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
 p{margin:0 0 17px}
 ul,ol{margin:0 0 17px;padding-left:26px}
 li{margin:6px 0}
 blockquote{
-  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
-  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+  margin:26px 0;padding:18px 24px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);border-radius:0;font-size:.97em;
+  line-height:1.66;
 }
 blockquote p:last-child{margin:0}
-hr{border:0;border-top:2px solid var(--line);margin:44px 0}
-a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
-a:hover{background:var(--brand-soft)}
+hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--accent-soft)}
 code{
-  font-family:var(--mono);font-size:.9em;background:var(--card-2);
-  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+  font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
+  border:1px solid var(--hair-2);border-radius:4px;padding:2px 6px;
+  letter-spacing:0;
 }
 pre{
-  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
-  overflow-x:auto;font-size:16px;line-height:1.6;
+  background:#111114;color:#F5F5F7;border-radius:6px;padding:22px 24px;
+  overflow-x:auto;font-size:16px;line-height:1.62;letter-spacing:0;
 }
 pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
-.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--hair-2);border-radius:6px}
 table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
-th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--hair-2);vertical-align:top}
+th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowrap;
+   font-size:15.5px;letter-spacing:.03em}
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
-footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
+  font-size:15.5px;line-height:1.62;letter-spacing:.010em}
+@media (max-width:900px){ .cta{display:none} }
 @media (max-width:760px){
   body{font-size:17.5px}
   .bm .t{font-size:17px}
   main{padding:22px 14px 70px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--card-2:#f4f4f4;--ink:#000;--ink-2:#1a1a1a;--ink-3:#3d3d3d;
+        --hair:rgba(0,0,0,.32);--hair-2:rgba(0,0,0,.15);--accent:#004260;--accent-soft:#f2f6f8}
+  header,footer .no-print,.cta{display:none!important}
+  body{font-size:11.5pt;line-height:1.6}
+  article{border:0;padding:0}
+  h2{break-after:avoid}
+  table,blockquote,pre,.tw{break-inside:avoid}
+  pre{background:#f4f4f4;color:#000;border:1px solid #bbb}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.82em;color:#555}
+}
 </style>
 </head>
 <body>
@@ -105,7 +154,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html" class="on" aria-current="page">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html" class="on" aria-current="page">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
 <main><article><h1>02. 규정 개정안</h1>
@@ -634,7 +683,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);fon
 확대하는 것도 좋다&quot;였다. 방향에 동의하되 <strong>조건을 붙인다.</strong></p>
 <p>다면평가에는 &quot;부서 내에서 껄끄러워지는 것을 피하려고 전원에게 높은 점수를 주는&quot; 경향이 있다는
 관찰이 있다. 실제 분포는 조합이 확인할 수 없다. 만약 그 관찰이 사실이라면, <strong>변별력이 없는 항목의
-비중을 20%로 올리는 것은 업적·역량 80%의 실질 지배력을 오히려 키운다.</strong> 따라서 <strong>변별력을 확보하는
+비중을 20%로 올리는 것은 업적·역량 80%의 실질 지배력을 오히려 키운다.<b> 따라서 </b>변별력을 확보하는
 장치가 함께 시행되지 않는 한 비중 확대는 역효과다.</strong></p>
 <blockquote>
 <p><strong>이 조건은 개정 9·15로 충족된다.</strong> 개정 9가 다면평가에 <strong>보정과 동점 금지</strong>를 도입해 변별력을
@@ -1056,7 +1105,7 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <p>⑤2호와 3호는 개정 5·9에서 판단을 미룬 공통평가·다면평가의 실제 분포를 매년 확인하는 장치다.
 추정으로 제도를 설계하지 않기 위한 조항이다.</p>
 <p><strong>타기관 근거</strong> 예금보험공사 제68조① &quot;해당회차 평가가 완료되는 즉시 평가대상자에게 <strong>평정점을 알려
-주어야 한다</strong>&quot; · 한국관광공사 제7조② 평가자는 &quot;역량별로 <strong>평가 사유를 작성</strong>하여야 한다&quot; ·
+주어야 한다<b>&quot; · 한국관광공사 제7조② 평가자는 &quot;역량별로 </b>평가 사유를 작성</strong>하여야 한다&quot; ·
 국가유산진흥원 제24조⑥ &quot;평가결과에 대한 공개 요청이 있을 경우 <strong>본인에 한하여</strong> 평가점수를 공개&quot;</p>
 <h3>개정 12. 제31조의2 신설 — 노사협의회 협의</h3>
 <div class="tw"><table>
@@ -1075,7 +1124,7 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 전례가 있다(§1-4). 규칙에 수치를 올려도, 규칙 자체가 원장 결재로 바뀌므로 같은 일이 반복될 수 있다.</p>
 <p>근거는 이미 있다. <strong>「근로자참여 및 협력증진에 관한 법률」 제20조①5호</strong>는 &quot;인사·노무관리의
 제도개선&quot;을 협의사항으로 정하고, <strong>창진원 노사협의회 운영규정 제25조①5호</strong>도 같은 내용을 협의사항으로
-두면서 **제25조②에서 &quot;협의회는 제1항 각 호의 사항에 대하여 의결할 수 있다&quot;**고 한다. 근무평정 제도의
+두면서 <b>제25조②에서 &quot;협의회는 제1항 각 호의 사항에 대하여 의결할 수 있다&quot;</b>고 한다. 근무평정 제도의
 변경은 이미 협의·의결 대상이다. 개정 12는 그 사실을 규칙에 명시하는 것에 그친다.</p>
 <h3>개정 13. 제7조② — 평가 미실시자의 점수 산출</h3>
 <div class="tw"><table>
@@ -1112,11 +1161,11 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <blockquote>
 <p><strong>개정 5와의 관계</strong> 개정 5는 당초 다면 비중 확대를 「보정·동점금지를 먼저 시행하고 2027년 결과를
 검증한 뒤 재협의」로 유보했다. 개정 14·15는 그 유보를 <strong>개정 9의 보정·동점 금지와 개정 15의
-지명제를 전제로</strong> 해소한다. <strong>개정 15가 채택되지 않으면 개정 5의 유보를 그대로 유지한다.</strong></p>
+지명제를 전제로<b> 해소한다. </b>개정 15가 채택되지 않으면 개정 5의 유보를 그대로 유지한다.</strong></p>
 </blockquote>
 <p><strong>이유</strong> 다면평가는 부서장·본부장과 <strong>다른 관측자</strong>가 보는 유일한 항목이다. 배점을 옮기면 평정점에서
 평가자 성향이 차지하는 몫이 줄어든다.</p>
-<p>아래 지표는 **「같은 실력 십분위 안의 평정점 표준편차」**다. 실력이 같은 사람들끼리 점수가 벌어진
+<p>아래 지표는 <b>「같은 실력 십분위 안의 평정점 표준편차」</b>다. 실력이 같은 사람들끼리 점수가 벌어진
 만큼이 곧 피평가자가 통제할 수 없는 외부요인의 총량이다. <strong>「제거율」은 현행과 이상적 제도(평가자가
 실력을 완전히 관측하는 가상의 제도) 사이에서 제거된 외부요인 영향의 비율</strong>을 말한다. 현행이 0%,
 이상적 제도가 100%다.</p>
@@ -1236,7 +1285,7 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 「기관장이 별도로 정한다」식 위임으로 <strong>미확인 42곳</strong>은 분포에서 제외했다.</p>
 <p><strong>분류를 먼저 밝혀야 한다.</strong> 창진원 규칙 <strong>제22조①</strong>은 다면평가자를 「<strong>부서장을 포함한</strong> 평가
 기준일 <strong>소속 부서 전원</strong>」으로 정한다. 따라서 창진원의 다면평가는 순수 동료평가가 아니라
-**상하·동료 통합 다면(유형 C)**이다. 아래 두 기준 모두를 제시한다.</p>
+<b>상하·동료 통합 다면(유형 C)</b>이다. 아래 두 기준 모두를 제시한다.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -1273,8 +1322,8 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 </tbody></table></div>
 <p><strong>어느 기준으로 보아도 창진원 10%는 중위값 미달이고, 20%는 중위값이다.</strong> 조합의 요구는
 상위권으로 올려 달라는 것이 아니라 <strong>가운데로 맞춰 달라는 것</strong>이다.</p>
-<p><strong>배점 구간별 분포 (유형 C · N=26)</strong> 10% 이하 8곳 · 11<del>19% 2곳 · **20</del>29% 9곳** · 30<del>39% 5곳
-(한국석유공사 36% · 한국부동산원·축산환경관리원·한국환경공단 30%) · 40</del>49% 1곳(한국전력거래소 40%) ·
+<p><strong>배점 구간별 분포 (유형 C · N=26)</strong> 10% 이하 8곳 · 11~19% 2곳 · <strong>20~29% 9곳</strong> · 30~39% 5곳
+(한국석유공사 36% · 한국부동산원·축산환경관리원·한국환경공단 30%) · 40~49% 1곳(한국전력거래소 40%) ·
 50% 이상 1곳(한국수자원공사 70~80%)</p>
 <p><strong>20% 이상 채택 기관의 조문 원문</strong></p>
 <div class="tw"><table>
@@ -1313,7 +1362,7 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <tr>
 <td><strong>한국관광공사</strong></td>
 <td>역량평가규정 제8조④</td>
-<td>&quot;1. 팀장급 이상은 직상위자와 <strong>소속부서직원</strong>의 평가를 각각 60%와 **40%**로 반영한다. 2. 팀원급은 각각 70%와 **30%**로 반영한다.&quot;</td>
+<td>&quot;1. 팀장급 이상은 직상위자와 <strong>소속부서직원</strong>의 평가를 각각 60%와 <b>40%</b>로 반영한다. 2. 팀원급은 각각 70%와 <b>30%</b>로 반영한다.&quot;</td>
 </tr>
 <tr>
 <td><strong>한국교육학술정보원</strong></td>
@@ -1338,11 +1387,11 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 </thead>
 <tbody><tr>
 <td><strong>제22조①</strong> 다면평가는 <strong>부서장을 포함한</strong> 평가 기준일 <strong>소속 부서 전원</strong>이 평가자가 되어 본인을 제외한 소속 부서 전원(부서장 제외)에 대하여 평가를 실시한다. 단, 파견, 퇴직자 등은 다면평가 대상에서 제외할 수 있다.<br>② 다면평가의 구간값은 원장이 별도로 정하는 바에 따른다.</td>
-<td>① 다면평가는 피평가자와 평정대상기간 중 <strong>3개월 이상 함께 근무하고 업무상 관련이 있었던 동료 4인 이상</strong>이 실시한다. <strong>업적·역량평가의 1차 평가자는 다면평가자가 되지 아니한다.</strong><br>② 제1항의 평가자는 <strong>피평가자가 5인 이상을 추천하고 부서장이 확인</strong>하여 인사담당부서장이 지정한다. 부서 인원이 부족한 경우 인사담당부서장이 협업 이력을 확인하여 관련 부서에서 보충 지정한다.<br>③ <strong>업무상 관련이 없는 자를 평가자로 지정해서는 아니 된다.</strong><br>④ 평가자 명단 및 개별 부여점수는 공개하지 아니한다.<br>⑤ 다면평가 점수는 유효 응답이 <strong>6인 이상</strong>인 경우 최고점 및 최저점을 각각 하나씩 제외한 후, <strong>기관 전체를 하나의 평가군</strong>으로 하여 **[별표 9]**의 방법에 따라 보정한다.<br>⑥ 평가자는 피평가자 전원에게 <strong>동일한 점수를 부여할 수 없다.</strong><br>⑦ 유효 응답이 <strong>3인 미만</strong>인 경우 해당 인원의 다면평가 점수는 80점으로 하고, 업적·역량평가 배점을 그 비율만큼 가산한다.<br>⑧ 인사담당부서장은 다면평가의 <strong>평가자별 부여 점수 분포</strong>를 익명으로 집계하여 노사협의회에 보고한다.</td>
+<td>① 다면평가는 피평가자와 평정대상기간 중 <strong>3개월 이상 함께 근무하고 업무상 관련이 있었던 동료 4인 이상</strong>이 실시한다. <strong>업적·역량평가의 1차 평가자는 다면평가자가 되지 아니한다.</strong><br>② 제1항의 평가자는 <strong>피평가자가 5인 이상을 추천하고 부서장이 확인</strong>하여 인사담당부서장이 지정한다. 부서 인원이 부족한 경우 인사담당부서장이 협업 이력을 확인하여 관련 부서에서 보충 지정한다.<br>③ <strong>업무상 관련이 없는 자를 평가자로 지정해서는 아니 된다.</strong><br>④ 평가자 명단 및 개별 부여점수는 공개하지 아니한다.<br>⑤ 다면평가 점수는 유효 응답이 <strong>6인 이상</strong>인 경우 최고점 및 최저점을 각각 하나씩 제외한 후, <strong>기관 전체를 하나의 평가군</strong>으로 하여 <b>[별표 9]</b>의 방법에 따라 보정한다.<br>⑥ 평가자는 피평가자 전원에게 <strong>동일한 점수를 부여할 수 없다.</strong><br>⑦ 유효 응답이 <strong>3인 미만</strong>인 경우 해당 인원의 다면평가 점수는 80점으로 하고, 업적·역량평가 배점을 그 비율만큼 가산한다.<br>⑧ 인사담당부서장은 다면평가의 <strong>평가자별 부여 점수 분포</strong>를 익명으로 집계하여 노사협의회에 보고한다.</td>
 </tr>
 </tbody></table></div>
 <blockquote>
-<p><strong>개정 9와의 관계 — 제22조는 하나로 병합한다.</strong> 개정 9는 제22조②(최고·최저점 제외 후 [별표 9] 보정)·제22조④(동점 금지)·제22조⑤(분포 보고)를 고치고, 개정 15는 평가자 선정을 신설한다. <strong>같은 조문을 두 번 고치는 것이므로 위 표의 제22조 전문이 두 개정을 합친 최종안이다.</strong> 개정 9의 제22조 관련 부분은 여기에 흡수되며, 개정 9는 **제22조의2(상향평가)**에 대해 그대로 유효하다.</p>
+<p><strong>개정 9와의 관계 — 제22조는 하나로 병합한다.</strong> 개정 9는 제22조②(최고·최저점 제외 후 [별표 9] 보정)·제22조④(동점 금지)·제22조⑤(분포 보고)를 고치고, 개정 15는 평가자 선정을 신설한다. <strong>같은 조문을 두 번 고치는 것이므로 위 표의 제22조 전문이 두 개정을 합친 최종안이다.</strong> 개정 9의 제22조 관련 부분은 여기에 흡수되며, 개정 9는 <b>제22조의2(상향평가)</b>에 대해 그대로 유효하다.</p>
 </blockquote>
 <p><strong>현행 조문이 문제를 그대로 적어 놓았다.</strong> 제22조①의 두 부분을 보라.</p>
 <div class="tw"><table>
@@ -1428,8 +1477,8 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 배점을 업적·역량으로 되돌리는 것이 옳다.</p>
 <p><strong>(4) 최고·최저점 제외는 유효 응답 6인 이상에만 적용한다.</strong> 개정 9는 다면평가에서 최고점과 최저점을
 각각 하나씩 제외하도록 한다(타기관 선례가 다수 있다). 그런데 <strong>평가자가 4인이면 두 개를 빼고 2인만
-남아 표본이 지나치게 얇아진다.</strong> 지명제로 평가자 수가 4<del>6인 규모가 되므로, 제외 장치는 <strong>6인 이상일
-때만</strong> 작동시킨다. 4</del>5인인 경우에는 제외 없이 전원의 점수를 쓰고, 대신 제3항의 접점 요건과 제4항의
+남아 표본이 지나치게 얇아진다.<b> 지명제로 평가자 수가 4~6인 규모가 되므로, 제외 장치는 </b>6인 이상일
+때만</strong> 작동시킨다. 4~5인인 경우에는 제외 없이 전원의 점수를 쓰고, 대신 제3항의 접점 요건과 제4항의
 비공개가 방어 장치가 된다.</p>
 <p><strong>타기관 근거 — 접점 요건 25곳</strong> 전수 조사에서 「평가자를 업무 관련자로 한정」하는 조문을
 <strong>25개 기관</strong>에서 확인했다. 조합 개정안의 핵심 조문에 다수 선례가 있다.</p>
@@ -1628,12 +1677,12 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <li><strong>역전 임계값은 σ₂ ≈ 0.80σ, 즉 부서장 관측오차의 2.7배다.</strong> 「본부장은 부서장보다 2~3배 부정확하다」
 는 상식적 범위의 <strong>정중앙</strong>이다. 본부장이 그보다 정확하면 50:50이 낫고, 그보다 부정확하면 60:40 또는
 70:30이 낫다. <strong>어느 쪽이 나은지 판정할 수 없다.</strong> 판정에 필요한 자료가 개정 16 제2호다.</li>
-<li><strong>손잡이 자체가 작다.</strong> 사후보정 도입은 외부요인의 **24.0%**를 제거하는데, 1차 비율 조정은
+<li><strong>손잡이 자체가 작다.</strong> 사후보정 도입은 외부요인의 <b>24.0%</b>를 제거하는데, 1차 비율 조정은
 <strong>+2.4% ~ −0.5%</strong> 범위다. <strong>보정 도입 효과의 1/10 ~ 1/50이다.</strong> 교섭에서 쓸 자원을 여기에 쓰는 것이
 손해다.</li>
 <li><strong>1차 100:0(2차 평가자 폐지)은 최악이다.</strong> σ₂를 1.5σ(본부장이 실력을 거의 못 봄)로 놓아도 지표2가
-<strong>7.575</strong>로 위 모든 배분보다 나쁘다. 2차 평가자의 가치는 「실력을 잘 아는가」가 아니라 **「부서 경계를
-넘어 비교하는 유일한 관측자인가」**에 있다. 100:0이면 부서 간 척도 차이를 아무도 상쇄하지 못한다.</li>
+<strong>7.575</strong>로 위 모든 배분보다 나쁘다. 2차 평가자의 가치는 「실력을 잘 아는가」가 아니라 <b>「부서 경계를
+넘어 비교하는 유일한 관측자인가」</b>에 있다. 100:0이면 부서 간 척도 차이를 아무도 상쇄하지 못한다.</li>
 <li>부수적으로, <strong>1차 비중을 낮출수록 부서 설명력이 오른다</strong>(σ₂=0.3σ에서 3.4 → 4.0). 「2차 비중을 늘리면
 부서 영향이 줄어든다」는 통념은 <strong>틀렸다.</strong></li>
 <li><strong>철회 자체가 교섭 자산이다.</strong> 「본부장이 무엇을 아는가」는 사측이 쓸 반론인데, 조합이 먼저 그 이유로
@@ -1864,9 +1913,9 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <p><strong>방향 확인</strong> 10명 평가군의 경우 <em>r</em> = 1(최저점자)은 <strong>67.86점</strong>, <em>r</em> = 10(최고점자)은 <strong>92.14점</strong>이
 된다. <strong>순위 부여 방향을 반대로 적용하면 최고점자가 최저 보정점수를 받으므로, 제2호의 방향을
 반드시 확인해야 한다.</strong></p>
-<p><strong>4. 기준값</strong> 제3호의 80은 [별표 7] 평정점 구간(60<del>100점)의 <strong>중앙값</strong>이다. 7은 <strong>정수로서
+<p><strong>4. 기준값</strong> 제3호의 80은 [별표 7] 평정점 구간(60~100점)의 <strong>중앙값</strong>이다. 7은 <strong>정수로서
 검산 재현성이 보장되는 값</strong>이다 — 제3호가 소수점 셋째자리 반올림을 정하므로 무한소수를 쓰면
-실무자에 따라 값이 달라진다. 평가군 인원이 3</del>16명인 창업진흥원에서 순위기반 보정의 최대 편차는
+실무자에 따라 값이 달라진다. 평가군 인원이 3~16명인 창업진흥원에서 순위기반 보정의 최대 편차는
 <strong>±1.77 표준편차</strong>(16명 평가군)이므로 <strong>절단은 발생하지 않는다.</strong></p>
 <blockquote>
 <p><strong>이 상수는 제도의 성능을 좌우하지 않으며, 노사 협의로 달리 정할 수 있다.</strong> 5점부터 10점까지
@@ -2494,7 +2543,7 @@ S획득률은 3명 부서 37.5% → 45.5%로 <strong>올라가지만</strong>, 1
 <tr>
 <td>한국교통연구원</td>
 <td>연구활동평가규정</td>
-<td>&quot;하향평가자는 평가대상자에게 부여한 점수의 평균값이 **85점(오차범위±2.5점)**이 되도록 하여야 한다. 단, 평균 87.5점을 초과하여 점수를 부여하고자 하는 경우에는 <strong>사유서를 제출</strong>하여야 한다&quot;</td>
+<td>&quot;하향평가자는 평가대상자에게 부여한 점수의 평균값이 <b>85점(오차범위±2.5점)</b>이 되도록 하여야 한다. 단, 평균 87.5점을 초과하여 점수를 부여하고자 하는 경우에는 <strong>사유서를 제출</strong>하여야 한다&quot;</td>
 </tr>
 <tr>
 <td>한국농어촌공사</td>

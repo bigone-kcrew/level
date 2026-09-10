@@ -1,0 +1,190 @@
+/* docs/compare.css — 현행·개선 좌우 대비 서식
+   토큰 이름은 docs/deck/deck.css 체계를 따르고, 값은 문서 레이아웃
+   (tools/layout.html)이 정의한다. 아래는 그 정의가 없을 때의 폴백이다.
+   새 색은 만들지 않는다. 그림자는 쓰지 않는다. JS 없이 순수 CSS로 끝낸다. */
+
+.cmp{ --c-now: var(--series-now, #5E6C82); --c-new: var(--series-new, #005075); }
+
+/* ── 항목 블록 ───────────────────────────────────────────── */
+.cmp{
+  max-width: none;              /* article>*{max-width:80ch} 해제 */
+  margin: 0 0 56px;            /* 항목 사이 간격은 넉넉히 */
+  padding: 0;
+}
+.cmp + .cmp{ margin-top: 56px; }
+.cmp:last-of-type{ margin-bottom: 24px; }
+
+.cmp-h{
+  max-width: none;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 12px;
+  font-size: clamp(21px, 2.1vw, 27px); line-height: 1.3;
+  letter-spacing: -.02em; font-weight: 700;
+  color: var(--ink, #111114);
+}
+/* 각 항목의 h2 는 자기 section 안에서 h2:first-of-type 이 되므로,
+   레이아웃의 h2:first-of-type 규칙(0,0,1,1)을 이기려면 자손 결합이 필요하다. */
+.cmp > .cmp-h{
+  margin: 0 0 14px; padding-top: 20px;
+  border-top: 1px solid var(--hair, rgba(17,17,20,.20));
+}
+
+/* ── 좌우 그리드 ─────────────────────────────────────────── */
+.cmp-g{
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;         /* 좌우 행 높이를 맞춘다 */
+  gap: 16px;
+}
+.cmp-now, .cmp-new{
+  min-width: 0;                 /* 긴 표·코드가 칸을 밀어내지 않게 */
+  padding: 14px 16px 4px;
+  border: 1px solid var(--hair-2, rgba(17,17,20,.09));
+  border-radius: 6px;
+  font-size: 16.5px; line-height: 1.66;
+  color: var(--ink-2, #36363C);
+}
+/* 좌측 — 물러난다 */
+.cmp-now{
+  background: var(--bg-2, #F1F1F4);
+  border-left: 3px solid var(--c-now);
+}
+/* 우측 — 강조한다 */
+.cmp-new{
+  background: color-mix(in srgb, var(--c-new) 7%, transparent);
+  border-left: 3px solid var(--c-new);
+}
+
+/* ── 칸 머리표 — 1열로 접혀도 「현행」·「개선」이 계속 보인다 ── */
+.cmp-lbl{
+  display: flex !important; align-items: baseline; flex-wrap: wrap; gap: 8px;
+  margin: 0 0 10px; padding-bottom: 9px;
+  border-bottom: 1px solid var(--hair-2, rgba(17,17,20,.09));
+  font-size: 16px; line-height: 1.4; font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink, #111114);
+}
+.cmp-now .cmp-lbl{ color: var(--ink-2, #36363C); }
+.cmp-new .cmp-lbl{ color: var(--c-new); }
+.cmp-lbl span{                  /* 「발췌」 등 꼬리표 */
+  font-size: 16px; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2, #36363C);
+  border: 1px solid var(--hair, rgba(17,17,20,.20));
+  border-radius: 3px; padding: 1px 7px;
+}
+
+/* ── 칸 내부 본문 — 여백은 타이트하게 ─────────────────────── */
+.cmp-now > *, .cmp-new > *{ max-width: none; }
+.cmp-now p, .cmp-new p{ margin: 0 0 10px; }
+.cmp-now ul, .cmp-new ul,
+.cmp-now ol, .cmp-new ol{ margin: 0 0 10px; padding-left: 21px; }
+.cmp-now li, .cmp-new li{ margin: 3px 0; }
+.cmp-now b, .cmp-new b, .cmp-now strong, .cmp-new strong{
+  font-weight: 700; color: var(--ink, #111114);
+}
+.cmp-none{ color: var(--ink-2, #36363C); font-style: normal; }
+.cmp-src{                       /* 발췌 출처 꼬리 */
+  margin-top: 4px !important;
+  font-size: 16px; color: var(--ink-2, #36363C);
+}
+/* 칸 안의 표는 바짝 붙인다 (build.mjs 가 .tw 로 감싼다) */
+.cmp .tw{ margin: 10px 0; border-radius: 4px; }
+.cmp table{ font-size: 16px; background: transparent; }
+.cmp th, .cmp td{ padding: 8px 11px; }
+.cmp th{ font-size: 16px; background: transparent; white-space: normal; }
+.cmp tbody tr:hover{ background: transparent; }
+
+/* ── 「무엇이 왜 달라지는가」 ─────────────────────────────── */
+.cmp-why{
+  max-width: none;
+  margin: 14px 0 0; padding: 12px 16px;
+  border-left: 3px solid var(--accent, #005075);
+  background: color-mix(in srgb, var(--accent, #005075) 6%, transparent);
+  border-radius: 0 4px 4px 0;
+  font-size: 16.5px; line-height: 1.64;
+  color: var(--ink-2, #36363C);
+}
+.cmp-why b{ color: var(--ink, #111114); }
+
+/* ── 배지 ────────────────────────────────────────────────── */
+.cmp-tag{
+  display: inline-block; vertical-align: 2px;
+  font-size: 16px; font-weight: 700; line-height: 1.25;
+  letter-spacing: 0; padding: 2px 9px; border-radius: 4px;
+  white-space: nowrap;
+}
+.cmp-tag.chg{
+  color: var(--accent, #005075);
+  border: 2px solid var(--accent, #005075);
+  background: transparent;
+}
+.cmp-tag.same{
+  color: var(--ink-2, #36363C);
+  border: 1px solid var(--hair, rgba(17,17,20,.20));
+  background: transparent;
+}
+.cmp-tag.new{
+  color: var(--bg-2, #F1F1F4);
+  background: var(--c-new);
+  border: 2px solid var(--c-new);
+}
+.cmp-tag.del{
+  color: var(--ink-2, #36363C);
+  border: 1px dashed var(--hair, rgba(17,17,20,.20));
+  background: transparent;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+/* ── 요약표 · 고지 ───────────────────────────────────────── */
+.cmp-note{
+  max-width: none;
+  margin: 0 0 28px; padding: 16px 20px;
+  border: 1px solid var(--hair, rgba(17,17,20,.20));
+  border-left: 3px solid var(--c-now);
+  border-radius: 0 4px 4px 0;
+  background: var(--bg-2, #F1F1F4);
+  font-size: 16.5px; line-height: 1.66;
+  color: var(--ink-2, #36363C);
+}
+.cmp-note b{ color: var(--ink, #111114); }
+.cmp-note p{ margin: 0; }
+.cmp-note p + p{ margin-top: 9px; }
+
+.cmp-sum table{ font-size: 16px; }
+.cmp-sum a{
+  display: flex; align-items: center;     /* 조작 타깃 48px */
+  min-height: 48px; padding: 2px 0;
+  font-weight: 700; text-decoration-thickness: 2px;
+}
+
+/* ── 1000px 미만 — 1열로 접힌다 ──────────────────────────── */
+@media (max-width: 999px){
+  .cmp-g{ grid-template-columns: 1fr; gap: 12px; }
+  .cmp{ margin-bottom: 48px; }
+  .cmp + .cmp{ margin-top: 48px; }
+  /* 접힌 뒤에는 머리표가 유일한 좌·우 표지이므로 더 또렷하게 */
+  .cmp-lbl{ font-size: 17px; }
+  .cmp-now, .cmp-new{ border-left-width: 4px; }
+}
+
+/* ── 인쇄 — 2열 유지, 배경 제거, 쌍을 자르지 않는다 ────────── */
+@media print{
+  .cmp{ break-inside: avoid; page-break-inside: avoid; margin-bottom: 26pt; }
+  .cmp + .cmp{ margin-top: 26pt; }
+  .cmp-g{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10pt;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  .cmp-now, .cmp-new, .cmp-why, .cmp-note{
+    background: none !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .cmp-now, .cmp-new{ border: 1px solid #888; border-left: 3px solid #444; }
+  .cmp-why{ border-left: 3px solid #444; }
+  .cmp-tag{ border-color: #444 !important; color: #000 !important; background: none !important; }
+  .cmp-h{ break-after: avoid; page-break-after: avoid; }
+  .cmp-sum a{ min-height: 0; display: inline; }
+}

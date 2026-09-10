@@ -181,7 +181,7 @@ put(gp, "A1", "② 평가군 계산 — 개정안 [별표 9] 제1호~제3호·�
 put(gp, "A2", DISCLAIMER, fill=F_NOTE, font=FN)
 put(gp, "A3", "입력(연노랑): 원점수 · 조정(제7호) · 조정 사유      나머지(연회색)는 모두 자동 계산", font=FN_S)
 put(gp, "A4", "동점 입력 건수 →", font=B_SEC)
-put(gp, "C4", '=IF(SUMPRODUCT(--($Q$%d:$Q$%d="★동점"))=0,"0건 (정상)",SUMPRODUCT(--($Q$%d:$Q$%d="★동점"))&"건 ★ 개정 2 위반 — 순위가 중복되어 산식이 깨진다. 원점수를 고쳐라")'
+put(gp, "C4", '=IF(COUNTIF($Q$%d:$Q$%d,"★동점")=0,"0건 (정상)",COUNTIF($Q$%d:$Q$%d,"★동점")&"건 ★ 개정 2 위반 — 순위가 중복되어 산식이 깨진다. 원점수를 고쳐라")'
     % (GR0, GR1, GR0, GR1), fill=F_NOTE, font=Font(bold=True, size=10))
 put(gp, "L4", "제5호 적용 평가군 수 →", font=B_SEC)
 put(gp, "O4", "=SUMPRODUCT((COUNTIF($A$%d:$A$%d,$A$%d:$A$%d)<6)/COUNTIF($A$%d:$A$%d,$A$%d:$A$%d))"
@@ -191,7 +191,8 @@ HEADERS = ["평가군", "평가자명", "평가군 구분", "직급", "피평가
            "인원 n", "순위 r\n(낮은 순 = 1위)", "s(n)", "p =\n(r−0.375)/(n+0.25)",
            "z = Φ⁻¹(p)", "보정점수\n(제3호)", "적용 기준점수\n(제5호 반영)",
            "조정\n(제7호 ±5)", "조정 후 점수", "조정 사유", "동점 경고",
-           "보정 후 순위", "순위 보존 검증", "키 (계산용)"]
+           "보정 후 순위", "순위 보존 검증", "키 (계산용)",
+           "절단 전 보정점수\n(60·100 미적용)", "절단 전 조정 후 점수\n(60·100 미적용)"]
 hdr(gp, 5, HEADERS)
 gp.row_dimensions[5].height = 34
 
@@ -237,6 +238,9 @@ for (bi, rr) in rows:
     put(gp, "S%d" % rr, '=IF($L%d="","제5호 - 미실시",IF($R%d=$H%d,"보존","★불일치"))' % (rr, rr, rr),
         fill=F_CALC, align=CTR)
     put(gp, "T%d" % rr, '=$E%d&"|"&$C%d' % (rr, rr), font=FN_S, fill=F_CALC)
+    # 절단이 실제로 발생하는지 세려면 절단 전 값이 있어야 한다(⑤ 검증에서 COUNTIF 로 센다)
+    put(gp, "U%d" % rr, '=IF($G%d<6,"",80+7*$K%d/$I%d)' % (rr, rr, rr), fill=F_CALC, align=CTR, fmt="0.000")
+    put(gp, "V%d" % rr, '=IF($N%d="",$M%d,$M%d+$N%d)' % (rr, rr, rr, rr), fill=F_CALC, align=CTR, fmt="0.000")
 
 for a in ("Q", "S"):
     gp.conditional_formatting.add("%s%d:%s%d" % (a, GR0, a, GR1),
@@ -244,7 +248,7 @@ for a in ("Q", "S"):
                    fill=PatternFill("solid", fgColor="FFC7CE")))
 widths(gp, {"A": 10, "B": 10, "C": 11, "D": 7, "E": 10, "F": 9, "G": 8, "H": 11, "I": 9,
             "J": 12, "K": 10, "L": 11, "M": 14, "N": 10, "O": 12, "P": 28, "Q": 10,
-            "R": 11, "S": 14, "T": 14})
+            "R": 11, "S": 14, "T": 14, "U": 16, "V": 18})
 gp.freeze_panes = "F6"
 
 GP  = lambda a: "'%s'!%s" % (SH_GRP, a)
@@ -491,18 +495,20 @@ G_K = GP("$K$%d:$K$%d" % (GR0, GR1))
 G_I = GP("$I$%d:$I$%d" % (GR0, GR1))
 G_M = GP("$M$%d:$M$%d" % (GR0, GR1))
 G_N = GP("$N$%d:$N$%d" % (GR0, GR1))
+G_U = GP("$U$%d:$U$%d" % (GR0, GR1))
+G_V = GP("$V$%d:$V$%d" % (GR0, GR1))
 SN_J = "'%s'!$%s$%d:$%s$%d" % (SH_SN, jL, SN_R0, jL, SN_R0 + 14)   # n=2~16 만 참고값이 있다
 CHECKS = [
     ("원점수 순위 ≠ 보정 후 순위 인 건수 (순위 100% 보존)",
      '=COUNTIF(%s,"★불일치")' % G_S, 0),
     ("동점 입력 건수 (개정 2 — 동점 금지)",
      '=COUNTIF(%s,"★동점")' % G_Q, 0),
-    ("보정점수 절단(60점 미만) 발생 건수",
-     "=SUMPRODUCT(--(80+7*%s/%s<60))" % (G_K, G_I), 0),
-    ("보정점수 절단(100점 초과) 발생 건수",
-     "=SUMPRODUCT(--(80+7*%s/%s>100))" % (G_K, G_I), 0),
-    ("제7호 조정 후 절단 발생 건수",
-     "=SUMPRODUCT(--(%s+%s<60))+SUMPRODUCT(--(%s+%s>100))" % (G_M, G_N, G_M, G_N), 0),
+    ("보정점수 절단(60점 미만) 발생 건수 — ② U열 기준",
+     '=COUNTIF(%s,"<60")' % G_U, 0),
+    ("보정점수 절단(100점 초과) 발생 건수 — ② U열 기준",
+     '=COUNTIF(%s,">100")' % G_U, 0),
+    ("제7호 조정 후 절단 발생 건수 — ② V열 기준",
+     '=COUNTIF(%s,"<60")+COUNTIF(%s,">100")' % (G_V, G_V), 0),
     ("s(n) 표(n=2~16) 참고값 불일치 건수",
      '=COUNTIF(%s,"FAIL")' % SN_J, 0),
     ("제7호 조정 총합계 (전 평가군)",
@@ -692,14 +698,25 @@ nr4, C_d0, C_d1 = example_block(
     note="예제 A(부여폭 38점)와 예제 C(부여폭 1.8점)의 H열 보정점수가 소수점까지 같다. "
          "이것이 [별표 9]가 하는 일이다 — 평가자가 넓게 주든 좁게 주든 결과가 같아지고, "
          "차등이 없던 평가군에 차등이 생긴다.")
+# 예제 C의 각 행에 「같은 순위인 예제 A 행과의 차이」를 넣어 행별로 대조한다.
+put(ex, "M%d" % (C_d0 - 1), "예제 A 같은 순위와의 차", fill=F_HEAD, font=B_HEAD, align=CTR)
+for rr in range(C_d0, C_d1 + 1):
+    put(ex, "M%d" % rr,
+        '=IFERROR(ROUND($H%d,3)-ROUND(INDEX($H$%d:$H$%d,MATCH($D%d,$D$%d:$D$%d,0)),3),"예제 A에 같은 순위가 없다")'
+        % (rr, A_d0, A_d1, rr, A_d0, A_d1), fill=F_CALC, align=CTR, fmt="0.000")
 put(ex, "A%d" % nr4, "예제 A와 예제 C의 보정점수 동일성 검증", font=B_SEC)
-put(ex, "B%d" % nr4, '=IF(SUMPRODUCT(--(ROUND($H$%d:$H$%d,3)<>ROUND($H$%d:$H$%d,3)))=0,'
-                     '"PASS — 두 예제의 보정점수가 전부 일치한다","FAIL")'
-    % (A_d0, A_d1, C_d0, C_d1), fill=F_CALC, align=CTR, font=Font(bold=True, size=11))
+put(ex, "B%d" % nr4, '=IF(COUNTIF($M$%d:$M$%d,"<>0")=0,'
+                     '"PASS — 두 예제의 보정점수가 전부 일치한다 (차이 0)","FAIL — M열 확인")'
+    % (C_d0, C_d1), fill=F_CALC, align=CTR, font=Font(bold=True, size=11))
+put(ex, "H%d" % nr4, "차이 합계", font=B_HEAD, fill=F_HEAD, align=CTR)
+put(ex, "I%d" % nr4, '=IFERROR(ROUND(SUM($M$%d:$M$%d),3),"산출 불가 — M열 확인")' % (C_d0, C_d1),
+    fill=F_CALC, align=CTR, fmt="0.000")
 ex.conditional_formatting.add("B%d" % nr4, CellIsRule(operator="containsText",
     formula=['NOT(ISERROR(SEARCH("PASS",B%d)))' % nr4], fill=PatternFill("solid", fgColor="C6EFCE")))
+ex.conditional_formatting.add("B%d" % nr4, CellIsRule(operator="containsText",
+    formula=['NOT(ISERROR(SEARCH("FAIL",B%d)))' % nr4], fill=PatternFill("solid", fgColor="FFC7CE")))
 widths(ex, {"A": 20, "B": 14, "C": 16, "D": 16, "E": 12, "F": 20, "G": 14,
-            "H": 26, "I": 26, "J": 12, "K": 14, "L": 40})
+            "H": 26, "I": 26, "J": 12, "K": 14, "L": 40, "M": 22})
 ex.freeze_panes = "B5"
 
 # ════════════════════════════════════════════════════════════════════
