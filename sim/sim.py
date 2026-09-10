@@ -20,20 +20,30 @@ import random, math, statistics as st
 # 평가군 단위: 실 하위 팀·TF는 소속 실장이 평가하므로 상위 실에 통합한다.
 #   (안전문화팀→재무계약실, 데이터분석팀→정책전략실, 정보보안팀→디지털AI실,
 #    기업가정신팀→대학창업실, 정보관리TF→창업확산실, AX전략TF→기획조정실)
-# 본부장 유형: 극단(과도한 차등) 2명 / 균등(과도한 균등) 3명  [조합 관찰]
-# 원장 직속(감사실·홍보실)은 원장이 2차 평가자이며 평균 제약을 받지 않는다.
+# 평정 성향: 본부 5개 중 극단(과도한 차등) 2 · 균등(과도한 균등) 3  [조합 관찰]
+#
+# ※ 어느 본부가 어느 유형인지는 이 모형에 담지 않는다. 반복마다 무작위로 배정한다.
+#    특정 본부를 지목하면 공개 자료에서 개인을 유추할 수 있고, 조합의 관찰은
+#    유형의 '개수'에 관한 것이지 특정 본부에 관한 확정 자료가 아니다.
+#
+# 원장 직속(감사실·홍보실)은 규칙 [별표 1]에 따라 원장이 2차 평가자이며
+# 평정계획상 평균 제약을 받지 않는다. 이는 규정 사실이므로 고정한다.
 
 ORG = {
-    "경영본부":        ("S", {"기획조정실": 10, "미래인재실": 8, "재무계약실": 14, "성과윤리실": 6}),
-    "정책본부":        ("S", {"정책전략실": 11, "원스톱지원실": 8, "사업관리실": 12, "디지털AI실": 9}),
-    "스케일업본부":    ("N", {"딥테크전략실": 12, "민관협력실": 11, "대학창업실": 14,
-                              "창업확산실": 16, "대전팁스팀": 6}),
-    "창업촉진본부":    ("N", {"지역전략실": 12, "예비재도전실": 9, "초기도약실": 12}),
-    "글로벌본부":      ("N", {"글로벌전략실": 11, "글로벌허브실": 6, "글로벌협력실": 10,
-                              "글로벌확산TF": 9}),
-    "원장직속":        ("O", {"감사실": 4, "홍보실": 3}),          # O = 원장(평균 제약 없음)
+    "경영본부":        {"기획조정실": 10, "미래인재실": 8, "재무계약실": 14, "성과윤리실": 6},
+    "정책본부":        {"정책전략실": 11, "원스톱지원실": 8, "사업관리실": 12, "디지털AI실": 9},
+    "스케일업본부":    {"딥테크전략실": 12, "민관협력실": 11, "대학창업실": 14,
+                        "창업확산실": 16, "대전팁스팀": 6},
+    "창업촉진본부":    {"지역전략실": 12, "예비재도전실": 9, "초기도약실": 12},
+    "글로벌본부":      {"글로벌전략실": 11, "글로벌허브실": 6, "글로벌협력실": 10,
+                        "글로벌확산TF": 9},
+    "원장직속":        {"감사실": 4, "홍보실": 3},
 }
-DEPT_SIZES = [n for _, d in ORG.values() for n in d.values()]     # 22개 평가군 · 213명
+HQ_NAMES   = list(ORG.keys())
+DIRECTOR_HQ = HQ_NAMES.index("원장직속")
+N_HQ       = len(HQ_NAMES)
+N_EXTREME  = 2          # 본부 5개 중 극단 성향 수 [조합 관찰]
+DEPT_SIZES = [n for d in ORG.values() for n in d.values()]        # 22개 평가군 · 213명
 
 # [실측] 근무평정규칙 제9조② / 별표 2 — 평가별·평가자별 반영비율
 W_CORE   = 0.85      # 업적 65% + 역량 20%
@@ -62,7 +72,14 @@ W_TENURE       = 0.10    # 근속기간
 
 # [가정 — 조합 관찰] 평정자 성향은 '과도한 차등(극단)'과 '과도한 균등' 두 방향으로 갈린다.
 #   공정형(적정 차등)을 별도로 두지 않는다. 실측 분포 자료 확보 시 재산정 대상.
-HQ_TYPES  = [t for t, _ in ORG.values()]  # ORG 에서 파생 (원장직속 포함 6개 평가단위)
+def draw_hq_types():
+    """반복마다 본부 유형을 무작위 배정한다. 특정 본부를 지목하지 않는다."""
+    idx = [h for h in range(N_HQ) if h != DIRECTOR_HQ]
+    random.shuffle(idx)
+    ty = {DIRECTOR_HQ: "O"}
+    for k, h in enumerate(idx):
+        ty[h] = "S" if k < N_EXTREME else "N"
+    return [ty[h] for h in range(N_HQ)]
 MGR_MIX   = {"S": 0.50, "N": 0.50}        # 부서장 22명: 극단 : 균등 (미확인 — 가정)
 SPREAD    = {"S": 13.0, "N": 2.0, "O": 7.0}         # 유형별 부서 내 부여점수 표준편차(점)
 FAVOR     = {"S": 0.70, "N": 0.0, "O": 0.0}         # 실력과 무관한 선호의 반영 비중
@@ -70,6 +87,13 @@ FAVOR     = {"S": 0.70, "N": 0.0, "O": 0.0}         # 실력과 무관한 선호
 # [가정] 개선안 — 순위기반 표준화의 목표 모수 (규칙 [별표 9] 개정안과 동일)
 TARGET_MEAN = 80.0
 TARGET_SD   = 7.0
+
+# [별표 9] 제7호 — 1차 평가자의 조정 여유. 평가군 내 조정점수 합계는 0.
+#   ADJ_COEF: 평가자가 인식한 신호 1σ 차이당 부여하는 조정 점수
+#   조정은 '평가자 자신의 신호'(FAVOR 가 섞인 값)에 따라 이루어진다고 본다.
+#   실력만 보고 조정한다고 가정하면 개선 효과가 과대평가된다.
+ADJ_BAND = 5.0
+ADJ_COEF = 4.0
 
 # [가정] 이동자 낙인 — 전 부서장이 '나갈 사람'에게, 신 부서장이 '온 지 얼마 안 된 사람'에게
 DEPART_PENALTY  = 0.6     # 표준화 실력 단위(σ)
@@ -201,7 +225,7 @@ def assign_grades(scores, rank_of=None, absolute=()):
     return grade, pts
 
 
-def award(members, gtype, signal_of, mode, mean_cap_slack=0.0):
+def award(members, gtype, signal_of, mode, mean_cap_slack=0.0, adjust=False):
     """한 평가자가 자기 피평가자 그룹에 점수를 부여한다.
 
     mode='current' : 유형별 부여폭 그대로. 그룹 평균은 80점 '이내'(상한)
@@ -222,17 +246,24 @@ def award(members, gtype, signal_of, mode, mean_cap_slack=0.0):
         sd = SPREAD[gtype]
     for k, i in enumerate(members):
         out[i] = clamp(base + sd * bl[rk[k] - 1])
+    # [별표 9] 제7호 — 합계 0 조정. 1차 평가자에게만 적용한다.
+    if mode == "reform" and adjust and ADJ_BAND > 0 and len(members) > 1:
+        m = st.mean(sig)
+        adj = [max(-ADJ_BAND, min(ADJ_BAND, ADJ_COEF * (x - m))) for x in sig]
+        ma = st.mean(adj)
+        for k, i in enumerate(members):
+            out[i] = clamp(out[i] + adj[k] - ma)
     return out
 
 
 def build(ability_scale=None):
     """실제 조직 구조(ORG)로 부서·본부·인원 생성."""
     depts, dept_hq = [], {}
-    for hq, (hqty, ds) in enumerate(ORG.values()):
+    for hq, ds in enumerate(ORG.values()):
         for _name, sz in ds.items():
             dept_hq[len(depts)] = hq
             depts.append(sz)
-    nd, nhq = len(depts), len(ORG)
+    nd, nhq = len(depts), N_HQ
     dept_ty = {d: ("S" if random.random() < MGR_MIX["S"] else "N") for d in range(nd)}
     people, dmem, hmem = [], {d: [] for d in range(nd)}, {h: [] for h in range(nhq)}
     for d, sz in enumerate(depts):
@@ -243,10 +274,10 @@ def build(ability_scale=None):
             hmem[dept_hq[d]].append(len(people) - 1)
     for i, g in enumerate(rank_labels(len(people))):     # 직급 배정 (등급 배정 단위)
         people[i]["g"] = g
-    return people, dept_hq, dept_ty, dmem, hmem
+    return people, dept_hq, dept_ty, dmem, hmem, draw_hq_types()
 
 
-def composite(people, dept_ty, dmem, hmem, mode, noise_of=None, mean_cap_slack=0.0):
+def composite(people, dept_ty, dmem, hmem, mode, noise_of=None, mean_cap_slack=0.0, hq_ty=None):
     """2단계 평가 → 종합점수"""
     def sig(gtype):
         w = FAVOR[gtype]
@@ -259,10 +290,10 @@ def composite(people, dept_ty, dmem, hmem, mode, noise_of=None, mean_cap_slack=0
 
     s1 = {}
     for d, mem in dmem.items():
-        s1.update(award(mem, dept_ty[d], sig(dept_ty[d]), mode, mean_cap_slack))
+        s1.update(award(mem, dept_ty[d], sig(dept_ty[d]), mode, mean_cap_slack, adjust=True))
     s2 = {}
     for h, mem in hmem.items():
-        s2.update(award(mem, HQ_TYPES[h], sig(HQ_TYPES[h]), mode, mean_cap_slack))
+        s2.update(award(mem, hq_ty[h], sig(hq_ty[h]), mode, mean_cap_slack))
 
     n = len(people)
     multi  = [clamp(92 + 4 * random.gauss(0, 1), 20, 100) for _ in range(n)]
@@ -279,18 +310,18 @@ def exp_grade_distribution(mode, reps=REPS, **kw):
     """평정자 유형별·본부별 등급 획득률과 실력 반영도"""
     s_by_mgr = {"S": [0, 0], "N": [0, 0]}
     c_by_mgr = {"S": [0, 0], "N": [0, 0]}
-    s_by_hq  = {h: [0, 0] for h in range(len(HQ_TYPES))}
+    s_by_hq  = {"S": [0, 0], "N": [0, 0], "O": [0, 0]}
     rho = []
     for _ in range(reps):
-        people, dept_hq, dept_ty, dmem, hmem = build(kw.get("ability_scale"))
+        people, dept_hq, dept_ty, dmem, hmem, hq_ty = build(kw.get("ability_scale"))
         total = composite(people, dept_ty, dmem, hmem, mode,
-                          kw.get("noise_of"), kw.get("mean_cap_slack", 0.0))
+                          kw.get("noise_of"), kw.get("mean_cap_slack", 0.0), hq_ty=hq_ty)
         grade, pts = assign_grades(total, lambda i: people[i]["g"],
                                    ABSOLUTE_REFORM if mode == "reform" else ())
         for i, p in enumerate(people):
-            mt = dept_ty[p["d"]]; hq = dept_hq[p["d"]]
-            s_by_mgr[mt][1] += 1; c_by_mgr[mt][1] += 1; s_by_hq[hq][1] += 1
-            if grade[i] == "S": s_by_mgr[mt][0] += 1; s_by_hq[hq][0] += 1
+            mt = dept_ty[p["d"]]; ht = hq_ty[dept_hq[p["d"]]]
+            s_by_mgr[mt][1] += 1; c_by_mgr[mt][1] += 1; s_by_hq[ht][1] += 1
+            if grade[i] == "S": s_by_mgr[mt][0] += 1; s_by_hq[ht][0] += 1
             if grade[i] == "C": c_by_mgr[mt][0] += 1
         rho.append(spearman([p["a"] for p in people], pts))
     pc = lambda o: 100 * o[0] / o[1] if o[1] else 0.0
@@ -381,8 +412,9 @@ def exp_promotion(mode, persistence=1.0, reps=None):
     out = {nm: [] for nm, _ in SCHEMES}
     for _ in range(reps):
         nd = len(DEPT_SIZES)
-        dept_hq = {d: d % len(HQ_TYPES) for d in range(nd)}
+        dept_hq = {d: d % N_HQ for d in range(nd)}
         dept_ty = {d: ("S" if random.random() < MGR_MIX["S"] else "N") for d in range(nd)}
+        hq_ty = draw_hq_types()
         base = []
         for d, sz in enumerate(DEPT_SIZES):
             for _ in range(sz):
@@ -395,10 +427,10 @@ def exp_promotion(mode, persistence=1.0, reps=None):
         for _ in range(4):
             people = [{"a": cur[i], "f": base[i]["f"], "d": base[i]["d"], "g": base[i]["g"]}
                       for i in range(len(base))]
-            dmem = {d: [] for d in range(nd)}; hmem = {h: [] for h in range(len(HQ_TYPES))}
+            dmem = {d: [] for d in range(nd)}; hmem = {h: [] for h in range(N_HQ)}
             for i, p in enumerate(people):
                 dmem[p["d"]].append(i); hmem[dept_hq[p["d"]]].append(i)
-            total = composite(people, dept_ty, dmem, hmem, mode)
+            total = composite(people, dept_ty, dmem, hmem, mode, hq_ty=hq_ty)
             years.append(assign_grades(total, lambda i: people[i]["g"],
                                        ABSOLUTE_REFORM if mode == "reform" else ())[1])
             cur = [persistence * cur[i] + math.sqrt(max(0.0, 1 - persistence ** 2)) * random.gauss(0, 1)
@@ -415,7 +447,7 @@ def exp_baseline(reps=REPS):
     """실력을 완전히 관측하는 이상적 제도의 기준선 (자진 공개용)"""
     zero, rho = [], []
     for _ in range(reps):
-        people, dept_hq, dept_ty, dmem, hmem = build()
+        people, dept_hq, dept_ty, dmem, hmem, hq_ty = build()
         total = [TARGET_MEAN + TARGET_SD * p["a"] for p in people]
         grade, pts = assign_grades(total, lambda i: people[i]["g"])
         nz = sum(1 for d in range(len(DEPT_SIZES))
@@ -439,9 +471,9 @@ def main():
     print(f" 부서 {len(DEPT_SIZES)}개 {min(DEPT_SIZES)}~{max(DEPT_SIZES)}명(중위 {st.median(DEPT_SIZES):.0f}) · 인원 {sum(DEPT_SIZES)}명")
     print(f" 2단계 평가: 업적·역량 {W_CORE:.0%}(1차 {W_1ST:.0%}/2차 {W_2ND:.0%}) + 다면 {W_MULTI:.0%} + 공통 {W_COMMON:.0%}")
     print(f" 평가단위 {list(ORG.keys())}")
-    print(f" 본부장 유형 {HQ_TYPES} (S=극단 N=균등 O=원장) · 부서장 극단:균등 = {MGR_MIX['S']:.0%}:{MGR_MIX['N']:.0%}")
-    nN = sum(sum(d.values()) for t, d in ORG.values() if t == "N")
-    print(f" 균등형 본부장 아래 인원 {nN}명 / 전체 {sum(DEPT_SIZES)}명 = {100*nN/sum(DEPT_SIZES):.0f}%  [조합 관찰]")
+    print(f" 평정 성향 — 본부 5개 중 극단 {N_EXTREME} · 균등 {5 - N_EXTREME}"
+          f"  (어느 본부인지는 지정하지 않으며 반복마다 무작위 배정한다)")
+    print(f" 부서장 22명 극단:균등 = {MGR_MIX['S']:.0%}:{MGR_MIX['N']:.0%} (미확인 — 가정)")
     print(f" 반복 {REPS}회 · 시드 {SEED}")
     print(line("="))
 
@@ -452,8 +484,8 @@ def main():
         random.seed(SEED)
         res[mode] = exp_grade_distribution(mode, mean_cap_slack=3.0 if mode == "current" else 0.0)
         r = res[mode]
-        hqS = [r["S_hq"][h] for h in sorted(r["S_hq"]) if HQ_TYPES[h] == "S"]
-        hqN = [r["S_hq"][h] for h in sorted(r["S_hq"]) if HQ_TYPES[h] == "N"]
+        hqS = [r["S_hq"]["S"]]
+        hqN = [r["S_hq"]["N"]]
         print(f"  [{lb}]")
         print(f"    부서장 유형별 S : 극단 {r['S_mgr']['S']:5.1f}%   균등 {r['S_mgr']['N']:5.1f}%"
               f"    (편차 {abs(r['S_mgr']['S']-r['S_mgr']['N']):4.1f}%p)")
@@ -543,8 +575,8 @@ def main():
     print("    → 극단형이 선호가 아니라 판별력으로 벌린다면(반영률 0) 개선 효과가 크게 줄어든다.")
 
     print("\n  (마) 본부 단위에서는 '균질' 해석이 성립하기 어렵다")
-    print(f"    부서 평균 {sum(DEPT_SIZES)/len(DEPT_SIZES):.1f}명 · 본부 평균 {sum(DEPT_SIZES)/len(HQ_TYPES):.1f}명")
-    print(f"    → 10명 부서가 균질할 수는 있으나, {sum(DEPT_SIZES)/len(HQ_TYPES):.0f}명 본부가 균질하다고 보기는 어렵다.")
+    print(f"    부서 평균 {sum(DEPT_SIZES)/len(DEPT_SIZES):.1f}명 · 본부 평균 {sum(DEPT_SIZES)/N_HQ:.1f}명")
+    print(f"    → 10명 부서가 균질할 수는 있으나, {sum(DEPT_SIZES)/N_HQ:.0f}명 본부가 균질하다고 보기는 어렵다.")
     print("      2차 평가자(본부장) 단계의 좁은 부여폭은 '집단 균질성'으로 설명되지 않는다.")
 
     print("\n  → 두 해석을 구별할 자료는 노사 모두에게 없다. 실측 평정 분포 자료가 필요한 이유다.")
