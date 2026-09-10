@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09. 수치의 근거 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="제시된 모든 수치가 어떤 지표·어떤 통계 기법·어떤 실행 조건에서 나왔는지의 전체 명세">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html" class="on" aria-current="page">09 근거</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><h1>09. 수치의 근거</h1>
+<p>이 문서는 <strong>다른 여덟 문서에 실린 모든 수치의 출처</strong>다. 사측이 통계 자문을 받으면 가장 먼저
+묻는 것이 「그 숫자는 어떻게 나왔는가」이므로, 답할 문서를 미리 둔다.</p>
+<blockquote>
+<p><strong>먼저 밝혀 둘 것</strong> — 이 자료의 수치는 <strong>모의데이터 계산치이며 창업진흥원의 실제 평정 결과가
+아니다.</strong> 제도의 규칙(규정·규칙·평정계획에서 확인된 실측값)과 조합의 관찰(가정값)을 입력해
+산출했다. 실측 평정 분포 자료가 제공되면 <strong>모수를 재산정해야 하며, 그것이 조합이 자료 제공을
+요구하는 이유다.</strong></p>
+</blockquote>
+<p><strong>재현 방법</strong> — 외부 패키지 없이 실행된다.</p>
+<pre><code>python3 sim/sim.py
+</code></pre>
+<hr>
+<h2>§1 무엇을 재는가 — 지표의 정의와 선택 이유</h2>
+<p>제도의 좋음을 재는 지표를 먼저 정해야 한다. <strong>지표를 정하지 않으면 유리한 숫자만 골라 쓰게 된다.</strong></p>
+<h3>1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★</h3>
+<p>근무평정의 근본 목적은 「S등급이 나오는가」가 아니라 **「개인이 외부요인의 영향을 적게 받고
+자기 성과로 평가받는가」**다. 외부요인은 부서장·본부장 성향, 전보, 부서원 수, 부서 내 승진자 수,
+기간제·직급 구성, 승진대상자 수 등 <strong>피평가자가 통제할 수 없는 모든 요인</strong>이다.</p>
+<p>이것을 직접 재는 방법은 하나다 — <strong>실력이 같은 사람들끼리 점수가 얼마나 흩어지는가.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>절차</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>①</td>
+<td>전 인원을 실력 순으로 정렬해 **십분위(10등분)**로 나눈다</td>
+</tr>
+<tr>
+<td>②</td>
+<td>각 분위 안에서 <strong>평정점의 표준편차</strong>를 구한다 (모표준편차 <code>pstdev</code>)</td>
+</tr>
+<tr>
+<td>③</td>
+<td>열 개 분위의 표준편차를 <strong>인원수로 가중평균</strong>한다</td>
+</tr>
+</tbody></table></div>
+<p>실력이 같은 집단 안에서 점수가 벌어진 만큼이 <strong>곧 외부요인의 총량</strong>이다. 값이 낮을수록 좋다.</p>
+<p><strong>왜 이 지표인가</strong></p>
+<ul>
+<li><strong>S획득률 편차는 한 단면만 본다.</strong> S등급 하나의 경계에서 무슨 일이 생기는지만 보여 주고,
+C등급이나 중간 구간에서 벌어지는 일을 놓친다.</li>
+<li><strong>순위상관 ρ는 방향만 본다.</strong> 순서가 맞으면 값이 높지만, 같은 실력자끼리 몇 점이 벌어졌는지는
+드러나지 않는다.</li>
+<li><strong>십분위 내 표준편차는 크기를 점수 단위로 직접 준다.</strong> 「같은 실력인데 평정점이 평균 몇 점
+벌어진다」로 말할 수 있다.</li>
+</ul>
+<p><strong>분위 수 선택</strong> — 십분위를 썼다. 213명을 10등분하면 분위당 21명으로 표준편차 추정이 안정된다.
+5분위(43명)는 분위 안의 실력 폭이 넓어져 「같은 실력」이라는 전제가 약해지고, 20분위(11명)는
+표준편차 추정이 불안정해진다.</p>
+<p><strong>기준선을 반드시 함께 제시한다</strong> — 이 지표의 절대값만으로는 좋은지 나쁜지 알 수 없다.
+그래서 <strong>이상적 제도</strong>를 함께 계산해 하한을 둔다.</p>
+<blockquote>
+<p><strong>「이상적 제도」의 정확한 정의</strong> 계산에서 이상적 제도의 종합점수는 <code>80 + 7 × 실력</code> 한 줄이다.
+즉 <strong>평가자가 실력을 완전히 관측하고, 다면평가(10%)와 공통평가(5%)가 없는</strong> 가상의 제도다.
+현행·개선안은 두 배점을 포함해 계산하므로, <strong>이 하한은 어떤 개정안으로도 도달할 수 없는 상한
+기준이다.</strong> 따라서 <strong>제거율은 절대 성취도가 아니라 방법 간 상대 비교에만 쓴다.</strong></p>
+<p>다면·공통평가를 포함해 이상적 제도를 다시 정의하면 하한이 올라가고 모든 제거율이 올라가지만,
+<strong>방법 간 순위는 바뀌지 않는다.</strong> 이 문서는 보수적인 쪽(제거율이 낮게 보이는 쪽)을 택했다.</p>
+</blockquote>
+<pre><code>제거율 = (현행 지표2 − 해당 제도 지표2) ÷ (현행 지표2 − 이상적 제도 지표2) × 100
+</code></pre>
+<p>**「제거 가능한 외부요인 영향 중 몇 %를 제거했는가」**를 뜻한다. 100%는 이상적 제도이고,
+0%는 현행이다. 나머지는 평가자가 실력을 완전히 관측하지 못하는 데서 오며 <strong>제도 설계로
+해소되지 않는다.</strong></p>
+<h3>1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)</h3>
+<p>실력 순위와 평정점 순위가 얼마나 일치하는지를 −1~+1로 준다.</p>
+<p><strong>왜 Pearson이 아닌가</strong> — 평정점은 [별표 7]에 따라 등급 구간(S 100 · A 90 · B 80 · C 70) 안에서
+배분되므로 <strong>실력과 선형 관계가 아니다.</strong> Pearson 상관은 선형성을 전제하므로 등급 구간화로 생긴
+계단 구조에서 값이 왜곡된다. Spearman은 순위만 쓰므로 단조 변환에 영향받지 않는다.</p>
+<p>동점 처리는 순위 평균이 아니라 정렬 순서 기준이다. 모의데이터에서 연속값이므로 동점이 사실상
+발생하지 않는다.</p>
+<h3>1-3 보조 지표 — 분산분해 (FWL 정리)</h3>
+<p>평정점의 분산을 <strong>실력 / 부서 고정효과 / 잔차</strong> 셋으로 나눈다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>①</td>
+<td>평정점을 <strong>실력에 단순회귀</strong>한다. 설명된 비율 = 실력 기여분</td>
+</tr>
+<tr>
+<td>②</td>
+<td>그 <strong>잔차</strong>를 부서 더미(부서 평균)로 한 번 더 설명한다. 증가분 = 부서 고정효과</td>
+</tr>
+<tr>
+<td>③</td>
+<td>남은 것이 잔차</td>
+</tr>
+</tbody></table></div>
+<p><strong>Frisch–Waugh–Lovell 정리</strong>에 따라 이 순차 절차의 결과는 실력과 부서 더미를 동시에 넣은
+회귀와 같다. <strong>실력을 먼저 넣는 순서를 택한 것은 의도적이다</strong> — 실력과 부서가 상관될 때
+공통분을 실력 쪽에 먼저 주므로 <strong>부서 효과를 보수적으로(작게) 추정한다.</strong> 조합이 「부서 영향이
+크다」고 주장하는 문서에서 부서 효과를 과대추정하지 않기 위한 선택이다.</p>
+<h3>1-4 보조 지표 — 등급 획득률과 규모격차</h3>
+<ul>
+<li><strong>등급 획득률</strong> — 평가자 유형별·실력 구간별로 S·A·B·C를 받은 비율. 제도의 결과를
+가장 직관적으로 보여 주므로 발표 자료에 쓴다. 다만 §1-1의 이유로 <strong>대표 지표로는 쓰지 않는다.</strong></li>
+<li><strong>규모격차</strong> — 실력 상위 20% 중 <strong>16명 이상 부서</strong> 소속자의 평균 평정점에서 <strong>3명 이하 부서</strong>
+소속자의 평균 평정점을 뺀 값. 부서 규모가 만드는 불이익의 크기다.</li>
+</ul>
+<hr>
+<h2>§2 산식 — 개정안이 쓰는 계산</h2>
+<h3>2-1 순위기반 표준화 — Blom 정규 순서통계량</h3>
+<p>개정 6([별표 10])의 보정 산식이다. 평가자가 부여한 점수의 <strong>부서 내 순위만 남기고 척도를
+통일</strong>한다.</p>
+<pre><code>r  = 부서 내 순위 (1 = 최저, n = 최고)
+z  = Φ⁻¹( (r − 0.375) ÷ (n + 0.25) )
+보정점수 = 80 + 7 × z        (60점 미만·100점 초과는 절단)
+</code></pre>
+<p><strong>Φ⁻¹은 표준정규분포의 분위수 함수</strong>(probit)다.</p>
+<p><strong>왜 Blom인가</strong> — 순위를 정규분포 점수로 바꾸는 방법은 여럿이고, 분모·분자의 보정상수만 다르다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>산식</th>
+<th>성질</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Van der Waerden</td>
+<td><code>r / (n+1)</code></td>
+<td>가장 단순. 양 끝에서 정규 순서통계량 기대값보다 <strong>안쪽으로 치우친다</strong></td>
+</tr>
+<tr>
+<td>Tukey</td>
+<td><code>(r − 1/3) / (n + 1/3)</code></td>
+<td>중간</td>
+</tr>
+<tr>
+<td><strong>Blom (채택)</strong></td>
+<td><code>(r − 0.375) / (n + 0.25)</code></td>
+<td>정규 순서통계량 기대값에 <strong>가장 근사</strong>. 소표본에서 특히 정확</td>
+</tr>
+</tbody></table></div>
+<p>창진원 부서는 <strong>3~16명(중위 10명)의 소표본</strong>이다. 소표본에서 양 끝(최고점·최저점)의 정확도가
+중요하고, 그 지점이 곧 S등급·C등급 경계이므로 <strong>Blom을 택했다.</strong> 세 방법의 차이는 10명 부서에서
+최고점 기준 0.1~0.3점 수준이므로 결론을 바꾸지 않는다.</p>
+<p><strong>왜 평균 80점·표준편차 7점인가</strong></p>
+<ul>
+<li><p><strong>평균 80점</strong> — 현행 평정계획이 이미 쓰는 값이다. 새로 만든 값이 아니다. 개정안은 이 값을
+<strong>규칙에 명시</strong>하자는 것이다(현행은 규칙에 없고 계획에만 있다).</p>
+</li>
+<li><p><strong>표준편차 7점</strong> — <strong>정수여서 검산 재현성이 보장되는 값</strong>이다. 제3호가 「소수점 셋째자리에서
+반올림」을 정하므로 상수가 무한소수면 실무자가 6.67로 계산할 때와 6.6667로 계산할 때 값이
+달라진다. 7은 누가 계산해도 같은 값을 낸다.</p>
+<p><strong>그리고 이 값은 제도의 성능을 좌우하지 않는다.</strong> 5점부터 10점까지 두 배로 바꿔도 외부요인
+제거율은 <strong>29.7%~30.6%로 0.9%p 안에서만 변하고, 전 구간에서 절단이 한 건도 발생하지 않는다</strong>
+(§5-2 목표 표준편차 민감도표). 부서장 선호(외부요인)도 목표 표준편차와 함께 비례해 커지므로
+신호 대 잡음 비가 거의 변하지 않기 때문이다.</p>
+<blockquote>
+<p><strong>따라서 이 상수는 노사 협의로 달리 정할 수 있다.</strong> 「±3 표준편차가 구간 60~100점을 정확히
+채우는 값」을 원하면 20/3 ≈ 6.667이고 결과는 7점과 소수 첫째 자리까지 같다(제거율 30.2%).
+다만 무한소수는 위의 검산 재현성 문제를 낳는다.</p>
+</blockquote>
+</li>
+</ul>
+<h3>2-2 Φ⁻¹의 계산 — Acklam 근사</h3>
+<p>외부 패키지를 쓰지 않기 위해 <strong>Acklam의 유리함수 근사</strong>를 썼다. 중앙 구간과 양 꼬리에 서로
+다른 유리함수를 쓰는 방식으로, <strong>절대오차가 1.15 × 10⁻⁹ 이하</strong>다. 평정점이 소수 둘째 자리까지
+쓰이므로 이 오차는 결과에 영향을 주지 않는다.</p>
+<p><strong>검산 방법</strong> — 엑셀의 <code>NORM.S.INV(p)</code> 또는 <code>NORMSINV(p)</code>와 대조하면 된다. 실무자가 엑셀로
+같은 값을 얻을 수 있다는 점이 이 산식을 조문화할 수 있는 이유다.</p>
+<h3>2-3 등급 배정 — 최대잔여법</h3>
+<p>규칙 제26조①은 등급을 <strong>직급별</strong>로 배정한다. 직급 인원에 등급 비율(S 20% · A 30% · B 40% ·
+C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.</p>
+<pre><code>① 각 등급 정원 = 직급 인원 × 등급 비율  → 정수부만 먼저 배정
+② 남은 자리는 소수부가 큰 등급 순으로 하나씩 배정 (최대잔여법)
+</code></pre>
+<p>선거 의석 배분에 쓰이는 방식과 같다. <strong>직급 인원이 적을 때 특정 등급이 통째로 사라지는 것을
+막는다.</strong> 예를 들어 1(나)급 4명에 S 20%를 곱하면 0.8명이지만, 최대잔여법에서는 S가 1명 배정된다.</p>
+<p><strong>평정점 산출</strong>은 [별표 7]에 따라 등급 구간 안에서 순위에 비례해 배분한다.</p>
+<h3>2-4 [별표 9] 제7호 — 합계 0 조정</h3>
+<p>1차 평가자(부서장)가 보정 결과를 ±5점 범위에서 조정하되, <strong>평가군 내 조정점수 합계가 0</strong>이
+되어야 한다. 부서 평균이 보존되므로 부서 간 형평이 깨지지 않는다.</p>
+<pre><code>① 조정량 = clip( 4.0 × (평가자 신호 − 평가군 신호 평균), −5, +5 )
+② 조정량에서 그 평균을 빼서 합계를 0으로 맞춘다
+③ 보정점수에 더한다 (60~100 절단)
+</code></pre>
+<p>②가 <strong>합계 0 제약의 구현</strong>이다. ①에서 상한(±5)에 걸린 사람이 있으면 ②로 평균을 뺀 뒤 다시
+상한을 넘을 수 있는데, <strong>이 잔차는 최대 0.296점</strong>이다. 실무에서는 무시할 수 있는 크기이므로
+재투영을 반복하지 않는다.</p>
+<p><code>4.0</code>은 <strong>평가자가 인식한 신호 1σ 차이당 부여하는 조정 점수</strong>의 가정값이다. 이 값이 클수록
+±5점 상한에 더 많은 사람이 걸린다.</p>
+<blockquote>
+<p><strong>주의 — 조정은 평가자 자신의 신호에 따라 이루어진다고 본다.</strong> 그 신호에는 선호(FAVOR)가
+섞여 있다. <strong>부서장이 실력만 보고 조정한다고 가정하면 개선 효과가 과대평가된다.</strong></p>
+</blockquote>
+<hr>
+<h2>§3 시뮬레이션 절차</h2>
+<p>한 번의 반복(replication)에서 다음이 순서대로 일어난다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 조직 생성</td>
+<td>실측 조직도로 22개 평가군·213명을 만든다</td>
+</tr>
+<tr>
+<td>② 성향 배정</td>
+<td>본부 5개 중 극단 2·균등 3을 <strong>무작위 배정</strong>한다. 부서장 22명은 극단:균등 50:50</td>
+</tr>
+<tr>
+<td>③ 실력·선호 부여</td>
+<td>각 개인에게 실력 <code>a ~ N(0,1)</code>과 선호 <code>f ~ N(0,1)</code>을 독립으로 부여</td>
+</tr>
+<tr>
+<td>④ 직급 배정</td>
+<td>실측 직급 구성(4·11·29·40·107·5명)을 무작위로 배정</td>
+</tr>
+<tr>
+<td>⑤ 1차·2차 평가</td>
+<td>평가자 유형별 부여폭·선호 반영률로 점수를 부여. 개선안은 여기서 보정과 ±5점 조정</td>
+</tr>
+<tr>
+<td>⑥ 다면·공통</td>
+<td>다면·공통평가 점수를 부여</td>
+</tr>
+<tr>
+<td>⑦ 종합점수</td>
+<td>업적·역량 85%(1차 60% / 2차 40%) + 다면 10% + 공통 5%</td>
+</tr>
+<tr>
+<td>⑧ 등급·평정점</td>
+<td>직급별로 등급을 배정하고 [별표 7] 구간에서 평정점을 산출</td>
+</tr>
+</tbody></table></div>
+<p><strong>평가자의 신호</strong> — 평가자가 인식하는 값은 실력이 아니라 실력과 선호의 혼합이다.</p>
+<pre><code>신호 = (1 − w) × 실력 + w × 선호        w = 유형별 선호 반영률
+</code></pre>
+<p>극단 성향은 <code>w = 0.70</code>, 균등 성향은 <code>w = 0</code>이다. <strong>즉 이 모형에서 극단 성향 평가자는 「차등을
+크게 주지만 그 차등의 70%가 선호」이고, 균등 성향 평가자는 「선호는 없지만 차등을 거의 주지
+않는다」.</strong> 이것이 조합의 관찰이며 <strong>가정값이다.</strong> 반대 해석(극단 성향이 판별력으로 벌린다)의
+결과는 §5-2에 있다.</p>
+<h3>3-1 반복 횟수와 난수</h3>
+<p><strong>반복 400회</strong>를 썼다. 반복을 늘리면 반복 간 변동이 줄어드는데, 주요 지표에서 <strong>400회면 소수
+첫째 자리가 안정된다.</strong> 시드는 <code>20260910</code>으로 고정했으므로 같은 스크립트는 항상 같은 값을 낸다.</p>
+<blockquote>
+<p><strong>문서 수치는 400회 실행값이다.</strong> 발표 화면의 시뮬레이터는 즉시 반응을 위해 기본 100회로
+돌아가므로 소수 첫째 자리가 다를 수 있다.</p>
+</blockquote>
+<hr>
+<h2>§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★</h2>
+<p><strong>이 절이 이 문서에서 가장 중요하다.</strong> 조사 과정에서 서로 다른 네 조건으로 계산했고,
+<strong>조건이 다르면 지표2의 절대값이 달라진다.</strong> 조건을 밝히지 않으면 「숫자가 왜 다르냐」는
+지적을 받는다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>다면평가 모형</th>
+<th>부서장 관측오차 σ₁</th>
+<th>본부장 관측오차 σ₂</th>
+<th>현행 지표2</th>
+<th>이상적 하한</th>
+<th>제거 가능 폭</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>① 본표</strong></td>
+<td>순수 잡음</td>
+<td>없음</td>
+<td>없음</td>
+<td><strong>8.225</strong></td>
+<td>2.363</td>
+<td>5.862</td>
+</tr>
+<tr>
+<td><strong>② 관측오차</strong></td>
+<td>순수 잡음</td>
+<td>0.3σ</td>
+<td>0.9σ</td>
+<td><strong>8.479</strong></td>
+<td>2.492</td>
+<td>5.987</td>
+</tr>
+<tr>
+<td><strong>③ 다면 확대</strong></td>
+<td>동료 4인 관측</td>
+<td>0.3σ</td>
+<td>0.9σ</td>
+<td><strong>8.513</strong></td>
+<td>2.386</td>
+<td>6.127</td>
+</tr>
+<tr>
+<td><strong>④ 접점 혼합</strong></td>
+<td>접점/무접점 혼합</td>
+<td>0.3σ</td>
+<td>0.9σ</td>
+<td><strong>8.513</strong></td>
+<td>2.386</td>
+<td>6.127</td>
+</tr>
+</tbody></table></div>
+<p><strong>각 조건이 쓰인 곳</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>쓰인 표</th>
+<th>스크립트</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>①</td>
+<td>진단의 근본 목적 절(제거율 30.2%) · 배치 편중 절 · 사측 이익 절(등급 획득률)</td>
+<td><code>sim/sim.py</code> · <code>placement.py</code> · <code>lowperf.py</code></td>
+</tr>
+<tr>
+<td>②</td>
+<td>「검토했으나 채택하지 않은 안」의 1차:2차 비율표 · 고급 통계보정 5종 비교표</td>
+<td><code>observer/drive1~3.py</code> · <code>methods.py</code> · <code>mrun.py</code></td>
+</tr>
+<tr>
+<td>③</td>
+<td>개정 14 다면 배점 곡선(10%→32.5% / 20%→40.9%)</td>
+<td><code>observer/drive4.py</code> · <code>sweep.py</code></td>
+</tr>
+<tr>
+<td>④</td>
+<td>개정 14 접점 비율표 · 개정 15 평가자 선정 방식 비교표</td>
+<td><code>observer/mix.py</code></td>
+</tr>
+</tbody></table></div>
+<p><strong>조건이 다른 제거율을 같은 표에 섞어 쓰지 않는다.</strong> 예를 들어 「보정 도입 24.0%」(조건 ②)와
+「다면 20% 40.9%」(조건 ③)는 기준선이 다르므로 직접 더할 수 없다. 두 값을 비교할 때는
+<strong>같은 조건 안에서 비교한 수치만 쓴다</strong> — 개정 14의 비교(다면 10% 32.5% vs 20% 40.9%)는
+모두 조건 ③이다.</p>
+<h3>4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증</h3>
+<p>제7호의 조정 폭(±3 / ±5 / ±10점)을 고른 근거표는 <strong>또 다른 조건</strong>에서 나왔다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>조건</td>
+<td>부서 간 실제 실력 격차 <strong>±0.5σ</strong></td>
+</tr>
+<tr>
+<td>지표</td>
+<td>Spearman ρ 및 극단 성향 부서 실력 상위 10%의 S획득률</td>
+</tr>
+<tr>
+<td>현행 ρ</td>
+<td>0.429 (본표 조건의 0.462와 다르다)</td>
+</tr>
+</tbody></table></div>
+<p><strong>부서 간 실력 격차를 넣은 이유</strong> — 제7호의 목적이 「극단 성향 부서의 우수자가 보정으로 입는
+손실을 회복시키는 것」이므로, 그 손실이 발생하는 조건(부서 간 실력 격차가 있는 상태)에서
+검증해야 한다.</p>
+<blockquote>
+<p><strong>제7호를 「외부요인 축소」로 정당화하지 않는다.</strong> 지표2로 재면 제7호의 효과는 조건에 따라
+<strong>+1.9%p ~ −1.0%p로 갈리는 무승부</strong>다. 제7호의 근거는 ①2차 평가자가 관측하지 못한 사정을
+1차 평가자가 교정하는 재량 ②극단 성향 부서 우수자의 손실 회복 ③사측이 요구하는 부서장
+재량의 정당한 통로, 이 셋이다. 외부요인 축소를 근거로 들면 반박당한다.</p>
+</blockquote>
+<hr>
+<h2>§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가</h2>
+<h3>5-1 실측값 (출처 확인됨)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>부서·인원</td>
+<td>22개 평가군 · 213명</td>
+<td>업무분장 및 직원연락처(2026.7.31. 기준)</td>
+</tr>
+<tr>
+<td>평가별 반영비율</td>
+<td>업적 65 + 역량 20 + 다면 10 + 공통 5</td>
+<td>규칙 제9조② · [별표 2]</td>
+</tr>
+<tr>
+<td>평가자별 반영비율</td>
+<td>1차 60% · 2차 40%</td>
+<td>[별표 2]</td>
+</tr>
+<tr>
+<td>등급별 비율</td>
+<td>S 20 · A 30 · B 40 · C 10</td>
+<td>규칙 제26조① · 연도별 계획</td>
+</tr>
+<tr>
+<td>평정점 구간</td>
+<td>S 100 · A 90 · B 80 · C 70</td>
+<td>[별표 7]</td>
+</tr>
+<tr>
+<td>등급 배정 단위</td>
+<td><strong>직급별 전사</strong></td>
+<td>규칙 제26조①</td>
+</tr>
+<tr>
+<td>평균 제약 단위</td>
+<td><strong>평가자별 피평가자 그룹(부서)</strong></td>
+<td>평정계획</td>
+</tr>
+<tr>
+<td>직급별 인원</td>
+<td>4 · 11 · 29 · 40 · 107 · 5명 (상대평가 196명)</td>
+<td>2025년 계획 〈직급별 배정 현황〉</td>
+</tr>
+<tr>
+<td>서열명부 배점</td>
+<td>근무평정 90% + 근속 10%</td>
+<td>인사규정 제23조 · 2026 승진평가 계획</td>
+</tr>
+<tr>
+<td>원장 직속 평균 제약</td>
+<td>미적용</td>
+<td>[별표 1] · 평정계획</td>
+</tr>
+<tr>
+<td>정기전보</td>
+<td>연 2회(1월·7월)</td>
+<td>복무규정</td>
+</tr>
+</tbody></table></div>
+<p><strong>두 단위가 다른 것이 이 제도의 핵심 구조다</strong> — 부서장은 자기 부서 안에서 평균 80점을 맞추지만,
+등급은 그 점수가 <strong>전사 직급 순위</strong>에 놓인 결과로 결정된다.</p>
+<h3>5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★</h3>
+<p><strong>이 표가 조합이 자진 공개해야 할 취약점의 전부다.</strong> 사측이 지적하기 전에 먼저 밝힌다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>가정값</th>
+<th>설정</th>
+<th>근거</th>
+<th>민감도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>평정자 유형별 <strong>부여폭</strong></td>
+<td>극단 13점 · 균등 2점 · 원장직속 7점</td>
+<td>조합 관찰</td>
+<td><strong>결론을 가장 크게 좌우한다.</strong> 7/6점으로 좁히면 개선효과가 +0.247 → <strong>+0.013</strong>으로 사라진다</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>선호 반영률</strong></td>
+<td>극단 0.70 · 균등 0</td>
+<td>조합 관찰</td>
+<td>0으로 두면(극단형이 판별력으로 벌린다면) 개선효과가 +0.245 → <strong>+0.066</strong>으로 줄어든다</td>
+</tr>
+<tr>
+<td>3</td>
+<td>부서장 <strong>극단:균등 비율</strong></td>
+<td>50:50</td>
+<td>미확인</td>
+<td>균등형이 많아질수록 현행의 피해 인원이 늘어난다</td>
+</tr>
+<tr>
+<td>4</td>
+<td>본부 유형 배분</td>
+<td>5개 중 극단 2 · 균등 3</td>
+<td>조합 관찰(개수만)</td>
+<td>어느 본부인지는 <strong>모형에 담지 않고 반복마다 무작위 배정</strong>한다</td>
+</tr>
+<tr>
+<td>5</td>
+<td>이동자 <strong>낙인</strong></td>
+<td>전 부서장 0.6σ · 신 부서장 0.8σ</td>
+<td>조합 관찰</td>
+<td>0으로 두면 이동 유형 간 격차가 <strong>사라진다.</strong> 즉 전보 불이익의 원인은 제도가 아니라 낙인 행동이다</td>
+</tr>
+<tr>
+<td>6</td>
+<td>목표 표준편차</td>
+<td>7점</td>
+<td><strong>정수 · 검산 재현성</strong></td>
+<td><strong>아래 표 — 5~10점에서 0.9%p 이내</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>±5점 조정 계수</td>
+<td>4.0</td>
+<td>미확인</td>
+<td>클수록 상한에 걸리는 인원이 늘어난다</td>
+</tr>
+<tr>
+<td>8</td>
+<td>부서장 <strong>관측오차</strong> σ₁</td>
+<td>0.3σ</td>
+<td>미확인</td>
+<td>조건 ②~④</td>
+</tr>
+<tr>
+<td>9</td>
+<td>본부장 <strong>관측오차</strong> σ₂</td>
+<td>0.9σ (조합에 불리한 쪽)</td>
+<td><strong>미확인 ★</strong></td>
+<td><strong>1차:2차 비율의 유·불리를 결정한다.</strong> 역전 임계값 0.80σ</td>
+</tr>
+<tr>
+<td>10</td>
+<td>동료 관측오차·선호</td>
+<td>접점 0.4σ·0.30 / 무접점 2.0σ·0.60</td>
+<td>미확인</td>
+<td>접점 비율 0에서 다면 확대 효과가 +1.0%p로 사라진다</td>
+</tr>
+<tr>
+<td>11</td>
+<td>다면 <strong>접점 비율</strong> q</td>
+<td>방식별 0.25~1.00</td>
+<td>미확인</td>
+<td>개정 15의 근거</td>
+</tr>
+<tr>
+<td>12</td>
+<td>직급×부서 교차 분포</td>
+<td>무작위</td>
+<td>미확인</td>
+<td>실측 자료 제공 시 재산정</td>
+</tr>
+<tr>
+<td>13</td>
+<td>부서 간 <strong>실제 실력 격차</strong></td>
+<td>0 (기본)</td>
+<td><strong>노사 모두 자료 없음</strong></td>
+<td>0.8σ까지 넣어도 개선효과는 30.2% → 27.5% (분모는 g=0으로 고정)</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>전보율</strong> τ</td>
+<td>0.45</td>
+<td>미확인</td>
+<td><strong>혼합효과 BLUP의 판정을 좌우한다.</strong> 30% 미만이면 순위표준화 단독보다 나쁘다(0%에서 23.6%)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>현행 모드의 <strong>평균 여유</strong></td>
+<td>0~3점 균등</td>
+<td>계획의 「80점 이내」 문언에서 도출</td>
+<td>0으로 두면 현행 평균이 정확히 80점이 되어 현행이 약간 유리해진다</td>
+</tr>
+</tbody></table></div>
+<p><strong>목표 표준편차(6번) 민감도 — 규칙 [별표 9] 제4호에 박히는 유일한 상수이므로 전량 공개한다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>목표 표준편차</th>
+<th>지표2</th>
+<th>제거율</th>
+<th>ρ</th>
+<th>절단(상/하)</th>
+<th>±3σ 구간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5점</td>
+<td>6.484</td>
+<td>29.7%</td>
+<td>0.700</td>
+<td><strong>0 / 0</strong></td>
+<td>65~95</td>
+</tr>
+<tr>
+<td>6점</td>
+<td>6.467</td>
+<td>30.0%</td>
+<td>0.703</td>
+<td><strong>0 / 0</strong></td>
+<td>62~98</td>
+</tr>
+<tr>
+<td>6.667점</td>
+<td>6.457</td>
+<td>30.2%</td>
+<td>0.704</td>
+<td><strong>0 / 0</strong></td>
+<td><strong>60~100</strong></td>
+</tr>
+<tr>
+<td><strong>7점 (개정안)</strong></td>
+<td><strong>6.453</strong></td>
+<td><strong>30.2%</strong></td>
+<td><strong>0.704</strong></td>
+<td><strong>0 / 0</strong></td>
+<td>59~101</td>
+</tr>
+<tr>
+<td>8점</td>
+<td>6.444</td>
+<td>30.4%</td>
+<td>0.705</td>
+<td><strong>0 / 0</strong></td>
+<td>56~104</td>
+</tr>
+<tr>
+<td>9점</td>
+<td>6.436</td>
+<td>30.5%</td>
+<td>0.706</td>
+<td><strong>0 / 0</strong></td>
+<td>53~107</td>
+</tr>
+<tr>
+<td>10점</td>
+<td>6.430</td>
+<td>30.6%</td>
+<td>0.707</td>
+<td><strong>0 / 0</strong></td>
+<td>50~110</td>
+</tr>
+</tbody></table></div>
+<p><em>(조건 ① · 반복 400회. 현행 8.225와 이상적 하한 2.363은 목표 표준편차와 무관하므로 분모가 고정된다.)</em></p>
+<p><strong>값을 두 배로 바꿔도 결과가 0.9%p 안에서 같고, 절단은 전 구간에서 발생하지 않는다.</strong> 평가군
+인원이 3~16명이므로 순위기반 보정의 최대 편차가 ±1.77 표준편차에 그치기 때문이다.</p>
+<p><strong>9번이 가장 중요하다.</strong> 본부장이 실력을 얼마나 정확히 관측하는지 아무도 모르기 때문에
+1차:2차 비율을 이번에 정할 수 없었고, 그래서 <strong>개정 16(평정 통계 산출·제공)에서 그 값을
+측정하는 조항</strong>을 넣었다. 2년 축적되면 자료로 판정할 수 있다.</p>
+<h3>5-3 조합이 먼저 인정하는 한계</h3>
+<ol>
+<li><strong>모든 안을 다 적용해도 제거 가능한 외부요인 영향의 절반 이상이 남는다.</strong> 개정 6만으로
+24~30%, 다면 확대를 더해 41%다. <strong>「완전 해결」이라고 말할 수 없다.</strong></li>
+<li><strong>좁은 부여폭이 「평가자의 무능」인지 「부서의 균질성」인지 판별할 자료가 노사 모두에게 없다.</strong>
+사측 해석(부서 균질)을 취하면 현행 ρ가 0.473 → 0.544로 오르고 개선 효과가 줄어든다.
+다만 <strong>본부 단위(평균 35.5명)에서는 균질성 해석이 성립하기 어렵다.</strong></li>
+<li><strong>선호가 「개인 속성」이면</strong>(모든 평가자가 같은 사람을 편애) <strong>어떤 통계기법도 그것을 실력과
+구별할 수 없다.</strong></li>
+<li><strong>「S등급자 0명 부서」 비율은 제도 결함 지표로 쓸 수 없다.</strong> 실력을 완전히 관측하는 이상적
+제도에서도 14.4%가 발생하며, 이론치 <code>E[(1−0.20)ⁿ]</code> = 15.0%와 일치한다. 조합 내에서 이
+수치가 근거로 쓰인 적이 있으므로 명시해 둔다.</li>
+<li><strong>[별표 9] 제7호는 조건에 따라 지표2를 약간 악화시킨다.</strong> §4-1 참조.</li>
+<li><strong>다면 확대의 최대 위험은 통계가 아니라 조직문화다.</strong> 담합·품앗이·보복이 발생하면 모형의
+독립 선호 가정이 깨진다. <strong>모형은 「동료가 편향된 경우」까지만 검증했고 담합(상관된 선호)은
+검증하지 않았다.</strong></li>
+</ol>
+<hr>
+<h2>§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유</h2>
+<p>같은 제도를 두 곳에서 계산한다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>문서</th>
+<th>발표 화면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>구현</td>
+<td><code>sim/sim.py</code> (Python)</td>
+<td><code>docs/deck/sim-core.js</code> (JavaScript)</td>
+</tr>
+<tr>
+<td>난수</td>
+<td>Mersenne Twister</td>
+<td>mulberry32</td>
+</tr>
+<tr>
+<td>기본 반복</td>
+<td>400회</td>
+<td>100회</td>
+</tr>
+</tbody></table></div>
+<p><strong>시드가 같아도 두 값은 정확히 일치하지 않는다.</strong> 난수 생성기가 다르므로 같은 시드에서 같은
+난수열이 나오지 않기 때문이다. 제도 규칙·산식·상수는 동일하게 맞추었으므로 <strong>소수 첫째 자리
+수준에서 일치</strong>한다.</p>
+<p><strong>화면 전용 기능</strong> — 동점 금지 옵션은 화면에만 있고 <code>sim.py</code>에는 없다.</p>
+<blockquote>
+<p>협의 자리에서 화면 시뮬레이터를 조작해 값이 문서와 미세하게 다르게 나오면, 위 사유를
+그대로 설명하면 된다. <strong>문서 수치의 정본은 <code>sim/sim.py</code>다.</strong></p>
+</blockquote>
+<hr>
+<h2>§7 검산 방법 — 사측이 직접 확인할 수 있는가</h2>
+<p>조문화의 조건은 <strong>실무자가 엑셀로 재현할 수 있는가</strong>다. 개정안의 산식은 모두 재현 가능하다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>산식</th>
+<th>엑셀 검산</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Blom 순위 → z</td>
+<td><code>=NORM.S.INV((순위−0.375)/(인원+0.25))</code></td>
+</tr>
+<tr>
+<td>보정점수</td>
+<td><code>=80+7*z</code>, 그 다음 <code>=MEDIAN(60,보정점수,100)</code></td>
+</tr>
+<tr>
+<td>부서 평균 확인</td>
+<td><code>=AVERAGE(보정점수 범위)</code> → <strong>80.00</strong></td>
+</tr>
+<tr>
+<td>±5점 조정 합계</td>
+<td><code>=SUM(조정량 범위)</code> → <strong>0.00</strong></td>
+</tr>
+<tr>
+<td>등급 정원</td>
+<td>직급 인원 × 비율의 정수부 + 최대잔여</td>
+</tr>
+</tbody></table></div>
+<p><strong>이것이 고급 통계보정 5종을 폐기한 이유다.</strong> 혼합효과 모형·Bradley-Terry·경험베이즈는 반복
+계산이 필요해 엑셀로 검산할 수 없고, <strong>검산할 수 없는 산식은 규정에 담을 수 없다.</strong>
+355개 기관 전수 조사에서 개인 근무평정에 이 계열 보정을 규정에 둔 기관이 <strong>0곳</strong>인 이유도
+같다고 본다.</p>
+<hr>
+<h2>§8 요구하는 자료 — 어느 가정값을 대체하는가</h2>
+<p>조합의 자료 요구는 모두 §5-2의 가정값을 실측으로 바꾸기 위한 것이다. <strong>개인을 식별할 수 없는
+집계 통계로만 요구한다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>요구 자료</th>
+<th>대체하는 가정값</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평가자별 부여점수의 평균·표준편차 분포</td>
+<td>1번(부여폭) · 3번(극단:균등 비율)</td>
+</tr>
+<tr>
+<td>1차 평가자와 2차 평가자 간 순위 일치도</td>
+<td><strong>9번(본부장 관측오차) ★</strong></td>
+</tr>
+<tr>
+<td>다면평가 평가자 간 일치도</td>
+<td>10번(동료 관측오차)</td>
+</tr>
+<tr>
+<td>직급별 종합점수 평균의 연도별 추이</td>
+<td>기준선 이동량</td>
+</tr>
+<tr>
+<td>직급별 등급 컷 위치의 연도별 추이</td>
+<td>등급 컷 변동</td>
+</tr>
+<tr>
+<td>부서별·직급별 등급 분포</td>
+<td>4번 · 12번</td>
+</tr>
+<tr>
+<td>이동자(전보·휴직·파견)의 등급 분포</td>
+<td>5번(낙인)</td>
+</tr>
+</tbody></table></div>
+<p><strong>자료를 받으면 모수를 재산정하고 결론을 수정한다.</strong> 이 자세를 먼저 밝히는 것이, 사측이
+「모의데이터일 뿐이다」로 문서 전체를 무력화하려 할 때의 답이다 — <strong>조합은 실측을 거부하지
+않는다. 실측 자료가 없어서 모의로 계산했을 뿐이다.</strong></p>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>

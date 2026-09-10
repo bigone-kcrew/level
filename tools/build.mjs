@@ -15,6 +15,7 @@ const NAV = [
   ['union', '06 전임자'],
   ['plan2027', '07 시행계획'],
   ['guide', '08 세부지침'],
+  ['method', '09 근거'],
 ];
 
 function frontMatter(src) {

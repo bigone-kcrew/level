@@ -126,14 +126,24 @@ window.SIM = (function () {
   }
 
   /* ─── 점수 부여 ─────────────────────────────────────────────── */
+  // 모표준편차 — [별표 9] 제3호의 s(n) 계산에 쓴다
+  function sdOf(v){ const m=v.reduce((a,b)=>a+b,0)/v.length;
+    return Math.sqrt(v.reduce((a,b)=>a+(b-m)*(b-m),0)/v.length); }
+
   function award(members,gtype,sig,mode,P,out,adjust){
     if(!members.length)return;
-    const s=members.map(sig), rk=ranks(s), bl=blom(members.length);
-    let base,sd;
-    if(mode==="reform"){ base=P.mean; sd=P.sd; }
+    const n=members.length;
+    const s=members.map(sig), rk=ranks(s), bl=blom(n);
+    let base,sd,div=1;
+    if(mode==="reform"){
+      base=P.mean; sd=P.sd;
+      // [별표 9] 제3호 — ÷ s(n). 이 나눗셈이 있어야 모든 평가군이
+      // 제4호가 정한 목표 표준편차를 실제로 달성한다(3명 4.97 → 7.00).
+      if(P.norm!==false && n>1) div=sdOf(bl);
+    }
     else if(gtype==="O"){ base=P.mean; sd=SPREAD_O; }      // 원장 — 평균 제약 미적용
     else { base=P.mean - rnd()*MEAN_SLACK; sd=(gtype==="S"?P.ext:P.even); }
-    for(let k=0;k<members.length;k++) out[members[k]]=clamp(base+sd*bl[rk[k]-1]);
+    for(let k=0;k<n;k++) out[members[k]]=clamp(base+sd*bl[rk[k]-1]/div);
     // [별표 9] 제7호 — 1차 평가자 ±N점 조정, 평가군 내 합계 0.
     // 조정은 '평가자 자신의 신호'(선호가 섞인 값)에 따른다.
     if(mode==="reform" && adjust && P.adj>0 && members.length>1){
@@ -144,7 +154,7 @@ window.SIM = (function () {
     }
   }
 
-  const DEF = { sd:7, mean:80, ext:13, even:2, fav:.7, mix:.5, adj:5,
+  const DEF = { sd:7, mean:80, ext:13, even:2, fav:.7, mix:.5, adj:5, norm:true,
                 reps:100, tie:true, abs:true, noC:true };
 
   /* ─── 본 시뮬레이션 ─────────────────────────────────────────── */

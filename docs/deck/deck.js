@@ -107,7 +107,13 @@ function toggleFull(){
   else
     (document.exitFullscreen || document.webkitExitFullscreen || function(){}).call(document);
 }
-function toggleNotes(){ drawer.classList.toggle("open"); }
+function toggleNotes(){
+  document.body.classList.toggle("notes-on");
+  if (document.body.classList.contains("notes-on")) {
+    const n = slides[idx].querySelector(".notes");
+    nbody.innerHTML = n ? n.innerHTML : '<p class="micro">이 슬라이드에는 발표 노트가 없습니다.</p>';
+  }
+}
 function toggleSide(){
   const hid = document.body.classList.toggle("hide-side");
   document.getElementById("sideOpen").hidden = !hid;
@@ -129,6 +135,27 @@ if (!(document.documentElement.requestFullscreen || document.documentElement.web
   a.target = "_blank"; a.rel = "noopener";
 })();
 
+/* ─── 테마 — 어두운 화면이 기본, 밝은 회의실·인쇄는 밝은 화면 ─────── */
+const THEME_KEY = "deck-theme";
+function applyTheme(t){
+  if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+  else document.documentElement.removeAttribute("data-theme");
+  const b = document.getElementById("btnTheme");
+  if (b) b.title = (t === "light" ? "어두운 화면 전환 (T)" : "밝은 화면 전환 (T)");
+}
+function toggleTheme(){
+  const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  try { localStorage.setItem(THEME_KEY, next); } catch (_) {}
+  applyTheme(next);
+}
+(function initTheme(){
+  let t = null;
+  try { t = localStorage.getItem(THEME_KEY); } catch (_) {}
+  applyTheme(t || "dark");
+  const b = document.getElementById("btnTheme");
+  if (b) b.addEventListener("click", toggleTheme);
+})();
+
 /* ─── 키보드 ───────────────────────────────────────────────────── */
 document.addEventListener("keydown", e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -142,7 +169,8 @@ document.addEventListener("keydown", e => {
     case "f": case "F": toggleFull(); break;
     case "n": case "N": toggleNotes(); break;
     case "h": case "H": toggleSide(); break;
-    case "Escape": drawer.classList.remove("open"); break;
+    case "t": case "T": toggleTheme(); break;
+    case "Escape": document.body.classList.remove("notes-on"); break;
     default:
       // 숫자키 → 해당 장(章)의 첫 슬라이드
       if (/^[1-9]$/.test(e.key)) {
