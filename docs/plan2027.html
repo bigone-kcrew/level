@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,16 +194,17 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html" class="on" aria-current="page">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html" class="on" aria-current="page">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>07. 2027년 근무평정 계획(안)</h1>
+<main><article>
+<h1>07. 2027년 근무평정 계획(안)</h1>
 <blockquote>
 <p><strong>이 문서의 성격</strong> 조합이 작성한 <strong>완성품 예시</strong>다. 「고쳐 주십시오」가 아니라 「이렇게 하면
 됩니다」를 보여주기 위한 것이다. 절 구성·표 형식·문체를 <strong>2025년 근무평정 계획 안내와 동일하게</strong>
@@ -166,7 +213,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 [별표 9] 제7호의 ±5점은 조합 검증 결과이며 <strong>협의 대상</strong>이다.</p>
 </blockquote>
 <hr>
-<h2>1. 근무평정 개요</h2>
+<h2 id="1-근무평정-개요">1. 근무평정 개요<a class="anchor" href="#1-근무평정-개요" aria-label="이 절 링크">§</a></h2>
 <p>□ <strong>평가목적</strong> : 우리 원 직원의 ’27년(’27.1.1.~12.31.) 근무실적 및 역량 등 평가를 통한 동기유발 및
 조직 생산성 제고</p>
 <p>  * 인사규정 제25조(근무평정) 제1항에 의거, 승진 및 성과급 지급 등의 자료로 활용</p>
@@ -200,7 +247,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>직전 점수 승계를 제거해 <strong>한 번 낮은 점수가 고착되는 것을 차단</strong></td>
 </tr>
 <tr>
-<td>노동조합 전임자·근로시간면제자</td>
+<td>노동조합 근로시간면제자</td>
 <td>이 계획에서 「최근 3회 평균」으로 처리</td>
 <td><strong>[별표 11]로 이관</strong> — 별책에서 별도 협의</td>
 </tr>
@@ -247,7 +294,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 합산하여 ‘종합점수’ 산출 후, <strong>[별표 9]에 따라 평가자별 평가점수를 보정</strong></p>
 <p>  * 본부장 및 단장, 부서장은 다면평가 대신 상향평가 적용</p>
 <hr>
-<h2>2. 전년대비 변경사항</h2>
+<h2 id="2-전년대비-변경사항">2. 전년대비 변경사항<a class="anchor" href="#2-전년대비-변경사항" aria-label="이 절 링크">§</a></h2>
 <p>□ <strong>주요 변경사항</strong> — 근무평정규칙 개정(’26.12. 의결 예정)에 따른 것이다.</p>
 <p>  ◦ <strong>(사전 평균제약 폐지)</strong> 평가자에게 피평가자 그룹 평균을 80점 이내로 제한하는 기준을 폐지하고,
   60~100점 범위에서 부여한 점수를 <strong>사후에 보정</strong>하는 방식으로 전환</p>
@@ -381,7 +428,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>개정 13<br>(규칙 제7조②)</td>
 </tr>
 <tr>
-<td><strong>노동조합 전임자</strong></td>
+<td><strong>노동조합 근로시간면제자</strong></td>
 <td>ㆍ최근 3회 평균</td>
 <td>ㆍ<b>[별표 11]로 이관</b>(별책 협의)</td>
 <td>별책 §4</td>
@@ -403,7 +450,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 
 <p>  → <strong>총 19개 항목이 달라진다.</strong></p>
 <hr>
-<h2>3. 세부 평가 계획</h2>
+<h2 id="3-세부-평가-계획">3. 세부 평가 계획<a class="anchor" href="#3-세부-평가-계획" aria-label="이 절 링크">§</a></h2>
 <p>□ <strong>평가자</strong> : 피평가자의 직급 등에 따라 1, 2차 평가자로 구분 <em>(현행과 동일)</em></p>
 <p>&lt; 평가자 현황 &gt;</p>
 <div class="tw">
@@ -504,8 +551,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   ② 2/3 미만인 경우 : 발령 전 소속 또는 복귀 후 소속으로 평가</p>
 <p>▪ <strong>퇴직·휴직자</strong> — 평가대상 제외에 해당하지 않는 퇴직자·휴직자는 평가 기준일 소속 부서가 없는 경우
 퇴직·휴직 직전 소속으로 평가한다(규칙 제11조).</p>
-<p>▪ <strong>노동조합 전임자·근로시간면제자</strong> — <strong>이 계획에서 정하지 아니한다.</strong> 규칙 제7조② 단서 및
-<b>[별표 11]</b>에 따르며, 세부 사항은 〈06 전임자 평정〉 별책의 협의 결과에 따른다.</p>
+<p>▪ <strong>노동조합 근로시간면제자</strong> — <strong>이 계획에서 정하지 아니한다.</strong> 규칙 제7조② 단서 및
+<b>[별표 11]</b>에 따르며, 세부 사항은 〈근로시간면제자 평정〉 별책의 협의 결과에 따른다.</p>
 <p>▪ <strong>해외사무소장</strong> — 상향평가 대상에서 제외하고 업적·역량·공통평가를 합산하여 100%로 환산 적용</p>
 <p>▪ <strong>평가군 변경자(절대평가 ↔ 상대평가)</strong> — 각 기간별로 별도 평정하고 근무기간을 일할 계산하여
 최종 평정점 산출</p>
@@ -603,7 +650,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>  ◦ <strong>업적평가 항목의 변경</strong> — 항목·배점은 현행을 유지하되, 평가자는 <strong>제15조②에 따라 합의된
   성과목표별로 달성 여부를 확인하고 그 내용을 평가표에 기재</strong>하여야 한다(개정 8, 제17조).</p>
 <hr>
-<h2>4. 점수부여 방식 ★ 가장 많이 달라지는 절</h2>
+<h2 id="4-점수부여-방식-가장-많이-달라지는-절">4. 점수부여 방식 ★ 가장 많이 달라지는 절<a class="anchor" href="#4-점수부여-방식-가장-많이-달라지는-절" aria-label="이 절 링크">§</a></h2>
 <p>◦ <strong>(업적 및 역량평가)</strong> 각 평가자는 <strong>60~100점 구간 내에서 평가점수를 부여</strong>한다.
 <strong>피평가자 그룹의 평균을 특정 수치 이내로 제한하는 기준은 두지 아니한다</strong>(규칙 제9조⑥).</p>
 <ul>
@@ -734,7 +781,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>  * 포상은 평가기간 중 인사담당자에게 신고하여야 하며 인사위원회 심의를 통해 수여한 포상에 한해
   가점으로 인정</p>
 <hr>
-<h2>5. 평가등급 배정</h2>
+<h2 id="5-평가등급-배정">5. 평가등급 배정<a class="anchor" href="#5-평가등급-배정" aria-label="이 절 링크">§</a></h2>
 <p>□ <strong>평가등급 배정</strong> : 4등급(S, A, B, C)으로 구분하며, 종합점수 고득점 순에 따라
 <strong>규칙 제26조③에 명시된 비율</strong>을 고려하여 <strong>직급별</strong>로 인원 배정</p>
 <p>  ◦ 등급별 비율은 <strong>S 100분의 20, A 100분의 30, B 100분의 40, C 100분의 10</strong>(규칙 제26조③)
@@ -911,7 +958,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </div>
 
 <hr>
-<h2>6. 향후 일정 ★ 목표설정이 연초로 이동한다</h2>
+<h2 id="6-향후-일정-목표설정이-연초로-이동한다">6. 향후 일정 ★ 목표설정이 연초로 이동한다<a class="anchor" href="#6-향후-일정-목표설정이-연초로-이동한다" aria-label="이 절 링크">§</a></h2>
 <p>가장 큰 절차 변화다. 현행은 목표설정이 <strong>평정 직전(2월 초)에 몰려 있어</strong> 사실상 사후 정리다.</p>
 <p>&lt; 개정 전후 일정 대비 &gt;</p>
 <div class="tw">
@@ -1089,7 +1136,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>  * 상기 일정은 사정에 따라 변동될 수 있음
   ** 세부 절차·역할·예외 처리는 〈08 근무평정 운영 세부지침(안)〉 참조</p>
 <hr>
-<h2>7. 미확정 사항</h2>
+<h2 id="7-미확정-사항">7. 미확정 사항<a class="anchor" href="#7-미확정-사항" aria-label="이 절 링크">§</a></h2>
 <p>□ 이 계획(안)에서 <strong>정하지 않고 남긴 항목</strong>이다.</p>
 <p>  ◦ <strong>(부서장 상향평가 배점의 확대 여부)</strong> 상향평가는 <strong>부하가 상사를 평가하는 구조</strong>로 다면평가와
   <strong>관측 구조가 다르므로 별도 검토가 필요하다.</strong> 다면평가 배점 확대(개정 14)의 논리가 그대로
@@ -1105,7 +1152,46 @@ ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정, 인사규정
 근무평정 계획에 따르며, 개정 조문은 〈02 규정 개정안〉을 정본으로 한다. [별표 9] 제7호의
 ±5점은 조합 검증 결과이며 노사 합의 전이다. 확인 기준일은 2026-09-10이다.</p>
 </blockquote>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#1-근무평정-개요">1. 근무평정 개요</a></li><li class="l2"><a href="#2-전년대비-변경사항">2. 전년대비 변경사항</a></li><li class="l2"><a href="#3-세부-평가-계획">3. 세부 평가 계획</a></li><li class="l2"><a href="#4-점수부여-방식-가장-많이-달라지는-절">4. 점수부여 방식 ★ 가장 많이 달라지는 절</a></li><li class="l2"><a href="#5-평가등급-배정">5. 평가등급 배정</a></li><li class="l2"><a href="#6-향후-일정-목표설정이-연초로-이동한다">6. 향후 일정 ★ 목표설정이 연초로 이동한다</a></li><li class="l2"><a href="#7-미확정-사항">7. 미확정 사항</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

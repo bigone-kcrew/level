@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,16 +194,17 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html" class="on" aria-current="page">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html" class="on" aria-current="page">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>09. 수치의 근거</h1>
+<main><article>
+<h1>09. 수치의 근거</h1>
 <p>이 문서는 <strong>다른 여덟 문서에 실린 모든 수치의 출처</strong>다. 사측이 통계 자문을 받으면 가장 먼저
 묻는 것이 「그 숫자는 어떻게 나왔는가」이므로, 답할 문서를 미리 둔다.</p>
 <blockquote>
@@ -170,9 +217,9 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <pre><code>python3 sim/sim.py
 </code></pre>
 <hr>
-<h2>§1 무엇을 재는가 — 지표의 정의와 선택 이유</h2>
+<h2 id="1-무엇을-재는가-지표의-정의와-선택-이유">§1 무엇을 재는가 — 지표의 정의와 선택 이유<a class="anchor" href="#1-무엇을-재는가-지표의-정의와-선택-이유" aria-label="이 절 링크">§</a></h2>
 <p>제도의 좋음을 재는 지표를 먼저 정해야 한다. <strong>지표를 정하지 않으면 유리한 숫자만 골라 쓰게 된다.</strong></p>
-<h3>1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★</h3>
+<h3 id="1-1-대표-지표-같은-실력-십분위-내-평정점-표준편차">1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★<a class="anchor" href="#1-1-대표-지표-같은-실력-십분위-내-평정점-표준편차" aria-label="이 절 링크">§</a></h3>
 <p>근무평정의 근본 목적은 「S등급이 나오는가」가 아니라 <b>「개인이 외부요인의 영향을 적게 받고
 자기 성과로 평가받는가」</b>다. 외부요인은 부서장·본부장 성향, 전보, 부서원 수, 부서 내 승진자 수,
 기간제·직급 구성, 승진대상자 수 등 <strong>피평가자가 통제할 수 없는 모든 요인</strong>이다.</p>
@@ -225,14 +272,14 @@ C등급이나 중간 구간에서 벌어지는 일을 놓친다.</li>
 <p><b>「제거 가능한 외부요인 영향 중 몇 %를 제거했는가」</b>를 뜻한다. 100%는 이상적 제도이고,
 0%는 현행이다. 나머지는 평가자가 실력을 완전히 관측하지 못하는 데서 오며 <strong>제도 설계로
 해소되지 않는다.</strong></p>
-<h3>1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)</h3>
+<h3 id="1-2-보조-지표-실력평정점-순위상관-Spearman-ρ">1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)<a class="anchor" href="#1-2-보조-지표-실력평정점-순위상관-Spearman-ρ" aria-label="이 절 링크">§</a></h3>
 <p>실력 순위와 평정점 순위가 얼마나 일치하는지를 −1~+1로 준다.</p>
 <p><strong>왜 Pearson이 아닌가</strong> — 평정점은 [별표 7]에 따라 등급 구간(S 100 · A 90 · B 80 · C 70) 안에서
 배분되므로 <strong>실력과 선형 관계가 아니다.</strong> Pearson 상관은 선형성을 전제하므로 등급 구간화로 생긴
 계단 구조에서 값이 왜곡된다. Spearman은 순위만 쓰므로 단조 변환에 영향받지 않는다.</p>
 <p>동점 처리는 순위 평균이 아니라 정렬 순서 기준이다. 모의데이터에서 연속값이므로 동점이 사실상
 발생하지 않는다.</p>
-<h3>1-3 보조 지표 — 분산분해 (FWL 정리)</h3>
+<h3 id="1-3-보조-지표-분산분해-FWL-정리">1-3 보조 지표 — 분산분해 (FWL 정리)<a class="anchor" href="#1-3-보조-지표-분산분해-FWL-정리" aria-label="이 절 링크">§</a></h3>
 <p>평정점의 분산을 <strong>실력 / 부서 고정효과 / 잔차</strong> 셋으로 나눈다.</p>
 <div class="tw"><table>
 <thead>
@@ -258,7 +305,7 @@ C등급이나 중간 구간에서 벌어지는 일을 놓친다.</li>
 회귀와 같다. <strong>실력을 먼저 넣는 순서를 택한 것은 의도적이다</strong> — 실력과 부서가 상관될 때
 공통분을 실력 쪽에 먼저 주므로 <strong>부서 효과를 보수적으로(작게) 추정한다.</strong> 조합이 「부서 영향이
 크다」고 주장하는 문서에서 부서 효과를 과대추정하지 않기 위한 선택이다.</p>
-<h3>1-4 보조 지표 — 등급 획득률과 규모격차</h3>
+<h3 id="1-4-보조-지표-등급-획득률과-규모격차">1-4 보조 지표 — 등급 획득률과 규모격차<a class="anchor" href="#1-4-보조-지표-등급-획득률과-규모격차" aria-label="이 절 링크">§</a></h3>
 <ul>
 <li><strong>등급 획득률</strong> — 평가자 유형별·실력 구간별로 S·A·B·C를 받은 비율. 제도의 결과를
 가장 직관적으로 보여 주므로 발표 자료에 쓴다. 다만 §1-1의 이유로 <strong>대표 지표로는 쓰지 않는다.</strong></li>
@@ -266,8 +313,8 @@ C등급이나 중간 구간에서 벌어지는 일을 놓친다.</li>
 소속자의 평균 평정점을 뺀 값. 부서 규모가 만드는 불이익의 크기다.</li>
 </ul>
 <hr>
-<h2>§2 산식 — 개정안이 쓰는 계산</h2>
-<h3>2-1 순위기반 표준화 — Blom 정규 순서통계량</h3>
+<h2 id="2-산식-개정안이-쓰는-계산">§2 산식 — 개정안이 쓰는 계산<a class="anchor" href="#2-산식-개정안이-쓰는-계산" aria-label="이 절 링크">§</a></h2>
+<h3 id="2-1-순위기반-표준화-Blom-정규-순서통계량">2-1 순위기반 표준화 — Blom 정규 순서통계량<a class="anchor" href="#2-1-순위기반-표준화-Blom-정규-순서통계량" aria-label="이 절 링크">§</a></h3>
 <p>개정 6([별표 10])의 보정 산식이다. 평가자가 부여한 점수의 <strong>부서 내 순위만 남기고 척도를
 통일</strong>한다.</p>
 <pre><code>r  = 부서 내 순위 (1 = 최저, n = 최고)
@@ -322,13 +369,13 @@ z  = Φ⁻¹( (r − 0.375) ÷ (n + 0.25) )
 </blockquote>
 </li>
 </ul>
-<h3>2-2 Φ⁻¹의 계산 — Acklam 근사</h3>
+<h3 id="2-2-Φ¹의-계산-Acklam-근사">2-2 Φ⁻¹의 계산 — Acklam 근사<a class="anchor" href="#2-2-Φ¹의-계산-Acklam-근사" aria-label="이 절 링크">§</a></h3>
 <p>외부 패키지를 쓰지 않기 위해 <strong>Acklam의 유리함수 근사</strong>를 썼다. 중앙 구간과 양 꼬리에 서로
 다른 유리함수를 쓰는 방식으로, <strong>절대오차가 1.15 × 10⁻⁹ 이하</strong>다. 평정점이 소수 둘째 자리까지
 쓰이므로 이 오차는 결과에 영향을 주지 않는다.</p>
 <p><strong>검산 방법</strong> — 엑셀의 <code>NORM.S.INV(p)</code> 또는 <code>NORMSINV(p)</code>와 대조하면 된다. 실무자가 엑셀로
 같은 값을 얻을 수 있다는 점이 이 산식을 조문화할 수 있는 이유다.</p>
-<h3>2-3 등급 배정 — 최대잔여법</h3>
+<h3 id="2-3-등급-배정-최대잔여법">2-3 등급 배정 — 최대잔여법<a class="anchor" href="#2-3-등급-배정-최대잔여법" aria-label="이 절 링크">§</a></h3>
 <p>규칙 제26조①은 등급을 <strong>직급별</strong>로 배정한다. 직급 인원에 등급 비율(S 20% · A 30% · B 40% ·
 C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.</p>
 <pre><code>① 각 등급 정원 = 직급 인원 × 등급 비율  → 정수부만 먼저 배정
@@ -337,7 +384,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <p>선거 의석 배분에 쓰이는 방식과 같다. <strong>직급 인원이 적을 때 특정 등급이 통째로 사라지는 것을
 막는다.</strong> 예를 들어 1(나)급 4명에 S 20%를 곱하면 0.8명이지만, 최대잔여법에서는 S가 1명 배정된다.</p>
 <p><strong>평정점 산출</strong>은 [별표 7]에 따라 등급 구간 안에서 순위에 비례해 배분한다.</p>
-<h3>2-4 [별표 9] 제7호 — 합계 0 조정</h3>
+<h3 id="2-4-별표-9-제7호-합계-0-조정">2-4 [별표 9] 제7호 — 합계 0 조정<a class="anchor" href="#2-4-별표-9-제7호-합계-0-조정" aria-label="이 절 링크">§</a></h3>
 <p>1차 평가자(부서장)가 보정 결과를 ±5점 범위에서 조정하되, <strong>평가군 내 조정점수 합계가 0</strong>이
 되어야 한다. 부서 평균이 보존되므로 부서 간 형평이 깨지지 않는다.</p>
 <pre><code>① 조정량 = clip( 4.0 × (평가자 신호 − 평가군 신호 평균), −5, +5 )
@@ -354,7 +401,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 섞여 있다. <strong>부서장이 실력만 보고 조정한다고 가정하면 개선 효과가 과대평가된다.</strong></p>
 </blockquote>
 <hr>
-<h2>§3 시뮬레이션 절차</h2>
+<h2 id="3-시뮬레이션-절차">§3 시뮬레이션 절차<a class="anchor" href="#3-시뮬레이션-절차" aria-label="이 절 링크">§</a></h2>
 <p>한 번의 반복(replication)에서 다음이 순서대로 일어난다.</p>
 <div class="tw"><table>
 <thead>
@@ -403,7 +450,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 크게 주지만 그 차등의 70%가 선호」이고, 균등 성향 평가자는 「선호는 없지만 차등을 거의 주지
 않는다」.<b> 이것이 조합의 관찰이며 </b>가정값이다.</strong> 반대 해석(극단 성향이 판별력으로 벌린다)의
 결과는 §5-2에 있다.</p>
-<h3>3-1 반복 횟수와 난수</h3>
+<h3 id="3-1-반복-횟수와-난수">3-1 반복 횟수와 난수<a class="anchor" href="#3-1-반복-횟수와-난수" aria-label="이 절 링크">§</a></h3>
 <p><strong>반복 400회</strong>를 썼다. 반복을 늘리면 반복 간 변동이 줄어드는데, 주요 지표에서 <strong>400회면 소수
 첫째 자리가 안정된다.</strong> 시드는 <code>20260910</code>으로 고정했으므로 같은 스크립트는 항상 같은 값을 낸다.</p>
 <blockquote>
@@ -411,7 +458,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 돌아가므로 소수 첫째 자리가 다를 수 있다.</p>
 </blockquote>
 <hr>
-<h2>§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★</h2>
+<h2 id="4-실행-조건-어느-표가-어느-조건에서-나왔는가">§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★<a class="anchor" href="#4-실행-조건-어느-표가-어느-조건에서-나왔는가" aria-label="이 절 링크">§</a></h2>
 <p><strong>이 절이 이 문서에서 가장 중요하다.</strong> 조사 과정에서 서로 다른 네 조건으로 계산했고,
 <strong>조건이 다르면 지표2의 절대값이 달라진다.</strong> 조건을 밝히지 않으면 「숫자가 왜 다르냐」는
 지적을 받는다.</p>
@@ -498,7 +545,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 「다면 20% 40.9%」(조건 ③)는 기준선이 다르므로 직접 더할 수 없다. 두 값을 비교할 때는
 <strong>같은 조건 안에서 비교한 수치만 쓴다</strong> — 개정 14의 비교(다면 10% 32.5% vs 20% 40.9%)는
 모두 조건 ③이다.</p>
-<h3>4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증</h3>
+<h3 id="4-1-별도-조건-별표-9-제7호-조정-폭-검증">4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증<a class="anchor" href="#4-1-별도-조건-별표-9-제7호-조정-폭-검증" aria-label="이 절 링크">§</a></h3>
 <p>제7호의 조정 폭(±3 / ±5 / ±10점)을 고른 근거표는 <strong>또 다른 조건</strong>에서 나왔다.</p>
 <div class="tw"><table>
 <thead>
@@ -530,8 +577,8 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 재량의 정당한 통로, 이 셋이다. 외부요인 축소를 근거로 들면 반박당한다.</p>
 </blockquote>
 <hr>
-<h2>§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가</h2>
-<h3>5-1 실측값 (출처 확인됨)</h3>
+<h2 id="5-실측값과-가정값-무엇이-확인된-것이고-무엇이-아닌가">§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가<a class="anchor" href="#5-실측값과-가정값-무엇이-확인된-것이고-무엇이-아닌가" aria-label="이 절 링크">§</a></h2>
+<h3 id="5-1-실측값-출처-확인됨">5-1 실측값 (출처 확인됨)<a class="anchor" href="#5-1-실측값-출처-확인됨" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -598,7 +645,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 </tbody></table></div>
 <p><strong>두 단위가 다른 것이 이 제도의 핵심 구조다</strong> — 부서장은 자기 부서 안에서 평균 80점을 맞추지만,
 등급은 그 점수가 <strong>전사 직급 순위</strong>에 놓인 결과로 결정된다.</p>
-<h3>5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★</h3>
+<h3 id="5-2-가정값-미확인-실측-자료-확보-시-재산정-대상">5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★<a class="anchor" href="#5-2-가정값-미확인-실측-자료-확보-시-재산정-대상" aria-label="이 절 링크">§</a></h3>
 <p><strong>이 표가 조합이 자진 공개해야 할 취약점의 전부다.</strong> 사측이 지적하기 전에 먼저 밝힌다.</p>
 <div class="tw"><table>
 <thead>
@@ -791,7 +838,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <p><strong>9번이 가장 중요하다.</strong> 본부장이 실력을 얼마나 정확히 관측하는지 아무도 모르기 때문에
 1차:2차 비율을 이번에 정할 수 없었고, 그래서 <strong>개정 16(평정 통계 산출·제공)에서 그 값을
 측정하는 조항</strong>을 넣었다. 2년 축적되면 자료로 판정할 수 있다.</p>
-<h3>5-3 조합이 먼저 인정하는 한계</h3>
+<h3 id="5-3-조합이-먼저-인정하는-한계">5-3 조합이 먼저 인정하는 한계<a class="anchor" href="#5-3-조합이-먼저-인정하는-한계" aria-label="이 절 링크">§</a></h3>
 <ol>
 <li><strong>모든 안을 다 적용해도 제거 가능한 외부요인 영향의 절반 이상이 남는다.</strong> 개정 6만으로
 24~30%, 다면 확대를 더해 41%다. <strong>「완전 해결」이라고 말할 수 없다.</strong></li>
@@ -809,7 +856,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 검증하지 않았다.</strong></li>
 </ol>
 <hr>
-<h2>§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유</h2>
+<h2 id="6-두-구현체의-차이-문서와-화면의-값이-다른-이유">§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유<a class="anchor" href="#6-두-구현체의-차이-문서와-화면의-값이-다른-이유" aria-label="이 절 링크">§</a></h2>
 <p>같은 제도를 두 곳에서 계산한다.</p>
 <div class="tw"><table>
 <thead>
@@ -844,7 +891,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 그대로 설명하면 된다. <strong>문서 수치의 정본은 <code>sim/sim.py</code>다.</strong></p>
 </blockquote>
 <hr>
-<h2>§7 검산 방법 — 사측이 직접 확인할 수 있는가</h2>
+<h2 id="7-검산-방법-사측이-직접-확인할-수-있는가">§7 검산 방법 — 사측이 직접 확인할 수 있는가<a class="anchor" href="#7-검산-방법-사측이-직접-확인할-수-있는가" aria-label="이 절 링크">§</a></h2>
 <p>조문화의 조건은 <strong>실무자가 엑셀로 재현할 수 있는가</strong>다. 개정안의 산식은 모두 재현 가능하다.</p>
 <div class="tw"><table>
 <thead>
@@ -879,7 +926,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 355개 기관 전수 조사에서 개인 근무평정에 이 계열 보정을 규정에 둔 기관이 <strong>0곳</strong>인 이유도
 같다고 본다.</p>
 <hr>
-<h2>§8 요구하는 자료 — 어느 가정값을 대체하는가</h2>
+<h2 id="8-요구하는-자료-어느-가정값을-대체하는가">§8 요구하는 자료 — 어느 가정값을 대체하는가<a class="anchor" href="#8-요구하는-자료-어느-가정값을-대체하는가" aria-label="이 절 링크">§</a></h2>
 <p>조합의 자료 요구는 모두 §5-2의 가정값을 실측으로 바꾸기 위한 것이다. <strong>개인을 식별할 수 없는
 집계 통계로만 요구한다.</strong></p>
 <div class="tw"><table>
@@ -921,7 +968,46 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <p><strong>자료를 받으면 모수를 재산정하고 결론을 수정한다.</strong> 이 자세를 먼저 밝히는 것이, 사측이
 「모의데이터일 뿐이다」로 문서 전체를 무력화하려 할 때의 답이다 — <strong>조합은 실측을 거부하지
 않는다. 실측 자료가 없어서 모의로 계산했을 뿐이다.</strong></p>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#1-무엇을-재는가-지표의-정의와-선택-이유">§1 무엇을 재는가 — 지표의 정의와 선택 이유</a></li><li class="l3"><a href="#1-1-대표-지표-같은-실력-십분위-내-평정점-표준편차">1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★</a></li><li class="l3"><a href="#1-2-보조-지표-실력평정점-순위상관-Spearman-ρ">1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)</a></li><li class="l3"><a href="#1-3-보조-지표-분산분해-FWL-정리">1-3 보조 지표 — 분산분해 (FWL 정리)</a></li><li class="l3"><a href="#1-4-보조-지표-등급-획득률과-규모격차">1-4 보조 지표 — 등급 획득률과 규모격차</a></li><li class="l2"><a href="#2-산식-개정안이-쓰는-계산">§2 산식 — 개정안이 쓰는 계산</a></li><li class="l3"><a href="#2-1-순위기반-표준화-Blom-정규-순서통계량">2-1 순위기반 표준화 — Blom 정규 순서통계량</a></li><li class="l3"><a href="#2-2-Φ¹의-계산-Acklam-근사">2-2 Φ⁻¹의 계산 — Acklam 근사</a></li><li class="l3"><a href="#2-3-등급-배정-최대잔여법">2-3 등급 배정 — 최대잔여법</a></li><li class="l3"><a href="#2-4-별표-9-제7호-합계-0-조정">2-4 [별표 9] 제7호 — 합계 0 조정</a></li><li class="l2"><a href="#3-시뮬레이션-절차">§3 시뮬레이션 절차</a></li><li class="l3"><a href="#3-1-반복-횟수와-난수">3-1 반복 횟수와 난수</a></li><li class="l2"><a href="#4-실행-조건-어느-표가-어느-조건에서-나왔는가">§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★</a></li><li class="l3"><a href="#4-1-별도-조건-별표-9-제7호-조정-폭-검증">4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증</a></li><li class="l2"><a href="#5-실측값과-가정값-무엇이-확인된-것이고-무엇이-아닌가">§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가</a></li><li class="l3"><a href="#5-1-실측값-출처-확인됨">5-1 실측값 (출처 확인됨)</a></li><li class="l3"><a href="#5-2-가정값-미확인-실측-자료-확보-시-재산정-대상">5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★</a></li><li class="l3"><a href="#5-3-조합이-먼저-인정하는-한계">5-3 조합이 먼저 인정하는 한계</a></li><li class="l2"><a href="#6-두-구현체의-차이-문서와-화면의-값이-다른-이유">§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유</a></li><li class="l2"><a href="#7-검산-방법-사측이-직접-확인할-수-있는가">§7 검산 방법 — 사측이 직접 확인할 수 있는가</a></li><li class="l2"><a href="#8-요구하는-자료-어느-가정값을-대체하는가">§8 요구하는 자료 — 어느 가정값을 대체하는가</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

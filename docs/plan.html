@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,17 +194,18 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html" class="on" aria-current="page">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>05. 추진계획</h1>
-<h2>§0 한 장 요약</h2>
+<main><article><div class="warn-in" role="note"><b>조합 내부 검토용</b> — 교섭 전략과 예상 반론이 담겨 있습니다. <b>발표 자리에서 이 페이지를 띄우지 마십시오.</b> 상단 탭에는 넣지 않았습니다.</div>
+<h1>05. 추진계획</h1>
+<h2 id="0-한-장-요약">§0 한 장 요약<a class="anchor" href="#0-한-장-요약" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -180,7 +227,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 <tr>
 <td><strong>분리 안건</strong></td>
-<td>승진제도(장기과제) · 노동조합 전임자 평정(별책)</td>
+<td>승진제도(장기과제) · 노동조합 근로시간면제자 평정(별책)</td>
 </tr>
 <tr>
 <td><strong>실질 마감</strong></td>
@@ -188,7 +235,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§1 왜 올해 안에 끝내야 하는가</h2>
+<h2 id="1-왜-올해-안에-끝내야-하는가">§1 왜 올해 안에 끝내야 하는가<a class="anchor" href="#1-왜-올해-안에-끝내야-하는가" aria-label="이 절 링크">§</a></h2>
 <p>근무평정은 <strong>평가대상기간이 해당 회계연도</strong>(규칙 제3조3호)이고 <strong>정기평정 기준일이 12월 말일</strong>
 (제5조1호)이다. 따라서 개정 시점에 따라 적용 가능한 최초 연도가 달라진다.</p>
 <div class="tw"><table>
@@ -210,7 +257,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>한 해를 넘기면 2년이 밀린다.</strong> 목표설정 시기를 규칙에 넣는 요구(개정 8)는 평가대상기간이
 시작된 뒤에는 적용할 수 없으므로 특히 시한에 민감하다.</p>
 <hr>
-<h2>§2 개정 층위 — 무엇을 고치고 무엇을 안 고치는가</h2>
+<h2 id="2-개정-층위-무엇을-고치고-무엇을-안-고치는가">§2 개정 층위 — 무엇을 고치고 무엇을 안 고치는가<a class="anchor" href="#2-개정-층위-무엇을-고치고-무엇을-안-고치는가" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -242,7 +289,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>인사규정 제25조②는 &quot;근무평정에 관한 세부 기준 및 절차 등은 <strong>근무평정 규칙에서 정하는 바에
 따른다<b>&quot;는 백지위임이다. </b>규칙에 무엇을 담아도 인사규정과 충돌하지 않으므로 인사규정을 열
 이유가 없다.</strong></p>
-<h3>2-1 규칙 개정 절차에 포함되는 관문</h3>
+<h3 id="2-1-규칙-개정-절차에-포함되는-관문">2-1 규칙 개정 절차에 포함되는 관문<a class="anchor" href="#2-1-규칙-개정-절차에-포함되는-관문" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -280,8 +327,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>두 관문이 노측에 유리하다.</strong> 감사부서를 두 번 경유하므로 &quot;규정에 없는 기준으로 승진과 성과급을
 결정해 왔다&quot;는 사실이 감사 절차에서 다시 확인된다.</p>
 <hr>
-<h2>§3 단계별 계획</h2>
-<h3>1단계 — 안건 상정 (2026년 9월, <strong>9/21 마감</strong>)</h3>
+<h2 id="3-단계별-계획">§3 단계별 계획<a class="anchor" href="#3-단계별-계획" aria-label="이 절 링크">§</a></h2>
+<h3 id="1단계-안건-상정-2026년-9월-921-마감">1단계 — 안건 상정 (2026년 9월, <strong>9/21 마감</strong>)<a class="anchor" href="#1단계-안건-상정-2026년-9월-921-마감" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -313,7 +360,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>참관제를 쓸지는 판단이 필요하다.</strong> 공개성은 높아지지만 사측이 방어적으로 나올 수 있다.
 1단계에서는 신청하지 않고, 협의가 정체될 때 카드로 남겨 두는 것을 권고한다.</p>
-<h3>2단계 — 9월 28일 2분기 정기회의</h3>
+<h3 id="2단계-9월-28일-2분기-정기회의">2단계 — 9월 28일 2분기 정기회의<a class="anchor" href="#2단계-9월-28일-2분기-정기회의" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -355,7 +402,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>5번이 이 회의의 전술적 목표다.</strong> 두 항목은 사측에 비용이 없고 선례가 명확하다. 첫 회의에서
 합의 사례를 만들면 이후 협의의 온도가 달라진다.</p>
-<h3>3단계 — 실무소위원회 (10~11월)</h3>
+<h3 id="3단계-실무소위원회-1011월">3단계 — 실무소위원회 (10~11월)<a class="anchor" href="#3단계-실무소위원회-1011월" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -394,7 +441,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>협의가 정체될 경우</strong> 운영규정 제20조②는 &quot;노사일방의 대표자가 회의의 목적 등을 문서로 명시하여
 회의의 소집을 요구할 때에는 이에 응하여야 한다&quot;고 정한다. <strong>임시회의 소집 요구권</strong>이 있다.</p>
-<h3>4단계 — 12월 4분기 정기회의 의결</h3>
+<h3 id="4단계-12월-4분기-정기회의-의결">4단계 — 12월 4분기 정기회의 의결<a class="anchor" href="#4단계-12월-4분기-정기회의-의결" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -425,7 +472,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>회의록에 의결 내용을 정확히 기재하는 것이 중요하다.</strong> 근참법 제24조의 이행 의무는 의결된
 내용에만 미친다. &quot;검토하기로 한다&quot;는 의결은 이행 의무를 만들지 않는다.</p>
-<h3>5단계 — 2027년 시행과 검증</h3>
+<h3 id="5단계-2027년-시행과-검증">5단계 — 2027년 시행과 검증<a class="anchor" href="#5단계-2027년-시행과-검증" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -466,7 +513,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§4 트랙 A만 채택될 경우 — 최소 조치</h2>
+<h2 id="4-트랙-A만-채택될-경우-최소-조치">§4 트랙 A만 채택될 경우 — 최소 조치<a class="anchor" href="#4-트랙-A만-채택될-경우-최소-조치" aria-label="이 절 링크">§</a></h2>
 <p>사측이 &quot;규칙 개정에 시간이 걸린다&quot;며 <strong>평정계획만 손보자</strong>고 제안할 수 있다. 그 경우 2027년
 평정에 반드시 반영해야 하는 최소 항목이다. 모두 규칙 개정 없이 가능하다.</p>
 <div class="tw"><table>
@@ -553,7 +600,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>따라서 트랙 A는 과도조치로만 의미가 있고, 규칙 개정을 병행해야 한다.</strong></p>
 <hr>
-<h2>§5 위험과 대응</h2>
+<h2 id="5-위험과-대응">§5 위험과 대응<a class="anchor" href="#5-위험과-대응" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -579,8 +626,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 <tr>
 <td><strong>교환 제안</strong></td>
-<td>&quot;전임자 처우를 개선해 주는 대신 사전조정계수는 유지&quot;</td>
-<td><strong>분리 원칙 고수.</strong> 전임자 안건은 별책으로 이미 분리해 두었다</td>
+<td>&quot;근로시간면제자 처우를 개선해 주는 대신 사전조정계수는 유지&quot;</td>
+<td><strong>분리 원칙 고수.</strong> 근로시간면제자 안건은 별책으로 이미 분리해 두었다</td>
 </tr>
 <tr>
 <td><strong>승진제도로 확대</strong></td>
@@ -604,7 +651,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§6 성공 기준</h2>
+<h2 id="6-성공-기준">§6 성공 기준<a class="anchor" href="#6-성공-기준" aria-label="이 절 링크">§</a></h2>
 <p>협의의 성패를 무엇으로 판단할지 미리 정해 둔다.</p>
 <div class="tw"><table>
 <thead>
@@ -635,7 +682,46 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 제규정관리규정 2024.05.03., 노사협의회 운영규정 2025.12.23.)에 따르며 확인 기준일은
 2026-09-10이다.</p>
 </blockquote>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-한-장-요약">§0 한 장 요약</a></li><li class="l2"><a href="#1-왜-올해-안에-끝내야-하는가">§1 왜 올해 안에 끝내야 하는가</a></li><li class="l2"><a href="#2-개정-층위-무엇을-고치고-무엇을-안-고치는가">§2 개정 층위 — 무엇을 고치고 무엇을 안 고치는가</a></li><li class="l3"><a href="#2-1-규칙-개정-절차에-포함되는-관문">2-1 규칙 개정 절차에 포함되는 관문</a></li><li class="l2"><a href="#3-단계별-계획">§3 단계별 계획</a></li><li class="l3"><a href="#1단계-안건-상정-2026년-9월-921-마감">1단계 — 안건 상정 (2026년 9월, 9/21 마감)</a></li><li class="l3"><a href="#2단계-9월-28일-2분기-정기회의">2단계 — 9월 28일 2분기 정기회의</a></li><li class="l3"><a href="#3단계-실무소위원회-1011월">3단계 — 실무소위원회 (10~11월)</a></li><li class="l3"><a href="#4단계-12월-4분기-정기회의-의결">4단계 — 12월 4분기 정기회의 의결</a></li><li class="l3"><a href="#5단계-2027년-시행과-검증">5단계 — 2027년 시행과 검증</a></li><li class="l2"><a href="#4-트랙-A만-채택될-경우-최소-조치">§4 트랙 A만 채택될 경우 — 최소 조치</a></li><li class="l2"><a href="#5-위험과-대응">§5 위험과 대응</a></li><li class="l2"><a href="#6-성공-기준">§6 성공 기준</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html" class="on" aria-current="page">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

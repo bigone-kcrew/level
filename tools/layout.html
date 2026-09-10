@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,7 +194,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc__BODYCLASS__">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
@@ -157,7 +203,47 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   <nav>__NAV__</nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article>__CONTENT__</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+<main><article>__BANNER__
+__CONTENT__</article>__TOC__</main>
+<footer>
+<div class="footmenu">__FOOTMENU__</div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

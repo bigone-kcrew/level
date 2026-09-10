@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,17 +194,18 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html" class="on" aria-current="page">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html" class="on" aria-current="page">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>01. 제도 진단</h1>
-<h2>0. 이 문서를 읽는 방법</h2>
+<main><article>
+<h1>01. 제도 진단</h1>
+<h2 id="0-이-문서를-읽는-방법">0. 이 문서를 읽는 방법<a class="anchor" href="#0-이-문서를-읽는-방법" aria-label="이 절 링크">§</a></h2>
 <p>창업진흥원의 개인 평가는 <strong>세 개의 제도가 서로 물려 있는 하나의 시스템</strong>입니다.
 어느 하나만 떼어 보면 문제가 보이지 않습니다.</p>
 <pre><code>              ┌─────────────────┐
@@ -180,12 +227,12 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
                                         │         │  평가자·사전조정계수가
                                         └─────────┘  근무평정과 **동일**
 </code></pre>
-<h3>이 문서의 범위</h3>
+<h3 id="이-문서의-범위">이 문서의 범위<a class="anchor" href="#이-문서의-범위" aria-label="이 절 링크">§</a></h3>
 <p><strong>본안은 근무평정 제도 개선입니다.</strong> 승진제도 자체의 개편(반영 회차, 동료평가, 인사위원회
 심의 구조 등)은 <strong>장기과제로 본안에서 다루지 않습니다.</strong> 다만 근무평정 결과가 승진으로
 이어지는 경로는 왜곡이 증폭·고착되는 지점이므로 §4에서 <strong>배경으로</strong> 설명하고,
 개선 제안은 <a href="#%EB%B6%99%EC%9E%84-%EC%9E%A5%EA%B8%B0%EA%B3%BC%EC%A0%9C">붙임</a>으로 정리합니다.</p>
-<p>노동조합 전임자·근로시간면제자의 평가 처리는 <strong>별도 안건</strong>으로 분리했습니다.
+<p>노동조합 근로시간면제자(이하 「근면자」)의 평가 처리는 <strong>별도 안건</strong>으로 분리했습니다.
 근무평정 개편의 대가로 삼지 않기 위한 것이며, 이 문서에서 다루지 않습니다.</p>
 <p><strong>세 가지가 이 문서의 뼈대입니다.</strong></p>
 <ol>
@@ -193,7 +240,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <li>승진 구조와 전보 시기가 그 왜곡을 증폭하고 고착시킨다</li>
 <li>결과를 검증할 방법이 없어 불신이 해소되지 않는다</li>
 </ol>
-<h3>수치에 관한 고지</h3>
+<h3 id="수치에-관한-고지">수치에 관한 고지<a class="anchor" href="#수치에-관한-고지" aria-label="이 절 링크">§</a></h3>
 <p>이 문서의 시뮬레이션 수치는 <strong>창업진흥원의 실제 평정 결과가 아닙니다.</strong>
 노동조합은 평정자별 점수 분포 자료를 요구했으나
 「근로자참여 및 협력증진에 관한 법률」 제14조 단서(개인정보)를 근거로 제공받지 못했습니다.
@@ -202,8 +249,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>어느 가정에서 결론이 약해지는지는 <strong>§7 민감도</strong>에서 먼저 밝힙니다.
 자료가 제공되면 모수를 재산정해야 하며, 그것이 §8 자료 요구의 이유입니다.</p>
 <hr>
-<h2>1. 평가 구조 — 누가 누구를 평가하는가</h2>
-<h3>1-1. 평가자</h3>
+<h2 id="1-평가-구조-누가-누구를-평가하는가">1. 평가 구조 — 누가 누구를 평가하는가<a class="anchor" href="#1-평가-구조-누가-누구를-평가하는가" aria-label="이 절 링크">§</a></h2>
+<h3 id="1-1-평가자">1-1. 평가자<a class="anchor" href="#1-1-평가자" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -241,7 +288,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>업적·역량평가가 종합점수의 85%이고 그것이 위 비율로 갈립니다.
 따라서 <strong>부서원의 종합점수에서 부서장의 실질 영향력은 51%</strong>(0.85 × 0.60),
 <strong>본부장은 34%</strong>(0.85 × 0.40)입니다.</p>
-<h3>1-2. 평가군 — 실 단위 22개</h3>
+<h3 id="1-2-평가군-실-단위-22개">1-2. 평가군 — 실 단위 22개<a class="anchor" href="#1-2-평가군-실-단위-22개" aria-label="이 절 링크">§</a></h3>
 <p>실 하위의 팀·TF는 <strong>소속 실장이 평가</strong>하므로 평가군은 실 단위입니다.</p>
 <div class="tw"><table>
 <thead>
@@ -297,7 +344,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 따라서 <strong>실질 평가군은 위 규모의 약 8할</strong>로 보아야 하며, 이 문서의 시뮬레이션은
 전체 규모를 기준으로 계산해 소부서 효과를 <strong>보수적으로(작게)</strong> 추정한 것입니다.
 부서별 절대평가자 수는 자료가 제공되지 않아 확인할 수 없습니다.</p>
-<h3>1-3. 결과가 쓰이는 곳</h3>
+<h3 id="1-3-결과가-쓰이는-곳">1-3. 결과가 쓰이는 곳<a class="anchor" href="#1-3-결과가-쓰이는-곳" aria-label="이 절 링크">§</a></h3>
 <p><strong>승진</strong> — 인사규정 제23조 및 2026년 승진평가 추진계획</p>
 <div class="tw"><table>
 <thead>
@@ -377,7 +424,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>30% × 70% = <strong>21%</strong></td>
 </tr>
 <tr>
-<td>노조 전임자</td>
+<td>근면자</td>
 <td>0%</td>
 <td>100%</td>
 <td><strong>70%</strong></td>
@@ -386,7 +433,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>개인성과 = 근무평정 70% + 내부평가 30%.
 내부평가성과급은 내부평가 결과로 별도 지급됩니다.</p>
 <hr>
-<h2>2. 목표관리가 형해화되어 있다</h2>
+<h2 id="2-목표관리가-형해화되어-있다">2. 목표관리가 형해화되어 있다<a class="anchor" href="#2-목표관리가-형해화되어-있다" aria-label="이 절 링크">§</a></h2>
 <p>규칙 제15조는 성과목표 면담 → 합의 → 확정을 요구합니다. 실제 운영은 다릅니다.</p>
 <div class="tw"><table>
 <thead>
@@ -422,8 +469,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 규정에 두고 있습니다. → <a href="benchmark.html">03. 타기관 비교</a></p>
 </blockquote>
 <hr>
-<h2>3. 사전조정계수가 평정자의 성향을 결과로 옮긴다</h2>
-<h3>3-1. 제도의 작동</h3>
+<h2 id="3-사전조정계수가-평정자의-성향을-결과로-옮긴다">3. 사전조정계수가 평정자의 성향을 결과로 옮긴다<a class="anchor" href="#3-사전조정계수가-평정자의-성향을-결과로-옮긴다" aria-label="이 절 링크">§</a></h2>
+<h3 id="3-1-제도의-작동">3-1. 제도의 작동<a class="anchor" href="#3-1-제도의-작동" aria-label="이 절 링크">§</a></h3>
 <p>업적·역량평가는 60~100점 구간에서 부여하되 <strong>피평가자 그룹의 평균점수를 80점 이내</strong>로
 설정합니다(연도별 계획). 2023년까지는 평균 85점 이내에 부여구간이 부서장 78~92점이었고,
 2024년부터 평균 80점 이내에 구간 60~100점으로 바뀌었습니다. <strong>압축이 강화된 방향입니다.</strong></p>
@@ -450,7 +497,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p>3명 평가군(홍보실)에서 한 명을 최고점 주려면 나머지 둘이 평균 70점, 즉 C등급 구간까지
 내려가야 합니다. 규모가 클수록 이 제약은 완화됩니다.</p>
-<h3>3-2. 같은 제약 아래에서 평정자는 두 방향으로 갈린다</h3>
+<h3 id="3-2-같은-제약-아래에서-평정자는-두-방향으로-갈린다">3-2. 같은 제약 아래에서 평정자는 두 방향으로 갈린다<a class="anchor" href="#3-2-같은-제약-아래에서-평정자는-두-방향으로-갈린다" aria-label="이 절 링크">§</a></h3>
 <p>제로섬 구조에서 평정자의 행동은 둘로 나뉩니다.</p>
 <div class="tw"><table>
 <thead>
@@ -481,7 +528,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>영향 인원은 소부서 문제보다 훨씬 많습니다. 그리고 결정적으로 —
 <strong>10명 부서가 균질할 수는 있어도 33~59명 본부가 균질할 수는 없습니다.</strong>
 2차 평가 단계의 좁은 부여폭은 &quot;집단이 실제로 비슷했다&quot;로 설명되지 않습니다.</p>
-<h3>3-2의2. 근본 목적 — 개인이 자기 성과로 평가받는가</h3>
+<h3 id="3-2의2-근본-목적-개인이-자기-성과로-평가받는가">3-2의2. 근본 목적 — 개인이 자기 성과로 평가받는가<a class="anchor" href="#3-2의2-근본-목적-개인이-자기-성과로-평가받는가" aria-label="이 절 링크">§</a></h3>
 <p>근무평정의 근본 목적은 「S등급이 나오는가」가 아닙니다.
 <b>「개인이 외부요인의 영향을 적게 받고 자기 성과로 평가받는가」</b>입니다.</p>
 <p>여기서 외부요인은 부서장·본부장의 평정 성향, 전보, 부서원 수, 부서 내 승진자 수, 기간제·직급 구성,
@@ -525,7 +572,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 비교하지 않습니다. 조건별 값은 〈02 규정 개정안〉 개정 14에 있습니다.)*</p>
 <p><strong>역전 조건은 찾지 못했습니다.</strong> 가정을 바꾸어 가며 계산했으나, <strong>현행이 개선안보다 이 지표에서 나은
 조건은 확인되지 않았습니다.</strong> 확인된 조건은 §7 민감도에 있습니다.</p>
-<h3>3-3. 시뮬레이션 결과</h3>
+<h3 id="3-3-시뮬레이션-결과">3-3. 시뮬레이션 결과<a class="anchor" href="#3-3-시뮬레이션-결과" aria-label="이 절 링크">§</a></h3>
 <p>평가군 22개(3~16명), 2단계 평가(1차 60% / 2차 40%), <strong>등급 배정은 규칙 제26조①에 따라
 직급별 전사 단위</strong>, 부서장 극단:균등 50:50, 본부 유형은 반복마다 무작위 배정, 반복 400회.
 개선안에는 [별표 9] 제7호(부서장 ±5점 조정, 합계 0)를 포함합니다.</p>
@@ -580,7 +627,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 부서장은 자기 부서 안에서 평균 80점을 맞추지만, 등급은 그 점수가 <strong>전사 직급 순위</strong>에 놓인
 결과로 결정됩니다. 5급은 107명이 한 평가군이므로, 균등하게 부여받은 직원은 중간에 밀집해
 S등급 정원 안에 들 길이 사실상 막힙니다.</p>
-<h3>3-4. 내부평가도 같은 병리를 공유한다</h3>
+<h3 id="3-4-내부평가도-같은-병리를-공유한다">3-4. 내부평가도 같은 병리를 공유한다<a class="anchor" href="#3-4-내부평가도-같은-병리를-공유한다" aria-label="이 절 링크">§</a></h3>
 <p><strong>성과급의 다른 축인 내부평가가 근무평정과 평가자·사전조정계수를 공유합니다.</strong></p>
 <div class="tw"><table>
 <thead>
@@ -615,7 +662,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 따라서 <strong>&quot;내부평가가 근무평정의 불이익을 보전한다&quot;는 기대는 제도가 아니라
 개별 평가자의 선의에 의존합니다.</strong> 편향은 두 번 적용됩니다.</p>
 <p>→ 사전조정계수 폐지는 근무평정만이 아니라 <strong>내부평가에도 함께 적용</strong>되어야 합니다.</p>
-<h3>3-5. 배치는 통제할 수 없는 외부요인이다</h3>
+<h3 id="3-5-배치는-통제할-수-없는-외부요인이다">3-5. 배치는 통제할 수 없는 외부요인이다<a class="anchor" href="#3-5-배치는-통제할-수-없는-외부요인이다" aria-label="이 절 링크">§</a></h3>
 <p>인사배치는 인사담당부서와 본부장의 <strong>정성적 판단</strong>이고, <strong>피평가자는 자기 부서를 선택할 수 없습니다.</strong></p>
 <p><strong>이 절은 배치가 편중되어 있다고 주장하지 않습니다.</strong> 편중 여부에 관한 자료는 조합에 없습니다.
 아래는 <strong>「만약 부서 간에 실제 실력 격차가 있다면」</strong> 결과가 어떻게 달라지는지를 조건부로 계산한
@@ -693,7 +740,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 개선안이 바꾸는 것은 부서 <strong>안</strong>의 산포뿐입니다.
 따라서 사측이 「개선안이 부서 간 격차를 무시한다」고 공격하려면 <strong>자기 현행 제도를 먼저 부정해야
 합니다.</strong></p>
-<h3>3-6. 이 개정이 사측에 주는 이익</h3>
+<h3 id="3-6-이-개정이-사측에-주는-이익">3-6. 이 개정이 사측에 주는 이익<a class="anchor" href="#3-6-이-개정이-사측에-주는-이익" aria-label="이 절 링크">§</a></h3>
 <p>이 문서는 조합의 문서이지만, 이 절은 <strong>사측의 이익</strong>을 적습니다. 협의 자리에서 필요한 부분입니다.</p>
 <p><strong>핵심은 이것입니다</strong> — 사측이 원하는 것은 「잘할 사람에게 잘 주기」보다 <strong>「실제 저성과자를 낮게
 평가하기」<b>인데, </b>현행 제도에서는 그것이 작동하지 않습니다.</strong></p>
@@ -815,12 +862,12 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tr>
 </tbody></table></div>
 <hr>
-<h2>4. 승진 구조가 왜곡을 증폭하고 고착시킨다 (배경)</h2>
+<h2 id="4-승진-구조가-왜곡을-증폭하고-고착시킨다-배경">4. 승진 구조가 왜곡을 증폭하고 고착시킨다 (배경)<a class="anchor" href="#4-승진-구조가-왜곡을-증폭하고-고착시킨다-배경" aria-label="이 절 링크">§</a></h2>
 <blockquote>
 <p>이 절은 <strong>배경 설명</strong>입니다. 승진제도 개편은 장기과제이며 본안 요구사항에 포함하지
 않습니다. 근무평정의 왜곡이 왜 그대로 남지 않고 커지는지를 보이기 위한 것입니다.</p>
 </blockquote>
-<h3>4-1. 승진 적체</h3>
+<h3 id="4-1-승진-적체">4-1. 승진 적체<a class="anchor" href="#4-1-승진-적체" aria-label="이 절 링크">§</a></h3>
 <p>2026년 승진평가 계획 기준입니다.</p>
 <div class="tw"><table>
 <thead>
@@ -869,7 +916,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tr>
 </tbody></table></div>
 <p>이 경쟁률에서 평정점 소수 둘째 자리가 승진을 가릅니다.</p>
-<h3>4-2. 승진자에게 최저평정을 주는 관행</h3>
+<h3 id="4-2-승진자에게-최저평정을-주는-관행">4-2. 승진자에게 최저평정을 주는 관행<a class="anchor" href="#4-2-승진자에게-최저평정을-주는-관행" aria-label="이 절 링크">§</a></h3>
 <p>조합이 파악한 관행입니다. 평가자에 따라 차이가 있습니다.</p>
 <ul>
 <li>승진자는 승진으로 이미 만족했으므로 낮은 평정에 이의를 제기하지 않는다</li>
@@ -914,7 +961,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tbody></table></div>
 <p>전체 69명이 30개 부서에 분포하는데 <strong>3명 이상 몰린 부서가 12개</strong>입니다.
 유일한 대상자인 부서에서는 부서 내 1위를 사실상 확보합니다.</p>
-<h3>4-3. 반영 회차가 짧아 특정 평정자가 승진을 결정한다</h3>
+<h3 id="4-3-반영-회차가-짧아-특정-평정자가-승진을-결정한다">4-3. 반영 회차가 짧아 특정 평정자가 승진을 결정한다<a class="anchor" href="#4-3-반영-회차가-짧아-특정-평정자가-승진을-결정한다" aria-label="이 절 링크">§</a></h3>
 <p>4급 승진(5급 → 4급)은 <strong>최근 2회</strong>만 반영합니다. 2023년부터 연 1회로 축소되어
 반영 기간이 2년입니다. 특정 부서장·본부장 아래에서의 2년이 승진을 좌우합니다.</p>
 <p>공공기관 표준은 최근 3년이며, 중소벤처기업부 산하 기관도 그렇습니다.</p>
@@ -944,7 +991,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tbody></table></div>
 <p>다만 2·3급 승진은 이미 3회 산술평균(= 균등 가중)이므로 <strong>문제는 직급 간 형평</strong>입니다.
 이 항목은 승진제도에 속하므로 본안이 아니라 <a href="#%EB%B6%99%EC%9E%84-%EC%9E%A5%EA%B8%B0%EA%B3%BC%EC%A0%9C">붙임</a>으로 정리합니다.</p>
-<h3>4-4. 평정점 변환이 인원수에 따라 차이를 증폭한다</h3>
+<h3 id="4-4-평정점-변환이-인원수에-따라-차이를-증폭한다">4-4. 평정점 변환이 인원수에 따라 차이를 증폭한다<a class="anchor" href="#4-4-평정점-변환이-인원수에-따라-차이를-증폭한다" aria-label="이 절 링크">§</a></h3>
 <p>평정점은 등급 구간 최고점에서 <code>10 ÷ 등급별 인원수</code>씩 차감합니다(별표 7).</p>
 <div class="tw"><table>
 <thead>
@@ -973,8 +1020,8 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tbody></table></div>
 <p>종합점수 차이가 0.01점이어도 평정점 간격은 직급 인원수에 따라 10배 이상 벌어집니다.</p>
 <hr>
-<h2>5. 전보·휴직·조직개편 시점이 만드는 불이익</h2>
-<h3>5-1. 제도의 작동</h3>
+<h2 id="5-전보·휴직·조직개편-시점이-만드는-불이익">5. 전보·휴직·조직개편 시점이 만드는 불이익<a class="anchor" href="#5-전보·휴직·조직개편-시점이-만드는-불이익" aria-label="이 절 링크">§</a></h2>
+<h3 id="5-1-제도의-작동">5-1. 제도의 작동<a class="anchor" href="#5-1-제도의-작동" aria-label="이 절 링크">§</a></h3>
 <p>규칙 제6조①은 <strong>평가자와 피평가자가 최소 30일 이상 근무한 부서를 기준으로 평가하고,
 2개 이상 부서에 해당하면 근무기간 비율로 가중</strong>하도록 정합니다.
 정기전보는 연 2회(1월·7월)입니다.</p>
@@ -1019,7 +1066,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 휴직·중도 파견·연중 조직개편도 같습니다.</p>
 <p>결과는 하나입니다 — <strong>한 부서장과 계속 가는 부서원이 유리합니다.</strong>
 이것이 사내 라인 문화의 제도적 경로입니다.</p>
-<h3>5-2. 시뮬레이션 결과</h3>
+<h3 id="5-2-시뮬레이션-결과">5-2. 시뮬레이션 결과<a class="anchor" href="#5-2-시뮬레이션-결과" aria-label="이 절 링크">§</a></h3>
 <p>가정: 전 부서장이 &#39;나갈 사람&#39;에게 0.6σ, 신 부서장이 &#39;온 지 얼마 안 된 사람&#39;에게 0.8σ 낮게 평가.</p>
 <div class="tw"><table>
 <thead>
@@ -1147,7 +1194,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <li>근무기간 <strong>6개월 미만 부서는 가중치에서 배제</strong>하고 주 근무부서 100% 반영</li>
 <li>연중 조직개편·중도 파견·휴직자는 <strong>절대평가 전환</strong></li>
 </ul>
-<h3>5-3. 평가자 부재 시 처리 규정이 없다</h3>
+<h3 id="5-3-평가자-부재-시-처리-규정이-없다">5-3. 평가자 부재 시 처리 규정이 없다<a class="anchor" href="#5-3-평가자-부재-시-처리-규정이-없다" aria-label="이 절 링크">§</a></h3>
 <p>2023년 계획에는 이런 조항이 있었습니다.</p>
 <blockquote>
 <p>평가자–피평가자 간 근무기간이 30일 이상이더라도 <strong>1차 평가자가 평가기준일 이전 퇴사 시에는
@@ -1159,18 +1206,18 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <p>외부 출신 본부장의 임기는 3년이고 종료 후 퇴직합니다.
 <strong>규정이 없어 처리가 그때그때 달라지는 상태입니다.</strong></p>
 <hr>
-<h2>6. 검증할 수 없어 불신이 해소되지 않는다</h2>
-<h3>6-1. 이의를 제기할 근거를 주지 않는다</h3>
+<h2 id="6-검증할-수-없어-불신이-해소되지-않는다">6. 검증할 수 없어 불신이 해소되지 않는다<a class="anchor" href="#6-검증할-수-없어-불신이-해소되지-않는다" aria-label="이 절 링크">§</a></h2>
+<h3 id="6-1-이의를-제기할-근거를-주지-않는다">6-1. 이의를 제기할 근거를 주지 않는다<a class="anchor" href="#6-1-이의를-제기할-근거를-주지-않는다" aria-label="이 절 링크">§</a></h3>
 <p>규칙 제28조①은 역량·업적·상향/다면·종합점수는 공개하되
 <strong>1·2차 평가자별 점수, 직급 내 순위, 평정점은 공개하지 않습니다.</strong></p>
 <p>이의신청 대상은 결과입니다. 자신의 평정점이 얼마이고 몇 등인지 모르는 상태에서
 7일 안에 &quot;이의신청 취지 및 사유&quot;를 작성해야 합니다.</p>
 <p>그리고 <strong>일부 인원은 평가 결과가 시스템에 등록조차 되지 않습니다</strong> —
 노동조합 위원장, 휴직 후 복직자 등. 본인도 자기 점수를 볼 수 없습니다.</p>
-<h3>6-2. 원 결정을 한 주체가 재심도 한다</h3>
+<h3 id="6-2-원-결정을-한-주체가-재심도-한다">6-2. 원 결정을 한 주체가 재심도 한다<a class="anchor" href="#6-2-원-결정을-한-주체가-재심도-한다" aria-label="이 절 링크">§</a></h3>
 <p>이의신청은 인사담당부서장을 거쳐 <strong>인사위원회</strong>가 14일 내 심의합니다.
 별도 재심기구가 없고, 평정자가 결과를 설명할 의무도 없습니다.</p>
-<h3>6-3. 사후 보정 근거가 있는데 쓰지 않는다</h3>
+<h3 id="6-3-사후-보정-근거가-있는데-쓰지-않는다">6-3. 사후 보정 근거가 있는데 쓰지 않는다<a class="anchor" href="#6-3-사후-보정-근거가-있는데-쓰지-않는다" aria-label="이 절 링크">§</a></h3>
 <p>규칙 제9조④에 이미 근거가 있습니다.</p>
 <blockquote>
 <p>근무평정 결과의 신뢰도를 제고하기 위해 <strong>평균 등을 적용하여 보정할 수 있으며</strong>
@@ -1178,7 +1225,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </blockquote>
 <p><strong>현재 이 보정은 실시되지 않습니다.</strong> 근거 조항이 사문화된 상태입니다.
 개편은 없는 권한을 새로 만드는 것이 아니라, <strong>있는 근거를 실제로 쓰게 하는 것</strong>입니다.</p>
-<h3>6-4. 핵심 기준이 규정 밖에 있다</h3>
+<h3 id="6-4-핵심-기준이-규정-밖에-있다">6-4. 핵심 기준이 규정 밖에 있다<a class="anchor" href="#6-4-핵심-기준이-규정-밖에-있다" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -1220,7 +1267,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 구조를 마련할 필요</strong>가 있으며 평가 결과를 조정할 때 위원회를 활용할 수 있도록
 체제를 구축해 <strong>평가결과의 수용도를 제고</strong>할 필요가 있다.&quot;</p>
 </blockquote>
-<h3>6-5. 공무직은 승진제도가 없는데 강제배분을 받는다</h3>
+<h3 id="6-5-공무직은-승진제도가-없는데-강제배분을-받는다">6-5. 공무직은 승진제도가 없는데 강제배분을 받는다<a class="anchor" href="#6-5-공무직은-승진제도가-없는데-강제배분을-받는다" aria-label="이 절 링크">§</a></h3>
 <p>공무직은 <strong>직급이 없고</strong>(시설원 / 시설반장) <strong>승진제도가 없습니다.</strong>
 재무계약실 안전문화팀 소속이며, 연도별 계획의 등급배정표에서
 <strong>공무직이 독립 등급배정군</strong>으로 편성됩니다.</p>
@@ -1255,7 +1302,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 어떻게 적용되는지도 규정에 없습니다.</p>
 <p>→ <strong>공무직은 절대평가로 전환해야 합니다.</strong></p>
 <hr>
-<h2>7. 민감도 — 결론이 약해지는 영역을 먼저 밝힌다</h2>
+<h2 id="7-민감도-결론이-약해지는-영역을-먼저-밝힌다">7. 민감도 — 결론이 약해지는 영역을 먼저 밝힌다<a class="anchor" href="#7-민감도-결론이-약해지는-영역을-먼저-밝힌다" aria-label="이 절 링크">§</a></h2>
 <p>정량 논거가 어떤 가정에 의존하는지 자진 공개합니다.
 개선 효과는 실력–평정점 순위상관(ρ)의 증가분으로 측정했습니다.</p>
 <p><strong>(가) 평정자들의 부여 폭이 서로 비슷해질 때</strong> — 효과가 줄어듭니다</p>
@@ -1382,7 +1429,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <strong>§4-2의 승진자 최저평정 관행과 §5의 전보자 낙인은 정의상 실력과 무관한 요소입니다.</strong>
 승진했다는 사실, 부서를 떠난다는 사실은 성과가 아닙니다.
 그 두 행동이 실재한다는 것 자체가 선호 반영률이 0이 아니라는 증거입니다.</p>
-<h3>7-1. 식별 문제 — 가장 근본적인 한계</h3>
+<h3 id="7-1-식별-문제-가장-근본적인-한계">7-1. 식별 문제 — 가장 근본적인 한계<a class="anchor" href="#7-1-식별-문제-가장-근본적인-한계" aria-label="이 절 링크">§</a></h3>
 <p>&quot;부서 점수 폭이 좁다&quot;는 관측은 두 가지로 읽힙니다.</p>
 <div class="tw"><table>
 <thead>
@@ -1429,7 +1476,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 어렵습니다.</strong> 10명 부서는 균질할 수 있어도 36명 본부는 그렇지 않습니다.
 1차 평가 단계에서 균질성 해석이 성립해도, 2차 평가 40%에서는 성립하지 않으므로
 표준화의 이득이 남습니다.</p>
-<h3>7-2. 표준화가 고치지 못하는 것</h3>
+<h3 id="7-2-표준화가-고치지-못하는-것">7-2. 표준화가 고치지 못하는 것<a class="anchor" href="#7-2-표준화가-고치지-못하는-것" aria-label="이 절 링크">§</a></h3>
 <p>정직하게 밝힙니다. 사후 표준화는 <strong>평정자의 편향과 판별력 차이</strong>를 교정합니다.
 다음 세 가지는 교정하지 못합니다.</p>
 <div class="tw"><table>
@@ -1458,7 +1505,7 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </tbody></table></div>
 <p>표준화만으로 문제가 해결된다고 주장하지 않습니다.
 <strong>표준화는 평정자 간 척도를 통일하는 장치이고, 나머지는 절차와 구제로 메워야 합니다.</strong></p>
-<h3>7-3. 반영 회차 확대의 근거 — 조건이 붙습니다</h3>
+<h3 id="7-3-반영-회차-확대의-근거-조건이-붙습니다">7-3. 반영 회차 확대의 근거 — 조건이 붙습니다<a class="anchor" href="#7-3-반영-회차-확대의-근거-조건이-붙습니다" aria-label="이 절 링크">§</a></h3>
 <p>서열명부 반영 회차를 늘리는 것이 유리한지는 <strong>직원의 성과가 해마다 얼마나 유지되는지</strong>에
 달려 있습니다. 인접 연도 실력 상관을 바꿔가며 계산했습니다.</p>
 <div class="tw"><table>
@@ -1501,12 +1548,12 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 성과가 빠르게 변하는 직무에서는 최근 성과를 더 봐야 한다는 반론이 성립합니다.
 <strong>따라서 이 요구는 &quot;회차를 무조건 늘리자&quot;가 아니라
 &quot;4급 승진만 2회인 직급 간 불형평을 없애자&quot;로 한정합니다.</strong></p>
-<h3>7-4. 쓰지 않기로 한 지표</h3>
+<h3 id="7-4-쓰지-않기로-한-지표">7-4. 쓰지 않기로 한 지표<a class="anchor" href="#7-4-쓰지-않기로-한-지표" aria-label="이 절 링크">§</a></h3>
 <p>「S등급자가 한 명도 없는 부서 비율」을 초기에 검토했으나 <strong>폐기했습니다.</strong>
 평가군 평균 9.68명, S 정원 20%인 제도에서는 실력을 완전히 관측하는 이상적 제도에서도
 그 비율이 상당히 높게 나옵니다. 제도 결함 지표로 쓸 수 없습니다.</p>
 <hr>
-<h2>8. 자료 요구</h2>
+<h2 id="8-자료-요구">8. 자료 요구<a class="anchor" href="#8-자료-요구" aria-label="이 절 링크">§</a></h2>
 <p>위 진단 중 정량 부분은 실측 자료 없이 모형으로만 논증한 것입니다.
 다음 자료가 제공되면 모수를 재산정하고 결론을 수정할 수 있습니다.</p>
 <div class="tw"><table>
@@ -1557,28 +1604,67 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 않았습니다. <strong>평가군 규모 구간별 집계 통계는 개인을 식별할 수 없으므로 단서에
 해당하지 않습니다.</strong> 사용자 측이 직접 분석해 결과만 노사협의회에 보고하는 방식도 가능합니다.</p>
 <hr>
-<h2>붙임 — 장기과제</h2>
+<h2 id="붙임-장기과제">붙임 — 장기과제<a class="anchor" href="#붙임-장기과제" aria-label="이 절 링크">§</a></h2>
 <p>본안 범위 밖이지만, 근무평정 개편과 맞물려 검토가 필요한 항목입니다.
 <strong>이번 개편의 전제로 삼지 않습니다.</strong></p>
-<h3>가. 승진 서열명부 반영 회차의 직급 간 형평</h3>
+<h3 id="가-승진-서열명부-반영-회차의-직급-간-형평">가. 승진 서열명부 반영 회차의 직급 간 형평<a class="anchor" href="#가-승진-서열명부-반영-회차의-직급-간-형평" aria-label="이 절 링크">§</a></h3>
 <p>4급 승진만 최근 2회(2년)를 반영하고, 2·3급은 3회, 1(나)급은 4회입니다.
 4급 승진 경쟁률이 22.7 : 1로 가장 높은데 반영 기간이 가장 짧습니다.
 → §4-3 · §7-3</p>
-<h3>나. 성과급 등급 비율·지급률의 규정화</h3>
+<h3 id="나-성과급-등급-비율·지급률의-규정화">나. 성과급 등급 비율·지급률의 규정화<a class="anchor" href="#나-성과급-등급-비율·지급률의-규정화" aria-label="이 절 링크">§</a></h3>
 <p>보수규정 제25조③이 원장에게 위임하고, 실제 수치는 성과관리 편람에 <strong>&quot;예시&quot;</strong> 로만
 존재합니다. 정부 경영평가단이 지적한 &quot;등급이 규정화되지 않았다&quot;에 해당합니다.
 → §6-4</p>
-<h3>다. 1(가)~2급 승진의 인사위원회 심의 100% 구조</h3>
+<h3 id="다-1가2급-승진의-인사위원회-심의-100-구조">다. 1(가)~2급 승진의 인사위원회 심의 100% 구조<a class="anchor" href="#다-1가2급-승진의-인사위원회-심의-100-구조" aria-label="이 절 링크">§</a></h3>
 <p>상위 직급 승진은 근무평정이 정량 반영되지 않고 참고자료(정성)로만 쓰입니다.
 근무평정 왜곡의 영향을 덜 받는다는 뜻이기도 하고, 재량이 크다는 뜻이기도 합니다.
 → §1-3</p>
-<h3>라. 노동조합 전임자·근로시간면제자 평가</h3>
+<h3 id="라-노동조합-근로시간면제자-평가">라. 노동조합 근로시간면제자 평가<a class="anchor" href="#라-노동조합-근로시간면제자-평가" aria-label="이 절 링크">§</a></h3>
 <p><strong>별도 안건으로 분리</strong>했습니다. 기관 내부에서 내부평가는 A등급 고정,
 근무평정은 최근 3회 평균으로 처리가 다릅니다.</p>
 <hr>
 <p>→ <a href="amendments.html">02. 규정 개정안</a> · <a href="benchmark.html">03. 타기관 비교</a> ·
 <a href="bargaining.html">04. 요구사항</a> · <a href="plan.html">05. 추진계획</a> · <a href="./">시뮬레이터</a></p>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-이-문서를-읽는-방법">0. 이 문서를 읽는 방법</a></li><li class="l3"><a href="#이-문서의-범위">이 문서의 범위</a></li><li class="l3"><a href="#수치에-관한-고지">수치에 관한 고지</a></li><li class="l2"><a href="#1-평가-구조-누가-누구를-평가하는가">1. 평가 구조 — 누가 누구를 평가하는가</a></li><li class="l3"><a href="#1-1-평가자">1-1. 평가자</a></li><li class="l3"><a href="#1-2-평가군-실-단위-22개">1-2. 평가군 — 실 단위 22개</a></li><li class="l3"><a href="#1-3-결과가-쓰이는-곳">1-3. 결과가 쓰이는 곳</a></li><li class="l2"><a href="#2-목표관리가-형해화되어-있다">2. 목표관리가 형해화되어 있다</a></li><li class="l2"><a href="#3-사전조정계수가-평정자의-성향을-결과로-옮긴다">3. 사전조정계수가 평정자의 성향을 결과로 옮긴다</a></li><li class="l3"><a href="#3-1-제도의-작동">3-1. 제도의 작동</a></li><li class="l3"><a href="#3-2-같은-제약-아래에서-평정자는-두-방향으로-갈린다">3-2. 같은 제약 아래에서 평정자는 두 방향으로 갈린다</a></li><li class="l3"><a href="#3-2의2-근본-목적-개인이-자기-성과로-평가받는가">3-2의2. 근본 목적 — 개인이 자기 성과로 평가받는가</a></li><li class="l3"><a href="#3-3-시뮬레이션-결과">3-3. 시뮬레이션 결과</a></li><li class="l3"><a href="#3-4-내부평가도-같은-병리를-공유한다">3-4. 내부평가도 같은 병리를 공유한다</a></li><li class="l3"><a href="#3-5-배치는-통제할-수-없는-외부요인이다">3-5. 배치는 통제할 수 없는 외부요인이다</a></li><li class="l3"><a href="#3-6-이-개정이-사측에-주는-이익">3-6. 이 개정이 사측에 주는 이익</a></li><li class="l2"><a href="#4-승진-구조가-왜곡을-증폭하고-고착시킨다-배경">4. 승진 구조가 왜곡을 증폭하고 고착시킨다 (배경)</a></li><li class="l3"><a href="#4-1-승진-적체">4-1. 승진 적체</a></li><li class="l3"><a href="#4-2-승진자에게-최저평정을-주는-관행">4-2. 승진자에게 최저평정을 주는 관행</a></li><li class="l3"><a href="#4-3-반영-회차가-짧아-특정-평정자가-승진을-결정한다">4-3. 반영 회차가 짧아 특정 평정자가 승진을 결정한다</a></li><li class="l3"><a href="#4-4-평정점-변환이-인원수에-따라-차이를-증폭한다">4-4. 평정점 변환이 인원수에 따라 차이를 증폭한다</a></li><li class="l2"><a href="#5-전보·휴직·조직개편-시점이-만드는-불이익">5. 전보·휴직·조직개편 시점이 만드는 불이익</a></li><li class="l3"><a href="#5-1-제도의-작동">5-1. 제도의 작동</a></li><li class="l3"><a href="#5-2-시뮬레이션-결과">5-2. 시뮬레이션 결과</a></li><li class="l3"><a href="#5-3-평가자-부재-시-처리-규정이-없다">5-3. 평가자 부재 시 처리 규정이 없다</a></li><li class="l2"><a href="#6-검증할-수-없어-불신이-해소되지-않는다">6. 검증할 수 없어 불신이 해소되지 않는다</a></li><li class="l3"><a href="#6-1-이의를-제기할-근거를-주지-않는다">6-1. 이의를 제기할 근거를 주지 않는다</a></li><li class="l3"><a href="#6-2-원-결정을-한-주체가-재심도-한다">6-2. 원 결정을 한 주체가 재심도 한다</a></li><li class="l3"><a href="#6-3-사후-보정-근거가-있는데-쓰지-않는다">6-3. 사후 보정 근거가 있는데 쓰지 않는다</a></li><li class="l3"><a href="#6-4-핵심-기준이-규정-밖에-있다">6-4. 핵심 기준이 규정 밖에 있다</a></li><li class="l3"><a href="#6-5-공무직은-승진제도가-없는데-강제배분을-받는다">6-5. 공무직은 승진제도가 없는데 강제배분을 받는다</a></li><li class="l2"><a href="#7-민감도-결론이-약해지는-영역을-먼저-밝힌다">7. 민감도 — 결론이 약해지는 영역을 먼저 밝힌다</a></li><li class="l3"><a href="#7-1-식별-문제-가장-근본적인-한계">7-1. 식별 문제 — 가장 근본적인 한계</a></li><li class="l3"><a href="#7-2-표준화가-고치지-못하는-것">7-2. 표준화가 고치지 못하는 것</a></li><li class="l3"><a href="#7-3-반영-회차-확대의-근거-조건이-붙습니다">7-3. 반영 회차 확대의 근거 — 조건이 붙습니다</a></li><li class="l3"><a href="#7-4-쓰지-않기로-한-지표">7-4. 쓰지 않기로 한 지표</a></li><li class="l2"><a href="#8-자료-요구">8. 자료 요구</a></li><li class="l2"><a href="#붙임-장기과제">붙임 — 장기과제</a></li><li class="l3"><a href="#가-승진-서열명부-반영-회차의-직급-간-형평">가. 승진 서열명부 반영 회차의 직급 간 형평</a></li><li class="l3"><a href="#나-성과급-등급-비율·지급률의-규정화">나. 성과급 등급 비율·지급률의 규정화</a></li><li class="l3"><a href="#다-1가2급-승진의-인사위원회-심의-100-구조">다. 1(가)~2급 승진의 인사위원회 심의 100% 구조</a></li><li class="l3"><a href="#라-노동조합-근로시간면제자-평가">라. 노동조합 근로시간면제자 평가</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

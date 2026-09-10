@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>06. 노동조합 전임자 평정 (별책) — 창업진흥원 근무평정 제도개선</title>
-<meta name="description" content="근무평정 개편과 분리한 별도 안건. 전임자·근로시간면제자 평정 방식 개선안">
+<title>06. 노동조합 근로시간면제자 평정 (별책) — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="근무평정 개편과 분리한 별도 안건. 근로시간면제자 평정 방식 개선안">
 <meta name="theme-color" content="#FBFAF9">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,20 +194,21 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html" class="on" aria-current="page">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>06. 노동조합 전임자·근로시간면제자 평정 (별책)</h1>
-<h2>§0 이 문서를 분리한 이유</h2>
+<main><article><div class="warn-ap" role="note"><b>본안과 분리된 별도 안건</b> — 근무평정 제도개선(본안)의 대가로 다루어지지 않기 위해 문서를 나누었습니다. <b>본안 의제에 끼워 넣지 않습니다.</b></div>
+<h1>06. 노동조합 근로시간면제자 평정 (별책)</h1>
+<h2 id="0-이-문서를-분리한-이유">§0 이 문서를 분리한 이유<a class="anchor" href="#0-이-문서를-분리한-이유" aria-label="이 절 링크">§</a></h2>
 <p><strong>근무평정 제도개선의 대가로 다루어지지 않기 위해 별도 안건으로 분리한다.</strong></p>
-<p>두 안건을 묶으면 사측은 &quot;전임자 처우를 개선해 주는 대신 사전조정계수는 남겨두자&quot;는 교환을 제안할
-수 있다. 근무평정 개편은 213명 전원에게 적용되는 제도의 문제이고, 전임자 평정은 소수 인원의
+<p>두 안건을 묶으면 사측은 &quot;근로시간면제자 처우를 개선해 주는 대신 사전조정계수는 남겨두자&quot;는 교환을 제안할
+수 있다. 근무평정 개편은 213명 전원에게 적용되는 제도의 문제이고, 근로시간면제자(이하 「근면자」) 평정은 소수 인원의
 처우 문제다. 규모가 다른 두 사안을 등가로 교환하는 것은 조합에 불리하다.</p>
 <p>시급성도 다르다.</p>
 <div class="tw"><table>
@@ -169,13 +216,13 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <tr>
 <th></th>
 <th>근무평정 개편 (본안)</th>
-<th>전임자 평정 (이 문서)</th>
+<th>근면자 평정 (이 문서)</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>적용 대상</td>
 <td>상대평가 대상 전원</td>
-<td>전임자·근로시간면제자</td>
+<td>근면자</td>
 </tr>
 <tr>
 <td>시한</td>
@@ -193,8 +240,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 예시로 계산한다. 실제 인원의 평정 이력은 노사협의회에서 당사자가 직접 제시할 사안이다.</p>
 </blockquote>
 <hr>
-<h2>§1 현행</h2>
-<h3>1-1 규칙</h3>
+<h2 id="1-현행">§1 현행<a class="anchor" href="#1-현행" aria-label="이 절 링크">§</a></h2>
+<h3 id="1-1-규칙">1-1 규칙<a class="anchor" href="#1-1-규칙" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -216,7 +263,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <p><strong>규칙에는 방법이 없다.</strong> 승진과 성과급을 좌우하는 산식이 전부 원장 재량으로 위임되어 있다.</p>
-<h3>1-2 평정계획 (2025년)</h3>
+<h3 id="1-2-평정계획-2025년">1-2 평정계획 (2025년)<a class="anchor" href="#1-2-평정계획-2025년" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -225,7 +272,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </thead>
 <tbody><tr>
-<td>전임자</td>
+<td>풀타임 근면자</td>
 <td>평가 제외 후 <strong>최근 3회 근무평정 평균값</strong> 적용</td>
 </tr>
 <tr>
@@ -233,7 +280,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>&quot;사전조정계수가 조정(<strong>85점→80점</strong>)된 만큼 보정하여 종합점수 산출&quot;</td>
 </tr>
 <tr>
-<td>근로시간면제자 (반전임)</td>
+<td>파트타임 근면자</td>
 <td>연간 근로기간의 1/2(<strong>183일</strong>) 이상 활동 시 최근 3회 평균</td>
 </tr>
 <tr>
@@ -241,13 +288,13 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>183일 미만 시 면제기간을 제외하고 부서 소속기간만 평가하여 가중치 조정</td>
 </tr>
 </tbody></table></div>
-<h3>1-3 3회 평균제의 유래</h3>
+<h3 id="1-3-3회-평균제의-유래">1-3 3회 평균제의 유래<a class="anchor" href="#1-3-3회-평균제의-유래" aria-label="이 절 링크">§</a></h3>
 <p>2023년 단체협약 체결 당시 <strong>조합이 스스로 도입</strong>했다. 노조 임원을 위한 제도라는 인상을 주지
 않기 위한 장치였다. 이 문서는 그 취지를 부정하지 않는다. <strong>취지는 유지하면서 부작용만 제거하는
 것이 목표다.</strong></p>
 <hr>
-<h2>§2 문제</h2>
-<h3>2-1 승진 경로가 산술적으로 막힌다</h3>
+<h2 id="2-문제">§2 문제<a class="anchor" href="#2-문제" aria-label="이 절 링크">§</a></h2>
+<h3 id="2-1-승진-경로가-산술적으로-막힌다">2-1 승진 경로가 산술적으로 막힌다<a class="anchor" href="#2-1-승진-경로가-산술적으로-막힌다" aria-label="이 절 링크">§</a></h3>
 <p>이것이 핵심이다. 규정 산식에 값을 넣으면 확인된다.</p>
 <p><strong>전제 — 모두 규정·계획의 실측값이다.</strong></p>
 <div class="tw"><table>
@@ -312,7 +359,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <p><strong>근속이 만점이 되어도 평정점 94.62점 — S등급 상위가 필요하다.</strong></p>
-<p>반면 전임자 산식이 만드는 평정점은 어떤 해석을 취하든 그 근처에 가지 않는다.</p>
+<p>반면 근로시간면제자 산식이 만드는 평정점은 어떤 해석을 취하든 그 근처에 가지 않는다.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -342,14 +389,14 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <p><strong>근속으로 메울 수 있는 최대치는 4.75점</strong>(50개월 → 96개월)인데, S등급 경쟁자와의 격차는
-20점 이상이다. <strong>전임 중에는 승진이 구조적으로 불가능하다.</strong></p>
-<p>이것이 &quot;<strong>승진이 안 되니 전임 희망자가 없다</strong>&quot;의 정확한 기전이다.</p>
-<h3>2-2 어떤 산식이 적용되었는지 당사자도 모른다</h3>
+20점 이상이다. <strong>근로시간면제 기간 중에는 승진이 구조적으로 불가능하다.</strong></p>
+<p>이것이 &quot;<strong>승진이 안 되니 근로시간면제자 희망자가 없다</strong>&quot;의 정확한 기전이다.</p>
+<h3 id="2-2-어떤-산식이-적용되었는지-당사자도-모른다">2-2 어떤 산식이 적용되었는지 당사자도 모른다<a class="anchor" href="#2-2-어떤-산식이-적용되었는지-당사자도-모른다" aria-label="이 절 링크">§</a></h3>
 <p>§2-1의 표에서 해석에 따라 <strong>심사 대상 진입 여부가 갈린다.</strong> 그런데 규칙에는 방법이 없고,
 계획의 &quot;최근 3회 근무평정 평균값&quot;이 <strong>종합점수의 평균인지 평정점의 평균인지 특정되지 않는다.</strong></p>
-<p>여기에 규칙 제28조①의 평정점 비공개가 겹친다. 전임자는 평가 결과가 시스템에 등록되지 않는다는
+<p>여기에 규칙 제28조①의 평정점 비공개가 겹친다. 근로시간면제자는 평가 결과가 시스템에 등록되지 않는다는
 지적도 있다. <strong>결과적으로 당사자는 자기 평정점도, 그것이 어떻게 산출되었는지도 확인할 수 없다.</strong></p>
-<h3>2-3 기준선을 따라갈 수단이 없다</h3>
+<h3 id="2-3-기준선을-따라갈-수단이-없다">2-3 기준선을 따라갈 수단이 없다<a class="anchor" href="#2-3-기준선을-따라갈-수단이-없다" aria-label="이 절 링크">§</a></h3>
 <p>3회 평균은 이동평균이다. 점화식 <code>m_n = (m_{n-1}+m_{n-2}+m_{n-3})/3</code> 은 감쇠 진동 후
 <strong>면제 직전 3회의 가중평균(1:2:3)으로 수렴</strong>하며 단조 하락하지 않는다 — &quot;산식이 매년 점수를
 하락시킨다&quot;는 서술은 사측이 이 계산으로 즉시 반박할 수 있으므로 쓰지 않는다.</p>
@@ -359,11 +406,11 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 &quot;3년 연속 하락&quot;의 원인을 산식만으로 설명할 수 없다는 한계를 정직하게 인정한다.</p>
 <p>영향은 승진에 그치지 않는다. 경영평가성과급의 개인성과 부분이 <b>근무평정 70% + 내부평가 30%</b>로
 산정되므로 평정점 하락이 성과급 하락으로 직결된다.</p>
-<h3>2-4 규칙에 근거가 없다</h3>
+<h3 id="2-4-규칙에-근거가-없다">2-4 규칙에 근거가 없다<a class="anchor" href="#2-4-규칙에-근거가-없다" aria-label="이 절 링크">§</a></h3>
 <p>사전조정계수와 같은 구조다. 평정계획의 &quot;사전조정계수가 조정(<strong>85점→80점</strong>)된 만큼 보정&quot;이라는
 문구가 그 증거다. <strong>기준값이 85점에서 80점으로 내려간 이력이 계획 문서에 남아 있고, 규칙에 없는
-수치였으므로 협의 없이 바뀌었다.</strong> 전임자 산식도 같은 방식으로 언제든 바뀔 수 있다.</p>
-<h3>2-5 분산 축소 — 3회 평균은 중간등급 고정 장치다</h3>
+수치였으므로 협의 없이 바뀌었다.</strong> 근로시간면제자 산식도 같은 방식으로 언제든 바뀔 수 있다.</p>
+<h3 id="2-5-분산-축소-3회-평균은-중간등급-고정-장치다">2-5 분산 축소 — 3회 평균은 중간등급 고정 장치다<a class="anchor" href="#2-5-분산-축소-3회-평균은-중간등급-고정-장치다" aria-label="이 절 링크">§</a></h3>
 <p>3회 산술평균은 점수의 표준편차를 σ/√3 = 0.577σ, 즉 <strong>42.3% 축소</strong>시킨다. 등급이 직급별
 상대평가(규칙 제26조① S20/A30/B40/C10)로 배정되므로 결과는 다음과 같다.</p>
 <div class="tw"><table>
@@ -438,7 +485,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>근로시간면제자는 「평정점이 고정되고 기준만 움직이는」 유일한 집단이며, 등급이 본인
 실력·노력과 무관한 값이 된다.<b> 이는 본안 개정의 논리(정당한 개인성과 평가)와 </b>정확히 같은
 논리</strong>다.</p>
-<h3>2-6 이미 나타난 결과 — 면제 사용의 자발적 축소</h3>
+<h3 id="2-6-이미-나타난-결과-면제-사용의-자발적-축소">2-6 이미 나타난 결과 — 면제 사용의 자발적 축소<a class="anchor" href="#2-6-이미-나타난-결과-면제-사용의-자발적-축소" aria-label="이 절 링크">§</a></h3>
 <p>근로시간면제 사용이 평정상 불리하게 작용하므로, 면제 사용을 최소화하고 부서 소속을 유지하는
 선택이 실제로 발생하고 있다. 제도가 「임금의 손실 없이」 사용하도록 보장한 권리의 행사를
 스스로 억제시키고 있다.</p>
@@ -447,7 +494,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p>이 추세가 계속되면 노사협의회 근로자위원 3명 구성 자체가 어려워질 수 있다. 이는 조합만의
 문제가 아니라 <strong>기관 노사관계 운영의 문제</strong>이며, 사측에도 손해다.</p>
 <hr>
-<h2>§3 전수 조사 — 355개 기관</h2>
+<h2 id="3-전수-조사-355개-기관">§3 전수 조사 — 355개 기관<a class="anchor" href="#3-전수-조사-355개-기관" aria-label="이 절 링크">§</a></h2>
 <p>ALIO 경영공시 기관 내규 355개 기관 · 규정 파일 36,190건을 조(條) 단위로 전수 조사했다.</p>
 <div class="tw"><table>
 <thead>
@@ -457,7 +504,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </thead>
 <tbody><tr>
-<td>전임자·근로시간면제자 평정을 규정한 기관</td>
+<td>근면자 평정을 규정한 기관</td>
 <td><strong>55곳</strong></td>
 </tr>
 <tr>
@@ -470,7 +517,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <p>확인된 방식은 네 갈래다.</p>
-<h3>3-1 직전 점수와 동일 직급 평균 중 유리한 값</h3>
+<h3 id="3-1-직전-점수와-동일-직급-평균-중-유리한-값">3-1 직전 점수와 동일 직급 평균 중 유리한 값<a class="anchor" href="#3-1-직전-점수와-동일-직급-평균-중-유리한-값" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -487,7 +534,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>「업무성과평가요령」 — &quot;노조법에 의한 근로시간 면제자 중 <b>풀타임 면제자와 파트타임 면제자(750시간 이상인 자)</b>에 대해서는 직전 연도 종합평가점수와 당해 연도 동일직군·동일직급 평균점수 중 <strong>유리한 결과</strong>를 적용한다&quot;</td>
 </tr>
 </tbody></table></div>
-<h3>3-2 동일 직급 평균 부여</h3>
+<h3 id="3-2-동일-직급-평균-부여">3-2 동일 직급 평균 부여<a class="anchor" href="#3-2-동일-직급-평균-부여" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -508,7 +555,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>「직원평정규정」 제② — 6개월 초과의 연수·파견·근로시간면제자·휴직 등으로 평정할 수 없을 때 &quot;각 평가별로 <b>평가그룹의 평균점수를 부여</b>&quot;</td>
 </tr>
 </tbody></table></div>
-<h3>3-3 중간등급 고정 부여</h3>
+<h3 id="3-3-중간등급-고정-부여">3-3 중간등급 고정 부여<a class="anchor" href="#3-3-중간등급-고정-부여" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -533,7 +580,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>「인사평가 규칙」 — 인사평가 대상에서 제외된 인원(<strong>근로시간면제자</strong> 등)의 승진포인트 등급은 <strong>B등급</strong>을 부여</td>
 </tr>
 </tbody></table></div>
-<h3>3-4 상한점 부여 · 단협 위임</h3>
+<h3 id="3-4-상한점-부여-·-단협-위임">3-4 상한점 부여 · 단협 위임<a class="anchor" href="#3-4-상한점-부여-·-단협-위임" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -550,7 +597,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>「근무성적평정요령」 제⑥ — &quot;<strong>노동조합 전임자</strong>에 대하여는 <strong>노·사간 단체협약에서 정하는 내용</strong>을 토대로 하여 등급을 분류하여 평가한다&quot;</td>
 </tr>
 </tbody></table></div>
-<h3>3-5 반전임(파트타임)의 기준</h3>
+<h3 id="3-5-파트타임-근면자의-기준">3-5 파트타임 근면자의 기준<a class="anchor" href="#3-5-파트타임-근면자의-기준" aria-label="이 절 링크">§</a></h3>
 <p>창진원은 <strong>183일</strong>(연간 근로기간의 1/2)을 기준으로 한다. 타기관의 기준은 다음과 같다.</p>
 <div class="tw"><table>
 <thead>
@@ -581,8 +628,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§4 개선안</h2>
-<h3>4-1 규칙 개정 — 제7조② 단서 삭제 (제1안 · 권고)</h3>
+<h2 id="4-개선안">§4 개선안<a class="anchor" href="#4-개선안" aria-label="이 절 링크">§</a></h2>
+<h3 id="4-1-규칙-개정-제7조②-단서-삭제-제1안-·-권고">4-1 규칙 개정 — 제7조② 단서 삭제 (제1안 · 권고)<a class="anchor" href="#4-1-규칙-개정-제7조②-단서-삭제-제1안-·-권고" aria-label="이 절 링크">§</a></h3>
 <p>핵심은 요구의 축을 바꾸는 데 있다. 창업진흥원 근무평정 규칙 제7조②은 <strong>본문</strong>에서 평가
 미실시자(휴직·출산전후휴가·정직·직위해제)에게 이미 완충 산식 — 「직전 종합점수 50% + 당해
 동일직급 평균 종합점수 50%」 — 을 적용한다. 그런데 같은 항 <strong>단서</strong>가 &quot;노동조합 전임자의
@@ -600,7 +647,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 <tr>
 <td>(O) 규칙 제7조② 단서 중 노동조합 전임자 관련 부분을 삭제해 달라</td>
-<td>규칙의 단서 삭제 — 전임자에게도 본문의 일반 산식을 적용하는 것뿐이다</td>
+<td>규칙의 단서 삭제 — 근면자에게도 본문의 일반 산식을 적용하는 것뿐이다</td>
 </tr>
 </tbody></table></div>
 <div class="tw"><table>
@@ -643,10 +690,10 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>본안과의 관계</strong> 본안(근무평정 제도개편) 개정 13은 제7조② <strong>본문</strong>을 「직전 50% 승계
 폐지 → 당해 동일직급 평균 100%」로 바꾸고 <strong>단서는 그대로 둔다</strong>(본안과 별책의 분리
 원칙, §0). 따라서 이 별책의 요구는 <strong>본안이 통과된 뒤 단서 한 문장을 지우는 것</strong>이 되고,
-그러면 전임자도 자동으로 동일 직급 평균을 받는다. <strong>별책은 본안에 의존하며 본안을
+그러면 근로시간면제자도 자동으로 동일 직급 평균을 받는다. <strong>별책은 본안에 의존하며 본안을
 대체하지 않는다.</strong> 이 요구를 본안 의제에 끼워 넣지 않는다.</p>
 </blockquote>
-<h3>4-2 [별표 11] 신설 — 보완안 (제1안이 관철되지 않을 경우)</h3>
+<h3 id="4-2-별표-11-신설-보완안-제1안이-관철되지-않을-경우">4-2 [별표 11] 신설 — 보완안 (제1안이 관철되지 않을 경우)<a class="anchor" href="#4-2-별표-11-신설-보완안-제1안이-관철되지-않을-경우" aria-label="이 절 링크">§</a></h3>
 <p>제1안이 관철되지 않을 경우에 대비한 보완안이다. 기존에 검토했던 「1안 유리한 값 / 2안 동일
 직급 평균 / 3안 중간등급 고정」 세 갈래 안은 아래 조문안으로 대체한다. 제2호의 구조는 §3-1의
 한국산업안전보건공단·한국소비자원 선례와 같다. 별표 11 신설도 제1안과 마찬가지로 규칙
@@ -670,7 +717,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 현저히 상회하지 아니하도록 한다.
 ※ 근거: 노조법 제81조①4호(운영비 원조) / 모범안 제14조 해설 「초과 시 운영비 원조에
 해당할 수 있다」</p>
-<p><strong>제6호 (제척)</strong> 근로시간면제자 및 노동조합 전임자는 본인의 평정 및 등급 심의에 참여하지
+<p><strong>제6호 (제척)</strong> 근로시간면제자 및 무급전임자는 본인의 평정 및 등급 심의에 참여하지
 아니한다. → 조합이 <strong>스스로</strong> 제안하는 이해충돌 차단 규정이다. 현재 창진원에서는 관행으로만
 운영되고 규정에는 없다.</p>
 <blockquote>
@@ -685,22 +732,22 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 조항이지 상한 조항이 아니므로 규칙이 더 유리한 산식을 정하는 것과 충돌하지 않는다.
 이번에 단협 개정까지 요구하면 안건이 무거워지고 「합의 파기」 프레임을 사측에 넘겨준다.</p>
 </blockquote>
-<h3>4-3 승진 경로에 관한 별도 검토 과제</h3>
+<h3 id="4-3-승진-경로에-관한-별도-검토-과제">4-3 승진 경로에 관한 별도 검토 과제<a class="anchor" href="#4-3-승진-경로에-관한-별도-검토-과제" aria-label="이 절 링크">§</a></h3>
 <p>이 문서의 개선안(제1안·보완안 모두)으로도 해결되지 않는 부분은 승진제도 쪽에 있다.
 <strong>본안과 이 별책 모두의 범위를 넘으므로 장기과제로 남긴다.</strong> 확인된 사실만 적는다.</p>
 <ul>
 <li><b>1(가)~2급 승진은 인사위원회 심의 100%</b>이고 근무평정·근속·동료평가는 모두 <b>참고자료(정성)</b>다.
 서열명부의 정량 순위가 절대적이지 않다.</li>
 <li><strong>3~4급 승진</strong>은 서열명부로 심사 대상을 걸러낸 뒤 정량 배점으로 결정한다. 평정점의 영향이 크다.</li>
-<li>따라서 전임자의 승진 가능성은 <strong>어느 직급으로 승진하는지에 따라 완전히 달라진다.</strong></li>
+<li>따라서 근로시간면제자의 승진 가능성은 <strong>어느 직급으로 승진하는지에 따라 완전히 달라진다.</strong></li>
 <li>2026년 T/O는 1(가)급 2 · 1(나)급 2 · 2급 3 · 3급 4 · 4급 3명, 합계 <strong>14명 / 후보 126명(11.1%)</strong>
 이다. <strong>T/O가 없으면 서열이 1위여도 승진은 없다.</strong></li>
 </ul>
 <hr>
-<h2>§5 예상 반론 — 「성과급 등급만 보전하겠다」</h2>
+<h2 id="5-예상-반론-성과급-등급만-보전하겠다">§5 예상 반론 — 「성과급 등급만 보전하겠다」<a class="anchor" href="#5-예상-반론-성과급-등급만-보전하겠다" aria-label="이 절 링크">§</a></h2>
 <p>사측이 내놓을 가장 값싼 양보다. 규칙과 계획을 그대로 두고 <strong>해당자 1~2명의 경영평가성과급
 지급등급만 상향</strong>하면 된다. 조합은 이 제안을 미리 예상하고 답을 준비해야 한다.</p>
-<h3>5-1 그 방법은 이미 시도되었고 실패했다 ★</h3>
+<h3 id="5-1-그-방법은-이미-시도되었고-실패했다">5-1 그 방법은 이미 시도되었고 실패했다 ★<a class="anchor" href="#5-1-그-방법은-이미-시도되었고-실패했다" aria-label="이 절 링크">§</a></h3>
 <p><strong>사측은 내부평가에서 이미 조합 임원에게 A등급을 고정 부여하고 있다.</strong></p>
 <p>경영평가성과급의 개인성과는 <strong>근무평정 70% + 내부평가 30%</strong> 로 산정된다. 즉 <strong>30%는 이미
 A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 연속 하락</strong>했다.</p>
@@ -710,7 +757,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 </blockquote>
 <p>이것은 예측이 아니라 <strong>기록</strong>이다. 사측 자신의 조치가 절반만 적용되었을 때 어떻게 되는지
 3년치 결과가 남아 있다.</p>
-<h3>5-2 재량으로 주는 이익은 받지 않는다</h3>
+<h3 id="5-2-재량으로-주는-이익은-받지-않는다">5-2 재량으로 주는 이익은 받지 않는다<a class="anchor" href="#5-2-재량으로-주는-이익은-받지-않는다" aria-label="이 절 링크">§</a></h3>
 <p>성과급 등급만 상향하는 것은 <strong>규칙에도 계획에도 근거가 없는 조치</strong>다. 두 가지 문제가 생긴다.</p>
 <div class="tw"><table>
 <thead>
@@ -733,7 +780,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 </blockquote>
 <p>조합이 <strong>자기에게 유리한 재량을 스스로 거부</strong>하는 것이므로, 「특혜를 요구한다」는 프레임을
 정면으로 벗는다.</p>
-<h3>5-3 요구의 대상은 성과급 등급이 아니라 평정점이다</h3>
+<h3 id="5-3-요구의-대상은-성과급-등급이-아니라-평정점이다">5-3 요구의 대상은 성과급 등급이 아니라 평정점이다<a class="anchor" href="#5-3-요구의-대상은-성과급-등급이-아니라-평정점이다" aria-label="이 절 링크">§</a></h3>
 <p>땜질을 봉쇄하는 것은 요구의 <strong>대상</strong>이다. 그래서 이 문서의 요구(제1안의 규칙 제7조② 본문
 적용, 보완안의 [별표 11] 제2호)는 성과급 등급이 아니라 <strong>종합점수의 산출 기준 자체</strong>를
 규정에 명시하도록 요구한다.</p>
@@ -771,7 +818,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 <td>개선된다</td>
 </tr>
 </tbody></table></div>
-<h3>5-4 땜질을 제안받으면 — 거절하지 말고 분리해서 받는다</h3>
+<h3 id="5-4-땜질을-제안받으면-거절하지-말고-분리해서-받는다">5-4 땜질을 제안받으면 — 거절하지 말고 분리해서 받는다<a class="anchor" href="#5-4-땜질을-제안받으면-거절하지-말고-분리해서-받는다" aria-label="이 절 링크">§</a></h3>
 <p>당장의 손실을 멈추는 것이므로 거부할 이유가 없다. 다만 세 가지를 지킨다.</p>
 <ol>
 <li><strong>회의록에 「이 안건이 종결된 것이 아니다」를 남긴다.</strong> 근참법 제24조의 이행 의무는
@@ -781,13 +828,13 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 땜질은 성과급만 막고 승진은 막지 못한다</li>
 <li><strong>본안(근무평정 제도개편)과 연결하지 않는다.</strong> 아래 5-5</li>
 </ol>
-<h3>5-5 진짜 위험 — 본안의 동력 상실</h3>
-<p>사측이 「전임자 개인 문제는 해결했다」고 선언하고 <strong>본안을 이미 해결된 문제로 취급</strong>하는 것이
+<h3 id="5-5-진짜-위험-본안의-동력-상실">5-5 진짜 위험 — 본안의 동력 상실<a class="anchor" href="#5-5-진짜-위험-본안의-동력-상실" aria-label="이 절 링크">§</a></h3>
+<p>사측이 「근로시간면제자 개인 문제는 해결했다」고 선언하고 <strong>본안을 이미 해결된 문제로 취급</strong>하는 것이
 가장 큰 위험이다.</p>
 <p><strong>이것을 막는 것이 §0 의 분리 원칙이다.</strong> 본안은 이 안건을 논거로 쓰지 않는다. 본안의 논거는
 <strong>「같은 실력을 가진 사람들이 받는 평정점의 차이가 8.26점에서 6.54점으로 줄어든다」</strong> 이며
-<strong>상대평가 대상 전원</strong>에 관한 것이다. 전임자 1~2명의 성과급과 무관하다.</p>
-<h3>5-6 부당노동행위 소지 — 위험 고지 (제기하지 않음)</h3>
+<strong>상대평가 대상 전원</strong>에 관한 것이다. 근로시간면제자 1~2명의 성과급과 무관하다.</p>
+<h3 id="5-6-부당노동행위-소지-위험-고지-제기하지-않음">5-6 부당노동행위 소지 — 위험 고지 (제기하지 않음)<a class="anchor" href="#5-6-부당노동행위-소지-위험-고지-제기하지-않음" aria-label="이 절 링크">§</a></h3>
 <p>이 문서는 부당노동행위를 단정하지 않는다. 위원장은 노동위원회에 구제신청할 의사가 없다 —
 승진 당시 승진소요연차 미달이었고, 성과급 등급 통보(6월 이후)도 다투지 않는다.</p>
 <ul>
@@ -822,7 +869,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§6 협의 절차</h2>
+<h2 id="6-협의-절차">§6 협의 절차<a class="anchor" href="#6-협의-절차" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -846,7 +893,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 <p><strong>본안 협의에서 이 안건을 조건으로 삼지 않는다.</strong> 사측이 이 안건을 먼저 제안하는 경우에도
 본안과 분리하여 처리한다.</p>
 <hr>
-<h2>붙임. 자료 요구</h2>
+<h2 id="붙임-자료-요구">붙임. 자료 요구<a class="anchor" href="#붙임-자료-요구" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -862,7 +909,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 </tr>
 <tr>
 <td>2</td>
-<td>최근 5년간 전임자·근로시간면제자에게 적용한 <strong>평정점과 그 산출 내역</strong></td>
+<td>최근 5년간 근면자에게 적용한 <strong>평정점과 그 산출 내역</strong></td>
 <td>§2-2 해석 문제 해소</td>
 </tr>
 <tr>
@@ -882,7 +929,7 @@ A로 고정되어 있다.<b> 그런데도 해당자의 지급등급은 </b>3년 
 </tr>
 <tr>
 <td>6</td>
-<td>최근 5년간 전임자·근로시간면제자의 <strong>근무평정 평정점과 경영평가성과급 지급등급 추이</strong>, 같은 기간 <strong>동일 직급 평균과의 차이</strong></td>
+<td>최근 5년간 근면자의 <strong>근무평정 평정점과 경영평가성과급 지급등급 추이</strong>, 같은 기간 <strong>동일 직급 평균과의 차이</strong></td>
 <td>§2-1 · §5-1 확인</td>
 </tr>
 <tr>
@@ -927,7 +974,46 @@ ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정, 인사규정
 확인 기준일은 2026-09-10이다. §2-1의 계산은 규정 산식에 공개된 실측 모수를 대입한 것이며,
 경쟁자 분포는 2025년 등급 배정 실적을 기준으로 한 추계다. 개인의 평정 이력은 싣지 않았다.</p>
 </blockquote>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-이-문서를-분리한-이유">§0 이 문서를 분리한 이유</a></li><li class="l2"><a href="#1-현행">§1 현행</a></li><li class="l3"><a href="#1-1-규칙">1-1 규칙</a></li><li class="l3"><a href="#1-2-평정계획-2025년">1-2 평정계획 (2025년)</a></li><li class="l3"><a href="#1-3-3회-평균제의-유래">1-3 3회 평균제의 유래</a></li><li class="l2"><a href="#2-문제">§2 문제</a></li><li class="l3"><a href="#2-1-승진-경로가-산술적으로-막힌다">2-1 승진 경로가 산술적으로 막힌다</a></li><li class="l3"><a href="#2-2-어떤-산식이-적용되었는지-당사자도-모른다">2-2 어떤 산식이 적용되었는지 당사자도 모른다</a></li><li class="l3"><a href="#2-3-기준선을-따라갈-수단이-없다">2-3 기준선을 따라갈 수단이 없다</a></li><li class="l3"><a href="#2-4-규칙에-근거가-없다">2-4 규칙에 근거가 없다</a></li><li class="l3"><a href="#2-5-분산-축소-3회-평균은-중간등급-고정-장치다">2-5 분산 축소 — 3회 평균은 중간등급 고정 장치다</a></li><li class="l3"><a href="#2-6-이미-나타난-결과-면제-사용의-자발적-축소">2-6 이미 나타난 결과 — 면제 사용의 자발적 축소</a></li><li class="l2"><a href="#3-전수-조사-355개-기관">§3 전수 조사 — 355개 기관</a></li><li class="l3"><a href="#3-1-직전-점수와-동일-직급-평균-중-유리한-값">3-1 직전 점수와 동일 직급 평균 중 유리한 값</a></li><li class="l3"><a href="#3-2-동일-직급-평균-부여">3-2 동일 직급 평균 부여</a></li><li class="l3"><a href="#3-3-중간등급-고정-부여">3-3 중간등급 고정 부여</a></li><li class="l3"><a href="#3-4-상한점-부여-·-단협-위임">3-4 상한점 부여 · 단협 위임</a></li><li class="l3"><a href="#3-5-파트타임-근면자의-기준">3-5 파트타임 근면자의 기준</a></li><li class="l2"><a href="#4-개선안">§4 개선안</a></li><li class="l3"><a href="#4-1-규칙-개정-제7조②-단서-삭제-제1안-·-권고">4-1 규칙 개정 — 제7조② 단서 삭제 (제1안 · 권고)</a></li><li class="l3"><a href="#4-2-별표-11-신설-보완안-제1안이-관철되지-않을-경우">4-2 [별표 11] 신설 — 보완안 (제1안이 관철되지 않을 경우)</a></li><li class="l3"><a href="#4-3-승진-경로에-관한-별도-검토-과제">4-3 승진 경로에 관한 별도 검토 과제</a></li><li class="l2"><a href="#5-예상-반론-성과급-등급만-보전하겠다">§5 예상 반론 — 「성과급 등급만 보전하겠다」</a></li><li class="l3"><a href="#5-1-그-방법은-이미-시도되었고-실패했다">5-1 그 방법은 이미 시도되었고 실패했다 ★</a></li><li class="l3"><a href="#5-2-재량으로-주는-이익은-받지-않는다">5-2 재량으로 주는 이익은 받지 않는다</a></li><li class="l3"><a href="#5-3-요구의-대상은-성과급-등급이-아니라-평정점이다">5-3 요구의 대상은 성과급 등급이 아니라 평정점이다</a></li><li class="l3"><a href="#5-4-땜질을-제안받으면-거절하지-말고-분리해서-받는다">5-4 땜질을 제안받으면 — 거절하지 말고 분리해서 받는다</a></li><li class="l3"><a href="#5-5-진짜-위험-본안의-동력-상실">5-5 진짜 위험 — 본안의 동력 상실</a></li><li class="l3"><a href="#5-6-부당노동행위-소지-위험-고지-제기하지-않음">5-6 부당노동행위 소지 — 위험 고지 (제기하지 않음)</a></li><li class="l2"><a href="#6-협의-절차">§6 협의 절차</a></li><li class="l2"><a href="#붙임-자료-요구">붙임. 자료 요구</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html" class="on" aria-current="page">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

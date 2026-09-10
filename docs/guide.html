@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,24 +194,25 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html" class="on" aria-current="page">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html" class="on" aria-current="page">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>08. 근무평정 운영 세부지침(안)</h1>
+<main><article>
+<h1>08. 근무평정 운영 세부지침(안)</h1>
 <blockquote>
 <p><strong>이 문서의 성격</strong> 규칙(무엇을)과 계획(올해 어떻게)의 사이를 메우는 실무 문서다.
 「이 경우엔 어떻게 하느냐」에 전부 답하는 것을 목표로 한다.</p>
-<p>개정 조문·별표는 〈02 규정 개정안〉, 전임자는 〈06 전임자 평정〉 별책을 <strong>정본</strong>으로 한다.
+<p>개정 조문·별표는 〈02 규정 개정안〉, 근로시간면제자(이하 「근면자」)는 〈근로시간면제자 평정〉 별책을 <strong>정본</strong>으로 한다.
 이 문서와 두 문서가 어긋나면 두 문서가 우선한다. [별표 9] 제7호의 ±5점은 <strong>협의 대상</strong>이다.</p>
 </blockquote>
 <hr>
-<h2>§0 개정 전후 요약 — 실무에서 무엇이 달라지는가</h2>
+<h2 id="0-개정-전후-요약-실무에서-무엇이-달라지는가">§0 개정 전후 요약 — 실무에서 무엇이 달라지는가<a class="anchor" href="#0-개정-전후-요약-실무에서-무엇이-달라지는가" aria-label="이 절 링크">§</a></h2>
 <div class="tw">
 
 <div class="tw"><table>
@@ -271,8 +318,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </div>
 
 <hr>
-<h2>§1 산식과 예제</h2>
-<h3>1-1 산식 요약</h3>
+<h2 id="1-산식과-예제">§1 산식과 예제<a class="anchor" href="#1-산식과-예제" aria-label="이 절 링크">§</a></h2>
+<h3 id="1-1-산식-요약">1-1 산식 요약<a class="anchor" href="#1-1-산식-요약" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -332,7 +379,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 그러면서 <strong>부서 내 순위는 100% 보존</strong>된다. 부서장이 1등으로 놓으면 보정 후에도 1등이다.
 기준값 80은 [별표 7] 평정점 구간(60~100)의 중앙값, 7은 ±3 표준편차가 그 구간을 채우는 값이다
 ([별표 9] 제4호).</p>
-<h3>1-2 예제 A — 10명 부서 · 넓게 주는 평가자</h3>
+<h3 id="1-2-예제-A-10명-부서-·-넓게-주는-평가자">1-2 예제 A — 10명 부서 · 넓게 주는 평가자<a class="anchor" href="#1-2-예제-A-10명-부서-·-넓게-주는-평가자" aria-label="이 절 링크">§</a></h3>
 <p><strong>상황</strong> 부서원 10명. 1차 평가자(부서장)가 최고 98점 ~ 최저 60점으로 넓게 부여했다.
 원점수 평균 81.10점, 표준편차 11.99점.</p>
 <p><strong>① 원점수와 ② 순위</strong> (고득점 순)</p>
@@ -345,6 +392,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <th>원점수</th>
 <th>(r−0.375)÷(n+0.25)</th>
 <th>Φ⁻¹ = z</th>
+<th>z ÷ s(n)</th>
 <th>③ 보정점수</th>
 </tr>
 </thead>
@@ -353,77 +401,90 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>98.0</td>
 <td>0.9390</td>
 <td>+1.5466</td>
-<td><strong>90.83</strong></td>
+<td>+1.7338</td>
+<td><strong>92.14</strong></td>
 </tr>
 <tr>
 <td>2</td>
 <td>95.0</td>
 <td>0.8415</td>
 <td>+1.0005</td>
-<td>87.00</td>
+<td>+1.1216</td>
+<td>87.85</td>
 </tr>
 <tr>
 <td>3</td>
 <td>92.0</td>
 <td>0.7439</td>
 <td>+0.6554</td>
-<td>84.59</td>
+<td>+0.7347</td>
+<td>85.14</td>
 </tr>
 <tr>
 <td>4</td>
 <td>88.0</td>
 <td>0.6463</td>
 <td>+0.3755</td>
-<td>82.63</td>
+<td>+0.4210</td>
+<td>82.95</td>
 </tr>
 <tr>
 <td>5</td>
 <td>84.0</td>
 <td>0.5488</td>
 <td>+0.1226</td>
-<td>80.86</td>
+<td>+0.1374</td>
+<td>80.96</td>
 </tr>
 <tr>
 <td>6</td>
 <td>80.0</td>
 <td>0.4512</td>
 <td>−0.1226</td>
-<td>79.14</td>
+<td>−0.1374</td>
+<td>79.04</td>
 </tr>
 <tr>
 <td>7</td>
 <td>76.0</td>
 <td>0.3537</td>
 <td>−0.3755</td>
-<td>77.37</td>
+<td>−0.4210</td>
+<td>77.05</td>
 </tr>
 <tr>
 <td>8</td>
 <td>72.0</td>
 <td>0.2561</td>
 <td>−0.6554</td>
-<td>75.41</td>
+<td>−0.7347</td>
+<td>74.86</td>
 </tr>
 <tr>
 <td>9</td>
 <td>66.0</td>
 <td>0.1585</td>
 <td>−1.0005</td>
-<td>73.00</td>
+<td>−1.1216</td>
+<td>72.15</td>
 </tr>
 <tr>
 <td>10</td>
 <td>60.0</td>
 <td>0.0610</td>
 <td>−1.5466</td>
-<td><strong>69.17</strong></td>
+<td>−1.7338</td>
+<td><strong>67.86</strong></td>
 </tr>
 </tbody></table></div>
 </div>
 
 <p>  * 순위 r 은 고득점 순이지만 Φ⁻¹ 에 넣는 값은 <strong>오름차순 순위</strong>(n − r + 1)다. 1위(98점)는
   n − 1 + 1 = 10위째 → (10 − 0.375) ÷ 10.25 = 0.9390.</p>
-<p><strong>보정 결과</strong> 평균 <strong>80.00점</strong>, 표준편차 <strong>6.25점</strong>. 원점수 표준편차 11.99 → 6.25로 좁아졌다.
+<p>  ** <strong>s(10) = 0.8920</strong> ([별표 9] 제3호 표). z 를 s(n) 으로 나누는 것은 <strong>평가군 인원이 달라도
+  표준편차가 정확히 7.00점이 되게</strong> 하기 위한 것이다. 이 나눗셈이 없으면 10명 평가군은 6.24점이
+  되어 제4호가 정한 값에 못 미친다.</p>
+<p><strong>보정 결과</strong> 평균 <strong>80.00점</strong>, 표준편차 <strong>7.00점</strong>. 원점수 표준편차 11.99 → 7.00으로 좁아졌다.
 <strong>순위는 완전히 보존된다.</strong></p>
 <p><strong>④ 조정</strong> — 부서장이 상위자에게 가점, 하위자에게 감점을 주기로 했다.</p>
 <div class="tw">
@@ -439,63 +500,63 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>90.83</td>
+<td>92.14</td>
 <td><strong>+5</strong></td>
-<td>95.83</td>
+<td>97.14</td>
 </tr>
 <tr>
 <td>2</td>
-<td>87.00</td>
+<td>87.85</td>
 <td>+3</td>
-<td>90.00</td>
+<td>90.85</td>
 </tr>
 <tr>
 <td>3</td>
-<td>84.59</td>
+<td>85.14</td>
 <td>+2</td>
-<td>86.59</td>
+<td>87.14</td>
 </tr>
 <tr>
 <td>4</td>
-<td>82.63</td>
+<td>82.95</td>
 <td>+1</td>
-<td><strong>83.63</strong></td>
+<td><strong>83.95</strong></td>
 </tr>
 <tr>
 <td>5</td>
-<td>80.86</td>
+<td>80.96</td>
 <td>0</td>
-<td>80.86</td>
+<td>80.96</td>
 </tr>
 <tr>
 <td>6</td>
-<td>79.14</td>
+<td>79.04</td>
 <td>0</td>
-<td>79.14</td>
+<td>79.04</td>
 </tr>
 <tr>
 <td>7</td>
-<td>77.37</td>
+<td>77.05</td>
 <td>−1</td>
-<td>76.37</td>
+<td>76.05</td>
 </tr>
 <tr>
 <td>8</td>
-<td>75.41</td>
+<td>74.86</td>
 <td>−2</td>
-<td>73.41</td>
+<td>72.86</td>
 </tr>
 <tr>
 <td>9</td>
-<td>73.00</td>
+<td>72.15</td>
 <td>−3</td>
-<td>70.00</td>
+<td>69.15</td>
 </tr>
 <tr>
 <td>10</td>
-<td>69.17</td>
+<td>67.86</td>
 <td><strong>−5</strong></td>
-<td>64.17</td>
+<td>62.86</td>
 </tr>
 <tr>
 <td><strong>합계</strong></td>
@@ -528,7 +589,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <ul>
 <li>평정점 = 100 − (10 ÷ 8) × (3 − 1) = <strong>97.50점</strong></li>
 </ul>
-<h3>1-3 예제 B — 4명 부서 · [별표 9] 제5호 적용</h3>
+<h3 id="1-3-예제-B-4명-부서-·-별표-9-제5호-적용">1-3 예제 B — 4명 부서 · [별표 9] 제5호 적용<a class="anchor" href="#1-3-예제-B-4명-부서-·-별표-9-제5호-적용" aria-label="이 절 링크">§</a></h3>
 <p><strong>상황</strong> 부서원 4명. <strong>6명 미만</strong>이므로 1차 보정을 실시하지 아니한다([별표 9] 제5호).</p>
 <p><strong>처리</strong></p>
 <ol>
@@ -651,7 +712,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 
 <p>  * 10명 미만 평가군이므로 규칙 제26조⑤에 따라 <strong>C등급을 부여하지 아니하고</strong> 그 인원을 B에
   가산했다. 사유를 기재해야 한다.</p>
-<h3>1-4 예제 C — 7월 정기전보자</h3>
+<h3 id="1-4-예제-C-7월-정기전보자">1-4 예제 C — 7월 정기전보자<a class="anchor" href="#1-4-예제-C-7월-정기전보자" aria-label="이 절 링크">§</a></h3>
 <p><strong>상황</strong> 7월 1일 정기전보. 전 부서 6개월(1~6월, 10명 부서) · 신 부서 6개월(7~12월, 12명 부서).
 이 직원의 실력은 두 부서 모두에서 상위 30% 수준이다.</p>
 <div class="tw">
@@ -762,7 +823,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 이 경우 <strong>신 부서에서 수행한 업무는 평가에 반영하지 아니하고</strong>(제6조②) 전 부서 업무만 평가한다.
 다만 평가 주체는 여전히 평가 기준일 소속 부서(신 부서)의 평가자이며, <strong>전 부서장의 서면 의견을
 들어</strong> 평가한다.</p>
-<h3>1-5 보정이 부여폭에 미치는 영향</h3>
+<h3 id="1-5-보정이-부여폭에-미치는-영향">1-5 보정이 부여폭에 미치는 영향<a class="anchor" href="#1-5-보정이-부여폭에-미치는-영향" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -792,9 +853,9 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <p>  → 보정은 <strong>차등을 없애는 것이 아니다.</strong> 차등이 없던 절반의 부서에 차등이 3.5배로 생긴다.
   넓게 주던 부서는 좁아지고, 좁게 주던 부서는 넓어져 <strong>양쪽이 같은 폭으로 수렴한다.</strong></p>
 <hr>
-<h2>§2 예외사항 전수</h2>
+<h2 id="2-예외사항-전수">§2 예외사항 전수<a class="anchor" href="#2-예외사항-전수" aria-label="이 절 링크">§</a></h2>
 <p>각 항목의 「누가 · 어떻게 · 근거」다. 개정 후 기준이며 변경된 항목은 <strong>굵게</strong> 표시했다.</p>
-<h3>2-1 부서 이동·이탈</h3>
+<h3 id="2-1-부서-이동·이탈">2-1 부서 이동·이탈<a class="anchor" href="#2-1-부서-이동·이탈" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -875,7 +936,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>2-2 평가 미실시와 대체 산출</h3>
+<h3 id="2-2-평가-미실시와-대체-산출">2-2 평가 미실시와 대체 산출<a class="anchor" href="#2-2-평가-미실시와-대체-산출" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -902,7 +963,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <td>제7조② 단서</td>
 </tr>
 <tr>
-<td><strong>노조 전임자</strong></td>
+<td><strong>풀타임 근면자</strong></td>
 <td><strong>[별표 11]</strong> 에 따른다 — 별책 협의 결과</td>
 <td>제7조② 단서 · 별책</td>
 </tr>
@@ -919,8 +980,8 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<p>  → 전임자·근로시간면제자는 <strong>이 지침에서 정하지 아니한다.</strong> 〈06 전임자 평정〉 별책이 정본이다.</p>
-<h3>2-3 평가자에 관한 예외</h3>
+<p>  → 근면자는 <strong>이 지침에서 정하지 아니한다.</strong> 〈근로시간면제자 평정〉 별책이 정본이다.</p>
+<h3 id="2-3-평가자에-관한-예외">2-3 평가자에 관한 예외<a class="anchor" href="#2-3-평가자에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -989,7 +1050,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>2-4 직군·신분에 관한 예외</h3>
+<h3 id="2-4-직군·신분에-관한-예외">2-4 직군·신분에 관한 예외<a class="anchor" href="#2-4-직군·신분에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1073,7 +1134,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <p>  * 절대평가 대상자는 <strong>보정하지 아니하고 원점수를 사용</strong>한다. 점수 부여 구간(60~100점)은 동일하다.
   ** 절대평가 대상자(육아휴직대체·파견)의 평가등급은 동일 직급 상대평가자의 종합점수와 비교하여
   등급·평정점을 산출한다(계획).</p>
-<h3>2-5 평가군 규모에 관한 예외</h3>
+<h3 id="2-5-평가군-규모에-관한-예외">2-5 평가군 규모에 관한 예외<a class="anchor" href="#2-5-평가군-규모에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1190,7 +1251,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </div>
 
 <p>  * C를 부여하지 아니하는 경우 그 인원은 <strong>B등급에 가산</strong>한다.</p>
-<h3>2-6 가감점과 제재에 관한 예외</h3>
+<h3 id="2-6-가감점과-제재에-관한-예외">2-6 가감점과 제재에 관한 예외<a class="anchor" href="#2-6-가감점과-제재에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1239,7 +1300,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>2-7 동점·중복에 관한 예외</h3>
+<h3 id="2-7-동점·중복에-관한-예외">2-7 동점·중복에 관한 예외<a class="anchor" href="#2-7-동점·중복에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1278,7 +1339,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>2-8 다면평가 평가자 선정에 관한 예외</h3>
+<h3 id="2-8-다면평가-평가자-선정에-관한-예외">2-8 다면평가 평가자 선정에 관한 예외<a class="anchor" href="#2-8-다면평가-평가자-선정에-관한-예외" aria-label="이 절 링크">§</a></h3>
 <p>다면평가는 <strong>업무상 관련이 있었던 동료 4인 이상</strong>이 실시하고, 평가자는 <strong>피평가자가 5인 이상을
 추천 → 부서장이 업무 접점을 확인 → 인사담당부서장이 지정<b>한다(</b>제22조①②</strong>). 지정 과정에서
 나오는 예외는 다음과 같다.</p>
@@ -1333,8 +1394,8 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <p>  * <strong>접점 없는 자를 지정하지 못한다</strong>(제22조③). 인원을 채우기 위해 무관자를 넣으면 제도의 효과가
   오히려 떨어지므로, 채울 수 없으면 ①의 예외로 처리하는 것이 규정의 취지다.</p>
 <hr>
-<h2>§3 평가의 절차</h2>
-<h3>3-1 연간 타임라인</h3>
+<h2 id="3-평가의-절차">§3 평가의 절차<a class="anchor" href="#3-평가의-절차" aria-label="이 절 링크">§</a></h2>
+<h3 id="3-1-연간-타임라인">3-1 연간 타임라인<a class="anchor" href="#3-1-연간-타임라인" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1511,7 +1572,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>3-2 보정과 조정의 순서 — 실무상 가장 혼동되는 지점</h3>
+<h3 id="3-2-보정과-조정의-순서-실무상-가장-혼동되는-지점">3-2 보정과 조정의 순서 — 실무상 가장 혼동되는 지점<a class="anchor" href="#3-2-보정과-조정의-순서-실무상-가장-혼동되는-지점" aria-label="이 절 링크">§</a></h3>
 <pre><code>① 1차 평가자 원점수 부여 (60~100, 동점 금지)
         ↓
 ② 인사담당부서: 1차 평가군별 [별표 9] 제3호 보정
@@ -1536,8 +1597,8 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 생기므로 인사담당부서가 마지막에 맞춘다([별표 9] 제7호).</li>
 </ol>
 <hr>
-<h2>§4 운용방법</h2>
-<h3>4-1 시스템(MIS) 입력</h3>
+<h2 id="4-운용방법">§4 운용방법<a class="anchor" href="#4-운용방법" aria-label="이 절 링크">§</a></h2>
+<h3 id="4-1-시스템MIS-입력">4-1 시스템(MIS) 입력<a class="anchor" href="#4-1-시스템MIS-입력" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1625,7 +1686,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
   ③ <strong>조정 사유 입력란을 필수값</strong>으로 한다.
   ④ 결과 조회 화면에 <strong>보정 전·후를 나란히</strong> 표시한다.
   ⑤ 조정 합계가 0이 아니면 <strong>저장을 막는다.</strong></p>
-<h3>4-2 보정 실행</h3>
+<h3 id="4-2-보정-실행">4-2 보정 실행<a class="anchor" href="#4-2-보정-실행" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1670,7 +1731,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>4-3 노사협의회 보고</h3>
+<h3 id="4-3-노사협의회-보고">4-3 노사협의회 보고<a class="anchor" href="#4-3-노사협의회-보고" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1734,7 +1795,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </div>
 
 <p>  * 모두 <strong>집계 통계 형태</strong>로 보고한다. 개인 식별이 가능한 형태로 보고하지 아니한다.</p>
-<h3>4-4 이의신청 처리</h3>
+<h3 id="4-4-이의신청-처리">4-4 이의신청 처리<a class="anchor" href="#4-4-이의신청-처리" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1785,7 +1846,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>4-5 기록 보존</h3>
+<h3 id="4-5-기록-보존">4-5 기록 보존<a class="anchor" href="#4-5-기록-보존" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1842,7 +1903,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <p>  * 평가자·피평가자·인사담당부서는 평가과정에서 알게 된 일체의 내용에 대하여 <strong>비밀을 엄수</strong>한다
   (제29조). 본인에게 본인의 점수를 통지하는 것은 비밀 누설이 아니다.</p>
 <hr>
-<h2>§5 피평가자가 해야 하는 사항</h2>
+<h2 id="5-피평가자가-해야-하는-사항">§5 피평가자가 해야 하는 사항<a class="anchor" href="#5-피평가자가-해야-하는-사항" aria-label="이 절 링크">§</a></h2>
 <div class="tw">
 
 <div class="tw"><table>
@@ -1949,8 +2010,8 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 <p><strong>개정으로 새로 생기는 일 4가지</strong> — 4번(이견 기록), 5번(목표 재설정), <strong>7번(다면평가 평가자 추천)</strong>,
 10번(평정점 확인)이다. 반대로 없어지는 것은 없다.</p>
 <hr>
-<h2>§6 평가자가 해야 하는 사항</h2>
-<h3>6-1 모든 평가자 공통</h3>
+<h2 id="6-평가자가-해야-하는-사항">§6 평가자가 해야 하는 사항<a class="anchor" href="#6-평가자가-해야-하는-사항" aria-label="이 절 링크">§</a></h2>
+<h3 id="6-1-모든-평가자-공통">6-1 모든 평가자 공통<a class="anchor" href="#6-1-모든-평가자-공통" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -2004,7 +2065,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </tbody></table></div>
 </div>
 
-<h3>6-2 부서장 (1차 평가자)</h3>
+<h3 id="6-2-부서장-1차-평가자">6-2 부서장 (1차 평가자)<a class="anchor" href="#6-2-부서장-1차-평가자" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -2136,7 +2197,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 
 <p>  → <strong>권한은 늘고 계산 부담은 줄어든다.</strong> 평균을 맞추는 일이 사라지고, 대신 순위 판단과
   ±5점 조정이라는 실질 재량이 생긴다. 다만 <strong>조정 사유 기재</strong>라는 새 의무가 붙는다.</p>
-<h3>6-3 본부장 (2차 평가자)</h3>
+<h3 id="6-3-본부장-2차-평가자">6-3 본부장 (2차 평가자)<a class="anchor" href="#6-3-본부장-2차-평가자" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -2203,7 +2264,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 (부서장 그룹 / 부서장 외 그룹) 안에서 <strong>누가 더 나은지 순위를 부여</strong>하면 되고, 부서 간 형평은
 [별표 9] 보정이 처리한다. 종전에는 본부장이 「그룹 평균 80점」을 맞추면서 사실상 부서 간 배분을
 했으나, 개정 후에는 그 역할이 사라진다.</p>
-<h3>6-4 원장</h3>
+<h3 id="6-4-원장">6-4 원장<a class="anchor" href="#6-4-원장" aria-label="이 절 링크">§</a></h3>
 <div class="tw">
 
 <div class="tw"><table>
@@ -2362,7 +2423,7 @@ S 8명(20%) · A 12명(30%) · B 16명(40%) · C 4명(10%). 직급 내 순위 3�
 </div>
 
 <hr>
-<h2>§7 자주 나올 질문</h2>
+<h2 id="7-자주-나올-질문">§7 자주 나올 질문<a class="anchor" href="#7-자주-나올-질문" aria-label="이 절 링크">§</a></h2>
 <p><strong>Q. 평균을 맞추지 않으면 다 100점을 주는 평가자가 나오지 않는가.</strong>
 A. 보정은 <strong>순위만 쓴다.</strong> 전원에게 100점을 주면 순위가 없으므로 동점 금지(제4조①3호)에 걸려
 평가표 재작성을 요구받는다. 순위를 매기면 그 순위대로 80±7점 분포에 배치된다. <strong>점수를 높게
@@ -2386,39 +2447,53 @@ A. 순위기반 보정은 <strong>최고점자가 받을 수 있는 점수의 �
 <thead>
 <tr>
 <th>평가군 인원</th>
-<th>최고점자의 보정점수</th>
-<th>최저점자의 보정점수</th>
+<th>최고점자</th>
+<th>최저점자</th>
+<th>최고점자 폭 <em>(÷s(n) 없을 때)</em></th>
 </tr>
 </thead>
 <tbody><tr>
 <td>3명</td>
-<td><strong>86.09점</strong></td>
-<td>73.91점</td>
+<td><strong>88.57점</strong></td>
+<td>71.43점</td>
+<td><em>(86.09점)</em></td>
 </tr>
 <tr>
 <td>4명</td>
-<td><strong>87.34점</strong></td>
-<td>72.66점</td>
+<td><strong>89.52점</strong></td>
+<td>70.48점</td>
+<td><em>(87.34점)</em></td>
 </tr>
 <tr>
 <td>5명</td>
-<td>88.09점</td>
-<td>71.91점</td>
+<td>90.20점</td>
+<td>69.80점</td>
+<td><em>(88.26점)</em></td>
+</tr>
+<tr>
+<td>6명</td>
+<td>90.73점</td>
+<td>69.27점</td>
+<td><em>(88.97점)</em></td>
 </tr>
 <tr>
 <td>10명</td>
-<td>90.83점</td>
-<td>69.17점</td>
+<td>92.14점</td>
+<td>67.86점</td>
+<td><em>(90.83점)</em></td>
 </tr>
 <tr>
 <td>16명</td>
-<td><strong>92.38점</strong></td>
-<td>67.62점</td>
+<td><strong>93.36점</strong></td>
+<td>66.64점</td>
+<td><em>(92.38점)</em></td>
 </tr>
 </tbody></table></div>
-<p>3명 부서에서 아무리 뛰어난 사람도 86.09점을 넘을 수 없고, 16명 부서의 최고점자는 92.38점을
+<p>3명 부서에서 아무리 뛰어난 사람도 <strong>88.57점</strong>을 넘을 수 없고, 16명 부서의 최고점자는 <strong>93.36점</strong>을
 받는다. <strong>소규모 부서가 구조적으로 불리해지므로</strong> 1차 보정을 면제하고 2차 평가자의 보정점수를
 100% 반영한다([별표 9] 제5호).</p>
+<p>  * <strong>÷s(n)이 격차를 줄이지만 없애지는 못한다.</strong> 나눗셈이 없을 때 3명↔16명 최고점 격차는
+  6.29점이고, 적용하면 <strong>4.79점</strong>으로 줄어든다. 남는 격차가 제5호를 두는 이유다.</p>
 <p><strong>Q. 조정 합계를 정확히 0으로 맞추기 어렵다.</strong>
 A. ±5점 상한 때문에 생기는 잔차는 <strong>인사담당부서장이 배분</strong>한다([별표 9] 제7호). 평가자는
 상한 안에서 조정하면 된다. <strong>합계가 정확히 0이 아니면 시스템이 저장을 막는다</strong>(§4 MIS 개선 요청 참조). 잔차는 [별표 9] 제7호에 따라 인사담당부서장이 배분한다.</p>
@@ -2435,7 +2510,7 @@ A. 전보·조직개편·휴복직으로 업무가 바뀌면 <strong>변경일�
 A. 공개되는 것은 <strong>본인의 점수와 평정점뿐</strong>이다. 직급 내 순위와 1·2차 평가자별 점수는 계속
 공개하지 아니한다(제28조①). 요구의 초점은 비교가 아니라 <strong>본인이 보정 결과를 검증할 수 있는가</strong>다.</p>
 <hr>
-<h2>§8 확정되지 않은 사항</h2>
+<h2 id="8-확정되지-않은-사항">§8 확정되지 않은 사항<a class="anchor" href="#8-확정되지-않은-사항" aria-label="이 절 링크">§</a></h2>
 <div class="tw">
 
 <div class="tw"><table>
@@ -2477,7 +2552,7 @@ A. 공개되는 것은 <strong>본인의 점수와 평정점뿐</strong>이다. 
 <td>자료 수령 후</td>
 </tr>
 <tr>
-<td><strong>[별표 11]</strong> 전임자 산출방법</td>
+<td><strong>[별표 11]</strong> 근면자 산출방법</td>
 <td><strong>별책 협의.</strong> 3안 중 선택</td>
 <td>본안 의결 후</td>
 </tr>
@@ -2492,7 +2567,7 @@ A. 공개되는 것은 <strong>본인의 점수와 평정점뿐</strong>이다. 
 <hr>
 <blockquote>
 <p><strong>면책</strong> 이 문서는 창업진흥원 노동조합이 작성한 세부지침(안)이며 확정된 제도가 아니다.
-개정 조문과 별표는 〈02 규정 개정안〉, 노동조합 전임자는 〈06 전임자 평정〉 별책을 정본으로
+개정 조문과 별표는 〈02 규정 개정안〉, 노동조합 근로시간면제자는 〈근로시간면제자 평정〉 별책을 정본으로
 하며 이 문서와 어긋나는 경우 두 문서가 우선한다. §1의 예제 계산은 [별표 9] 산식에 가정한
 원점수를 대입한 결과이고, 원점수·순위·다면·공통 점수는 설명을 위한 가정값이다.
 §1-4·§1-5의 전체 인원 기준 수치는 <code>sim/sim.py</code> 반복 400회 실행값이며 창업진흥원의 실제
@@ -2500,7 +2575,46 @@ A. 공개되는 것은 <strong>본인의 점수와 평정점뿐</strong>이다. 
 않는다. 규정 인용은 ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정, 인사규정
 2026.05.28. 개정)과 2025년 근무평정 계획에 따르며 확인 기준일은 2026-09-10이다.</p>
 </blockquote>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-개정-전후-요약-실무에서-무엇이-달라지는가">§0 개정 전후 요약 — 실무에서 무엇이 달라지는가</a></li><li class="l2"><a href="#1-산식과-예제">§1 산식과 예제</a></li><li class="l3"><a href="#1-1-산식-요약">1-1 산식 요약</a></li><li class="l3"><a href="#1-2-예제-A-10명-부서-·-넓게-주는-평가자">1-2 예제 A — 10명 부서 · 넓게 주는 평가자</a></li><li class="l3"><a href="#1-3-예제-B-4명-부서-·-별표-9-제5호-적용">1-3 예제 B — 4명 부서 · [별표 9] 제5호 적용</a></li><li class="l3"><a href="#1-4-예제-C-7월-정기전보자">1-4 예제 C — 7월 정기전보자</a></li><li class="l3"><a href="#1-5-보정이-부여폭에-미치는-영향">1-5 보정이 부여폭에 미치는 영향</a></li><li class="l2"><a href="#2-예외사항-전수">§2 예외사항 전수</a></li><li class="l3"><a href="#2-1-부서-이동·이탈">2-1 부서 이동·이탈</a></li><li class="l3"><a href="#2-2-평가-미실시와-대체-산출">2-2 평가 미실시와 대체 산출</a></li><li class="l3"><a href="#2-3-평가자에-관한-예외">2-3 평가자에 관한 예외</a></li><li class="l3"><a href="#2-4-직군·신분에-관한-예외">2-4 직군·신분에 관한 예외</a></li><li class="l3"><a href="#2-5-평가군-규모에-관한-예외">2-5 평가군 규모에 관한 예외</a></li><li class="l3"><a href="#2-6-가감점과-제재에-관한-예외">2-6 가감점과 제재에 관한 예외</a></li><li class="l3"><a href="#2-7-동점·중복에-관한-예외">2-7 동점·중복에 관한 예외</a></li><li class="l3"><a href="#2-8-다면평가-평가자-선정에-관한-예외">2-8 다면평가 평가자 선정에 관한 예외</a></li><li class="l2"><a href="#3-평가의-절차">§3 평가의 절차</a></li><li class="l3"><a href="#3-1-연간-타임라인">3-1 연간 타임라인</a></li><li class="l3"><a href="#3-2-보정과-조정의-순서-실무상-가장-혼동되는-지점">3-2 보정과 조정의 순서 — 실무상 가장 혼동되는 지점</a></li><li class="l2"><a href="#4-운용방법">§4 운용방법</a></li><li class="l3"><a href="#4-1-시스템MIS-입력">4-1 시스템(MIS) 입력</a></li><li class="l3"><a href="#4-2-보정-실행">4-2 보정 실행</a></li><li class="l3"><a href="#4-3-노사협의회-보고">4-3 노사협의회 보고</a></li><li class="l3"><a href="#4-4-이의신청-처리">4-4 이의신청 처리</a></li><li class="l3"><a href="#4-5-기록-보존">4-5 기록 보존</a></li><li class="l2"><a href="#5-피평가자가-해야-하는-사항">§5 피평가자가 해야 하는 사항</a></li><li class="l2"><a href="#6-평가자가-해야-하는-사항">§6 평가자가 해야 하는 사항</a></li><li class="l3"><a href="#6-1-모든-평가자-공통">6-1 모든 평가자 공통</a></li><li class="l3"><a href="#6-2-부서장-1차-평가자">6-2 부서장 (1차 평가자)</a></li><li class="l3"><a href="#6-3-본부장-2차-평가자">6-3 본부장 (2차 평가자)</a></li><li class="l3"><a href="#6-4-원장">6-4 원장</a></li><li class="l2"><a href="#7-자주-나올-질문">§7 자주 나올 질문</a></li><li class="l2"><a href="#8-확정되지-않은-사항">§8 확정되지 않은 사항</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

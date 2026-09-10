@@ -45,7 +45,7 @@
   }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
 body{
   margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
   font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
@@ -81,6 +81,31 @@ nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--a
 }
 .cta:hover{filter:brightness(1.1)}
 main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -125,6 +150,27 @@ th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowra
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--card-2)}
 strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
 footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   font-size:15.5px;line-height:1.62;letter-spacing:.010em}
 @media (max-width:900px){ .cta{display:none} }
@@ -148,17 +194,18 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 }
 </style>
 </head>
-<body>
+<body class="doc has-toc">
 <header><div class="hin">
   <div class="bm">
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html" class="on" aria-current="page">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html">06 전임자</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html" class="on" aria-current="page">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
-<main><article><h1>03. 타기관 비교</h1>
-<h2>§0 조사 방법</h2>
+<main><article>
+<h1>03. 타기관 비교</h1>
+<h2 id="0-조사-방법">§0 조사 방법<a class="anchor" href="#0-조사-방법" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -187,8 +234,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 전체를 훑어 「무엇을 하는 조항인지」로 분류했다.</p>
 <p>전수 집계의 상세 결과와 기관 명단은 <a href="census.html">부록 — 사전·사후 조정 전수 집계</a>에 있다.</p>
 <hr>
-<h2>§1 사전 평균제약과 사후 보정 — 핵심 비교</h2>
-<h3>1-1 전수 집계</h3>
+<h2 id="1-사전-평균제약과-사후-보정-핵심-비교">§1 사전 평균제약과 사후 보정 — 핵심 비교<a class="anchor" href="#1-사전-평균제약과-사후-보정-핵심-비교" aria-label="이 절 링크">§</a></h2>
+<h3 id="1-1-전수-집계">1-1 전수 집계<a class="anchor" href="#1-1-전수-집계" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -219,7 +266,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <p><strong>창업진흥원 방식은 355개 기관 중 6곳에 속한다.</strong></p>
-<h3>1-2 사전 평균제약 17개 기관 전수</h3>
+<h3 id="1-2-사전-평균제약-17개-기관-전수">1-2 사전 평균제약 17개 기관 전수<a class="anchor" href="#1-2-사전-평균제약-17개-기관-전수" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -316,7 +363,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>두 가지가 드러난다.</strong> 첫째, 창진원의 80점은 조사 대상 중 가장 낮은 수준이다. 둘째, 80점을
 쓰는 6곳 중에서도 <strong>완충장치가 전혀 없는 곳은 창진원뿐이다.</strong></p>
-<h3>1-3 중소벤처기업부 소관 형제기관</h3>
+<h3 id="1-3-중소벤처기업부-소관-형제기관">1-3 중소벤처기업부 소관 형제기관<a class="anchor" href="#1-3-중소벤처기업부-소관-형제기관" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -343,7 +390,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>기술보증기금의 &quot;양극화·중심화&quot;는 조합이 관찰한 극단·균등 성향 문제를 같은 중기부 기관이 이미
 규정 문언으로 인정하고 시정 권한까지 둔 것이다.</strong></p>
-<h3>1-4 사후 보정 산식 — 조문 원문</h3>
+<h3 id="1-4-사후-보정-산식-조문-원문">1-4 사후 보정 산식 — 조문 원문<a class="anchor" href="#1-4-사후-보정-산식-조문-원문" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -412,7 +459,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>제8조② — &quot;<strong>성과관리위원회는</strong> 평가자 및 확인자에 의한 원점수를 평균·표준편차일치법을 적용하여 보정할 수 있다&quot;</td>
 </tr>
 </tbody></table></div>
-<h3>1-5 조정 여유 — 합계 0 방식</h3>
+<h3 id="1-5-조정-여유-합계-0-방식">1-5 조정 여유 — 합계 0 방식<a class="anchor" href="#1-5-조정-여유-합계-0-방식" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -432,8 +479,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>②가 보정을 규정하고 ③이 그 위에 조정 여유를 얹는 구조로, 이 문서의 개정 6 + [별표 9] 제7호와
 정확히 같은 설계다. 전수 조사에서 이 조문은 355개 기관 중 새만금개발공사가 유일하다.</strong></p>
 <hr>
-<h2>§2 이동자 평정 — 창진원과 다수 기관의 차이</h2>
-<h3>2-1 점수를 누가 부여하는가</h3>
+<h2 id="2-이동자-평정-창진원과-다수-기관의-차이">§2 이동자 평정 — 창진원과 다수 기관의 차이<a class="anchor" href="#2-이동자-평정-창진원과-다수-기관의-차이" aria-label="이 절 링크">§</a></h2>
+<h3 id="2-1-점수를-누가-부여하는가">2-1 점수를 누가 부여하는가<a class="anchor" href="#2-1-점수를-누가-부여하는가" aria-label="이 절 링크">§</a></h3>
 <p><strong>다수 기관은 「현 부서에서 평가하고 전 부서장의 의견만 듣는」 방식이다.</strong> 전 부서장이 점수를
 직접 매기지 않으므로 &quot;나갈 사람&quot; 낙인이 원리적으로 발생하지 않는다.</p>
 <div class="tw"><table>
@@ -468,7 +515,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>제6조① — <strong>전·현 부서 근무기간 가중 합산</strong> (전 부서장이 직접 점수 부여)</td>
 </tr>
 </tbody></table></div>
-<h3>2-2 최소 근무기간 기준</h3>
+<h3 id="2-2-최소-근무기간-기준">2-2 최소 근무기간 기준<a class="anchor" href="#2-2-최소-근무기간-기준" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -511,7 +558,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 <p><strong>창진원의 30일은 조사 대상 중 가장 짧다.</strong> 11월 조직개편으로 부서가 바뀐 직원이 한 달치 근무로
 새 부서장에게 평가받는 일이 이 기준 때문에 발생한다.</p>
-<h3>2-3 목표의 재설정</h3>
+<h3 id="2-3-목표의-재설정">2-3 목표의 재설정<a class="anchor" href="#2-3-목표의-재설정" aria-label="이 절 링크">§</a></h3>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -537,7 +584,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§3 평가자 부재와 직무대리</h2>
+<h2 id="3-평가자-부재와-직무대리">§3 평가자 부재와 직무대리<a class="anchor" href="#3-평가자-부재와-직무대리" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -585,7 +632,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>창진원은 지정 근거만 있고 승계 순서·시점·통지가 없다.</strong> 그리고 직무대리를 평가자로 명시적으로
 인정하는데, 이는 한국출판문화산업진흥원의 규정과 정면으로 반대다.</p>
 <hr>
-<h2>§4 소규모 평가군과 절대평가</h2>
+<h2 id="4-소규모-평가군과-절대평가">§4 소규모 평가군과 절대평가<a class="anchor" href="#4-소규모-평가군과-절대평가" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -643,7 +690,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§5 동점 부여 금지와 재평가 요구</h2>
+<h2 id="5-동점-부여-금지와-재평가-요구">§5 동점 부여 금지와 재평가 요구<a class="anchor" href="#5-동점-부여-금지와-재평가-요구" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -679,7 +726,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <p><strong>창진원은 규칙이 동점을 회피하도록 정하면서 계획이 동점 부여를 지시한다.</strong> 규칙과 계획이
 반대 방향이다.</p>
 <hr>
-<h2>§6 평정 결과 공개</h2>
+<h2 id="6-평정-결과-공개">§6 평정 결과 공개<a class="anchor" href="#6-평정-결과-공개" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -705,10 +752,10 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§7 노동조합 전임자·근로시간면제자 평정</h2>
-<p>전임자·근로시간면제자 평정을 규정한 기관은 <strong>55곳</strong>이며, 확인된 방식은 네 갈래다.
+<h2 id="7-노동조합-근로시간면제자-평정">§7 노동조합 근로시간면제자 평정<a class="anchor" href="#7-노동조합-근로시간면제자-평정" aria-label="이 절 링크">§</a></h2>
+<p>근로시간면제자(이하 「근면자」) 평정을 규정한 기관은 <strong>55곳</strong>이며, 확인된 방식은 네 갈래다.
 <strong>「최근 N회 평균」 방식은 355개 기관 중 창업진흥원 외 한 곳도 확인되지 않았다.</strong></p>
-<p>상세는 <a href="union.html">〈06 전임자 평정〉 별책</a> §3에 있다.</p>
+<p>상세는 <a href="union.html">〈근로시간면제자 평정〉 별책</a> §3에 있다.</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -734,7 +781,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 </tbody></table></div>
 <hr>
-<h2>§8 상위 지침 — 무엇을 규율하고 무엇을 규율하지 않는가</h2>
+<h2 id="8-상위-지침-무엇을-규율하고-무엇을-규율하지-않는가">§8 상위 지침 — 무엇을 규율하고 무엇을 규율하지 않는가<a class="anchor" href="#8-상위-지침-무엇을-규율하고-무엇을-규율하지-않는가" aria-label="이 절 링크">§</a></h2>
 <p>「공기업·준정부기관 예산운용지침」의 차등 요건은 <strong>성과급 지급등급</strong>에 적용된다.</p>
 <div class="tw"><table>
 <thead>
@@ -768,7 +815,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 S~E 6등급 체계를 별도로 운영하고 있다. 따라서 근무평정 등급 비율을 규칙에 명시하는 것(개정 10)은
 상위 지침과 충돌하지 않는다.</p>
 <hr>
-<h2>§9 창업진흥원의 위치 — 요약</h2>
+<h2 id="9-창업진흥원의-위치-요약">§9 창업진흥원의 위치 — 요약<a class="anchor" href="#9-창업진흥원의-위치-요약" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -828,7 +875,7 @@ S~E 6등급 체계를 별도로 운영하고 있다. 따라서 근무평정 등�
 <td>규정 명시</td>
 </tr>
 <tr>
-<td>전임자 평정</td>
+<td>근면자 평정</td>
 <td><strong>최근 N회 평균 (유일)</strong></td>
 <td>동일직급 평균 · 유리한 값 · 중간등급</td>
 </tr>
@@ -839,7 +886,46 @@ S~E 6등급 체계를 별도로 운영하고 있다. 따라서 근무평정 등�
 2026-09-10이다. 전수 집계의 방법과 기관 명단은 <a href="census.html">부록</a>에 있다. 창업진흥원 규정
 인용은 ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정)과 2025년 근무평정 계획에 따른다.</p>
 </blockquote>
-</article></main>
-<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-조사-방법">§0 조사 방법</a></li><li class="l2"><a href="#1-사전-평균제약과-사후-보정-핵심-비교">§1 사전 평균제약과 사후 보정 — 핵심 비교</a></li><li class="l3"><a href="#1-1-전수-집계">1-1 전수 집계</a></li><li class="l3"><a href="#1-2-사전-평균제약-17개-기관-전수">1-2 사전 평균제약 17개 기관 전수</a></li><li class="l3"><a href="#1-3-중소벤처기업부-소관-형제기관">1-3 중소벤처기업부 소관 형제기관</a></li><li class="l3"><a href="#1-4-사후-보정-산식-조문-원문">1-4 사후 보정 산식 — 조문 원문</a></li><li class="l3"><a href="#1-5-조정-여유-합계-0-방식">1-5 조정 여유 — 합계 0 방식</a></li><li class="l2"><a href="#2-이동자-평정-창진원과-다수-기관의-차이">§2 이동자 평정 — 창진원과 다수 기관의 차이</a></li><li class="l3"><a href="#2-1-점수를-누가-부여하는가">2-1 점수를 누가 부여하는가</a></li><li class="l3"><a href="#2-2-최소-근무기간-기준">2-2 최소 근무기간 기준</a></li><li class="l3"><a href="#2-3-목표의-재설정">2-3 목표의 재설정</a></li><li class="l2"><a href="#3-평가자-부재와-직무대리">§3 평가자 부재와 직무대리</a></li><li class="l2"><a href="#4-소규모-평가군과-절대평가">§4 소규모 평가군과 절대평가</a></li><li class="l2"><a href="#5-동점-부여-금지와-재평가-요구">§5 동점 부여 금지와 재평가 요구</a></li><li class="l2"><a href="#6-평정-결과-공개">§6 평정 결과 공개</a></li><li class="l2"><a href="#7-노동조합-근로시간면제자-평정">§7 노동조합 근로시간면제자 평정</a></li><li class="l2"><a href="#8-상위-지침-무엇을-규율하고-무엇을-규율하지-않는가">§8 상위 지침 — 무엇을 규율하고 무엇을 규율하지 않는가</a></li><li class="l2"><a href="#9-창업진흥원의-위치-요약">§9 창업진흥원의 위치 — 요약</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>

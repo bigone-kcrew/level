@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제시사항 한눈에 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="노동조합이 제시하는 근무평정 제도개선과 승진제도 개편을 한 화면에 정리한다 (조합 내부 검토용)">
+<meta name="theme-color" content="#FBFAF9">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="compare.css">
+<style>
+/* 토큰 이름은 발표덱(docs/deck/deck.css)과 같은 체계를 쓴다.
+   문서는 오래 읽는 것이므로 밝은 바탕을 기본으로 하고, 시스템 설정이
+   어두운 화면이면 자동으로 뒤집는다. 본문 대비는 두 모드 모두 7:1 이상. */
+:root{
+  color-scheme:light dark;
+  --bg:#FBFAF9; --card:#FFFFFF; --card-2:#F4F4F6;
+  --bg-2:#F1F1F4;
+  --ink:#111114;    /* 18.9:1 */
+  --ink-2:#36363C;  /* 12.0:1 */
+  --ink-3:#4A4A52;  /*  8.8:1 */
+  --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
+  --line:var(--hair-2); --line-2:var(--hair);
+  --accent:#005075;      /*  8.7:1 */
+  --accent-2:#003F5C;
+  --accent-soft:#EAF1F6;
+  --brand:var(--accent); --brand-soft:var(--accent-soft);
+  --danger:#96201A; --ok:#136B30;
+  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --chip-ink:#FFFFFF;
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
+         "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
+  --mono:"SF Mono",ui-monospace,"D2Coding",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
+    --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
+    --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
+    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --danger:#FF453A; --ok:#30D158;
+    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
+    --chip-ink:#00131C;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-optical-sizing:auto;
+}
+header{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--hair-2);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px}
+.bm{display:flex;flex-direction:column;padding:11px 0;flex:0 0 auto}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.018em;white-space:nowrap}
+.bm .s{font-size:15.5px;color:var(--ink-3);font-weight:400;letter-spacing:.012em;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 0;min-width:0;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16.5px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
+.cta{
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
+  display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
+article{
+  background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
+  padding:clamp(24px,4vw,62px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{font-weight:700}
+h1{font-size:clamp(32px,3.6vw,50px);line-height:1.14;letter-spacing:-.030em;margin:0 0 28px}
+h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
+   margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
+h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
+   margin:36px 0 12px;color:var(--accent)}
+h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:26px 0;padding:18px 24px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);border-radius:0;font-size:.97em;
+  line-height:1.66;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--accent-soft)}
+code{
+  font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
+  border:1px solid var(--hair-2);border-radius:4px;padding:2px 6px;
+  letter-spacing:0;
+}
+pre{
+  background:#111114;color:#F5F5F7;border-radius:6px;padding:22px 24px;
+  overflow-x:auto;font-size:16px;line-height:1.62;letter-spacing:0;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--hair-2);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--hair-2);vertical-align:top}
+th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowrap;
+   font-size:15.5px;letter-spacing:.03em}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
+  font-size:15.5px;line-height:1.62;letter-spacing:.010em}
+@media (max-width:900px){ .cta{display:none} }
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--card-2:#f4f4f4;--ink:#000;--ink-2:#1a1a1a;--ink-3:#3d3d3d;
+        --hair:rgba(0,0,0,.32);--hair-2:rgba(0,0,0,.15);--accent:#004260;--accent-soft:#f2f6f8}
+  header,footer .no-print,.cta{display:none!important}
+  body{font-size:11.5pt;line-height:1.6}
+  article{border:0;padding:0}
+  h2{break-after:avoid}
+  table,blockquote,pre,.tw{break-inside:avoid}
+  pre{background:#f4f4f4;color:#000;border:1px solid #bbb}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.82em;color:#555}
+}
+</style>
+</head>
+<body class="doc">
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><div class="warn-in" role="note"><b>조합 내부 검토용</b> — 교섭 전략과 예상 반론이 담겨 있습니다. <b>발표 자리에서 이 페이지를 띄우지 마십시오.</b> 상단 탭에는 넣지 않았습니다.</div>
+<h1>제시사항 한눈에</h1>
+<p>노동조합이 무엇을 요구하고, 무엇을 요구하지 않는지를 한 화면에 둔다.
+<strong>두 축이다</strong> — 이번에 관철할 <strong>근무평정 제도개선</strong>과, 방향만 세워 두는 <strong>승진제도 개편</strong>.</p>
+<blockquote>
+<p><strong>이 문서는 조합 내부 검토용이다.</strong> 협의 자리에서 쓰는 것은 〈01 진단〉·〈02 개정안〉·발표 화면이며,
+이 문서는 <strong>무엇을 먼저 내주고 무엇을 지킬지</strong>를 정리한 것이므로 사측과 함께 보지 않는다.</p>
+</blockquote>
+<hr>
+<h2 id="한-장-요약">한 장 요약<a class="anchor" href="#한-장-요약" aria-label="이 절 링크">§</a></h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>무엇을</th>
+<th>몇 건</th>
+<th>언제</th>
+<th>성격</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>축 1</strong></td>
+<td><strong>근무평정 제도개선</strong></td>
+<td>요구 <strong>16건</strong> · 그중 <strong>불가분 핵심 5건</strong></td>
+<td>2026.9.28. 협의 → 2027년 평정 적용</td>
+<td><strong>이번 협의의 본안</strong></td>
+</tr>
+<tr>
+<td><strong>축 2</strong></td>
+<td><strong>승진제도 개편</strong></td>
+<td>방향 <strong>4건</strong></td>
+<td>시기 미정</td>
+<td><strong>장기과제. 본안의 조건으로 삼지 않는다</strong></td>
+</tr>
+<tr>
+<td>별</td>
+<td>근로시간면제자 평정</td>
+<td>규칙 제7조② 단서 삭제 <strong>1건</strong></td>
+<td>본안 통과 후</td>
+<td><strong>완전 분리.</strong> 본안의 대가로 다루지 않는다</td>
+</tr>
+</tbody></table></div>
+<p><strong>이 표의 마지막 두 줄이 전략의 핵심이다.</strong> 축 2와 별책을 본안에 붙이면 사측은
+「조합이 이것저것 다 요구한다」로 정리하고 본안을 흐린다. <strong>분리해서 순서대로 간다.</strong></p>
+<hr>
+<h2 id="축-1-·-근무평정-제도개선-이번에-관철한다">축 1 · 근무평정 제도개선 — 이번에 관철한다<a class="anchor" href="#축-1-·-근무평정-제도개선-이번에-관철한다" aria-label="이 절 링크">§</a></h2>
+<h3 id="불가분-핵심-5건-하나가-빠지면-전부-철회한다">불가분 핵심 5건 — 하나가 빠지면 전부 철회한다<a class="anchor" href="#불가분-핵심-5건-하나가-빠지면-전부-철회한다" aria-label="이 절 링크">§</a></h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>조문</th>
+<th>무엇을</th>
+<th>빠지면</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>핵-1</strong></td>
+<td>규칙 <strong>제9조④</strong></td>
+<td>사전 평균제약 폐지 + 사후 보정 <strong>의무화</strong></td>
+<td><strong>제거율 0%</strong> — 나머지 전부 무의미</td>
+</tr>
+<tr>
+<td><strong>핵-2</strong></td>
+<td><strong>[별표 9] 신설</strong></td>
+<td>순위기반 표준화 산식 (÷s(n) 포함)</td>
+<td><strong>제거율 0%</strong></td>
+</tr>
+<tr>
+<td><strong>핵-3</strong></td>
+<td>규칙 <strong>제4조①3호</strong></td>
+<td>동점 부여 <strong>금지</strong> (「가능한 범위 내에서」 삭제)</td>
+<td><strong>24.0% → 4.9%</strong> · 본부장까지 동점이면 <strong>−8.7%</strong></td>
+</tr>
+<tr>
+<td><strong>핵-4</strong></td>
+<td>규칙 <strong>제22조①</strong></td>
+<td>다면평가를 <strong>업무 관련자 4인 이상</strong>이 실시</td>
+<td>−2.5 ~ 7.3%p</td>
+</tr>
+<tr>
+<td><strong>핵-5</strong></td>
+<td>규칙 <strong>제28조① + 제9조⑥</strong></td>
+<td>평정점 본인 공개 + 평정 통계 노사협의회 제공</td>
+<td><strong>실시 여부를 확인할 수 없다</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>5건만으로 외부요인 제거율 32.9%</strong>, 16건 전부가 42.0%다. 즉 <b>핵심 5건이 전체 효과의 78%</b>를
+만든다. 조문 1개당 효율은 <strong>6.6%p 대 2.3%p</strong>이고, 추가 13건의 한계 효율은 <strong>0.7%p</strong>다.</p>
+<h3 id="나머지-11건-분리-협의-가능">나머지 11건 — 분리 협의 가능<a class="anchor" href="#나머지-11건-분리-협의-가능" aria-label="이 절 링크">§</a></h3>
+<p><strong>사측에게 진짜 협상 카드를 주면서 핵심을 보호하기 위한 것이다.</strong> 사측이 「12건을 수용했다」고
+말할 수 있게 하되, 그 12건에 핵심 5건이 반드시 들어가도록 구조를 만든다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>우선</th>
+<th>요구</th>
+<th>왜 이 순위인가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>먼저 합의</strong></td>
+<td>공무직 절대평가(개정 7) · 미실시자 산식(개정 13)</td>
+<td><strong>사측에 비용이 0</strong>이다. 신뢰를 쌓을 항목</td>
+</tr>
+<tr>
+<td>비용 낮음</td>
+<td>등급비율 규칙 명시(개정 10) · 노사협의 의무(개정 12)</td>
+<td>현행 운영을 규칙에 옮기는 것</td>
+</tr>
+<tr>
+<td>실체 있음</td>
+<td>전보·조직개편 처리(개정 3) · 평가자 부재(개정 4) · 목표설정(개정 8)</td>
+<td>효과는 미측정이나 <strong>사측 반대 명분이 약하다</strong></td>
+</tr>
+<tr>
+<td><strong>교환물</strong></td>
+<td><strong>다면 배점 10% → 20%</strong>(개정 5·14)</td>
+<td>9.1%p가 여기서 나오지만 <strong>사측 저항이 가장 크다.</strong> 핵-4(지명제)만 받고 <strong>배점은 내주는 것이 가장 유리한 교환</strong></td>
+</tr>
+</tbody></table></div>
+<h3 id="요구하지-않는-것-미리-정해-둔다">요구하지 않는 것 — 미리 정해 둔다<a class="anchor" href="#요구하지-않는-것-미리-정해-둔다" aria-label="이 절 링크">§</a></h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사안</th>
+<th>왜 요구하지 않는가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1차:2차 비중 50:50</td>
+<td><strong>역전 임계값이 상식 범위 안</strong>이라 유리·불리를 판정할 수 없다. <strong>조합이 먼저 접는 것이 교섭 자산</strong>이다</td>
+</tr>
+<tr>
+<td>고급 통계보정 (혼합효과·Bradley-Terry·경험베이즈)</td>
+<td>전부 순위표준화보다 <strong>열등</strong>하고 <strong>355곳 중 선례 0곳</strong>. 엑셀로 검산할 수 없다</td>
+</tr>
+<tr>
+<td>전 직원 절대평가</td>
+<td>측정 결과 <strong>−0.9%로 현행보다 나쁘다.</strong> 보정의 대체재가 아니라 보완재다</td>
+</tr>
+<tr>
+<td>S등급 부여</td>
+<td>선례 0곳. <strong>노조법 제81조①4호(운영비 원조)로 역공당한다</strong></td>
+</tr>
+<tr>
+<td>등급 면제로 저성과자 보호</td>
+<td>조합이 <strong>스스로 성과개선 통로를 열어 두는 조항을 넣었다</strong>(제26조⑥)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="축-2-·-승진제도-개편-방향만-세워-둔다">축 2 · 승진제도 개편 — 방향만 세워 둔다<a class="anchor" href="#축-2-·-승진제도-개편-방향만-세워-둔다" aria-label="이 절 링크">§</a></h2>
+<p><strong>본안의 조건으로 삼지 않는다.</strong> 근무평정 개편이 승진에 미치는 영향과, 검토 과정에서 확인된
+것만 정리한다. 네 건 중 <strong>두 건은 근무평정 개편만으로 상당 부분 해결된다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>사안</th>
+<th>현황</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>승-1</strong></td>
+<td><strong>반영 회차의 직급 간 불형평</strong></td>
+<td>4급 <strong>2회</strong> · 2·3급 <strong>3회</strong> · 1(나)급 <strong>4회</strong> 산술평균</td>
+<td><strong>요구할 값이 있다.</strong> 회차가 많을수록 평정 잡음이 상쇄되는데 4급만 2회다. 다른 직급 수준으로 맞추는 것이 방향</td>
+</tr>
+<tr>
+<td><strong>승-2</strong></td>
+<td>승진자 저평정 관행</td>
+<td>승진 직후 낮은 평가를 받는 경향</td>
+<td><strong>개정 6의 보정으로 상당 부분 완화된다.</strong> 등급 배정은 직급별 전사인데 점수 부여는 부서 단위인 구조에서 나오는 현상이므로, 별도 승진제도 개정 없이 개선된다</td>
+</tr>
+<tr>
+<td><strong>승-3</strong></td>
+<td>서열명부 산식</td>
+<td>근무평정 <strong>90%</strong> + 근속 <strong>10%</strong></td>
+<td><strong>당장 바꿀 필요가 없다.</strong> 근무평정에 보정이 들어가면 서열명부의 신뢰도도 함께 오른다</td>
+</tr>
+<tr>
+<td><strong>승-4</strong></td>
+<td>승진 T/O</td>
+<td>2026년 <strong>14명 / 후보 126명 = 11.1%</strong></td>
+<td><strong>T/O가 없으면 서열 1위여도 승진은 없다.</strong> 산정 근거와 시기의 사전 공개를 요구할 수는 있으나 <strong>T/O 자체는 조합이 정할 수 없다</strong></td>
+</tr>
+</tbody></table></div>
+<h3 id="회차를-몇-회로-맞출-것인가-계산해-두었다">회차를 몇 회로 맞출 것인가 — 계산해 두었다<a class="anchor" href="#회차를-몇-회로-맞출-것인가-계산해-두었다" aria-label="이 절 링크">§</a></h3>
+<p>실력이 해마다 얼마나 유지되는지(지속성)에 따라 최적 회차가 달라진다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>실력 지속성</th>
+<th>2회 (현행 4급)</th>
+<th>3회 (2·3급)</th>
+<th>4회 (1(나)급)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0 (완전 유지)</td>
+<td>0.490</td>
+<td>0.491</td>
+<td><strong>0.491</strong></td>
+</tr>
+<tr>
+<td>0.9</td>
+<td>0.378</td>
+<td>0.406</td>
+<td><strong>0.436</strong></td>
+</tr>
+<tr>
+<td>0.8</td>
+<td>0.286</td>
+<td>0.330</td>
+<td><strong>0.383</strong></td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>0.208</td>
+<td>0.263</td>
+<td><strong>0.336</strong></td>
+</tr>
+</tbody></table></div>
+<p>값은 서열명부와 실력의 순위상관이며 <strong>높을수록 좋다.</strong> 어느 지속성에서도 <strong>회차가 많은 쪽이 낫다.</strong>
+다만 <strong>지속성이 낮을수록 회차 확대의 이점이 줄어든다</strong> — 실력이 해마다 바뀌면 오래된 평정을 더
+넣는 것의 값이 떨어진다. <em>(모의데이터 계산치이며 창업진흥원의 실제 결과가 아니다.)</em></p>
+<h3 id="요구하지-않기로-한-것">요구하지 않기로 한 것<a class="anchor" href="#요구하지-않기로-한-것" aria-label="이 절 링크">§</a></h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사안</th>
+<th>왜</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>근속승진 신설</strong></td>
+<td><strong>철회했다.</strong> ①특정인만 적용하면 반발이 크다 ②승진 T/O 확보가 유동적이다 ③<strong>승진제도를 개정한 지 얼마 되지 않았다</strong> — 개정 직후 재개정 요구는 조합의 다른 요구 전체의 신뢰도를 깎는다</td>
+</tr>
+<tr>
+<td>1(가)~2급 인사위 심의 100%의 정성 판단</td>
+<td>근무평정·근속·동료평가가 모두 참고자료인 구조 자체는 이번 범위를 넘는다</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="순서-무엇을-언제">순서 — 무엇을 언제<a class="anchor" href="#순서-무엇을-언제" aria-label="이 절 링크">§</a></h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>시기</th>
+<th>할 일</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>~9월 21일</strong></td>
+<td>의제 통보 <strong>실질 마감</strong>(운영규정 제20조③ 7일 전). 핵심 5건을 <strong>하나의 안</strong>으로 제출 + 집계 자료 요구서</td>
+</tr>
+<tr>
+<td><strong>9월 28일</strong></td>
+<td>2분기 노사협의회. <strong>먼저 합의 2건</strong>(개정 7·13)으로 신뢰를 쌓고 핵심 5건 협의 개시. 실무소위 구성 제안</td>
+</tr>
+<tr>
+<td>10~11월</td>
+<td>실무소위 — 산식 확정, 자료 수령 후 <strong>모수 재산정</strong></td>
+</tr>
+<tr>
+<td>4분기 회의</td>
+<td>의결 시도. <strong>6명 중 4명 찬성 필요</strong>(제21조 2/3) — 사측 1명 이상의 찬성이 반드시 있어야 한다</td>
+</tr>
+<tr>
+<td>12월</td>
+<td>2027년 근무평정 계획에 반영</td>
+</tr>
+<tr>
+<td><strong>본안 통과 후</strong></td>
+<td><strong>별도 안건</strong> — 규칙 제7조② 단서 삭제(근로시간면제자)</td>
+</tr>
+</tbody></table></div>
+<p><strong>의결 정족수가 전략을 결정한다.</strong> 사측위원 3인이 전원 반대하면 의결이 불가능하므로 <strong>합의만이
+유일한 경로</strong>다. 그래서 「먼저 합의할 항목」을 따로 둔 것이다.</p>
+<hr>
+<h2 id="스스로-정해-둔-선">스스로 정해 둔 선<a class="anchor" href="#스스로-정해-둔-선" aria-label="이 절 링크">§</a></h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>본안과 별책을 섞지 않는다</strong></td>
+<td>근로시간면제자 평정을 본안의 대가로 다루면 <strong>본안이 개인 사안으로 축소된다</strong></td>
+</tr>
+<tr>
+<td><strong>승진제도를 본안의 조건으로 걸지 않는다</strong></td>
+<td>조건을 걸면 사측이 「승진제도는 장기과제」라는 이유로 본안까지 미룰 수 있다</td>
+</tr>
+<tr>
+<td><strong>모르는 것은 먼저 공개한다</strong></td>
+<td>가정값 15건을 스스로 밝힌다. 사측이 「모의데이터일 뿐이다」로 무력화하려 할 때의 답이 거기 있다</td>
+</tr>
+<tr>
+<td><strong>재량으로 주는 이익은 받지 않는다</strong></td>
+<td>「성과급 등급만 보전하겠다」는 제안은 규칙을 그대로 둔 채 개인을 달래는 것이다</td>
+</tr>
+<tr>
+<td><strong>저성과 관리 통로를 막지 않는다</strong></td>
+<td>등급 면제를 저성과자 보호 수단으로 요구하지 않는다</td>
+</tr>
+</tbody></table></div>
+</article></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html" class="on" aria-current="page">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>
