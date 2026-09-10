@@ -498,23 +498,93 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px 
 body.notes-on #notes-drawer { transform: none; }
 #notes-drawer .hd { font-size: var(--fs-micro); font-weight: 700; letter-spacing: .05em; color: var(--ink-3); margin-bottom: 10px; }
 
-/* ── 시뮬레이터 — 세로가 짧은 화면에서 압축한다 ─────────────────────── */
-#sim .box label { margin-bottom: 10px !important; }
-@media (max-height: 820px) {
-  #sim input[type="range"] { height: 34px; }
-  #sim .box label { margin-bottom: 4px !important; }
-  #sim .box { padding: 14px 18px; }
-  #sim .cols { margin-top: 12px !important; gap: 20px; }
-  #sim .title { margin-bottom: 0; }
-  #sim .eyebrow { margin-bottom: 12px; }
-  #sim .legend { margin-top: 8px; }
-  #sim .cap { margin-top: 10px; }
+/* ── 시뮬레이터 ─────────────────────────────────────────────────────────
+   평소에는 차트만 둔다. 변수판은 우측에서 나왔다 사라진다.
+   주 조작 경로는 V 키다 — 발표에서 무선 리모컨을 쓰면 포인터가 없기 때문에
+   hover 만으로 만들면 아예 열 수 없다. 손잡이를 항상 남겨 그 사실을 알린다. */
+.sim-fig { margin-top: 26px; }
+.sim-foot {
+  display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 64px);
+  align-items: baseline; margin-top: 14px;
 }
-@media (max-height: 740px) {
-  #sim input[type="range"] { height: 28px; }
-  #sim .box .h { margin-bottom: 4px; }
-  #sim .box p.micro { margin-top: 8px !important; padding-top: 8px !important; }
+.sim-foot .legend { margin: 0; }
+.sim-rho { margin: 0; font-variant-numeric: tabular-nums; }
+.sim-rho b { font-family: var(--mono); font-size: 1.06em; }
+
+/* 우측 끝 감지 영역 — 보이지 않는다 */
+.sim-hot { position: absolute; top: 12vh; right: 0; bottom: 12vh; width: 26px; z-index: 4; }
+
+/* 항상 남아 있는 얇은 손잡이 */
+.sim-handle {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  z-index: 6; display: grid; gap: 8px; justify-items: center; align-content: center;
+  width: 34px; min-height: 108px; padding: 12px 0; cursor: pointer;
+  background: color-mix(in srgb, var(--bg-2) 78%, transparent);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--hair-2); border-right: 0; border-radius: 10px 0 0 10px;
+  color: var(--ink-3);
+  transition: color 160ms var(--ease), background 160ms var(--ease), opacity 220ms var(--ease);
 }
+.sim-handle:hover { color: var(--ink); background: color-mix(in srgb, var(--bg-2) 94%, transparent); }
+.sim-handle .k {
+  font-family: var(--mono); font-size: var(--fs-micro); font-weight: 600;
+  line-height: 1; padding: 3px 5px; border: 1px solid var(--hair); border-radius: 4px;
+}
+.sim-handle .t {
+  font-size: var(--fs-micro); letter-spacing: .08em;
+  writing-mode: vertical-rl; text-orientation: upright;
+}
+/* 손잡이는 패널이 열리면 사라진다. 패널이 DOM 상 손잡이보다 뒤에 있어
+   형제 선택자가 닿지 않으므로 슬라이드에 클래스를 건다. */
+.sim-slide.panel-on .sim-handle { opacity: 0; pointer-events: none; }
+
+/* 변수판 — 떠 있는 반투명 층. 차트를 밀지 않고 위에 얹힌다 */
+.sim-panel {
+  position: absolute; right: 0; top: 9vh; bottom: 9vh; z-index: 8;
+  width: min(360px, 32vw); padding: 22px 24px 18px;
+  display: flex; flex-direction: column; gap: 2px; overflow-y: auto;
+  background: color-mix(in srgb, var(--bg-2) 86%, transparent);
+  backdrop-filter: blur(30px) saturate(170%); -webkit-backdrop-filter: blur(30px) saturate(170%);
+  border: 1px solid var(--hair-2); border-right: 0; border-radius: 14px 0 0 14px;
+  transform: translateX(101%);
+  transition: transform 420ms var(--ease), opacity 260ms var(--ease);
+  opacity: 0;
+}
+.sim-panel.on { transform: none; opacity: 1; }
+.sim-panel[inert] { pointer-events: none; }
+.sp-h {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--hair-2);
+  font-size: var(--fs-cap); font-weight: 700; color: var(--ink);
+}
+.sp-x {
+  flex: 0 0 auto; width: 40px; height: 40px; display: grid; place-items: center;
+  background: none; border: 0; border-radius: 8px; cursor: pointer;
+  color: var(--ink-3); font-size: var(--fs-cap);
+}
+.sp-x:hover { color: var(--ink); background: var(--hair-2); }
+.sim-panel label { display: block; margin: 0 0 6px; color: var(--ink-2); }
+.sim-panel label > span { display: block; }
+.sim-panel label b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.sp-f {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--hair-2);
+}
+.sp-r {
+  min-height: 40px; padding: 0 14px; cursor: pointer;
+  background: none; border: 1px solid var(--hair); border-radius: 6px;
+  color: var(--ink-2); font-size: var(--fs-micro); font-weight: 600;
+}
+.sp-r:hover { color: var(--ink); border-color: var(--ink-3); }
+
+@media (max-height: 800px) {
+  .sim-panel { top: 5vh; bottom: 5vh; padding: 16px 20px 14px; }
+  .sim-panel input[type="range"] { height: 36px; }
+  .sim-panel label { margin-bottom: 0; }
+  .sp-h { margin-bottom: 10px; padding-bottom: 8px; }
+  .sim-fig { margin-top: 16px; }
+}
+@media (max-width: 1000px) { .sim-panel { width: min(340px, 62vw); } }
 
 /* ── 작은 화면 ──────────────────────────────────────────────────────────── */
 @media (max-width: 1180px) { :root { --side-w: 216px; } }

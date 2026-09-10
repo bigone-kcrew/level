@@ -8,7 +8,8 @@
     "build": "node tools/build.mjs && node tools/build-deck.mjs",
     "sim": "python3 sim/sim.py",
     "build:docs": "node tools/build.mjs",
-    "build:deck": "node tools/build-deck.mjs"
+    "build:deck": "node tools/build-deck.mjs",
+    "xref": "python3 tools/xref.py"
   },
   "dependencies": {
     "marked": "^15.0.0"

@@ -1102,57 +1102,65 @@
 </section>
 
 <!-- ══ 06b-simulator.html ══ -->
-<!-- ══ 시뮬레이터 — 변수를 직접 움직여 확인한다 ══ -->
-<section class="slide" id="sim" data-trans="wipe" data-ch="Ⅵ. 개정안" data-title="시뮬레이터 — 직접 확인">
+<!-- ══ 시뮬레이터 — 차트가 화면을 차지하고, 변수는 우측에서 나온다 ══ -->
+<section class="slide sim-slide" id="sim" data-trans="wipe" data-ch="Ⅵ. 개정안" data-title="시뮬레이터 — 직접 확인">
   <p class="eyebrow rise">Ⅵ-8<span class="sep">·</span>직접 확인</p>
   <h2 class="title mid rise" style="--d:100ms">가정을 못 믿으시면 <em>직접 바꿔 보십시오</em></h2>
 
-  <div class="cols c2-1" style="margin-top:22px; align-items:start">
-    <div class="fig rise" style="--d:200ms">
-      <svg viewBox="0 0 760 240" role="img" aria-label="개정 전후 등급 획득률 비교 막대그래프">
-        <g id="simChart"></g>
-      </svg>
-      <div class="legend">
-        <span><i style="background:var(--series-now)"></i>현행 (사전조정계수)</span>
-        <span><i style="background:var(--series-new)"></i>개선 (순위기반 보정)</span>
-      </div>
-    </div>
-
-    <div class="box rise" style="--d:280ms">
-      <p class="h">개정에 따른 변수</p>
-      <label class="micro" style="display:block;margin-bottom:14px">
-        목표 표준편차 <b id="vSd">7.0</b>점
-        <input id="iSd" type="range" min="4" max="10" step="0.5" value="7" />
-      </label>
-      <label class="micro" style="display:block;margin-bottom:14px">
-        제7호 조정 폭 ±<b id="vAdj">5</b>점
-        <input id="iAdj" type="range" min="0" max="10" step="1" value="5" />
-      </label>
-      <label class="micro" style="display:block;margin-bottom:14px">
-        극단 성향 부여폭 <b id="vExt">13</b>점
-        <input id="iExt" type="range" min="6" max="16" step="1" value="13" />
-      </label>
-      <label class="micro" style="display:block;margin-bottom:14px">
-        균등 성향 부여폭 <b id="vEven">2</b>점
-        <input id="iEven" type="range" min="1" max="8" step="1" value="2" />
-      </label>
-      <label class="micro" style="display:block">
-        선호 반영률 <b id="vFav">0.70</b>
-        <input id="iFav" type="range" min="0" max="0.9" step="0.05" value="0.7" />
-      </label>
-      <p class="micro" style="margin-top:16px;border-top:1px solid var(--hair-2);padding-top:12px">
-        실력–평정점 순위상관 &nbsp; 현행 <b id="oRhoC">—</b> &nbsp;→&nbsp; 개선 <b id="oRhoR">—</b>
-      </p>
-    </div>
+  <div class="fig sim-fig rise" style="--d:220ms">
+    <svg viewBox="0 0 1180 330" role="img" aria-label="개정 전후 등급 획득률 비교 막대그래프">
+      <g id="simChart"></g>
+    </svg>
   </div>
 
-  <p class="cap rise" style="--d:360ms">
+  <div class="sim-foot rise" style="--d:320ms">
+    <div class="legend">
+      <span><i style="background:var(--series-now)"></i>현행 (사전조정계수)</span>
+      <span><i style="background:var(--series-new)"></i>개선 (순위기반 보정)</span>
+    </div>
+    <p class="micro sim-rho">
+      실력–평정점 순위상관 &nbsp; 현행 <b id="oRhoC">—</b> &nbsp;→&nbsp; 개선 <b id="oRhoR">—</b>
+    </p>
+  </div>
+
+  <p class="cap rise" style="--d:400ms">
     반복 100회 · 화면용. 문서 수치는 400회 실행값이며 난수 생성기가 달라 소수 첫째 자리에서 차이가 날 수 있습니다.
     모의데이터 계산치이며 창업진흥원의 실제 평정 결과가 아닙니다.
   </p>
 
+  <!-- 우측 끝 감지 영역 — 마우스가 닿으면 열린다 -->
+  <div class="sim-hot" id="simHot" aria-hidden="true"></div>
+
+  <!-- 항상 남아 있는 얇은 손잡이. 리모컨만 쓸 때도 V 키가 있다는 것을 알려 준다 -->
+  <button type="button" class="sim-handle" id="simHandle"
+          aria-expanded="false" aria-controls="simPanel">
+    <span class="k">V</span><span class="t">변수</span>
+  </button>
+
+  <div class="sim-panel" id="simPanel" role="group" aria-label="개정 변수 조정" inert>
+    <p class="sp-h">개정에 따른 변수<button type="button" class="sp-x" id="simClose" aria-label="닫기 (Esc)">✕</button></p>
+
+    <label class="micro"><span>목표 표준편차 <b id="vSd">7.0</b>점</span>
+      <input id="iSd" type="range" min="4" max="10" step="0.5" value="7" /></label>
+    <label class="micro"><span>제7호 조정 폭 ±<b id="vAdj">5</b>점</span>
+      <input id="iAdj" type="range" min="0" max="10" step="1" value="5" /></label>
+    <label class="micro"><span>극단 성향 부여폭 <b id="vExt">13</b>점</span>
+      <input id="iExt" type="range" min="6" max="16" step="1" value="13" /></label>
+    <label class="micro"><span>균등 성향 부여폭 <b id="vEven">2</b>점</span>
+      <input id="iEven" type="range" min="1" max="8" step="1" value="2" /></label>
+    <label class="micro"><span>선호 반영률 <b id="vFav">0.70</b></span>
+      <input id="iFav" type="range" min="0" max="0.9" step="0.05" value="0.7" /></label>
+
+    <p class="sp-f micro">
+      <button type="button" class="sp-r" id="simReset">기본값으로</button>
+      <span>Esc 로 닫습니다</span>
+    </p>
+  </div>
+
   <div class="notes">
-    <p>사측이 「가정값이 과하다」고 하면 이 화면을 띄우고 슬라이더를 넘겨 주십시오.
+    <p><b>V 키</b>를 누르면 우측에서 변수 조정판이 나옵니다. 마우스를 화면 오른쪽 끝에 대도 열립니다.
+    <b>Esc</b> 로 닫습니다. 평소에는 차트만 두는 것이 목적입니다.</p>
+    <p>사측이 「가정값이 과하다」고 하면 이 화면을 띄우고 조정판을 넘겨 주십시오.
     부여폭을 13/2에서 7/6으로 좁히면 개선 효과가 거의 사라지는 것을 직접 보게 됩니다.
     <b>그것을 숨기지 않는다는 것이 이 화면의 목적입니다.</b></p>
     <p>이어서 「그래서 실측 자료를 주시면 모수를 다시 잡겠습니다」로 넘어갑니다.</p>
@@ -1163,9 +1171,11 @@
 window.DECK_HOOKS = window.DECK_HOOKS || {};
 window.DECK_HOOKS["sim"] = function () {
   const $ = id => document.getElementById(id);
-  const ids = ["Sd","Adj","Ext","Even","Fav"];
-  const g = $("simChart");
+  const KEYS = ["Sd", "Adj", "Ext", "Even", "Fav"];
+  const DEFAULTS = { Sd: 7, Adj: 5, Ext: 13, Even: 2, Fav: 0.7 };
+  const g = $("simChart"), panel = $("simPanel"), handle = $("simHandle"), hot = $("simHot");
 
+  /* ── 차트 ─────────────────────────────────────────────── */
   function draw(r) {
     const rows = [
       ["S · 극단 성향 부서장", r.current.sExt, r.reform.sExt],
@@ -1173,18 +1183,25 @@ window.DECK_HOOKS["sim"] = function () {
       ["C · 극단 성향 부서장", r.current.cExt, r.reform.cExt],
       ["C · 균등 성향 부서장", r.current.cEven, r.reform.cEven]
     ];
-    const max = Math.max(10, ...rows.flatMap(x => [x[1], x[2]]));
-    const nice = Math.ceil(max / 10) * 10;
-    const L = 190, W = 500, H = 54, top = 16;
+    const nice = Math.ceil(Math.max(10, ...rows.flatMap(x => [x[1], x[2]])) / 10) * 10;
+    const L = 300, W = 760, H = 78, top = 14, BH = 24;
     let s = "";
+    // 기준 격자 — 극단적으로 덜어낸다
+    for (let v = 0; v <= nice; v += 10) {
+      const x = L + v / nice * W;
+      s += `<line x1="${x}" y1="${top - 6}" x2="${x}" y2="${top + rows.length * H - 22}"
+             stroke="var(--hair-2)" stroke-width="1"/>`;
+      s += `<text x="${x}" y="${top + rows.length * H - 4}" font-size="16" text-anchor="middle"
+             fill="var(--ink-3)">${v}%</text>`;
+    }
     rows.forEach((row, i) => {
       const y = top + i * H;
       const w1 = row[1] / nice * W, w2 = row[2] / nice * W;
-      s += `<text x="0" y="${y + 15}" font-size="16" fill="var(--ink-2)">${row[0]}</text>`;
-      s += `<rect x="${L}" y="${y + 3}" width="${w1.toFixed(1)}" height="16" rx="2" fill="var(--series-now)"/>`;
-      s += `<text x="${L + w1 + 8}" y="${y + 16}" font-size="15" fill="var(--ink-3)">${row[1].toFixed(1)}%</text>`;
-      s += `<rect x="${L}" y="${y + 23}" width="${w2.toFixed(1)}" height="16" rx="2" fill="var(--series-new)"/>`;
-      s += `<text x="${L + w2 + 8}" y="${y + 36}" font-size="15" fill="var(--ink)">${row[2].toFixed(1)}%</text>`;
+      s += `<text x="0" y="${y + 30}" font-size="20" fill="var(--ink-2)">${row[0]}</text>`;
+      s += `<rect x="${L}" y="${y}" width="${w1.toFixed(1)}" height="${BH}" rx="3" fill="var(--series-now)"/>`;
+      s += `<text x="${L + w1 + 10}" y="${y + 18}" font-size="19" fill="var(--ink-3)">${row[1].toFixed(1)}%</text>`;
+      s += `<rect x="${L}" y="${y + BH + 4}" width="${w2.toFixed(1)}" height="${BH}" rx="3" fill="var(--series-new)"/>`;
+      s += `<text x="${L + w2 + 10}" y="${y + BH + 22}" font-size="19" font-weight="600" fill="var(--ink)">${row[2].toFixed(1)}%</text>`;
     });
     g.innerHTML = s;
     $("oRhoC").textContent = r.current.rho.toFixed(3);
@@ -1192,23 +1209,52 @@ window.DECK_HOOKS["sim"] = function () {
   }
 
   function recompute() {
-    const o = {
-      sd:   parseFloat($("iSd").value),
-      adj:  parseFloat($("iAdj").value),
-      ext:  parseFloat($("iExt").value),
-      even: parseFloat($("iEven").value),
-      fav:  parseFloat($("iFav").value),
-      reps: 100
-    };
-    $("vSd").textContent   = o.sd.toFixed(1);
-    $("vAdj").textContent  = o.adj;
-    $("vExt").textContent  = o.ext;
-    $("vEven").textContent = o.even;
-    $("vFav").textContent  = o.fav.toFixed(2);
+    const o = { reps: 100 };
+    KEYS.forEach(k => {
+      const v = parseFloat($("i" + k).value);
+      o[k.toLowerCase() === "sd" ? "sd" : k.toLowerCase()] = v;
+      $("v" + k).textContent = (k === "Sd") ? v.toFixed(1) : (k === "Fav") ? v.toFixed(2) : v;
+    });
     draw(window.SIM.run(o));
   }
 
-  ids.forEach(k => $("i" + k).addEventListener("input", recompute));
+  /* ── 변수판 열고 닫기 ──────────────────────────────────
+     주 경로는 V 키다. 발표에서 무선 리모컨을 쓰면 포인터가 없기 때문이다.
+     마우스가 있으면 오른쪽 끝에 대는 것으로도 열린다. */
+  let openT = null;
+  const slide = document.getElementById("sim");
+  function setOpen(on) {
+    panel.classList.toggle("on", on);
+    slide.classList.toggle("panel-on", on);
+    handle.setAttribute("aria-expanded", String(on));
+    if (on) panel.removeAttribute("inert"); else panel.setAttribute("inert", "");
+    if (on) { const f = panel.querySelector("input"); if (f) f.focus({ preventScroll: true }); }
+  }
+  const isOpen = () => panel.classList.contains("on");
+
+  handle.addEventListener("click", () => setOpen(!isOpen()));
+  $("simClose").addEventListener("click", () => { setOpen(false); handle.focus(); });
+  $("simReset").addEventListener("click", () => {
+    KEYS.forEach(k => { $("i" + k).value = DEFAULTS[k]; });
+    recompute();
+  });
+
+  // 오른쪽 끝에 잠깐 머물러야 열린다 — 지나가는 것만으로 열리면 방해가 된다
+  hot.addEventListener("pointerenter", () => {
+    clearTimeout(openT); openT = setTimeout(() => setOpen(true), 220);
+  });
+  hot.addEventListener("pointerleave", () => clearTimeout(openT));
+  panel.addEventListener("pointerleave", e => {
+    if (e.pointerType === "mouse" && !panel.contains(document.activeElement)) setOpen(false);
+  });
+
+  document.addEventListener("keydown", e => {
+    if (!slide.classList.contains("is-active")) return;
+    if (e.key === "v" || e.key === "V") { e.preventDefault(); setOpen(!isOpen()); }
+    else if (e.key === "Escape" && isOpen()) { e.stopPropagation(); setOpen(false); handle.focus(); }
+  });
+
+  KEYS.forEach(k => $("i" + k).addEventListener("input", recompute));
   recompute();
 };
 </script>

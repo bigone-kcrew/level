@@ -620,7 +620,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td><strong>0.704</strong> (+0.242)</td>
 </tr>
 </tbody></table></div>
-<p>같은 실력이라도 <strong>어느 본부에 있느냐로 S등급 확률이 1.9배 차이납니다.</strong>
+<p>같은 실력이라도 <strong>어느 본부에 있느냐로 S등급 확률이 1.89배 차이납니다.</strong>
 극단 성향 부서장 아래에서는 S가 29.4%, C가 16.6% — 승자와 패자가 동시에 대량 발생합니다.
 균등 성향 부서장 아래에서는 S가 9.9%, C가 2.1% — 아무 일도 일어나지 않습니다.</p>
 <p>이 구조의 원인은 <strong>평균 제약의 단위(부서)와 등급 배정의 단위(직급)가 다르다</strong>는 점입니다.
@@ -1068,6 +1068,8 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 이것이 사내 라인 문화의 제도적 경로입니다.</p>
 <h3 id="5-2-시뮬레이션-결과">5-2. 시뮬레이션 결과<a class="anchor" href="#5-2-시뮬레이션-결과" aria-label="이 절 링크">§</a></h3>
 <p>가정: 전 부서장이 &#39;나갈 사람&#39;에게 0.6σ, 신 부서장이 &#39;온 지 얼마 안 된 사람&#39;에게 0.8σ 낮게 평가.</p>
+<p><em>(아래 세 표는 모두 <code>sim/sim.py</code> 의 같은 실행에서 나온 값입니다 — 본부 유형 무작위 배정 ·
+반복 400회 · 시드 20260910. 조건이 다른 값을 섞어 쓰지 않습니다. 〈09 수치의 근거〉 §4 참조.)</em></p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -1081,44 +1083,44 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 <tbody><tr>
 <td>잔류 (한 부서장과 계속)</td>
 <td>55%</td>
-<td>23.6%</td>
-<td>82.61</td>
+<td>23.1%</td>
+<td>82.98</td>
 <td>기준</td>
 </tr>
 <tr>
 <td>1월 전보 (평정 후 이동)</td>
 <td>12%</td>
-<td>23.7%</td>
-<td>82.68</td>
-<td><strong>+0.08</strong></td>
+<td>23.4%</td>
+<td>83.05</td>
+<td><strong>+0.07</strong></td>
 </tr>
 <tr>
 <td><strong>7월 전보</strong></td>
 <td>12%</td>
-<td>19.0%</td>
-<td>80.19</td>
-<td><strong>−2.42</strong></td>
+<td>17.7%</td>
+<td>80.52</td>
+<td><strong>−2.46</strong></td>
 </tr>
 <tr>
 <td><strong>연중 조직개편</strong></td>
 <td>8%</td>
-<td><strong>9.2%</strong></td>
-<td>76.63</td>
-<td><strong>−5.97</strong></td>
+<td><strong>9.0%</strong></td>
+<td>77.30</td>
+<td><strong>−5.69</strong></td>
 </tr>
 <tr>
 <td>중도 휴직</td>
 <td>7%</td>
-<td>10.2%</td>
-<td>77.00</td>
-<td>−5.61</td>
+<td>9.5%</td>
+<td>77.73</td>
+<td>−5.25</td>
 </tr>
 <tr>
 <td>중도 파견</td>
 <td>6%</td>
-<td>10.4%</td>
-<td>77.28</td>
-<td>−5.33</td>
+<td>10.8%</td>
+<td>77.80</td>
+<td>−5.18</td>
 </tr>
 </tbody></table></div>
 <p>같은 계산에서 <strong>낙인 효과만 0으로 두면</strong> 결과가 이렇게 바뀝니다.</p>
@@ -1136,24 +1138,24 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </thead>
 <tbody><tr>
 <td>S 획득률</td>
-<td>19.7%</td>
-<td>19.7%</td>
-<td>23.8%</td>
-<td>19.8%</td>
-<td>20.0%</td>
 <td>19.3%</td>
+<td>19.8%</td>
+<td>21.8%</td>
+<td>19.5%</td>
+<td>18.7%</td>
+<td>20.6%</td>
 </tr>
 <tr>
 <td>잔류자 대비 평정점</td>
 <td>기준</td>
-<td>+0.06</td>
-<td>+0.36</td>
-<td>+0.06</td>
-<td>−0.10</td>
-<td>+0.08</td>
+<td>+0.12</td>
+<td>+0.22</td>
+<td>+0.15</td>
+<td>+0.01</td>
+<td>+0.19</td>
 </tr>
 </tbody></table></div>
-<p>모든 유형이 19~24%로 균일해집니다.
+<p>모든 유형이 19~22%로 균일해집니다.
 <strong>격차의 원인은 규정이 아니라 &quot;나가는 사람에게 낮게 준다&quot;는 행동 하나입니다.</strong></p>
 <p>그리고 중요한 한계가 있습니다. 순위기반 표준화를 적용하면 이렇게 됩니다.</p>
 <div class="tw"><table>
@@ -1170,24 +1172,24 @@ S등급 정원 안에 들 길이 사실상 막힙니다.</p>
 </thead>
 <tbody><tr>
 <td>S 획득률</td>
-<td>20.6%</td>
-<td>21.0%</td>
-<td><strong>17.5%</strong></td>
+<td>19.4%</td>
+<td>20.1%</td>
+<td><strong>17.3%</strong></td>
+<td>18.7%</td>
 <td>19.8%</td>
-<td>19.5%</td>
-<td>21.1%</td>
+<td>19.9%</td>
 </tr>
 <tr>
 <td>잔류자 대비 평정점</td>
 <td>기준</td>
-<td>+0.07</td>
-<td><strong>+0.09</strong></td>
-<td>+0.03</td>
-<td>−0.22</td>
-<td>+0.12</td>
+<td>+0.19</td>
+<td><strong>+0.03</strong></td>
+<td>+0.06</td>
+<td>+0.02</td>
+<td>+0.14</td>
 </tr>
 </tbody></table></div>
-<p><strong>평정점 격차는 사라지지만(−2.42 → +0.09) S등급 획득률 격차는 85%로 남습니다.</strong>
+<p><strong>평정점 격차는 사라지지만(−2.46 → +0.03) S등급 획득률은 잔류자의 89% 수준에 머뭅니다.</strong>
 보정이 부서 내 순위를 보존하기 때문입니다. <strong>전보 불이익은 별도 장치가 필요합니다.</strong></p>
 <ul>
 <li>전출자 평정을 <strong>전보 발령 전에 마감</strong> — 7월 전보자의 상반기 평정을 6월에 완료</li>
