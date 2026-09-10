@@ -5,8 +5,12 @@
   "description": "창업진흥원 근무평정 제도개선 제안자료",
   "type": "module",
   "scripts": {
-    "build": "node tools/build.mjs",
-    "sim": "python3 sim/sim.py"
+    "build": "node tools/build.mjs && node tools/build-deck.mjs",
+    "sim": "python3 sim/sim.py",
+    "build:docs": "node tools/build.mjs",
+    "build:deck": "node tools/build-deck.mjs"
   },
-  "dependencies": { "marked": "^15.0.0" }
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
 }

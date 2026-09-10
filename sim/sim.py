@@ -310,6 +310,9 @@ def exp_grade_distribution(mode, reps=REPS, **kw):
     """평정자 유형별·본부별 등급 획득률과 실력 반영도"""
     s_by_mgr = {"S": [0, 0], "N": [0, 0]}
     c_by_mgr = {"S": [0, 0], "N": [0, 0]}
+    # 등급 전체 분포 — 평정자 유형별 S/A/B/C (버터플라이 차트용 집계)
+    all_by_mgr = {t: {g: 0 for g, _ in GRADE} for t in ("S", "N")}
+    n_by_mgr = {"S": 0, "N": 0}
     s_by_hq  = {"S": [0, 0], "N": [0, 0], "O": [0, 0]}
     rho = []
     for _ in range(reps):
@@ -323,6 +326,8 @@ def exp_grade_distribution(mode, reps=REPS, **kw):
             s_by_mgr[mt][1] += 1; c_by_mgr[mt][1] += 1; s_by_hq[ht][1] += 1
             if grade[i] == "S": s_by_mgr[mt][0] += 1; s_by_hq[ht][0] += 1
             if grade[i] == "C": c_by_mgr[mt][0] += 1
+            if grade[i] is not None:
+                all_by_mgr[mt][grade[i]] += 1; n_by_mgr[mt] += 1
         rho.append(spearman([p["a"] for p in people], pts))
     pc = lambda o: 100 * o[0] / o[1] if o[1] else 0.0
     return {
@@ -330,6 +335,8 @@ def exp_grade_distribution(mode, reps=REPS, **kw):
         "C_mgr": {k: pc(v) for k, v in c_by_mgr.items()},
         "S_hq":  {k: pc(v) for k, v in s_by_hq.items()},
         "rho":   st.mean(rho),
+        "dist":  {t: {g: (100 * all_by_mgr[t][g] / n_by_mgr[t] if n_by_mgr[t] else 0.0)
+                      for g, _ in GRADE} for t in ("S", "N")},
     }
 
 
@@ -495,6 +502,14 @@ def main():
         print(f"    실력-평정점 rho : {r['rho']:.3f}\n")
     print(f"  → 개선 효과 : rho {res['current']['rho']:.3f} → {res['reform']['rho']:.3f}"
           f"  ({res['reform']['rho']-res['current']['rho']:+.3f})")
+
+    # ── 1-2. 등급 전체 분포 — 평정자 유형별 (버터플라이 차트 데이터)
+    print("\n  [등급 전체 분포 · %]")
+    print("    " + " " * 12 + "".join(f"{g:>9}" for g, _ in GRADE))
+    for mode, tag in (("current", "현행"), ("reform", "개선")):
+        for ty, tyname in (("S", "극단"), ("N", "균등")):
+            d = res[mode]["dist"][ty]
+            print(f"    {tag} {tyname:<8}" + "".join(f"{d[g]:>8.1f} " for g, _ in GRADE))
 
     # ── 2. 이론 기준선 (자진 공개)
     z, th, orho = exp_baseline()

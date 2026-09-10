@@ -1,0 +1,338 @@
+/* ══════════════════════════════════════════════════════════════════════
+   근무평정 제도개선(안) — 발표 덱
+   디자인: 스위스 그리드 (html-ppt-skill 'swiss-grid' 팔레트 이식, MIT)
+   비율:   16:9 기준 · vh 비례 스케일로 1366×768 ~ 1920×1080 및 16:10 흡수
+   가독성: 청중 고령층 — 본문 18px 하한, 전 텍스트 대비 7:1 이상,
+           얇은 굵기 미사용, 조작 타깃 48px
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ─── 팔레트 ─────────────────────────────────────────────────────────── */
+:root{
+  color-scheme: light;
+
+  /* 저채도 · 절제된 지면.
+     순백 대신 미세하게 따뜻한 종이색, 순흑 대신 부드러운 먹색.
+     포인트는 소방차 빨강이 아니라 벽돌색 하나로 제한한다. */
+  --paper:#FBFAF8;          /* 종이 */
+  --paper-2:#F0EEE9;        /* 은은한 면 */
+  --ink:#1C1B19;            /* 본문·제목 · 종이 대비 16.5:1 */
+  --ink-2:#3E3C39;          /* 보조 · 10.5:1 */
+  --ink-3:#504E49;          /* 캡션·메타 · 7.97:1 (전 텍스트 7:1 하한 준수) */
+  --rule:#1C1B19;           /* 굵은 괘선은 본문색과 같은 먹색 — 스위스 원칙 */
+  --rule-soft:#DCD8D0;      /* 표 내부 얇은 선 */
+
+  --accent:#9A4A42;         /* 벽돌색 — 유일한 포인트. 큰 글자·괘선·포인트에만 */
+  --accent-ink:#7B3229;     /* 본문 크기 강조 텍스트용 · 8.64:1 */
+  --accent-soft:#F3EAE8;    /* 강조 배경 */
+
+  /* 차트 2계열 — 현행=중성 슬레이트, 개선=벽돌색.
+     dataviz 검증기 결과: 명도대역 PASS · CVD ΔE 13.0(deutan)/19.8(tritan) PASS ·
+     일반시야 ΔE 17.1 PASS(하한 15) · 면 대비 PASS.
+     채도 하한만 이탈했다 — 「저채도」가 요구사항이므로 의도적이다. 판별에 영향을 주는
+     검사는 모두 통과하며, 스킬이 요구하는 부차 부호화를 함께 쓴다:
+     막대마다 직접 값 라벨 · 범례 · 2px 종이색 간격 · 개선 계열 상단 강조선. */
+  --series-now:#7A8894;
+  --series-new:#9A4A42;
+
+  /* FX 모듈이 읽는 토큰 — base.css 와 이름이 어긋나므로 여섯 개 모두 정의 */
+  --accent-2:#1C1B19;
+  --ok:#4A6B52; --warn:#8A7440; --danger:#9A4A42;
+  --text-1:#1C1B19;
+
+  /* ─── 타이포 스케일 ───────────────────────────────────────────────
+     의도적으로 불균등하다. 13→15→18→22→30→46→72→96 —
+     중간 단계를 비워 위계가 즉시 읽히게 한다.
+     (균등한 16/20/24/32 사다리는 생성물 특유의 형태다) */
+  --fs-micro:clamp(13px, 1.50vh, 16px);   /* 페이지 번호·라벨 — 본문 아님 */
+  --fs-cap:  clamp(15px, 1.78vh, 19px);   /* 캡션·표·범례 */
+  --fs-body: clamp(18px, 2.20vh, 24px);   /* 본문 하한 18px */
+  --fs-lead: clamp(22px, 2.95vh, 33px);   /* 리드 문장 */
+  --fs-mid:  clamp(30px, 4.20vh, 47px);   /* 소제목·강조 문구 */
+  --fs-big:  clamp(46px, 7.40vh, 84px);   /* 슬라이드 제목 */
+  --fs-huge: clamp(72px,12.00vh,140px);   /* 장 제목 */
+  --fs-stat: clamp(90px,19.00vh,215px);   /* 거대 수치 */
+
+  --sp-1:clamp(6px, .85vh, 11px);
+  --sp-2:clamp(12px, 1.7vh, 22px);
+  --sp-3:clamp(22px, 3.2vh, 42px);
+  --sp-4:clamp(34px, 5.0vh, 66px);
+
+  --pad-x:clamp(26px, 3.6vw, 74px);
+  --pad-y:clamp(22px, 3.4vh, 56px);
+
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,
+         'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',
+         'Helvetica Neue',Helvetica,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+
+  --tight:-.015em;   /* 스위스 원값 -.04em 은 한글 자모가 붙어 보인다 */
+  --ease:cubic-bezier(.4,0,.2,1);
+
+  --side-w:clamp(176px, 15vw, 252px);
+}
+
+/* ─── 기본 ───────────────────────────────────────────────────────────── */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--paper)}
+body{
+  color:var(--ink); font-family:var(--font); font-size:var(--fs-body);
+  font-weight:400; line-height:1.62; -webkit-font-smoothing:antialiased;
+  display:flex;
+}
+/* 한글은 어절 단위로 끊는다 — 스킬에 이 선언이 없어 제목이 중간에서 깨진다 */
+body,h1,h2,h3,p,li,td,th,blockquote,figcaption{
+  word-break:keep-all; overflow-wrap:break-word;
+}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:var(--tight);line-height:1.20}
+p{margin:0}
+b,strong{font-weight:700}
+.mono,.num{font-family:var(--mono);font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;letter-spacing:-.01em}
+
+/* ─── 좌측 사이드바 ───────────────────────────────────────────────────
+   발표자가 쓰는 도구다. 작고 조용하게. 본문 위계에 끼어들지 않는다. */
+#side{
+  flex:0 0 var(--side-w); height:100%; background:var(--paper);
+  border-right:2px solid var(--rule); display:flex; flex-direction:column;
+  overflow:hidden; transition:margin-left .3s var(--ease);
+}
+body.hide-side #side{margin-left:calc(-1 * var(--side-w))}
+.side-top{padding:var(--sp-2) 14px var(--sp-1);border-bottom:1px solid var(--rule)}
+.side-top .t{font-size:var(--fs-cap);font-weight:700;letter-spacing:var(--tight);line-height:1.3}
+.side-top .s{font-size:var(--fs-micro);color:var(--ink-3);margin-top:2px}
+#nav{flex:1 1 auto;overflow-y:auto;padding:6px 0 14px;scrollbar-width:thin}
+#nav::-webkit-scrollbar{width:8px}
+#nav::-webkit-scrollbar-thumb{background:var(--rule-soft)}
+#nav .ch{
+  font-size:var(--fs-micro);font-weight:700;color:var(--ink);
+  padding:12px 14px 5px;letter-spacing:.02em;
+}
+#nav .ch+.ch{border-top:1px solid var(--rule-soft)}
+#nav a{
+  display:flex;gap:8px;align-items:baseline;
+  font-size:var(--fs-micro);color:var(--ink-3);text-decoration:none;
+  padding:7px 14px 7px 12px;border-left:3px solid transparent;
+  min-height:34px;line-height:1.35;
+}
+#nav a:hover{color:var(--ink);background:var(--paper-2)}
+#nav a[aria-current=true]{
+  color:var(--ink);font-weight:700;border-left-color:var(--accent);background:var(--paper-2);
+}
+#nav a .i{font-family:var(--mono);font-size:.9em;color:var(--ink-3);flex:0 0 auto}
+#nav a[aria-current=true] .i{color:var(--accent)}
+#nav a:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+
+/* 도구 — 아이콘만 */
+.side-tools{
+  border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);
+}
+.side-tools > *{
+  flex:1 1 0;min-width:48px;min-height:48px;display:flex;align-items:center;
+  justify-content:center;gap:5px;background:var(--paper);border:0;cursor:pointer;
+  color:var(--ink);font:inherit;font-size:var(--fs-micro);text-decoration:none;
+}
+.side-tools > *:hover{background:var(--ink);color:var(--paper)}
+.side-tools > *:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.side-tools svg{width:17px;height:17px;flex:0 0 auto}
+
+/* ─── 덱 ─────────────────────────────────────────────────────────────── */
+#deck,.deck{position:relative;flex:1 1 auto;height:100%;overflow:hidden;background:var(--paper)}
+.slide{
+  position:absolute;inset:0;padding:var(--pad-y) var(--pad-x);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateX(18px);
+  transition:opacity .34s var(--ease), transform .34s var(--ease);
+  overflow:hidden;
+}
+.slide.is-active{opacity:1;pointer-events:auto;transform:none;z-index:2}
+.slide.is-prev{transform:translateX(-18px)}
+
+/* 반복되는 단 하나의 장식 — 슬라이드 상단 규칙선. 페이지마다 다른 장식을 뿌리지 않는다. */
+.slide::before{
+  content:'';position:absolute;left:var(--pad-x);right:var(--pad-x);top:calc(var(--pad-y) * .52);
+  height:2px;background:var(--rule);
+}
+.slide.bare::before{display:none}
+/* 12칼럼 힌트 — 여백이 넓은 슬라이드에만 수동으로 붙인다 */
+.slide.grid-hint{
+  background-image:linear-gradient(90deg,rgba(0,0,0,.045) 1px,transparent 1px);
+  background-size:calc(100% / 12) 100%;
+}
+
+/* 슬라이드 머리 */
+.eyebrow{
+  font-size:var(--fs-micro);font-weight:700;color:var(--ink-3);
+  letter-spacing:.02em;margin-bottom:var(--sp-1);
+}
+.eyebrow .on{color:var(--accent)}
+.slide h2.title{font-size:var(--fs-big);font-weight:700;line-height:1.16}
+.slide h2.title em{font-style:normal;color:var(--accent-ink)}
+.lead{
+  font-size:var(--fs-lead);color:var(--ink-2);font-weight:400;line-height:1.5;
+  margin-top:var(--sp-2);max-width:44em;   /* 제목은 폭 제한 없음, 리드만 제한해 우측 여백 */
+}
+.slide-body{flex:1 1 auto;min-height:0;margin-top:var(--sp-3);display:flex;flex-direction:column}
+
+/* 장 구분 — 유일하게 센터링을 허용한다 */
+.slide.divider{justify-content:center}
+.slide.divider .rn{font-family:var(--mono);font-size:var(--fs-mid);color:var(--accent);font-weight:600}
+.slide.divider h2{font-size:var(--fs-huge);font-weight:700;line-height:1.14;margin-top:var(--sp-1)}
+.slide.divider .lead{font-size:var(--fs-lead);margin-top:var(--sp-3)}
+
+/* 거대 수치 */
+.stat{font-family:var(--mono);font-size:var(--fs-stat);font-weight:600;
+  line-height:.92;letter-spacing:-.045em}
+.stat.red{color:var(--accent)}
+.stat .u{font-size:.38em;font-weight:600;letter-spacing:0}
+.stat-note{font-size:var(--fs-lead);color:var(--ink-2);margin-top:var(--sp-2);max-width:40em}
+
+/* 강조를 색이 아니라 블록으로 — 문장 안에 검은 덩어리를 박아 스캔 지점을 만든다 */
+.chip{background:var(--ink);color:var(--paper);padding:.06em .34em;font-weight:700;
+  white-space:nowrap}
+.chip.red{background:var(--accent)}
+.mark{border-bottom:.34em solid rgba(154,74,66,.28);font-weight:700}
+
+/* 개조식 */
+.gj{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--sp-1)}
+.gj>li{position:relative;padding-left:1.05em;font-size:var(--fs-body);color:var(--ink-2);line-height:1.55}
+.gj>li::before{content:'—';position:absolute;left:0;color:var(--accent);font-weight:700}
+.gj>li>ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:4px}
+.gj>li>ul>li{position:relative;padding-left:.95em;font-size:var(--fs-cap);color:var(--ink-3)}
+.gj>li>ul>li::before{content:'·';position:absolute;left:.1em;color:var(--ink-3);font-weight:700}
+.gj b{color:var(--ink)}
+.sq{font-size:var(--fs-cap);font-weight:700;color:var(--ink);margin:0 0 var(--sp-1);
+  letter-spacing:.01em}
+
+/* 인용 — 규정 원문 */
+blockquote.q{margin:0;border-left:4px solid var(--accent);padding:var(--sp-1) 0 var(--sp-1) var(--sp-2)}
+blockquote.q .txt{font-size:var(--fs-mid);font-weight:500;line-height:1.4}
+blockquote.q .src{font-size:var(--fs-cap);color:var(--ink-3);margin-top:var(--sp-2);font-weight:700}
+
+/* 면 — 라운딩 0, 그림자 없음. 구분은 괘선만. */
+.box{background:var(--paper);border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:var(--sp-2) 0;min-height:0}
+.box.pad{padding:var(--sp-2)}
+.box.fill{background:var(--paper-2);border:0;padding:var(--sp-2)}
+.box.on{border-top-color:var(--accent);border-top-width:4px}
+
+/* 열 — 묶음 안은 타이트, 묶음 사이는 크게 */
+.cols{display:grid;gap:var(--sp-2);min-height:0}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c-side{grid-template-columns:minmax(270px,26%) 1fr}
+.rows{display:grid;gap:var(--sp-3);min-height:0}
+
+/* 표 — 세로 괘선 없이 가로선만 (에디토리얼 표 정석) */
+table{border-collapse:collapse;width:100%;font-size:var(--fs-cap)}
+thead th{
+  font-size:var(--fs-micro);font-weight:700;color:var(--ink-3);text-align:left;
+  letter-spacing:.02em;padding:8px 10px;border-bottom:2px solid var(--rule);
+}
+td{padding:9px 10px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:1px solid var(--rule)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+td b{color:var(--ink)}
+tr.hl td{background:var(--paper-2)}
+tr.hl td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+
+/* 범례 — 색만이 아니라 텍스트와 형태로도 구분 */
+.legend{display:flex;gap:var(--sp-2);flex-wrap:wrap;font-size:var(--fs-cap);
+  font-weight:700;color:var(--ink-2)}
+.legend i{display:inline-block;width:16px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .ln{width:22px;height:0;border-top:3px dashed var(--ink-3);vertical-align:3px}
+
+/* 차트 */
+svg.chart{display:block;width:100%;height:100%;overflow:visible}
+.gl{stroke:var(--rule-soft);stroke-width:1}
+.axl{fill:var(--ink-2);font-size:15px;font-weight:700;font-family:var(--font)}
+.vl{fill:var(--ink);font-size:17px;font-weight:600;font-family:var(--mono)}
+.bar{transition:height .42s var(--ease), y .42s var(--ease), width .42s var(--ease)}
+
+/* 컨트롤 */
+.ctrl{display:flex;flex-direction:column;gap:4px}
+.ctrl .lab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  font-size:var(--fs-cap);font-weight:700;color:var(--ink)}
+.ctrl .lab .rv{font-family:var(--mono);font-size:var(--fs-cap);font-weight:600;
+  color:var(--paper);background:var(--ink);padding:2px 8px}
+.ctrl .why{font-size:var(--fs-micro);color:var(--ink-3);line-height:1.45}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:48px;
+  background:none;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;background:var(--rule-soft)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;
+  margin-top:-10px;background:var(--paper);border:3px solid var(--accent)}
+input[type=range]::-moz-range-track{height:6px;background:var(--rule-soft)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--paper);
+  border:3px solid var(--accent);border-radius:0}
+input[type=range]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.chk{display:flex;align-items:center;gap:10px;min-height:48px;cursor:pointer;
+  font-size:var(--fs-cap);font-weight:700;color:var(--ink)}
+.chk input{width:22px;height:22px;accent-color:var(--accent);cursor:pointer;flex:0 0 auto}
+.tag{font-family:var(--mono);font-size:var(--fs-micro);font-weight:600;color:var(--paper);
+  background:var(--accent);padding:2px 6px}
+
+/* 발표자 노트 — 관객 화면에 절대 노출되지 않는다 */
+.notes{display:none !important}
+#notes-drawer{
+  position:fixed;left:0;right:0;bottom:0;max-height:44vh;overflow-y:auto;
+  background:var(--ink);color:#F2F2F2;padding:var(--sp-2) var(--pad-x);
+  font-size:var(--fs-cap);line-height:1.7;z-index:60;
+  transform:translateY(101%);transition:transform .28s var(--ease);
+}
+#notes-drawer.open{transform:none}
+#notes-drawer b{color:#FF6B7F}
+#notes-drawer .hd{font-size:var(--fs-micro);color:#9A9A9A;font-weight:700;margin-bottom:6px}
+
+/* 진행 표시 */
+#prog{position:fixed;left:0;right:0;bottom:0;height:3px;z-index:40;pointer-events:none}
+#prog>span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s var(--ease)}
+.pageno{position:absolute;right:var(--pad-x);bottom:calc(var(--pad-y) * .5);
+  font-family:var(--mono);font-size:var(--fs-micro);color:var(--ink-3)}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;
+    transition-duration:.001ms!important}
+}
+@media (max-width:1000px){
+  .c3{grid-template-columns:1fr 1fr}
+  .c-side{grid-template-columns:1fr}
+}
+
+/* 목차를 숨겼을 때 다시 여는 손잡이 */
+#sideOpen{
+  position:fixed;left:0;top:0;width:48px;height:48px;z-index:50;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--paper);border:0;border-right:2px solid var(--rule);
+  border-bottom:1px solid var(--rule);cursor:pointer;color:var(--ink);
+}
+#sideOpen[hidden]{display:none}
+#sideOpen:hover{background:var(--ink);color:var(--paper)}
+#sideOpen:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+#sideOpen svg{width:19px;height:19px}
+
+/* ─── 레이아웃 유틸 ─────────────────────────────────────────────────── */
+.slide-body.spread{justify-content:space-between}   /* 위·아래로 벌린다 */
+.slide-body.mid{justify-content:center}
+.push{margin-top:auto}                              /* 이 요소를 아래로 밀어붙인다 */
+.hr{border-top:1px solid var(--rule-soft);margin:var(--sp-2) 0}
+.hr.strong{border-top:2px solid var(--rule)}
+.fig{flex:1 1 auto;min-height:0}                    /* 차트 컨테이너 — 남은 높이를 채운다 */
+.fig.h-sm{flex:0 0 auto;height:clamp(120px,22vh,260px)}
+.fig.h-md{flex:0 0 auto;height:clamp(180px,34vh,400px)}
+.grow{flex:1 1 auto;min-height:0}
+.tight{gap:var(--sp-1)}                             /* 묶음 안 — 타이트 */
+.loose{gap:var(--sp-3)}                             /* 묶음 사이 — 넉넉 */
+.right{text-align:right}
+.cap{font-size:var(--fs-cap);color:var(--ink-3);line-height:1.5}
+.cap.src{font-weight:700}
+.mid-txt{font-size:var(--fs-mid);font-weight:700;line-height:1.32;letter-spacing:var(--tight)}
+.k{font-size:var(--fs-micro);font-weight:700;color:var(--ink-3);letter-spacing:.02em}
+.v{font-size:var(--fs-mid);font-weight:700;color:var(--ink);letter-spacing:var(--tight)}
+.kv{display:flex;flex-direction:column;gap:2px}
+.scroll-y{overflow-y:auto;min-height:0}
+.scroll-y::-webkit-scrollbar{width:8px}
+.scroll-y::-webkit-scrollbar-thumb{background:var(--rule-soft)}
+/* 표를 화면에 꽉 채울 때 */
+table.big{font-size:var(--fs-body)}
+table.big thead th{font-size:var(--fs-cap)}
+table.big td{padding:11px 12px}
