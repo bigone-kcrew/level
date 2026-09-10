@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부록. 사전·사후 조정 전수 집계 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="공공기관 355개 기관 규정 36,190건 전수 조사 결과">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html" class="on" aria-current="page">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><p><strong>모집단</strong> ALIO 경영공시 기관 내규 코퍼스 355개 기관 · 규정 파일 36,190건
+(그중 근무평정·인사평가 전용 규정을 별도 보유한 기관 246개)</p>
+<p><strong>방법</strong> 전 파일을 조(條) 단위로 분할 → 근무평정 문맥 조문만 선별(채용·수습·자문변호사·연구과제 등 제외)
+→ 문장 단위로 ①평가자가 부여할 점수의 평균을 사전에 제약하는 조항과 ②사후에 산식으로 보정하는
+조항을 분리 판정 → 표본 감사로 오탐 제거.</p>
+<h2>결과</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>기관 수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사후 보정 근거를 규정에 둔 기관</td>
+<td><strong>202</strong></td>
+</tr>
+<tr>
+<td>그중 평정자 간 편차·성향 보정 <strong>산식·기법까지 명문화</strong></td>
+<td><strong>66</strong></td>
+</tr>
+<tr>
+<td>사전 평균제약(평가자가 부여 시점에 평균을 맞추는 방식)을 둔 기관</td>
+<td><strong>17</strong></td>
+</tr>
+<tr>
+<td>사전 평균제약을 <strong>80점</strong>으로 묶은 기관</td>
+<td><strong>6</strong></td>
+</tr>
+</tbody></table></div>
+<h2>사전 평균제약 보유 17개 기관 전수</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>사전 평균 기준</th>
+<th>사후 보정 산식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>창업진흥원</td>
+<td>80 <em>(규칙 본문에 없음 — 평정계획에만)</em></td>
+<td>근거만(제9조④) · 미실시</td>
+</tr>
+<tr>
+<td>한국보건산업진흥원</td>
+<td>80 (직책별, 임금피크자는 절대평가)</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>한국과학기술기획평가원</td>
+<td>80 (분포비율 미준수 대체)</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>예금보험공사</td>
+<td>80 이내 / 6명 미만 85·2명 88·1명 91 이내</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국원자력안전기술원</td>
+<td>80 (실무직)</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국주택금융공사</td>
+<td>80 이내 / 86 이내 (66~100점 부여)</td>
+<td>근거만(특이점수 배제)</td>
+</tr>
+<tr>
+<td>한전KDN</td>
+<td>82 (1차), 2차는 사장 절대평가</td>
+<td><strong>있음</strong></td>
+</tr>
+<tr>
+<td>한국관광공사</td>
+<td>83<del>85 <strong>구간</strong> / 1인은 83</del>87</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국가스안전공사</td>
+<td>83~87 <strong>구간</strong> (다면·1인 제외)</td>
+<td><strong>있음</strong>(조정점수 산식)</td>
+</tr>
+<tr>
+<td>한국국방연구원</td>
+<td>85 이내</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국무역보험공사</td>
+<td>85 (제1·제2평정 각각)</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국교통연구원</td>
+<td>85 ±2.5 · <strong>초과 시 사유서</strong></td>
+<td>없음</td>
+</tr>
+<tr>
+<td>한국국제협력단</td>
+<td>최대 87 · 최종반영은 인사위 결정</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>농림수산식품교육문화정보원</td>
+<td>90 (95~85점 사이로 부여)</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국농어촌공사</td>
+<td>90 초과 불가 (절대평가)</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국학중앙연구원</td>
+<td>90 초과 불가</td>
+<td>근거만</td>
+</tr>
+<tr>
+<td>한국농수산식품유통공사</td>
+<td>90 이하 (해외조직망, 1인 제외)</td>
+<td>근거만</td>
+</tr>
+</tbody></table></div>
+<p><strong>요지</strong> ① 사전 평균제약은 355개 기관 중 17개(4.8%)로 소수. ② 그 17개 중에서도 <strong>80점은 6개뿐</strong>이며
+나머지는 82~90점, 또는 구간형·사유서·1인 예외를 함께 둔다. ③ 반면 사후 보정은 202개 기관이 근거를
+두고 66개 기관은 산식까지 규정에 박아 두었다. ④ 창업진흥원은 사전 80점 제약을 <strong>규칙 본문이 아닌
+평정계획으로</strong> 운용하면서, 규칙 제9조④에 있는 사후 보정 근거는 실시하지 않는다.</p>
+<h2>중소벤처기업부 소관 형제기관 선례</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>소상공인시장진흥공단</td>
+<td>수행능력평가 운영요령 제10조② — &quot;평가점수는 <strong>평균-표준편차조정법</strong>으로 점수를 조정하여 적용하되, 차수별 평가에 대해 독립적으로 실시한다&quot; (산식 표 포함)</td>
+</tr>
+<tr>
+<td>기술보증기금</td>
+<td>종합근무평정규정 제16조 — &quot;평정결과가 기금 전체적인 견지에서 <strong>정규분포</strong>를 이룰 수 있도록 유의&quot; · &quot;역량평가 결과가 특별한 사유 없이 지나치게 <strong>양극화·중심화·관대화</strong> 되어 신뢰성이 떨어지는 경우에는 <strong>재평정을 지시</strong>할 수 있다&quot;</td>
+</tr>
+</tbody></table></div>
+<h2>사후 보정 산식을 명문화한 66개 기관</h2>
+<p>(재)축산환경관리원, (주)한국가스기술공사, 건강보험심사평가원, 건설근로자공제회, 국가아동권리보장원,
+국가유산진흥원, 국립박물관문화재단, 국립암센터, 국방과학연구소, 국토안전관리원, <strong>기술보증기금</strong>,
+노사발전재단, 대한무역투자진흥공사, 대한석탄공사, 대한적십자사, 독립기념관, 무역안보관리원,
+부산항만공사, 사립학교교직원연금공단, 새만금개발공사, <strong>소상공인시장진흥공단</strong>, 에너지경제연구원,
+여수광양항만공사, 영상물등급위원회, 재단법인 한국에너지재단, 정보통신기획평가원, 정보통신산업진흥원,
+한국가스공사, 한국가스안전공사, 한국고용노동교육원, 한국고용정보원, 한국공예디자인문화진흥원,
+한국광해광업공단, 한국국제교류재단, 한국기술교육대학교, 한국남부발전(주), 한국데이터산업진흥원,
+한국도박문제예방치유원, 한국문학번역원, 한국발명진흥회, 한국방송광고진흥공사, 한국방송통신전파진흥원,
+한국보건복지인재원, 한국보훈복지의료공단, 한국부동산원, 한국산림복지진흥원, 한국산업단지공단,
+한국세라믹기술원, 한국수출입은행, 한국식품산업클러스터진흥원, 한국양성평등교육진흥원, 한국에너지공단,
+한국원자력통제기술원, 한국원자력환경공단, 한국의료분쟁조정중재원, 한국재정정보원, 한국전력기술주식회사,
+한국청소년상담복지개발원, 한국청소년활동진흥원, 한국투자공사, 한국특허전략개발원, 한국해양조사협회,
+한국해외인프라도시개발지원공사, 한전KDN, 한전KPS(주), 한전원자력연료주식회사</p>
+<blockquote>
+<p>집계 기준일 2026-09-10. 규정 원문은 각 기관 ALIO 경영공시 게시본.</p>
+</blockquote>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>

@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01. 제도 진단 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="근무평정·내부평가·부서평가가 승진과 성과급으로 이어지는 경로와 그 구조적 결함">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html" class="on" aria-current="page">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><h1>01. 제도 진단</h1>
+<h2>0. 이 문서를 읽는 방법</h2>
+<p>창업진흥원의 개인 평가는 <strong>세 개의 제도가 서로 물려 있는 하나의 시스템</strong>입니다.
+어느 하나만 떼어 보면 문제가 보이지 않습니다.</p>
+<pre><code>              ┌─────────────────┐
+              │  근무평정        │  업적 65 · 역량 20 · 다면(상향) 10 · 공통 5
+              │  (규칙 별표)     │  평가자: 부서장 1차 60% / 본부장 2차 40%
+              └────────┬────────┘  사전조정계수: 그룹 평균 80점 이내
+                       │
+        ┌──────────────┴──────────────┐
+        │                             │
+   [승진]                        [성과급]
+   서열명부 = 평정점 90% + 근속 10%    경영평가성과급 종합점수
+        │                             = 부서성과 + 개인성과
+        ├─ 1(가)~2급 : 인사위 100%          부서원 40 : 60
+        └─ 3~4급 : 평정 60 + 근속 20        부서장 70 : 30
+                   + 동료평가 20        개인성과 = 근무평정 70% + 내부평가 30%
+                                             │
+                                        ┌────┴────┐
+                                        │ 내부평가 │  정성 90 · 혁신지표 10
+                                        │         │  평가자·사전조정계수가
+                                        └─────────┘  근무평정과 **동일**
+</code></pre>
+<h3>이 문서의 범위</h3>
+<p><strong>본안은 근무평정 제도 개선입니다.</strong> 승진제도 자체의 개편(반영 회차, 동료평가, 인사위원회
+심의 구조 등)은 <strong>장기과제로 본안에서 다루지 않습니다.</strong> 다만 근무평정 결과가 승진으로
+이어지는 경로는 왜곡이 증폭·고착되는 지점이므로 §4에서 <strong>배경으로</strong> 설명하고,
+개선 제안은 <a href="#%EB%B6%99%EC%9E%84-%EC%9E%A5%EA%B8%B0%EA%B3%BC%EC%A0%9C">붙임</a>으로 정리합니다.</p>
+<p>노동조합 전임자·근로시간면제자의 평가 처리는 <strong>별도 안건</strong>으로 분리했습니다.
+근무평정 개편의 대가로 삼지 않기 위한 것이며, 이 문서에서 다루지 않습니다.</p>
+<p><strong>세 가지가 이 문서의 뼈대입니다.</strong></p>
+<ol>
+<li>목표가 평가기준이 되지 못하는 상태에서, 사전조정계수가 평정자의 성향 차이를 결과에 그대로 옮긴다</li>
+<li>승진 구조와 전보 시기가 그 왜곡을 증폭하고 고착시킨다</li>
+<li>결과를 검증할 방법이 없어 불신이 해소되지 않는다</li>
+</ol>
+<h3>수치에 관한 고지</h3>
+<p>이 문서의 시뮬레이션 수치는 <strong>창업진흥원의 실제 평정 결과가 아닙니다.</strong>
+노동조합은 평정자별 점수 분포 자료를 요구했으나
+「근로자참여 및 협력증진에 관한 법률」 제14조 단서(개인정보)를 근거로 제공받지 못했습니다.
+따라서 <strong>제도의 규칙과 조합의 관찰을 입력해 산출한 모의 결과</strong>이며,
+가정값은 <a href="./">시뮬레이터</a>에서 직접 조정할 수 있고 <code>sim/sim.py</code>로 재현됩니다.</p>
+<p>어느 가정에서 결론이 약해지는지는 <strong>§7 민감도</strong>에서 먼저 밝힙니다.
+자료가 제공되면 모수를 재산정해야 하며, 그것이 §8 자료 요구의 이유입니다.</p>
+<hr>
+<h2>1. 평가 구조 — 누가 누구를 평가하는가</h2>
+<h3>1-1. 평가자</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>피평가자</th>
+<th>1차 (60%)</th>
+<th>2차 (40%)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>본부장·단장</td>
+<td>원장 100%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>부서장 (4급 이상)</td>
+<td>소속 본부장 50%</td>
+<td>원장 50%</td>
+</tr>
+<tr>
+<td>부서원 (3급 이상·4급 이하)</td>
+<td>소속 부서장 60%</td>
+<td>소속 본부장 40%</td>
+</tr>
+<tr>
+<td><strong>원장 직속 부서</strong>(감사실·홍보실) 부서장</td>
+<td>원장 100%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>원장 직속 부서 부서원</td>
+<td>소속 부서장 60%</td>
+<td>원장 40%</td>
+</tr>
+</tbody></table></div>
+<p>업적·역량평가가 종합점수의 85%이고 그것이 위 비율로 갈립니다.
+따라서 <strong>부서원의 종합점수에서 부서장의 실질 영향력은 51%</strong>(0.85 × 0.60),
+<strong>본부장은 34%</strong>(0.85 × 0.40)입니다.</p>
+<h3>1-2. 평가군 — 실 단위 22개</h3>
+<p>실 하위의 팀·TF는 <strong>소속 실장이 평가</strong>하므로 평가군은 실 단위입니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>본부</th>
+<th>평가군</th>
+<th>인원</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>경영본부</td>
+<td>기획조정실 10 · 미래인재실 8 · 재무계약실 14 · 성과윤리실 6</td>
+<td>38</td>
+</tr>
+<tr>
+<td>정책본부</td>
+<td>정책전략실 11 · 원스톱지원실 8 · 사업관리실 12 · 디지털AI실 9</td>
+<td>40</td>
+</tr>
+<tr>
+<td>스케일업본부</td>
+<td>딥테크전략실 12 · 민관협력실 11 · 대학창업실 14 · 창업확산실 16 · 대전팁스팀 6</td>
+<td>59</td>
+</tr>
+<tr>
+<td>창업촉진본부</td>
+<td>지역전략실 12 · 예비재도전실 9 · 초기도약실 12</td>
+<td>33</td>
+</tr>
+<tr>
+<td>글로벌본부</td>
+<td>글로벌전략실 11 · 글로벌허브실 6 · 글로벌협력실 10 · 글로벌확산TF 9</td>
+<td>36</td>
+</tr>
+<tr>
+<td>원장 직속</td>
+<td>감사실 4 · 홍보실 3</td>
+<td>7</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>22개 평가군</strong></td>
+<td><strong>213</strong></td>
+</tr>
+</tbody></table></div>
+<p>규모는 3~16명, 중위 10명, 평균 9.68명입니다.
+출처는 「창업진흥원 업무분장 및 직원연락처(2026.7.31. 기준)」이며, 해외사무소 3명은
+상향평가 제외 대상이라 별도입니다.</p>
+<p><strong>다만 사전조정계수가 실제로 적용되는 모집단은 이보다 작습니다.</strong>
+절대평가 대상자(전문계약직·기간제 육아휴직대체·파견·임금피크제 등)는
+연도별 계획에 따라 &quot;그룹 평균점수는 미적용&quot;이므로 평균 산정에서 빠집니다.
+2025년 기준 평정대상 248명 중 상대평가는 196명(79%)이었습니다.
+따라서 <strong>실질 평가군은 위 규모의 약 8할</strong>로 보아야 하며, 이 문서의 시뮬레이션은
+전체 규모를 기준으로 계산해 소부서 효과를 <strong>보수적으로(작게)</strong> 추정한 것입니다.
+부서별 절대평가자 수는 자료가 제공되지 않아 확인할 수 없습니다.</p>
+<h3>1-3. 결과가 쓰이는 곳</h3>
+<p><strong>승진</strong> — 인사규정 제23조 및 2026년 승진평가 추진계획</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>산식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1단계 서열명부</td>
+<td><strong>근무평정 평정점 90% + 근속기간 10%</strong> → 공무원 임용령 배수 준용해 승진 대상자 Pool</td>
+</tr>
+<tr>
+<td>2단계 (1(가)~2급)</td>
+<td><strong>인사위원회 심의 100%</strong>. 근무평정·근속·동료평가는 참고자료(정성)</td>
+</tr>
+<tr>
+<td>2단계 (3~4급)</td>
+<td>근무평정 60% + 근속 20% + <strong>동료평가 20%</strong></td>
+</tr>
+</tbody></table></div>
+<p>평정점 반영 회차는 최저승진소요기간 내 총 평정 횟수의 1/2(홀수는 올림)을 <strong>산술평균</strong>합니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>승진 직급</th>
+<th>소요기간</th>
+<th>총 횟수</th>
+<th>반영</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1(가)급</td>
+<td>3년</td>
+<td>3회</td>
+<td>2회</td>
+</tr>
+<tr>
+<td>1(나)급</td>
+<td>5년</td>
+<td>7회</td>
+<td>4회</td>
+</tr>
+<tr>
+<td>2·3급</td>
+<td>4년</td>
+<td>5회</td>
+<td>3회</td>
+</tr>
+<tr>
+<td>4급</td>
+<td>3년</td>
+<td>3회</td>
+<td><strong>2회</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>성과급</strong> — 성과관리 편람 및 연도별 지급계획</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>부서성과</th>
+<th>개인성과</th>
+<th>근무평정의 실질 비중</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>부서원</td>
+<td>40%</td>
+<td>60%</td>
+<td>60% × 70% = <strong>42%</strong></td>
+</tr>
+<tr>
+<td>부서장</td>
+<td>70%</td>
+<td>30%</td>
+<td>30% × 70% = <strong>21%</strong></td>
+</tr>
+<tr>
+<td>노조 전임자</td>
+<td>0%</td>
+<td>100%</td>
+<td><strong>70%</strong></td>
+</tr>
+</tbody></table></div>
+<p>개인성과 = 근무평정 70% + 내부평가 30%.
+내부평가성과급은 내부평가 결과로 별도 지급됩니다.</p>
+<hr>
+<h2>2. 목표관리가 형해화되어 있다</h2>
+<p>규칙 제15조는 성과목표 면담 → 합의 → 확정을 요구합니다. 실제 운영은 다릅니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>연도</th>
+<th>평가대상기간</th>
+<th>목표값 입력·합의 시점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2024년</td>
+<td>2024.1.1.~12.31.</td>
+<td><strong>2025.2.7.~2.11.</strong></td>
+</tr>
+<tr>
+<td>2025년</td>
+<td>2025.1.1.~12.31.</td>
+<td><strong>2026.2.2.~2.4.</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>1년이 끝난 뒤에 목표를 입력하고 합의합니다.</strong> 그리고 실제 절차는 이렇습니다.</p>
+<ul>
+<li>피평가자가 경영정보시스템(MIS)에 <strong>정성·정량 구분 없이 수행한 일을 서술식으로</strong> 입력</li>
+<li>평가자가 <strong>목표합의 간편결재</strong>를 하면 완료</li>
+</ul>
+<p>목표가 아니라 실적 서술이고, 합의가 아니라 결재입니다. 결과를 알고 나서 목표를 쓰므로
+규칙 제15조②의 목표량·난이도 검토도 성립하지 않습니다.
+중간점검은 제15조③에서 &quot;실시<strong>할 수 있다</strong>&quot;는 임의 조항입니다.</p>
+<blockquote>
+<p><strong>비교</strong> — 같은 중소벤처기업부 산하 한국벤처투자는 근무평정시행지침 제8조에서
+중간점검을 연 1회 매년 7월에 실시하도록 하고 목표 수정 사유 4호를 명문화했습니다.
+근로복지공단·국민연금공단·한국수목원정원관리원은 목표설정 시기와 중간점검 서식까지
+규정에 두고 있습니다. → <a href="benchmark.html">03. 타기관 비교</a></p>
+</blockquote>
+<hr>
+<h2>3. 사전조정계수가 평정자의 성향을 결과로 옮긴다</h2>
+<h3>3-1. 제도의 작동</h3>
+<p>업적·역량평가는 60<del>100점 구간에서 부여하되 <strong>피평가자 그룹의 평균점수를 80점 이내</strong>로
+설정합니다(연도별 계획). 2023년까지는 평균 85점 이내에 부여구간이 부서장 78</del>92점이었고,
+2024년부터 평균 80점 이내에 구간 60~100점으로 바뀌었습니다. <strong>압축이 강화된 방향입니다.</strong></p>
+<p>평균이 상한이므로 &quot;누군가는 반드시 낮은 점수를 받는다&quot;는 명제는 성립하지 않습니다.
+정확한 명제는 이것입니다 — <strong>한 명에게 100점을 주려면 나머지의 평균이
+<code>(80n − 100) ÷ (n − 1)</code> 이하여야 합니다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>평가군 규모</th>
+<th>3명</th>
+<th>6명</th>
+<th>10명</th>
+<th>16명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>나머지가 내려가야 하는 평균</td>
+<td><strong>70.0점</strong></td>
+<td>76.0점</td>
+<td>77.8점</td>
+<td>78.7점</td>
+</tr>
+</tbody></table></div>
+<p>3명 평가군(홍보실)에서 한 명을 최고점 주려면 나머지 둘이 평균 70점, 즉 C등급 구간까지
+내려가야 합니다. 규모가 클수록 이 제약은 완화됩니다.</p>
+<h3>3-2. 같은 제약 아래에서 평정자는 두 방향으로 갈린다</h3>
+<p>제로섬 구조에서 평정자의 행동은 둘로 나뉩니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>유형</th>
+<th>행동</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>과도한 차등(극단)</strong></td>
+<td>선호하는 직원에게 최고점, 그렇지 않은 직원에게 최저점</td>
+<td>표적화가 제도적으로 가능해짐</td>
+</tr>
+<tr>
+<td><strong>과도한 균등</strong></td>
+<td>평균 80점을 맞추려 전원 비슷하게 부여</td>
+<td>판별력 소실</td>
+</tr>
+</tbody></table></div>
+<p>조합의 관찰에 따르면 <strong>부서장과 본부장 모두 이 두 방향으로 갈리며, 적정 차등을 하는
+평정자를 별도 유형으로 두기 어렵습니다.</strong> 본부장 5명의 성향은 극단 2명 / 균등 3명이고,
+그 결과 <strong>직원 213명 중 128명(60%)이 균등 성향 본부장 아래에 있습니다.</strong></p>
+<p>이것이 소부서 문제보다 영향 인원이 훨씬 많습니다. 그리고 결정적으로 —
+<strong>7명 부서가 균질할 수는 있어도 33~59명 본부가 균질할 수는 없습니다.</strong>
+2차 평가 단계의 좁은 부여폭은 &quot;집단이 실제로 비슷했다&quot;로 설명되지 않습니다.</p>
+<h3>3-3. 시뮬레이션 결과</h3>
+<p>평가군 22개(3~16명), 2단계 평가(1차 60% / 2차 40%), 본부장 유형 실측,
+부서장 극단:균등 50:50, 반복 400회.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>현행</th>
+<th>개선(순위기반 표준화)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S등급 획득률 — 극단 성향 부서장</td>
+<td><strong>31.1%</strong></td>
+<td>19.6%</td>
+</tr>
+<tr>
+<td>S등급 획득률 — 균등 성향 부서장</td>
+<td><strong>9.8%</strong></td>
+<td>20.8%</td>
+</tr>
+<tr>
+<td>부서장 유형 간 편차</td>
+<td><strong>21.3%p</strong></td>
+<td><strong>1.2%p</strong></td>
+</tr>
+<tr>
+<td>C등급 획득률 — 극단 / 균등</td>
+<td>18.1% / <strong>2.0%</strong></td>
+<td>9.4% / 10.3%</td>
+</tr>
+<tr>
+<td>S등급 획득률 — 극단 / 균등 <strong>본부장</strong></td>
+<td>29.3% / 14.4%</td>
+<td>20.1% / 20.3%</td>
+</tr>
+<tr>
+<td><strong>본부 간 격차</strong></td>
+<td><strong>2.04배</strong></td>
+<td>0.99배</td>
+</tr>
+<tr>
+<td>실력–평정점 순위상관 ρ</td>
+<td><strong>0.482</strong></td>
+<td><strong>0.744</strong></td>
+</tr>
+</tbody></table></div>
+<p>같은 실력이라도 <strong>어느 본부에 있느냐로 S등급 확률이 2배 차이납니다.</strong>
+극단 성향 부서장 아래에서는 S가 31%, C가 18% — 승자와 패자가 동시에 대량 발생합니다.
+균등 성향 부서장 아래에서는 S가 10%, C가 2% — 아무 일도 일어나지 않습니다.</p>
+<h3>3-4. 내부평가도 같은 병리를 공유한다</h3>
+<p><strong>성과급의 다른 축인 내부평가가 근무평정과 평가자·사전조정계수를 공유합니다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>근무평정</th>
+<th>내부평가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평가자 (부서원)</td>
+<td>부서장 60% / 본부장 40%</td>
+<td><strong>동일</strong></td>
+</tr>
+<tr>
+<td>사전조정계수</td>
+<td>그룹 평균 80점 이내</td>
+<td><strong>동일</strong></td>
+</tr>
+<tr>
+<td>지표</td>
+<td>업적·역량·다면·공통</td>
+<td>정성 90% + 혁신지표(교육 이수) 10%</td>
+</tr>
+<tr>
+<td>등급</td>
+<td>S·A·B·C 4등급</td>
+<td>S~E 6등급</td>
+</tr>
+</tbody></table></div>
+<p>같은 평가자가 같은 제약 아래 두 번 평가합니다.
+따라서 <strong>&quot;내부평가가 근무평정의 불이익을 보전한다&quot;는 기대는 제도가 아니라
+개별 평가자의 선의에 의존합니다.</strong> 편향은 두 번 적용됩니다.</p>
+<p>→ 사전조정계수 폐지는 근무평정만이 아니라 <strong>내부평가에도 함께 적용</strong>되어야 합니다.</p>
+<hr>
+<h2>4. 승진 구조가 왜곡을 증폭하고 고착시킨다 (배경)</h2>
+<blockquote>
+<p>이 절은 <strong>배경 설명</strong>입니다. 승진제도 개편은 장기과제이며 본안 요구사항에 포함하지
+않습니다. 근무평정의 왜곡이 왜 그대로 남지 않고 커지는지를 보이기 위한 것입니다.</p>
+</blockquote>
+<h3>4-1. 승진 적체</h3>
+<p>2026년 승진평가 계획 기준입니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>승진 직급</th>
+<th>승진 후보자</th>
+<th>T/O</th>
+<th>경쟁률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1(가)급</td>
+<td>6</td>
+<td>2</td>
+<td>3 : 1</td>
+</tr>
+<tr>
+<td>1(나)급</td>
+<td>8</td>
+<td>2</td>
+<td>4 : 1</td>
+</tr>
+<tr>
+<td>2급</td>
+<td>13</td>
+<td>3</td>
+<td>4.3 : 1</td>
+</tr>
+<tr>
+<td>3급</td>
+<td>31</td>
+<td>4</td>
+<td>7.8 : 1</td>
+</tr>
+<tr>
+<td><strong>4급</strong></td>
+<td><strong>68</strong></td>
+<td><strong>3</strong></td>
+<td><strong>22.7 : 1</strong></td>
+</tr>
+<tr>
+<td>계</td>
+<td>126</td>
+<td>14</td>
+<td>9 : 1</td>
+</tr>
+</tbody></table></div>
+<p>이 경쟁률에서 평정점 소수 둘째 자리가 승진을 가릅니다.</p>
+<h3>4-2. 승진자에게 최저평정을 주는 관행</h3>
+<p>조합이 파악한 관행입니다. 평가자에 따라 차이가 있습니다.</p>
+<ul>
+<li>승진자는 승진으로 이미 만족했으므로 낮은 평정에 이의를 제기하지 않는다</li>
+<li>승진 후에는 최저승진소요기간(3~5년)이 있어 당해 평정의 영향이 즉시 나타나지 않는다</li>
+<li>그 결과 <strong>부서에 승진자가 있으면 나머지 부서원이 이익을 본다</strong></li>
+<li>따라서 <strong>승진자가 한 번 나온 부서에서 다시 승진자가 나올 확률이 높아진다</strong></li>
+</ul>
+<p>반대로 <strong>승진 대상자가 한 부서에 몰리면 서로가 불리해집니다.</strong> 실제 분포로 확인됩니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>부서</th>
+<th>평가군 규모</th>
+<th>승진 대상자</th>
+<th>상황</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>재무계약실</strong></td>
+<td>14명</td>
+<td>4급 승진 <strong>3명</strong></td>
+<td>같은 T/O 3자리를 두고 부서 내 경쟁</td>
+</tr>
+<tr>
+<td><strong>예비재도전실</strong></td>
+<td>9명</td>
+<td>전 직급 합계 <strong>6명</strong></td>
+<td>부서원 대부분이 대상자</td>
+</tr>
+<tr>
+<td>창업확산TF</td>
+<td>—</td>
+<td>3급 승진 3명</td>
+<td></td>
+</tr>
+<tr>
+<td>민관협력실</td>
+<td>11명</td>
+<td>5명</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>전체 69명이 30개 부서에 분포하는데 <strong>3명 이상 몰린 부서가 12개</strong>입니다.
+유일한 대상자인 부서에서는 부서 내 1위를 사실상 확보합니다.</p>
+<h3>4-3. 반영 회차가 짧아 특정 평정자가 승진을 결정한다</h3>
+<p>4급 승진(5급 → 4급)은 <strong>최근 2회</strong>만 반영합니다. 2023년부터 연 1회로 축소되어
+반영 기간이 2년입니다. 특정 부서장·본부장 아래에서의 2년이 승진을 좌우합니다.</p>
+<p>공공기관 표준은 최근 3년이며, 중소벤처기업부 산하 기관도 그렇습니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>반영</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>한국중소벤처기업유통원</td>
+<td>최근 3년 50 / 30 / 20</td>
+</tr>
+<tr>
+<td>소상공인시장진흥공단</td>
+<td>최근 3년 50 / 30 / 20</td>
+</tr>
+<tr>
+<td>중소벤처기업진흥공단</td>
+<td>최근 3~6년 40 / 30 / 30</td>
+</tr>
+<tr>
+<td><strong>창업진흥원 4급 승진</strong></td>
+<td><strong>최근 2회 산술평균</strong></td>
+</tr>
+</tbody></table></div>
+<p>다만 2·3급 승진은 이미 3회 산술평균(= 균등 가중)이므로 <strong>문제는 직급 간 형평</strong>입니다.
+이 항목은 승진제도에 속하므로 본안이 아니라 <a href="#%EB%B6%99%EC%9E%84-%EC%9E%A5%EA%B8%B0%EA%B3%BC%EC%A0%9C">붙임</a>으로 정리합니다.</p>
+<h3>4-4. 평정점 변환이 인원수에 따라 차이를 증폭한다</h3>
+<p>평정점은 등급 구간 최고점에서 <code>10 ÷ 등급별 인원수</code>씩 차감합니다(별표 7).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>직급</th>
+<th>해당 등급 인원</th>
+<th>1위</th>
+<th>2위</th>
+<th>간격</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2급 S등급</td>
+<td>2명</td>
+<td>100점</td>
+<td>95점</td>
+<td><strong>5.00점</strong></td>
+</tr>
+<tr>
+<td>5급 S등급</td>
+<td>21명</td>
+<td>100점</td>
+<td>99.52점</td>
+<td><strong>0.48점</strong></td>
+</tr>
+</tbody></table></div>
+<p>종합점수 차이가 0.01점이어도 평정점 간격은 직급 인원수에 따라 10배 이상 벌어집니다.</p>
+<hr>
+<h2>5. 전보·휴직·조직개편 시점이 만드는 불이익</h2>
+<h3>5-1. 제도의 작동</h3>
+<p>규칙 제6조①은 <strong>평가자와 피평가자가 최소 30일 이상 근무한 부서를 기준으로 평가하고,
+2개 이상 부서에 해당하면 근무기간 비율로 가중</strong>하도록 정합니다.
+정기전보는 연 2회(1월·7월)입니다.</p>
+<p>여기서 시점에 따라 처지가 갈립니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>유형</th>
+<th>평가 구조</th>
+<th>처지</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>잔류</td>
+<td>한 부서 12개월</td>
+<td>기준</td>
+</tr>
+<tr>
+<td><strong>1월 전보</strong></td>
+<td>전년도 평정이 끝난 뒤 이동 → 신 부서 12개월</td>
+<td>유리</td>
+</tr>
+<tr>
+<td><strong>7월 전보</strong></td>
+<td>전 부서 6개월(가중 0.5) + 신 부서 6개월(0.5)</td>
+<td>전 부서장이 &quot;나갈 사람&quot;을 평가</td>
+</tr>
+<tr>
+<td><strong>연중 조직개편</strong></td>
+<td>전 부서 11개월(0.9) + 신 부서 1개월(0.1)</td>
+<td>신 부서장이 &quot;온 지 한 달&quot;을 평가</td>
+</tr>
+<tr>
+<td>중도 휴직·파견</td>
+<td>근무 기간만 평가</td>
+<td>잔여 기간 평가 없음</td>
+</tr>
+</tbody></table></div>
+<p><strong>7월에 전보 가는 사람은 이미 떠난 사람이므로 전 부서장이 좋은 평정을 주지 않는 경향이
+있습니다.</strong> 반면 1~2월에 근무평정이 끝난 뒤 이동하는 사람은 온전히 신 부서에서 평가받습니다.
+승진소요기간 도래 시점은 같으므로 <strong>7월 전보자가 상대적으로 불리합니다.</strong>
+휴직·중도 파견·연중 조직개편도 같습니다.</p>
+<p>결과는 하나입니다 — <strong>한 부서장과 계속 가는 부서원이 유리합니다.</strong>
+이것이 사내 라인 문화의 제도적 경로입니다.</p>
+<h3>5-2. 시뮬레이션 결과</h3>
+<p>가정: 전 부서장이 &#39;나갈 사람&#39;에게 0.6σ, 신 부서장이 &#39;온 지 얼마 안 된 사람&#39;에게 0.8σ 낮게 평가.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>이동 유형</th>
+<th>인원 비중</th>
+<th>S 획득률</th>
+<th>평정점</th>
+<th>잔류자 대비</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>잔류 (한 부서장과 계속)</td>
+<td>55%</td>
+<td>23.6%</td>
+<td>82.61</td>
+<td>기준</td>
+</tr>
+<tr>
+<td>1월 전보 (평정 후 이동)</td>
+<td>12%</td>
+<td>23.7%</td>
+<td>82.68</td>
+<td><strong>+0.08</strong></td>
+</tr>
+<tr>
+<td><strong>7월 전보</strong></td>
+<td>12%</td>
+<td>19.0%</td>
+<td>80.19</td>
+<td><strong>−2.42</strong></td>
+</tr>
+<tr>
+<td><strong>연중 조직개편</strong></td>
+<td>8%</td>
+<td><strong>9.2%</strong></td>
+<td>76.63</td>
+<td><strong>−5.97</strong></td>
+</tr>
+<tr>
+<td>중도 휴직</td>
+<td>7%</td>
+<td>10.2%</td>
+<td>77.00</td>
+<td>−5.61</td>
+</tr>
+<tr>
+<td>중도 파견</td>
+<td>6%</td>
+<td>10.4%</td>
+<td>77.28</td>
+<td>−5.33</td>
+</tr>
+</tbody></table></div>
+<p>같은 계산에서 <strong>낙인 효과만 0으로 두면</strong> 결과가 이렇게 바뀝니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>이동 유형</th>
+<th>잔류</th>
+<th>1월 전보</th>
+<th>7월 전보</th>
+<th>연중 개편</th>
+<th>중도 휴직</th>
+<th>중도 파견</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S 획득률</td>
+<td>19.7%</td>
+<td>19.7%</td>
+<td>23.8%</td>
+<td>19.8%</td>
+<td>20.0%</td>
+<td>19.3%</td>
+</tr>
+<tr>
+<td>잔류자 대비 평정점</td>
+<td>기준</td>
+<td>+0.06</td>
+<td>+0.36</td>
+<td>+0.06</td>
+<td>−0.10</td>
+<td>+0.08</td>
+</tr>
+</tbody></table></div>
+<p>모든 유형이 19~24%로 균일해집니다.
+<strong>격차의 원인은 규정이 아니라 &quot;나가는 사람에게 낮게 준다&quot;는 행동 하나입니다.</strong></p>
+<p>그리고 중요한 한계가 있습니다. 순위기반 표준화를 적용하면 이렇게 됩니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>이동 유형</th>
+<th>잔류</th>
+<th>1월 전보</th>
+<th><strong>7월 전보</strong></th>
+<th>연중 개편</th>
+<th>중도 휴직</th>
+<th>중도 파견</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S 획득률</td>
+<td>20.6%</td>
+<td>21.0%</td>
+<td><strong>17.5%</strong></td>
+<td>19.8%</td>
+<td>19.5%</td>
+<td>21.1%</td>
+</tr>
+<tr>
+<td>잔류자 대비 평정점</td>
+<td>기준</td>
+<td>+0.07</td>
+<td><strong>+0.09</strong></td>
+<td>+0.03</td>
+<td>−0.22</td>
+<td>+0.12</td>
+</tr>
+</tbody></table></div>
+<p><strong>평정점 격차는 사라지지만(−2.42 → +0.09) S등급 획득률 격차는 85%로 남습니다.</strong>
+보정이 부서 내 순위를 보존하기 때문입니다. <strong>전보 불이익은 별도 장치가 필요합니다.</strong></p>
+<ul>
+<li>전출자 평정을 <strong>전보 발령 전에 마감</strong> — 7월 전보자의 상반기 평정을 6월에 완료</li>
+<li>근무기간 <strong>6개월 미만 부서는 가중치에서 배제</strong>하고 주 근무부서 100% 반영</li>
+<li>연중 조직개편·중도 파견·휴직자는 <strong>절대평가 전환</strong></li>
+</ul>
+<h3>5-3. 평가자 부재 시 처리 규정이 없다</h3>
+<p>2023년 계획에는 이런 조항이 있었습니다.</p>
+<blockquote>
+<p>평가자–피평가자 간 근무기간이 30일 이상이더라도 <strong>1차 평가자가 평가기준일 이전 퇴사 시에는
+평가자에서 제외하고 해당 기간의 근무성과는 2차 평가자 100%로 반영</strong></p>
+</blockquote>
+<p><strong>2025년 계획에는 이 문장이 없습니다.</strong> 규칙에도 없습니다.
+그 결과 임기가 끝나는 본부장이 <strong>퇴임 전에 근무평정을 미리 하고 퇴직</strong>하는 실무가
+생겼습니다. 이는 규칙 제4조①2호(<code>평가대상기간을 임의로 소급 또는 연장하여 평가하지 아니한다</code>)와 충돌하며, 12월 퇴직자가 11월에 평정하면 12월 실적이 빠집니다.</p>
+<p>외부 출신 본부장의 임기는 3년이고 종료 후 퇴직합니다.
+<strong>규정이 없어 처리가 그때그때 달라지는 상태입니다.</strong></p>
+<hr>
+<h2>6. 검증할 수 없어 불신이 해소되지 않는다</h2>
+<h3>6-1. 이의를 제기할 근거를 주지 않는다</h3>
+<p>규칙 제28조①은 역량·업적·상향/다면·종합점수는 공개하되
+<strong>1·2차 평가자별 점수, 직급 내 순위, 평정점은 공개하지 않습니다.</strong></p>
+<p>이의신청 대상은 결과입니다. 자신의 평정점이 얼마이고 몇 등인지 모르는 상태에서
+7일 안에 &quot;이의신청 취지 및 사유&quot;를 작성해야 합니다.</p>
+<p>그리고 <strong>일부 인원은 평가 결과가 시스템에 등록조차 되지 않습니다</strong> —
+노동조합 위원장, 휴직 후 복직자 등. 본인도 자기 점수를 볼 수 없습니다.</p>
+<h3>6-2. 원 결정을 한 주체가 재심도 한다</h3>
+<p>이의신청은 인사담당부서장을 거쳐 <strong>인사위원회</strong>가 14일 내 심의합니다.
+별도 재심기구가 없고, 평정자가 결과를 설명할 의무도 없습니다.</p>
+<h3>6-3. 사후 보정 근거가 있는데 쓰지 않는다</h3>
+<p>규칙 제9조④에 이미 근거가 있습니다.</p>
+<blockquote>
+<p>근무평정 결과의 신뢰도를 제고하기 위해 <strong>평균 등을 적용하여 보정할 수 있으며</strong>
+세부사항은 원장이 별도로 정하는 바에 따른다.</p>
+</blockquote>
+<p><strong>현재 이 보정은 실시되지 않습니다.</strong> 근거 조항이 사문화된 상태입니다.
+개편은 없는 권한을 새로 만드는 것이 아니라, <strong>있는 근거를 실제로 쓰게 하는 것</strong>입니다.</p>
+<h3>6-4. 핵심 기준이 규정 밖에 있다</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>소재</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>등급별 비율 (S20 / A30 / B40 / C10)</td>
+<td>규칙 제26조③이 원장에게 위임 → <strong>연도별 계획(안)</strong></td>
+</tr>
+<tr>
+<td>사전조정계수 (평균 80점 이내)</td>
+<td>규칙에 없음 → <strong>연도별 계획(안)</strong></td>
+</tr>
+<tr>
+<td>다면평가 등급 환산 (S10 / A8 / B6 / C4 / D2)</td>
+<td>규칙 별표에 없음 → <strong>연도별 계획(안)</strong></td>
+</tr>
+<tr>
+<td>승진 서열명부 산식 (평정 90 + 근속 10)</td>
+<td>규정에 없음 → <strong>연도별 승진평가 계획</strong></td>
+</tr>
+<tr>
+<td>성과급 등급 비율·지급률</td>
+<td>보수규정 제25조③이 원장에게 위임 → <strong>성과관리 편람</strong>, 그것도 &quot;예시&quot;</td>
+</tr>
+<tr>
+<td>사후 보정 산식</td>
+<td>규칙 제9조④가 원장에게 위임 → <strong>미작성</strong></td>
+</tr>
+</tbody></table></div>
+<p>승진과 성과급을 결정하는 기준이 대부분 규정이 아니라 매년 바뀌는 계획 문서에 있습니다.
+<strong>정부 경영평가단도 같은 점을 지적했습니다.</strong></p>
+<blockquote>
+<p>2025년도 경영평가 보고서 — &quot;기관의 등급평가는 노사합의에 따른 평가라기 보다는
+내부적으로 진행한 평가이고 <strong>등급이 규정화되지 않았다</strong>는 점에서 평가결과의 적정성을
+판단하는 데 한계가 있다. … <strong>등급평가 및 심의위원회를 마련해 등급을 최종확정하는
+구조를 마련할 필요</strong>가 있으며 평가 결과를 조정할 때 위원회를 활용할 수 있도록
+체제를 구축해 <strong>평가결과의 수용도를 제고</strong>할 필요가 있다.&quot;</p>
+</blockquote>
+<h3>6-5. 공무직은 승진제도가 없는데 강제배분을 받는다</h3>
+<p>공무직은 <strong>직급이 없고</strong>(시설원 / 시설반장) <strong>승진제도가 없습니다.</strong>
+재무계약실 안전문화팀 소속이며, 연도별 계획의 등급배정표에서
+<strong>공무직이 독립 등급배정군</strong>으로 편성됩니다.</p>
+<p>문제는 그 배정군의 크기입니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기준 시점</th>
+<th>공무직 재직 인원</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2025년 근무평정 계획</td>
+<td><strong>5명</strong></td>
+</tr>
+<tr>
+<td>2026.7.31.</td>
+<td><strong>1명</strong> (나머지는 휴직)</td>
+</tr>
+<tr>
+<td>최근</td>
+<td>복직 1명 + 신규 2명</td>
+</tr>
+</tbody></table></div>
+<p>5명에 S 20% / A 30% / B 40% / C 10%를 적용하면 S 1명, A 1<del>2명, B 2명, C 0</del>1명이고,
+반올림에 따라 C가 1명 나오면 <strong>한 사람이 20%를 뒤집어씁니다.</strong>
+<strong>재직자가 1명인 시점에는 강제배분이 아예 성립하지 않습니다.</strong>
+집단 크기가 1~5명 사이에서 움직이는 배정군에 상대평가를 적용하는 것은
+통계적으로 의미가 없고, 그 해에 누가 재직 중인지가 등급을 결정합니다.</p>
+<p>게다가 승진에 쓸 수 없는 평정을 받으면서 성과급만 깎이고,
+규칙 제30조(4회 연속 C등급 → 직위해제)가 직위 개념이 다른 공무직에게
+어떻게 적용되는지도 규정에 없습니다.</p>
+<p>→ <strong>공무직은 절대평가로 전환해야 합니다.</strong></p>
+<hr>
+<h2>7. 민감도 — 결론이 약해지는 영역을 먼저 밝힌다</h2>
+<p>정량 논거가 어떤 가정에 의존하는지 자진 공개합니다.
+개선 효과는 실력–평정점 순위상관(ρ)의 증가분으로 측정했습니다.</p>
+<p><strong>(가) 평정자들의 부여 폭이 서로 비슷해질 때</strong> — 효과가 줄어듭니다</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>극단 / 균등 부여 표준편차</th>
+<th>현행 ρ</th>
+<th>개선 ρ</th>
+<th>개선 효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>13 / 2점 (기본 가정)</td>
+<td>0.481</td>
+<td>0.744</td>
+<td><strong>+0.263</strong></td>
+</tr>
+<tr>
+<td>11 / 3점</td>
+<td>0.551</td>
+<td>0.744</td>
+<td>+0.193</td>
+</tr>
+<tr>
+<td>9 / 4점</td>
+<td>0.622</td>
+<td>0.744</td>
+<td>+0.122</td>
+</tr>
+<tr>
+<td>8 / 5점</td>
+<td>0.675</td>
+<td>0.744</td>
+<td>+0.069</td>
+</tr>
+<tr>
+<td>7 / 6점</td>
+<td>0.720</td>
+<td>0.744</td>
+<td><strong>+0.024</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>(나) 균등 성향 평정자가 실력을 정확히 보지 못할 때</strong> — 효과가 줄어듭니다</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>관측오차 (σ)</th>
+<th>현행 ρ</th>
+<th>개선 ρ</th>
+<th>개선 효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.0</td>
+<td>0.487</td>
+<td>0.742</td>
+<td><strong>+0.255</strong></td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>0.429</td>
+<td>0.607</td>
+<td>+0.179</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>0.377</td>
+<td>0.474</td>
+<td>+0.096</td>
+</tr>
+<tr>
+<td>3.0</td>
+<td>0.349</td>
+<td>0.400</td>
+<td><strong>+0.051</strong></td>
+</tr>
+</tbody></table></div>
+<p>표준화는 순위를 신뢰합니다. 순위 자체가 부정확하면 어떤 제도도 정확해지지 않습니다.</p>
+<p><strong>(다) 가장 큰 취약점 — 극단 성향이 &#39;선호&#39; 때문인지 &#39;판별력&#39; 때문인지</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>선호 반영률</th>
+<th>현행 ρ</th>
+<th>개선 ρ</th>
+<th>개선 효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.7 (기본 가정)</td>
+<td>0.486</td>
+<td>0.744</td>
+<td><strong>+0.258</strong></td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>0.686</td>
+<td>0.852</td>
+<td>+0.166</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>0.823</td>
+<td>0.921</td>
+<td>+0.098</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td>0.874</td>
+<td>0.946</td>
+<td>+0.072</td>
+</tr>
+<tr>
+<td><strong>0.0 (순수 판별력)</strong></td>
+<td><strong>0.878</strong></td>
+<td>0.948</td>
+<td><strong>+0.070</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>넓게 주는 평정자가 실력을 정확히 판별해서 그러는 것이라면, 현행 제도는 이미
+상당히 정확합니다(ρ 0.878).</strong> 이것이 이 진단의 가장 큰 취약점입니다.</p>
+<p>다만 조합은 선호 반영률이 0이 아니라고 봅니다. 근거는 이 문서 안에 있습니다 —
+<strong>§4-2의 승진자 최저평정 관행과 §5의 전보자 낙인은 정의상 실력과 무관한 요소입니다.</strong>
+승진했다는 사실, 부서를 떠난다는 사실은 성과가 아닙니다.
+그 두 행동이 실재한다는 것 자체가 선호 반영률이 0이 아니라는 증거입니다.</p>
+<h3>7-1. 식별 문제 — 가장 근본적인 한계</h3>
+<p>&quot;부서 점수 폭이 좁다&quot;는 관측은 두 가지로 읽힙니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>해석</th>
+<th>함의</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>평정자가 판별하지 못한다</strong> (조합)</td>
+<td>사후 표준화로 교정된다</td>
+</tr>
+<tr>
+<td><strong>부서원이 실제로 균질하다</strong> (사용자 측)</td>
+<td>표준화는 없는 차이를 만들어 넣는다</td>
+</tr>
+</tbody></table></div>
+<p><strong>두 해석을 구별할 자료는 노사 모두에게 없습니다.</strong> 실측 평정 분포를 받지 못했기 때문입니다.
+사용자 측 해석을 모형에 넣으면 이렇게 됩니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>해석</th>
+<th>현행 ρ</th>
+<th>개선 ρ</th>
+<th>개선 효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>좁은 폭 = 평정자가 판별하지 못함 (조합)</td>
+<td>0.478</td>
+<td>0.739</td>
+<td>+0.260</td>
+</tr>
+<tr>
+<td>좁은 폭 = 부서원이 실제로 균질함 (사용자 측)</td>
+<td>0.553</td>
+<td>0.741</td>
+<td><strong>+0.188</strong></td>
+</tr>
+</tbody></table></div>
+<p>효과가 0.260에서 0.188로 줄지만 <strong>뒤집히지는 않습니다.</strong>
+이유는 2단계 구조입니다 — <strong>평가군이 33~59명(평균 36명)인 본부가 균질하다고 보기는
+어렵습니다.</strong> 10명 부서는 균질할 수 있어도 36명 본부는 그렇지 않습니다.
+1차 평가 단계에서 균질성 해석이 성립해도, 2차 평가 40%에서는 성립하지 않으므로
+표준화의 이득이 남습니다.</p>
+<h3>7-2. 표준화가 고치지 못하는 것</h3>
+<p>정직하게 밝힙니다. 사후 표준화는 <strong>평정자의 편향과 판별력 차이</strong>를 교정합니다.
+다음 세 가지는 교정하지 못합니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>못 고치는 것</th>
+<th>이유</th>
+<th>보완 장치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>의도적 표적화</strong></td>
+<td>보정이 부서 내 순위를 보존한다</td>
+<td>최고·최저 등급 사유 기재, 재심기구</td>
+</tr>
+<tr>
+<td><strong>전보·휴직 낙인</strong></td>
+<td>같은 이유</td>
+<td>전출자 평정 시기 조정, 단기 근무 부서 가중치 배제</td>
+</tr>
+<tr>
+<td><strong>평정자의 관측 오차</strong></td>
+<td>표준화는 순위를 신뢰한다</td>
+<td>다면평가 배점 확대, 목표관리 정상화</td>
+</tr>
+</tbody></table></div>
+<p>표준화만으로 문제가 해결된다고 주장하지 않습니다.
+<strong>표준화는 평정자 간 척도를 통일하는 장치이고, 나머지는 절차와 구제로 메워야 합니다.</strong></p>
+<h3>7-3. 반영 회차 확대의 근거 — 조건이 붙습니다</h3>
+<p>서열명부 반영 회차를 늘리는 것이 유리한지는 <strong>직원의 성과가 해마다 얼마나 유지되는지</strong>에
+달려 있습니다. 인접 연도 실력 상관을 바꿔가며 계산했습니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>실력 지속성</th>
+<th>2회 (4급 현행)</th>
+<th>3회 (2·3급 현행)</th>
+<th>4회 (1(나)급 현행)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0 (실력 불변)</td>
+<td>0.506</td>
+<td>0.507</td>
+<td><strong>0.507</strong></td>
+</tr>
+<tr>
+<td>0.9</td>
+<td>0.396</td>
+<td>0.423</td>
+<td><strong>0.453</strong></td>
+</tr>
+<tr>
+<td>0.8</td>
+<td>0.301</td>
+<td>0.346</td>
+<td><strong>0.399</strong></td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>0.223</td>
+<td>0.279</td>
+<td><strong>0.353</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>실력이 해마다 변할수록 회차를 늘리는 이점이 오히려 커집니다.</strong>
+평정 자체의 오차(현행 ρ 0.48)가 실력 변동보다 크기 때문에, 평균화의 이득이 지배합니다.</p>
+<p>단서를 붙입니다 — 평정이 지금보다 훨씬 정확해지면 이 관계는 역전될 수 있습니다.
+성과가 빠르게 변하는 직무에서는 최근 성과를 더 봐야 한다는 반론이 성립합니다.
+<strong>따라서 이 요구는 &quot;회차를 무조건 늘리자&quot;가 아니라
+&quot;4급 승진만 2회인 직급 간 불형평을 없애자&quot;로 한정합니다.</strong></p>
+<h3>7-4. 쓰지 않기로 한 지표</h3>
+<p>「S등급자가 한 명도 없는 부서 비율」을 초기에 검토했으나 <strong>폐기했습니다.</strong>
+평가군 평균 9.68명, S 정원 20%인 제도에서는 실력을 완전히 관측하는 이상적 제도에서도
+그 비율이 상당히 높게 나옵니다. 제도 결함 지표로 쓸 수 없습니다.</p>
+<hr>
+<h2>8. 자료 요구</h2>
+<p>위 진단 중 정량 부분은 실측 자료 없이 모형으로만 논증한 것입니다.
+다음 자료가 제공되면 모수를 재산정하고 결론을 수정할 수 있습니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>필요 사유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>최근 3년 <strong>평가자별 부여점수 분포 통계</strong> (평가군 규모 구간별 평균·표준편차, 개인 식별 불가 형태)</td>
+<td>§3 · §7-1 식별 문제의 해소</td>
+</tr>
+<tr>
+<td>최근 3년 <strong>직급별·부서별 등급 분포</strong></td>
+<td>§3-3 검증</td>
+</tr>
+<tr>
+<td>최근 3년 <strong>부서별 승진자 배출 이력과 승진 직후 연도 평정등급</strong></td>
+<td>§4-2 검증</td>
+</tr>
+<tr>
+<td>최근 3년 <strong>전보·휴직·조직개편 대상자의 평정등급</strong></td>
+<td>§5 검증</td>
+</tr>
+<tr>
+<td>최근 3년 <strong>C등급 2회 이상 반복 부여 인원 수</strong></td>
+<td>규칙 제30조 개정 필요성</td>
+</tr>
+<tr>
+<td>최근 3년 <strong>이의신청 접수·인정 건수</strong></td>
+<td>§6 구제 절차 실효성</td>
+</tr>
+<tr>
+<td><strong>사후 보정 미실시 경위</strong> 및 제9조④ 위임 문서 존재 여부</td>
+<td>§6-3</td>
+</tr>
+<tr>
+<td><strong>평가자 부재 시 처리 이력</strong> (임기 종료·퇴사 평정자)</td>
+<td>§5-3</td>
+</tr>
+<tr>
+<td><strong>내부평가 세부 기준</strong></td>
+<td>§3-4</td>
+</tr>
+</tbody></table></div>
+<p>첫 번째 자료는 사용자 측이 근로자참여법 제14조 단서(개인정보)를 근거로 제공하지
+않았습니다. <strong>평가군 규모 구간별 집계 통계는 개인을 식별할 수 없으므로 단서에
+해당하지 않습니다.</strong> 사용자 측이 직접 분석해 결과만 노사협의회에 보고하는 방식도 가능합니다.</p>
+<hr>
+<h2>붙임 — 장기과제</h2>
+<p>본안 범위 밖이지만, 근무평정 개편과 맞물려 검토가 필요한 항목입니다.
+<strong>이번 개편의 전제로 삼지 않습니다.</strong></p>
+<h3>가. 승진 서열명부 반영 회차의 직급 간 형평</h3>
+<p>4급 승진만 최근 2회(2년)를 반영하고, 2·3급은 3회, 1(나)급은 4회입니다.
+4급 승진 경쟁률이 22.7 : 1로 가장 높은데 반영 기간이 가장 짧습니다.
+→ §4-3 · §7-3</p>
+<h3>나. 성과급 등급 비율·지급률의 규정화</h3>
+<p>보수규정 제25조③이 원장에게 위임하고, 실제 수치는 성과관리 편람에 <strong>&quot;예시&quot;</strong> 로만
+존재합니다. 정부 경영평가단이 지적한 &quot;등급이 규정화되지 않았다&quot;에 해당합니다.
+→ §6-4</p>
+<h3>다. 1(가)~2급 승진의 인사위원회 심의 100% 구조</h3>
+<p>상위 직급 승진은 근무평정이 정량 반영되지 않고 참고자료(정성)로만 쓰입니다.
+근무평정 왜곡의 영향을 덜 받는다는 뜻이기도 하고, 재량이 크다는 뜻이기도 합니다.
+→ §1-3</p>
+<h3>라. 노동조합 전임자·근로시간면제자 평가</h3>
+<p><strong>별도 안건으로 분리</strong>했습니다. 기관 내부에서 내부평가는 A등급 고정,
+근무평정은 최근 3회 평균으로 처리가 다릅니다.</p>
+<hr>
+<p>→ <a href="amendments.html">02. 규정 개정안</a> · <a href="benchmark.html">03. 타기관 비교</a> ·
+<a href="bargaining.html">04. 요구사항</a> · <a href="plan.html">05. 추진계획</a> · <a href="./">시뮬레이터</a></p>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>

@@ -3,781 +3,1110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>근무평정 시뮬레이터</title>
-<meta name="description" content="창업진흥원 근무평정 사전조정계수의 작동 결과를 변수를 조정하며 확인하는 시뮬레이터">
+<title>근무평정 제도개선 — 노사협의회 제안자료</title>
+<meta name="description" content="창업진흥원 근무평정제도 개선안. 변수를 조정하며 제도의 작동 결과를 확인하는 발표용 시뮬레이터.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
+/* ═══ 토큰 ═══ 어르신 가독성 우선: 본문 대비 9:1 이상, 얇은 굵기 미사용 */
 :root{
   color-scheme: light;
-  --surface-0:#f6f5f2; --surface-1:#fcfcfb; --surface-2:#efeeea;
-  --line:#e2e1dc; --line-strong:#cfcec8;
-  --text-1:#0b0b0b; --text-2:#52514e; --text-3:#807e78;
-  --s1:#2a78d6; --s2:#eb6834;
-  --o1:#86b6ef; --o2:#2a78d6; --o3:#104281;
-  --warn-bg:#fdf6e6; --warn-line:#e8d9a8; --warn-text:#5c4a12;
-  --accent:#2a78d6;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme: dark;
-    --surface-0:#121211; --surface-1:#1a1a19; --surface-2:#242422;
-    --line:#333330; --line-strong:#474742;
-    --text-1:#ffffff; --text-2:#c3c2b7; --text-3:#918f85;
-    --s1:#3987e5; --s2:#d95926;
-    --o1:#184f95; --o2:#3987e5; --o3:#cde2fb;
-    --warn-bg:#2a2413; --warn-line:#4d431f; --warn-text:#e0cf95;
-    --accent:#3987e5;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme: dark;
-  --surface-0:#121211; --surface-1:#1a1a19; --surface-2:#242422;
-  --line:#333330; --line-strong:#474742;
-  --text-1:#ffffff; --text-2:#c3c2b7; --text-3:#918f85;
-  --s1:#3987e5; --s2:#d95926;
-  --o1:#184f95; --o2:#3987e5; --o3:#cde2fb;
-  --warn-bg:#2a2413; --warn-line:#4d431f; --warn-text:#e0cf95;
-  --accent:#3987e5;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E;            /* 본문 · 흰 배경 대비 16.5:1 */
+  --ink-2:#334155;          /* 보조 · 9.4:1 */
+  --ink-3:#475569;          /* 작은 메타 · 7.5:1 */
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8;          /* 텍스트용 파랑 5.5:1 */
+  --brand-fill:#2563EB;     /* 차트 채움 */
+  --brand-soft:#E8EEFD;
+  --accent:#C2410C;         /* 텍스트용 주황 5.9:1 */
+  --accent-fill:#EA580C;    /* 차트 채움 */
+  --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06), 0 8px 24px rgba(15,26,46,.07);
+  --shadow-lg:0 2px 4px rgba(15,26,46,.07), 0 18px 44px rgba(15,26,46,.11);
+  --r:14px; --r-sm:9px;
+
+  /* 화면 높이에 비례하는 타이포 — 16:10 전체화면에서 한 화면에 들어가면서도 크게 */
+  --fs-xs:clamp(13px,1.62vh,17px);
+  --fs-sm:clamp(14.5px,1.82vh,19px);
+  --fs:clamp(16px,2.05vh,21.5px);
+  --fs-md:clamp(18px,2.4vh,25px);
+  --fs-lg:clamp(21px,2.95vh,32px);
+  --fs-xl:clamp(25px,3.7vh,42px);
+  --fs-hero:clamp(34px,6.4vh,76px);
+  --sp:clamp(8px,1.15vh,15px);
+  --sp2:clamp(13px,1.85vh,24px);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
 }
 *{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
 body{
-  margin:0; background:var(--surface-0); color:var(--text-1);
-  font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font); font-size:var(--fs); font-weight:500;
+  line-height:1.62; -webkit-font-smoothing:antialiased;
+  display:flex; flex-direction:column;
 }
-.wrap{max-width:1120px; margin:0 auto; padding:28px 20px 72px}
-header h1{font-size:26px; line-height:1.3; margin:0 0 8px; letter-spacing:-.01em}
-header p.lede{margin:0 0 18px; color:var(--text-2); max-width:70ch}
-.topbar{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
-.docnav{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 20px}
-.docnav a{
-  display:inline-block; padding:5px 11px; border:1px solid var(--line-strong); border-radius:999px;
-  color:var(--text-2); text-decoration:none; font-size:12.5px; background:var(--surface-1);
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.018em;line-height:1.25}
+p{margin:0}
+b,strong{font-weight:700}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ═══ 헤더 + 탭 ═══ */
+header{
+  flex:0 0 auto; background:var(--card); border-bottom:1px solid var(--line);
+  padding:0 clamp(14px,2.2vw,34px); display:flex; align-items:center;
+  gap:clamp(12px,2vw,32px); box-shadow:0 1px 0 rgba(15,26,46,.04);
 }
-.docnav a:hover{color:var(--text-1); border-color:var(--accent)}
-button.ghost{
-  background:var(--surface-1); border:1px solid var(--line-strong); color:var(--text-2);
-  border-radius:8px; padding:6px 11px; font-size:12.5px; cursor:pointer; font-family:inherit;
+.brandmark{display:flex;flex-direction:column;gap:1px;padding:calc(var(--sp)*.9) 0;flex:0 0 auto}
+.brandmark .t{font-size:var(--fs-md);font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.brandmark .s{font-size:var(--fs-xs);color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav[role=tablist]{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav[role=tablist]::-webkit-scrollbar{display:none}
+.tab{
+  appearance:none;border:0;background:none;cursor:pointer;font:inherit;
+  font-size:var(--fs-sm); font-weight:600; color:var(--ink-3);
+  padding:0 clamp(10px,1.4vw,20px); min-height:52px; min-width:44px;
+  border-bottom:3px solid transparent; white-space:nowrap;
+  transition:color .18s ease, border-color .18s ease, background .18s ease;
+  display:flex;align-items:center;gap:7px;
 }
-button.ghost:hover{color:var(--text-1)}
-.notice{
-  background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn-text);
-  border-radius:10px; padding:13px 15px; margin:0 0 24px; font-size:13px; line-height:1.65;
+.tab .n{
+  font-family:var(--mono);font-size:var(--fs-xs);font-weight:600;
+  background:var(--bg);color:var(--ink-3);border-radius:5px;padding:1px 6px;
+  transition:background .18s ease,color .18s ease;
 }
-.notice b{font-weight:600}
-section{margin:0 0 30px}
-h2{font-size:15px; margin:0 0 4px; letter-spacing:.01em}
-h2 .num{color:var(--text-3); font-weight:400; margin-right:7px}
-p.sub{margin:0 0 14px; color:var(--text-2); font-size:13px; max-width:78ch}
-/* ---- controls ---- */
-.panel{background:var(--surface-1); border:1px solid var(--line); border-radius:12px; padding:16px 18px}
-.ctrls{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:13px 20px}
-.ctrl label{display:block; font-size:12px; color:var(--text-2); margin-bottom:5px}
-.ctrl label .v{color:var(--text-1); font-weight:600; font-variant-numeric:tabular-nums}
-.ctrl input[type=range]{width:100%; accent-color:var(--accent); margin:0}
-.ctrl .pair{display:flex; gap:7px}
-.ctrl input[type=number]{
-  width:100%; background:var(--surface-2); color:var(--text-1); border:1px solid var(--line-strong);
-  border-radius:6px; padding:5px 7px; font:inherit; font-size:13px; font-variant-numeric:tabular-nums;
+.tab:hover{color:var(--ink);background:var(--card-2)}
+.tab[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.tab[aria-selected=true] .n{background:var(--brand);color:#fff}
+.tab:focus-visible{outline:3px solid var(--brand);outline-offset:-3px;border-radius:4px}
+.doclink{
+  flex:0 0 auto;font-size:var(--fs-xs);font-weight:600;color:var(--brand);
+  text-decoration:none;border:1.5px solid var(--line-2);border-radius:999px;
+  padding:7px 15px;min-height:40px;display:inline-flex;align-items:center;
+  transition:border-color .18s,background .18s;
 }
-.grpline{grid-column:1/-1; border-top:1px dashed var(--line-strong); padding-top:12px; margin-top:1px}
-.grpline h3{font-size:11.5px; text-transform:none; color:var(--text-3); margin:0 0 10px; font-weight:600}
-.actions{display:flex; gap:9px; align-items:center; margin-top:15px; flex-wrap:wrap}
-.pill{font-size:11.5px; color:var(--text-3); padding:3px 9px; border-radius:999px; background:var(--surface-2)}
-.pill.busy{color:var(--accent)}
-/* ---- tiles ---- */
-.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:13px}
-.tile{background:var(--surface-1); border:1px solid var(--line); border-radius:12px; padding:15px 16px}
-.tile .k{font-size:12px; color:var(--text-2); margin-bottom:9px; line-height:1.4}
-.tile .row{display:flex; align-items:baseline; gap:9px}
-.tile .n{font-size:27px; font-weight:600; letter-spacing:-.02em; line-height:1}
-.tile .n.cur{color:var(--s2)} .tile .n.ref{color:var(--s1)}
-.tile .arrow{color:var(--text-3); font-size:14px}
-.tile .lbls{display:flex; gap:9px; margin-top:7px; font-size:11px; color:var(--text-3)}
-.tile .lbls span{flex:1}
-/* ---- charts ---- */
-.cardgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:16px}
-.card{background:var(--surface-1); border:1px solid var(--line); border-radius:12px; padding:15px 16px 8px}
-.card h3{font-size:13px; margin:0 0 3px; font-weight:600}
-.card .cap{font-size:11.5px; color:var(--text-3); margin:0 0 11px; line-height:1.5}
-.legend{display:flex; gap:14px; flex-wrap:wrap; margin:0 0 6px}
-.legend i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px}
-.legend span{font-size:11.5px; color:var(--text-2)}
-.chart{width:100%; overflow-x:auto}
-svg{display:block}
-svg text{font-family:inherit}
-.tip{
-  position:fixed; pointer-events:none; z-index:50; background:var(--surface-1);
-  border:1px solid var(--line-strong); border-radius:8px; padding:7px 10px; font-size:12px;
-  color:var(--text-1); box-shadow:0 6px 20px rgba(0,0,0,.14); opacity:0; transition:opacity .1s;
-  max-width:240px; line-height:1.5;
+.doclink:hover{border-color:var(--brand);background:var(--brand-soft)}
+.doclink:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+
+/* ═══ 패널 ═══ */
+main{flex:1 1 auto;position:relative;min-height:0}
+.pane{
+  position:absolute;inset:0;padding:var(--sp2) clamp(14px,2.2vw,34px);
+  display:none;grid-template-rows:auto 1fr;gap:var(--sp2);min-height:0;
 }
-.tip.on{opacity:1}
-.tip .tk{color:var(--text-3); font-size:11px; display:block; margin-bottom:2px}
-.tip .tv{font-variant-numeric:tabular-nums}
-/* ---- table ---- */
-table{border-collapse:collapse; width:100%; font-size:12.5px; margin-top:6px}
-th,td{border-bottom:1px solid var(--line); padding:7px 9px; text-align:right; font-variant-numeric:tabular-nums}
-th:first-child,td:first-child{text-align:left; font-variant-numeric:normal}
-thead th{color:var(--text-2); font-weight:600; border-bottom:1px solid var(--line-strong)}
-tbody tr:hover{background:var(--surface-2)}
-.tblwrap{overflow-x:auto}
-details.tbl{margin-top:13px}
-details.tbl summary{cursor:pointer; font-size:12.5px; color:var(--text-2); padding:4px 0}
-details.tbl summary:hover{color:var(--text-1)}
-footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--line); color:var(--text-3); font-size:12px; line-height:1.7}
-footer a{color:var(--text-2)}
-code{background:var(--surface-2); padding:1px 5px; border-radius:4px; font-size:12px}
+.pane[data-on]{display:grid}
+.phead{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--sp2);flex-wrap:wrap}
+.phead h2{font-size:var(--fs-lg)}
+.phead .sub{font-size:var(--fs-sm);color:var(--ink-2);max-width:78ch;margin-top:3px;font-weight:500}
+.pill{
+  font-size:var(--fs-xs);font-weight:700;padding:5px 12px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);white-space:nowrap;
+}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+
+/* 카드 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);min-height:0}
+.card.pad{padding:var(--sp2)}
+.card h3{font-size:var(--fs);margin-bottom:var(--sp)}
+.ctitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:var(--sp)}
+.ctitle h3{margin:0}
+.hint{font-size:var(--fs-xs);color:var(--ink-3);font-weight:500}
+
+/* 통계 타일 */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp)}
+.tile{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:calc(var(--sp)*1.15) calc(var(--sp)*1.3);box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden;
+}
+.tile .k{font-size:var(--fs-xs);color:var(--ink-3);font-weight:600;letter-spacing:-.01em}
+.tile .v{font-family:var(--mono);font-size:var(--fs-xl);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.tile .d{font-size:var(--fs-xs);font-weight:600}
+.tile.good .v{color:var(--ok)} .tile.bad .v{color:var(--danger)}
+.tile.hi{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft),var(--shadow)}
+.tile .spark{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(120% 100% at 50% 0,var(--brand-soft),transparent 70%)}
+.tile.flash .spark{animation:flash .7s ease-out}
+@keyframes flash{0%{opacity:.95}100%{opacity:0}}
+
+/* 히어로 수치 */
+.hero{display:flex;align-items:baseline;gap:clamp(10px,1.6vw,22px);flex-wrap:wrap}
+.hero .big{font-family:var(--mono);font-size:var(--fs-hero);font-weight:600;letter-spacing:-.045em;line-height:.98}
+.arrow{font-size:var(--fs-lg);color:var(--ink-3);font-weight:700}
+
+/* 컨트롤 */
+.ctrls{display:flex;flex-direction:column;gap:var(--sp);overflow-y:auto;min-height:0;padding-right:6px;padding-bottom:var(--sp)}
+.ctrls::-webkit-scrollbar{width:10px}
+.ctrls::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px}
+.seg{display:flex;gap:5px;background:var(--bg);padding:5px;border-radius:11px}
+.seg button{
+  appearance:none;border:0;cursor:pointer;font:inherit;font-size:var(--fs-sm);font-weight:700;
+  flex:1;min-height:48px;border-radius:8px;background:transparent;color:var(--ink-2);
+  transition:background .2s,color .2s,box-shadow .2s;
+}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--brand);box-shadow:var(--shadow)}
+.seg button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.row{display:flex;flex-direction:column;gap:5px}
+.row .lab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:var(--fs-sm);font-weight:600}
+.row .lab .rv{font-family:var(--mono);font-size:var(--fs-sm);font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:1px 8px}
+.row .why{font-size:var(--fs-xs);color:var(--ink-3);font-weight:500}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:34px;background:none;cursor:pointer;margin:0;
+}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:99px;background:var(--line)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:30px;margin-top:-10px;border-radius:50%;
+  background:var(--card);border:3px solid var(--brand);box-shadow:var(--shadow);
+}
+input[type=range]::-moz-range-track{height:10px;border-radius:99px;background:var(--line)}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--card);border:3px solid var(--brand)}
+input[type=range]:focus-visible{outline:3px solid var(--brand);outline-offset:4px;border-radius:99px}
+.chk{display:flex;align-items:center;gap:11px;min-height:48px;cursor:pointer;font-size:var(--fs-sm);font-weight:600}
+.chk input{width:26px;height:26px;accent-color:var(--brand);cursor:pointer;flex:0 0 auto}
+.chk .tagx{font-size:var(--fs-xs);font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:1px 7px}
+
+/* 접힘 */
+details.fold{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card-2);overflow:hidden}
+details.fold>summary{
+  cursor:pointer;list-style:none;padding:13px 15px;font-size:var(--fs-sm);font-weight:700;
+  display:flex;align-items:center;gap:9px;min-height:48px;color:var(--ink-2);
+}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:'▸';color:var(--brand);font-size:.95em;transition:transform .2s ease}
+details.fold[open]>summary::before{transform:rotate(90deg)}
+details.fold>summary:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+details.fold .body{padding:0 15px 15px;font-size:var(--fs-xs);color:var(--ink-2);font-weight:500}
+
+/* 표 */
+table{border-collapse:collapse;width:100%;font-size:var(--fs-xs)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:700;color:var(--ink-3);font-size:var(--fs-xs)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.scroll{overflow-y:auto;min-height:0}
+.scroll::-webkit-scrollbar{width:10px}
+.scroll::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px}
+
+/* 범례 */
+.legend{display:flex;gap:clamp(12px,1.6vw,22px);flex-wrap:wrap;font-size:var(--fs-xs);font-weight:600;color:var(--ink-2)}
+.legend i{display:inline-block;width:15px;height:15px;border-radius:4px;margin-right:7px;vertical-align:-2px}
+.legend .ln{width:20px;height:0;border-top:3px dashed var(--ink-3);border-radius:0;vertical-align:2px}
+
+/* 차트 */
+svg{display:block;width:100%;height:100%;overflow:visible}
+.gl{stroke:var(--line);stroke-width:1}
+.ax{fill:var(--ink-2);font-size:15px;font-weight:600;font-family:var(--font)}
+.vl{fill:var(--ink);font-size:16px;font-weight:600;font-family:var(--mono)}
+.bar{transition:height .42s cubic-bezier(.22,.61,.36,1), y .42s cubic-bezier(.22,.61,.36,1)}
+
+/* 진단 다이어그램 */
+.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--sp);align-items:stretch}
+.fbox{background:var(--card-2);border:2px solid var(--line);border-radius:var(--r-sm);padding:calc(var(--sp)*1.1);display:flex;flex-direction:column;gap:4px}
+.fbox .t{font-size:var(--fs-sm);font-weight:700}
+.fbox .d{font-size:var(--fs-xs);color:var(--ink-2);font-weight:500}
+.fbox.a{border-color:var(--accent-fill);background:var(--accent-soft)}
+.fbox.b{border-color:var(--brand-fill);background:var(--brand-soft)}
+.fmid{display:flex;align-items:center;justify-content:center;font-size:var(--fs-lg);color:var(--ink-3);font-weight:700}
+
+/* 배지형 그리드 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp)}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:calc(var(--sp)*1.05);box-shadow:var(--shadow)}
+.mini .k{font-size:var(--fs-xs);color:var(--ink-3);font-weight:700;margin-bottom:3px}
+.mini .v{font-size:var(--fs-sm);font-weight:600}
+.mini.on{border-color:var(--brand);border-width:2px;background:var(--brand-soft)}
+
+/* 등장 애니메이션 */
+.rv{opacity:0;transform:translateY(11px)}
+.pane[data-on] .rv{animation:rise .34s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.pane[data-on] .rv:nth-child(1){animation-delay:.02s}
+.pane[data-on] .rv:nth-child(2){animation-delay:.08s}
+.pane[data-on] .rv:nth-child(3){animation-delay:.14s}
+.pane[data-on] .rv:nth-child(4){animation-delay:.2s}
+
+/* 하단 고지 */
+.foot{font-size:var(--fs-xs);color:var(--ink-3);font-weight:500}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
+  .rv{opacity:1;transform:none}
+}
+@media (max-width:1100px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .grid3{grid-template-columns:1fr 1fr}
+}
+@media (max-height:620px){:root{--fs:15px;--fs-sm:13.5px;--fs-xs:12.5px}}
 </style>
 </head>
 <body>
-
-<div class="wrap">
 <header>
-  <div class="topbar">
-    <div>
-      <h1>근무평정 사전조정계수 시뮬레이터</h1>
-      <p class="lede">현행 제도(평정자별 평균 80점 강제)와 개선안(사후 평균·표준편차 표준화)이
-      각각 어떤 결과를 만드는지 변수를 조정하며 확인할 수 있습니다.
-      모든 계산은 브라우저에서 실행됩니다.</p>
-    </div>
-    <button class="ghost" id="themeBtn" title="테마 전환">◐ 테마</button>
+  <div class="brandmark">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합 · 2026년 2분기 노사협의회</span>
   </div>
-  <nav class="docnav">
-    <a href="diagnosis.html">01 제도 진단</a>
-    <a href="amendments.html">02 규정 개정안</a>
-    <a href="benchmark.html">03 타기관 비교</a>
-    <a href="bargaining.html">04 요구사항</a>
-    <a href="plan.html">05 추진계획</a>
-    <a href="https://github.com/bigone-kcrew/level">저장소</a>
+  <nav role="tablist" aria-label="발표 화면">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1</span>진단</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="n">2</span>시뮬레이터</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="n">3</span>전보·휴직</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="n">4</span>타기관 전수</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span class="n">5</span>개정안</button>
   </nav>
-  <div class="notice">
-    <b>이것은 창업진흥원의 실제 평정 결과가 아닙니다.</b>
-    평정자별 점수 분포 자료가 제공되지 않아, <b>제도의 규칙만을 입력하여 산출한 모의 결과</b>입니다.
-    평정자 유형의 비율과 유형별 부여점수 표준편차는 가정값이며 아래에서 직접 조정할 수 있습니다.
-    다만 작동 원리는 가정이 아니라 산술입니다 — 어떤 부서의 부여점수가 78~82점에 몰려 있고 다른 부서가
-    60~100점에 퍼져 있으면, 앞 부서 구성원은 전사 순위에서 중위권에만 배치됩니다.
-  </div>
+  <button class="doclink" id="fsBtn" type="button" aria-label="전체화면 전환">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="margin-right:7px">
+      <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+    </svg><span id="fsTxt">전체화면</span>
+  </button>
+  <a class="doclink" id="docLink" href="diagnosis.html">문서 전문</a>
 </header>
+<main>
 
-<section>
-  <h2><span class="num">설정</span>가정값 조정</h2>
-  <p class="sub">평정자 유형은 세 가지로 가정합니다.
-  <b>공정형</b>은 실력을 반영해 적정하게 벌리고, <b>균등형</b>은 평균 80점을 맞추려 비슷비슷하게 부여하며,
-  <b>전략형</b>은 제도를 숙지해 선호하는 직원에게 최고점, 그렇지 않은 직원에게 최저점을 줍니다.</p>
-  <div class="panel">
-    <div class="ctrls" id="ctrls"></div>
-    <div class="actions">
-      <button class="ghost" id="resetBtn">기본값으로</button>
-      <button class="ghost" id="rerollBtn">난수 다시 뽑기</button>
-      <span class="pill" id="status">준비</span>
+<!-- ═══════════════ 1. 진단 ═══════════════ -->
+<section class="pane" id="p1" role="tabpanel" aria-labelledby="t1" data-on>
+  <div class="phead">
+    <div>
+      <h2>평균은 부서에서, 등급은 직급에서 결정된다</h2>
+      <p class="sub">점수를 부여할 때의 평균 제약은 <b>부서 단위</b>인데, 등급 배정은 <b>직급별 전사 단위</b>입니다(규칙 제26조①). 두 단위가 어긋나 있어 <b>부서장·본부장의 평가 성향이 등급을 결정</b>합니다.</p>
+    </div>
+    <span class="pill">규칙에 「사전조정계수」·「평균 80점」은 없습니다</span>
+  </div>
+
+  <div style="display:grid;grid-template-rows:auto auto 1fr;gap:var(--sp2);min-height:0">
+    <div class="flow rv">
+      <div class="fbox a">
+        <span class="t">① 점수 부여 — 부서 단위</span>
+        <span class="d">부서장·본부장이 자기 피평가자 그룹의 <b>평균을 80점 이내</b>로 맞춘다. 60~100점 범위.<br>부서 규모 3~16명 · 22개 평가군</span>
+        <span class="d" style="color:var(--accent);font-weight:700">근무평정 규칙에 없다 — 매년 평정계획에만 있다</span>
+      </div>
+      <div class="fmid" aria-hidden="true">→</div>
+      <div class="fbox b">
+        <span class="t">② 등급 배정 — 직급 단위</span>
+        <span class="d">종합점수를 <b>직급별 전사 순위</b>로 세워 S 20 / A 30 / B 40 / C 10%를 배정한다.<br>1(나)급 4 · 2급 11 · 3급 29 · 4급 40 · 5급 107 · 공무직 5명</span>
+        <span class="d" style="color:var(--brand);font-weight:700">규칙 제26조① · 비율은 계획에만 있다</span>
+      </div>
+    </div>
+
+    <div class="tiles rv">
+      <div class="tile bad"><span class="k">부서장 유형 간 S획득률 편차</span><span class="v">19.6<span style="font-size:.5em">%p</span></span><span class="d" style="color:var(--danger)">극단형 29.5% vs 균등형 9.9%</span></div>
+      <div class="tile bad"><span class="k">본부 간 S획득률 격차</span><span class="v">1.89<span style="font-size:.5em">배</span></span><span class="d" style="color:var(--danger)">극단형 27.7% vs 균등형 14.7%</span></div>
+      <div class="tile bad"><span class="k">실력–평정점 순위상관</span><span class="v">0.47</span><span class="d" style="color:var(--ink-3)">1에 가까울수록 실력이 반영됨</span></div>
+      <div class="tile"><span class="k">균등형 본부장 아래 인원</span><span class="v">60<span style="font-size:.5em">%</span></span><span class="d" style="color:var(--ink-3)">128명 / 213명 · 조합 관찰</span></div>
+    </div>
+
+    <div class="grid3 rv" style="min-height:0">
+      <div class="card pad" style="display:flex;flex-direction:column;gap:var(--sp)">
+        <h3>목표관리가 형해화되어 있다</h3>
+        <p style="font-size:var(--fs-sm);color:var(--ink-2)">피평가자가 시스템에 <b>정성·정량 구분 없이 서술식</b>으로 올리고, 평가자가 간편결재하면 평가가 끝난다. 규칙에 <b>목표설정 시기도, 목표의 형식 요건도 없다</b>.</p>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:auto;padding-top:var(--sp);border-top:1px solid var(--line)">→ 개정 8: 개시 후 2개월 내 설정 · 목표별 달성기준 명시 · 제17조에서 달성 여부 기재</p>
+      </div>
+      <div class="card pad" style="display:flex;flex-direction:column;gap:var(--sp)">
+        <h3>검증할 수 없다</h3>
+        <p style="font-size:var(--fs-sm);color:var(--ink-2)">규칙 제28조①은 <b>평정점을 본인에게도 공개하지 않는다</b>. 승진과 성과급을 결정하는 수치인데 당사자가 자기 값을 모른다. 그래서 이의신청이 거의 없다.</p>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:auto;padding-top:var(--sp);border-top:1px solid var(--line)">→ 개정 11: 보정 전·후 점수와 평정점을 본인에게 공개</p>
+      </div>
+      <div class="card pad" style="display:flex;flex-direction:column;gap:var(--sp)">
+        <h3>보정 권한은 이미 있다</h3>
+        <p style="font-size:var(--fs-sm);color:var(--ink-2)">규칙 <b>제9조④</b> — "근무평정 결과의 신뢰도를 제고하기 위해 평균 등을 적용하여 <b>보정할 수 있으며</b>". 근거가 있는데 <b>한 번도 실시되지 않았다</b>.</p>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:auto;padding-top:var(--sp);border-top:1px solid var(--line)">→ 개정 6: "할 수 있다"를 "한다"로. 새 권한이 아니라 있는 권한을 쓰는 것</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2><span class="num">결과 1</span>제도 전체 지표</h2>
-  <p class="sub">동일한 직원 집단에 두 제도를 각각 적용한 결과입니다.
-  <b>실력–평정점 순위상관</b>은 1에 가까울수록 평정 결과가 실제 실력 순위를 잘 반영한다는 뜻입니다.</p>
-  <div class="tiles" id="tiles"></div>
-</section>
-
-<section>
-  <h2><span class="num">결과 2</span>평정자 유형별 등급 획득률</h2>
-  <p class="sub">전체 인원 대비 S등급은 설정한 비율(기본 20%), C등급은 기본 10%가 배정됩니다.
-  어느 유형의 평정자 아래에 있든 그 비율에 가깝게 나와야 공정한 제도입니다.</p>
-  <div class="cardgrid">
-    <div class="card">
-      <h3>S등급 획득률</h3>
-      <p class="cap">현행 제도에서는 균등형 평정자 부서에서 S등급이 거의 나오지 않습니다.</p>
-      <div class="legend" id="lg1"></div>
-      <div class="chart" id="ch1"></div>
-      <details class="tbl"><summary>표로 보기</summary><div class="tblwrap" id="tb1"></div></details>
+<!-- ═══════════════ 2. 시뮬레이터 ═══════════════ -->
+<section class="pane" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <div class="phead">
+    <div>
+      <h2>변수를 움직여 결과를 확인한다</h2>
+      <p class="sub">왼쪽 값을 바꾸면 오른쪽이 즉시 다시 계산됩니다. <b>현행과 개선안을 매번 같은 조건으로 동시에 계산</b>해 나란히 보여줍니다.</p>
     </div>
-    <div class="card">
-      <h3>C등급 획득률</h3>
-      <p class="cap">전략형 평정자 부서에서는 최상위와 최하위가 동시에 대량 발생합니다.</p>
-      <div class="legend" id="lg2"></div>
-      <div class="chart" id="ch2"></div>
-      <details class="tbl"><summary>표로 보기</summary><div class="tblwrap" id="tb2"></div></details>
+    <span class="pill" id="simMeta">계산 중…</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(290px,25%) 1fr;gap:var(--sp2);min-height:0">
+
+    <!-- 좌: 조정 -->
+    <div class="ctrls">
+      <div class="card pad" style="display:flex;flex-direction:column;gap:var(--sp)">
+        <div class="ctitle"><h3>이번 개정의 변수</h3><span class="hint">바로 조정</span></div>
+
+        <div class="row">
+          <div class="lab"><span>보정 산식의 목표 표준편차 σ</span><span class="rv num" id="vSd">7</span></div>
+          <input type="range" id="sSd" min="3" max="14" step="0.5" value="7" aria-describedby="wSd">
+          <span class="why" id="wSd">[별표 9]의 값. 클수록 보정 후 점수가 넓게 퍼진다.</span>
+        </div>
+
+        <label class="chk"><input type="checkbox" id="cTie" checked>
+          <span>동점 부여 금지</span><span class="tagx">개정 2</span></label>
+        <label class="chk"><input type="checkbox" id="cAbs" checked>
+          <span>공무직 절대평가</span><span class="tagx">개정 7</span></label>
+        <label class="chk"><input type="checkbox" id="cNoC" checked>
+          <span>10명 미만 C 미부여</span><span class="tagx">개정 10⑤</span></label>
+      </div>
+
+      <details class="fold" id="foldCur">
+        <summary>현행의 조건 — 평정자 부여폭 · 선호</summary>
+        <div class="body" style="display:flex;flex-direction:column;gap:var(--sp);padding-top:2px">
+          <div class="row">
+            <div class="lab"><span>극단형 평정자 부여폭</span><span class="rv num" id="vExt">13</span></div>
+            <input type="range" id="sExt" min="4" max="18" step="0.5" value="13">
+            <span class="why">부서 안 부여점수의 표준편차(점).</span>
+          </div>
+          <div class="row">
+            <div class="lab"><span>균등형 평정자 부여폭</span><span class="rv num" id="vEven">2</span></div>
+            <input type="range" id="sEven" min="1" max="12" step="0.5" value="2">
+            <span class="why">좁을수록 부서원이 중간에 뭉친다.</span>
+          </div>
+          <div class="row">
+            <div class="lab"><span>극단형의 선호 반영률</span><span class="rv num" id="vFav">0.70</span></div>
+            <input type="range" id="sFav" min="0" max="1" step="0.05" value="0.7">
+            <span class="why">벌리는 이유가 실력 판별(0)인지 선호(1)인지. <b>0이면 개선 효과가 줄어든다</b> — 조합이 먼저 밝히는 취약점.</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>세부 설정 — 목표 평균 · 극단형 비율 · 반복</summary>
+        <div class="body" style="display:flex;flex-direction:column;gap:var(--sp);padding-top:2px">
+          <div class="row">
+            <div class="lab"><span>보정 산식의 목표 평균</span><span class="rv num" id="vMean">80</span></div>
+            <input type="range" id="sMean" min="75" max="88" step="1" value="80">
+            <span class="why">별표 7 구간(60~100)의 중앙값.</span>
+          </div>
+          <div class="row">
+            <div class="lab"><span>부서장 중 극단형 비율</span><span class="rv num" id="vMix">50%</span></div>
+            <input type="range" id="sMix" min="0" max="100" step="5" value="50">
+            <span class="why">22명 중 극단형 비중. 미확인 — 자료 요구 대상</span>
+          </div>
+          <div class="row">
+            <div class="lab"><span>반복 횟수</span><span class="rv num" id="vReps">60</span></div>
+            <input type="range" id="sReps" min="20" max="200" step="20" value="60">
+            <span class="why">많을수록 안정되고 느려진다.</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>고정 자료 — 조직 · 직급 · 반영비율</summary>
+        <div class="body scroll" style="max-height:34vh">
+          <p style="font-weight:700;margin:6px 0 4px">직급별 인원 — 등급 배정 단위</p>
+          <table id="rankTbl"></table>
+          <p style="font-weight:700;margin:16px 0 4px">반영비율과 등급비율 — 규칙 제9조②·제26조</p>
+          업적 65% · 역량 20% · 다면(부서장은 상향) 10% · 공통 5%<br>
+          업적·역량 중 1차 60% · 2차 40% (부서장은 50:50)<br>
+          등급 S 20 · A 30 · B 40 · C 10% — 평정점 구간 S 100~90.01 / A 90~80.01 / B 80~70.01 / C 70~60.01
+          <p style="font-weight:700;margin:16px 0 4px">조직 구성 — 22개 평가군 213명</p>
+          <table id="orgTbl"></table>
+        </div>
+      </details>
+    </div>
+
+    <!-- 우: 결과 -->
+    <div style="display:grid;grid-template-rows:auto 1fr auto;gap:var(--sp2);min-height:0">
+      <div class="tiles">
+        <div class="tile" id="tiDev"><span class="spark"></span><span class="k">부서장 유형 간 S획득률 편차</span><span class="v num" id="oDev">–</span><span class="d" id="oDevD">–</span></div>
+        <div class="tile" id="tiHq"><span class="spark"></span><span class="k">본부 간 S획득률 격차</span><span class="v num" id="oHq">–</span><span class="d" id="oHqD">–</span></div>
+        <div class="tile hi" id="tiRho"><span class="spark"></span><span class="k">실력–평정점 순위상관 ρ</span><span class="v num" id="oRho">–</span><span class="d" id="oRhoD">–</span></div>
+        <div class="tile" id="tiC"><span class="spark"></span><span class="k">C등급 획득률 편차</span><span class="v num" id="oC">–</span><span class="d" id="oCD">–</span></div>
+      </div>
+
+      <div class="card pad" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp);min-height:0">
+        <div class="ctitle">
+          <h3>평정자 유형별 S등급 획득률</h3>
+          <div class="legend">
+            <span><i style="background:#EA580C"></i>현행</span>
+            <span><i style="background:#2563EB"></i>개선안</span>
+            <span><i class="ln"></i>정원 20%</span>
+          </div>
+        </div>
+        <div style="min-height:0"><svg id="chA" viewBox="0 0 900 300" role="img" aria-label="평정자 유형별 S등급 획득률 비교"></svg></div>
+      </div>
+
+      <div class="card pad">
+        <div class="ctitle">
+          <h3>실력이 평정점에 반영되는 정도</h3>
+          <span class="hint">순위상관 ρ · 1에 가까울수록 실력 반영</span>
+        </div>
+        <div style="height:clamp(74px,11vh,124px)"><svg id="chB" viewBox="0 0 900 150" role="img" aria-label="실력-평정점 순위상관 비교"></svg></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2><span class="num">결과 3</span>승진후보자 서열명부 상위 20% 진입률</h2>
-  <p class="sub">3년간의 평정점을 누적해 명부를 만들고, 그 기간 중 <b>균등형 평정자 아래에 1년 이상
-  있었던 사람</b>과 <b>한 번도 없었던 사람</b>의 상위 20% 진입률을 비교합니다.
-  두 값이 20%에 가깝게 같아야 정상입니다.</p>
-  <div class="cardgrid">
-    <div class="card">
-      <h3>현행 — 평균 80점 강제</h3>
-      <p class="cap">반영 회차를 늘려도 격차가 좁혀지지 않습니다.</p>
-      <div class="legend" id="lg3"></div>
-      <div class="chart" id="ch3"></div>
+<!-- ═══════════════ 3. 전보·휴직 ═══════════════ -->
+<section class="pane" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <div class="phead">
+    <div>
+      <h2>7월에 전보 가는 사람은 왜 불리한가</h2>
+      <p class="sub">현행 규칙 제6조①은 <b>전 부서장이 이미 떠난 직원에게 직접 점수를 부여</b>합니다. "나갈 사람"에게 점수를 아끼는 동기가 제도 안에 남아 있습니다. 아래 슬라이더로 그 낙인의 크기를 조정해 보십시오.</p>
     </div>
-    <div class="card">
-      <h3>개선 — 사후 표준화</h3>
-      <p class="cap">격차가 사라지고, 반영 회차 확대가 비로소 효과를 냅니다.</p>
-      <div class="legend" id="lg4"></div>
-      <div class="chart" id="ch4"></div>
-    </div>
+    <span class="pill">30일 기준은 조사한 공공기관 중 가장 짧습니다</span>
   </div>
-  <div class="card" style="margin-top:16px">
-    <h3>반영 회차별 실력–명부점수 순위상관</h3>
-    <p class="cap">현행 제도에서는 반영 회차를 늘려도 상관이 완만하게만 올라가고, 사후 표준화와 결합할 때 가장 높아집니다.
-    전보가 없으면(전보율 0%) 같은 평정자가 반복되므로 반영 회차 확대는 효과가 없습니다.</p>
-    <div class="legend" id="lg5"></div>
-    <div class="chart" id="ch5"></div>
-    <details class="tbl"><summary>표로 보기</summary><div class="tblwrap" id="tb3"></div></details>
+
+  <div style="display:grid;grid-template-columns:minmax(280px,24%) 1fr;gap:var(--sp2);min-height:0">
+    <div class="ctrls">
+      <div class="card pad" style="display:flex;flex-direction:column;gap:var(--sp)">
+        <div class="ctitle"><h3>낙인의 크기</h3><span class="hint">바로 조정</span></div>
+        <div class="row">
+          <div class="lab"><span>떠나는 사람에 대한 감점</span><span class="rv num" id="vDep">0.6</span></div>
+          <input type="range" id="sDep" min="0" max="1.5" step="0.05" value="0.6">
+          <span class="why">전 부서장이 전출 예정자를 낮게 보는 정도(실력 표준편차 단위).</span>
+        </div>
+        <div class="row">
+          <div class="lab"><span>새로 온 사람에 대한 감점</span><span class="rv num" id="vNew">0.8</span></div>
+          <input type="range" id="sNew" min="0" max="1.5" step="0.05" value="0.8">
+          <span class="why">신 부서장이 온 지 얼마 안 된 사람을 낮게 보는 정도.</span>
+        </div>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);border-top:1px solid var(--line);padding-top:var(--sp)">
+          <b>둘 다 0으로 내려 보십시오.</b> 유형 간 격차가 사라집니다. 원인은 산식이 아니라 <b>낙인 행동</b>이며, 보정만으로는 평정점 격차만 해소되고 S획득률 격차는 부분적으로만 줄어듭니다. 그래서 개정 3이 따로 필요합니다.
+        </p>
+      </div>
+      <details class="fold" open>
+        <summary>이동 유형의 가정 비중</summary>
+        <div class="body">잔류 55% · 1월 전보 12% · 7월 전보 12% · 연중 조직개편 8% · 중도 휴직 7% · 중도 파견 6%<br><br>정기전보가 1월·7월 연 2회라는 것은 복무규정상 사실이고, 비중은 가정입니다.</div>
+      </details>
+      <details class="fold">
+        <summary>타기관은 어떻게 하는가</summary>
+        <div class="body">
+          <b>현 부서 평가 + 전 부서장 의견 청취</b> — 과학기술정책연구원 제18조 · 과학기술사업화진흥원 제7조 · 의료기관평가인증원 제8조 · 해양수산과학기술진흥원 제16조 · 한국교육학술정보원 제9조<br><br>
+          <b>최소 근무기간</b> — 장애인기업종합지원센터 1개월 · 한국양성평등교육진흥원 2개월 · 한국사회보장정보원 2개월 · 한국세라믹기술원 3개월 · 건설근로자공제회 3개월 · <b>창업진흥원 30일</b>
+        </div>
+      </details>
+    </div>
+
+    <div style="display:grid;grid-template-rows:1fr auto;gap:var(--sp2);min-height:0">
+      <div class="card pad" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp);min-height:0">
+        <div class="ctitle">
+          <h3>이동 유형별 평정점 — 잔류자 대비</h3>
+          <div class="legend">
+            <span><i style="background:#EA580C"></i>현행</span>
+            <span><i style="background:#2563EB"></i>개선안(보정)</span>
+          </div>
+        </div>
+        <div style="min-height:0"><svg id="chC" viewBox="0 0 900 320" role="img" aria-label="이동 유형별 평정점 격차"></svg></div>
+      </div>
+      <div class="card pad scroll" style="max-height:35vh">
+        <table id="mvTbl"></table>
+      </div>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2><span class="num">결과 4</span>민감도 — 결론이 가정에 의존하는가</h2>
-  <p class="sub">균등형 평정자가 점수를 얼마나 벌리는지(부여 표준편차)를 바꿔가며,
-  그 부서 구성원의 S등급 획득률을 계산합니다. 현행 제도에서의 결과입니다.
-  가로축 오른쪽 끝은 균등형이 공정형과 똑같이 평가하는 경우입니다.</p>
-  <div class="card">
-    <h3>균등형 평정자 부서원의 S등급 획득률</h3>
-    <p class="cap">균등형 평정자가 76~84점대로 상당히 판별하는 경우(표준편차 4점)에도
-    기준선에 크게 미달합니다. 격차가 사라지려면 모든 평정자가 같은 분산으로 평가해야 하는데, 그것이 곧 사후 표준화입니다.</p>
-    <div class="legend" id="lg6"></div>
-    <div class="chart" id="ch6"></div>
-    <details class="tbl"><summary>표로 보기</summary><div class="tblwrap" id="tb4"></div></details>
+<!-- ═══════════════ 4. 타기관 전수 ═══════════════ -->
+<section class="pane" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <div class="phead">
+    <div>
+      <h2>공공기관 355곳의 규정을 전부 확인했다</h2>
+      <p class="sub">ALIO 경영공시 기관 내규 <b>355개 기관 · 규정 파일 36,190건</b>을 조(條) 단위로 나눠 전수 조사한 결과입니다. 검색 표본이 아니라 전수입니다.</p>
+    </div>
+    <span class="pill b">확인 기준일 2026-09-10</span>
+  </div>
+
+  <div style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp2);min-height:0">
+    <div class="tiles rv">
+      <div class="tile good"><span class="k">사후 보정 근거를 둔 기관</span><span class="v">202</span><span class="d" style="color:var(--ok)">355곳의 57%</span></div>
+      <div class="tile good"><span class="k">보정 산식까지 명문화</span><span class="v">66</span><span class="d" style="color:var(--ok)">19% · 중기부 소관 2곳 포함</span></div>
+      <div class="tile bad"><span class="k">사전 평균제약을 둔 기관</span><span class="v">17</span><span class="d" style="color:var(--danger)">4.8%</span></div>
+      <div class="tile bad"><span class="k">그중 기준이 80점인 기관</span><span class="v">6</span><span class="d" style="color:var(--danger)">1.7% — 창진원 포함</span></div>
+    </div>
+
+    <div class="grid2 rv" style="min-height:0">
+      <div class="card pad" style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp);min-height:0">
+        <div class="ctitle"><h3>사전 평균제약 17개 기관의 기준값</h3><span class="hint">창진원이 가장 낮다</span></div>
+        <div style="min-height:0"><svg id="chD" viewBox="0 0 900 420" role="img" aria-label="사전 평균제약 기관별 기준값"></svg></div>
+      </div>
+      <div style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp);min-height:0">
+        <div class="card pad">
+          <h3 style="color:var(--brand)">중소벤처기업부 소관 형제기관 선례</h3>
+          <table style="margin-top:var(--sp)">
+            <tr><td style="font-weight:700;white-space:nowrap">소상공인시장<br>진흥공단</td><td>수행능력평가 운영요령 제10조② — "평가점수는 <b>평균-표준편차조정법으로 점수를 조정</b>하여 적용하되, 차수별 평가에 대해 독립적으로 실시한다" <span style="color:var(--ink-3)">(산식 표 포함)</span></td></tr>
+            <tr><td style="font-weight:700;white-space:nowrap">기술보증기금</td><td>종합근무평정규정 제16조 — 평정결과가 "<b>정규분포</b>를 이룰 수 있도록 유의" · 역량평가가 "지나치게 <b>양극화·중심화·관대화</b>되어 신뢰성이 떨어지는 경우에는 <b>재평정을 지시</b>할 수 있다"</td></tr>
+          </table>
+        </div>
+        <div class="card pad scroll" style="min-height:0">
+          <h3>80점을 쓰는 6곳 중 창진원만 완충장치가 없다</h3>
+          <table style="margin-top:var(--sp)">
+            <tr><td style="font-weight:700">예금보험공사</td><td>6명 미만 85 · 2명 88 · 1명 91점 이내 <b>(규모별 차등)</b></td></tr>
+            <tr><td style="font-weight:700">한국주택금융공사</td><td>66~100점 부여 + <b>±20% 특이점수 배제 후 재산출</b></td></tr>
+            <tr><td style="font-weight:700">한국관광공사</td><td>83~85점 <b>구간형</b>(하한 있음) + 1인 예외</td></tr>
+            <tr><td style="font-weight:700">한국가스안전공사</td><td>83~87점 <b>구간형</b> + 조정점수 산식</td></tr>
+            <tr><td style="font-weight:700">한국교통연구원</td><td>85±2.5점 + <b>초과 시 사유서</b></td></tr>
+            <tr><td style="font-weight:700;color:var(--danger)">창업진흥원</td><td style="color:var(--danger);font-weight:700">80점 · 완충장치 없음 · 규칙에 근거 없음</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer>
-  <p><b>계산 방법.</b> 각 부서에 실력(정규분포)과 평정자 선호(실력과 무관한 정규분포)를 가진 인원을 배치하고,
-  평정자 유형에 따라 부서 내 순위를 정한 뒤 정규 순서통계량으로 점수를 부여합니다.
-  현행은 부서 평균을 80점으로 고정하고 유형별 표준편차를 그대로 두며,
-  개선은 평가자별 평균과 표준편차를 모두 목표값으로 일치시킵니다(축소추정 적용).
-  이후 전사 고득점순으로 등급을 배정하고 등급 구간 내에서 인원수에 따라 평정점을 산출합니다.
-  동일한 계산을 파이썬으로 재현할 수 있습니다 — <code>python3 sim/sim.py</code></p>
-  <p>문서: <a href="https://creativecommons.org/licenses/by/4.0/deed.ko">CC BY 4.0</a> ·
-  코드: MIT · <a href="https://github.com/bigone-kcrew/level">github.com/bigone-kcrew/level</a></p>
-</footer>
-</div>
-<div class="tip" id="tip"></div>
+<!-- ═══════════════ 5. 개정안 ═══════════════ -->
+<section class="pane" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <div class="phead">
+    <div>
+      <h2>인사규정은 열지 않는다 — 규칙과 계획만 고친다</h2>
+      <p class="sub">인사규정 제25조②가 근무평정을 규칙에 전부 위임하고 있고, 「제규정관리규정」 제4조2호·제5조①2호에 따라 <b>규칙 개정은 원장 결재 사항</b>입니다. <b>이사회 의결도, 장관 보고도 필요하지 않습니다.</b></p>
+    </div>
+    <span class="pill b">9월 21일까지 의제 통보 — 운영규정 제20조③</span>
+  </div>
 
+  <div style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp2);min-height:0">
+    <div class="grid3 rv">
+      <div class="mini"><div class="k">트랙 A — 계획만</div><div class="v">원장 결재 · 즉시</div>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:5px">과도조치로만 의미. <b>원장 재량으로 원상복귀 가능</b> — 사전조정계수는 이미 85→80점으로 바뀐 이력이 있다.</p></div>
+      <div class="mini on"><div class="k">트랙 B — 규칙 + 계획 <b style="color:var(--brand)">권고</b></div><div class="v">원장 결재 · 수 주</div>
+        <p style="font-size:var(--fs-xs);color:var(--ink-2);margin-top:5px">일상감사(제9조②)와 부패영향평가(제11조)를 거친다. 두 절차 모두 감사부서를 경유 — <b>노측에는 검증 지점</b>.</p></div>
+      <div class="mini"><div class="k">트랙 C — 인사규정까지</div><div class="v">이사회 의결 · 수 개월</div>
+        <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:5px"><b>불필요.</b> 제25조②가 백지위임이라 규칙에 무엇을 담아도 충돌하지 않는다. 얻는 것 없이 일정만 감당한다.</p></div>
+    </div>
+
+    <div class="grid2 rv" style="min-height:0">
+      <div class="card pad scroll" style="min-height:0">
+        <div class="ctitle"><h3>개정 13건</h3><span class="hint">근무평정 규칙</span></div>
+        <table>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">1</td><td>제3조</td><td>종합점수 정의에 빠진 상향·공통평가 보완, "보정" 정의 신설</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">2</td><td>제4조</td><td>"가능한 범위 내에서" 삭제 → <b>동점 부여 금지</b> + 재작성 요구</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">3</td><td>제6조</td><td><b>현 부서장이 전 부서장 의견을 들어 평가</b> · 60일 미만 부서 업무 미반영</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">4</td><td>제8조</td><td>부재 시 2차 평가자 승계 · <b>직무대리·겸직자 배제</b> · <b>기준일 전 평가 금지</b> · 변경 통지</td></tr>
+          <tr><td class="n" style="color:var(--ink-3);font-weight:700">5</td><td>제9조②</td><td>다면 비중 — 현행 10% 유지, 보정 효과 검증 후 2027년 재협의</td></tr>
+          <tr style="background:var(--brand-soft)"><td class="n" style="color:var(--brand);font-weight:700">6</td><td><b>제9조④⑥⑦</b></td><td><b>사후보정 의무화 + 사전 평균제약 금지 + 노사협의회 보고</b> ★</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">7</td><td>제9조⑤</td><td><b>공무직 절대평가</b> — 실제 대상이 1~3명인데 상대평가 중</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">8</td><td>제15조·17조</td><td>개시 후 2개월 내 설정 · <b>목표별 달성기준 명시</b> · 평가표에 달성 여부 기재</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">9</td><td>제22조·22조의2</td><td>다면·상향에도 <b>보정 적용</b> + 동점 금지 + 분포 보고</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">10</td><td>제26조③</td><td><b>등급비율 20·30·40·10을 규칙에 명시</b> · ±5%p 조정 시 보고 · 10명 미만 C 미부여</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">11</td><td>제28조</td><td><b>평정점 본인 공개</b>(보정 전·후) · 이의신청 의견진술 · 연간 실적 보고</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">12</td><td>제31조의2</td><td><b>노사협의회 협의 의무</b> 신설 — 비율·보정방법·평가자 변경 시</td></tr>
+          <tr><td class="n" style="color:var(--brand);font-weight:700">13</td><td>제7조②</td><td>미실시자 점수에서 <b>직전 점수 50% 승계 폐지</b> → 동일직급 평균</td></tr>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-rows:auto 1fr;gap:var(--sp);min-height:0">
+        <div class="card pad">
+          <div class="ctitle"><h3>일정</h3><span class="hint">근무평정은 올해 안에 결판나야 내년 근평에 적용된다</span></div>
+          <table style="margin-top:var(--sp)">
+            <tr><td class="n" style="font-weight:700;color:var(--accent)">9.21</td><td>노사협의회 의제 통보 마감 <span style="color:var(--ink-3)">(운영규정 제20조③ — 회의 7일 전)</span></td></tr>
+            <tr><td class="n" style="font-weight:700">9.28</td><td>2분기 정기회의 — <b>협의사항 상정</b> <span style="color:var(--ink-3)">(제25조①5호 인사·노무관리의 제도개선)</span></td></tr>
+            <tr><td class="n" style="font-weight:700">10~11</td><td>실무소위원회 사전심의 <span style="color:var(--ink-3)">(제11조 · 노사 각 2인)</span></td></tr>
+            <tr><td class="n" style="font-weight:700">12월</td><td>4분기 정기회의 <b>의결</b> <span style="color:var(--ink-3)">(제21조 출석위원 2/3 찬성)</span> → 원장 결재</td></tr>
+            <tr><td class="n" style="font-weight:700">2027</td><td>근무평정 적용</td></tr>
+          </table>
+        </div>
+        <div class="card pad scroll" style="min-height:0">
+          <div class="ctitle"><h3>의결 정족수 — 노측이 실질 거부권을 가진다</h3></div>
+          <p style="font-size:var(--fs-sm);color:var(--ink-2)">노사협의회는 <b>사측 3인 · 노측 3인</b>입니다. 운영규정 제21조는 "근로자위원과 사용자위원의 각 과반수의 출석으로 개최하고 <b>출석위원 3분의 2 이상의 찬성으로 의결</b>"합니다.</p>
+          <p style="font-size:var(--fs-sm);color:var(--ink-2);margin-top:var(--sp)">6명 출석이면 <b>4명 찬성</b>이 필요합니다. 노측 3인이 반대하면 의결이 불가능하고, 노측만으로도 의결할 수 없습니다. <b>합의가 유일한 경로</b>입니다.</p>
+          <p style="font-size:var(--fs-xs);color:var(--ink-3);margin-top:var(--sp);border-top:1px solid var(--line);padding-top:var(--sp)">노동조합 전임자 평가는 <b>이 안건에서 의도적으로 분리</b>했습니다. 근무평정 개편의 대가로 다루어지지 않기 위해 별도 안건으로 제안합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 <script>
-/* ============ theme ============ */
-(function(){
-  var b=document.getElementById('themeBtn');
-  try{ var t=localStorage.getItem('kpr-theme'); if(t) document.documentElement.setAttribute('data-theme',t);}catch(e){}
-  b.addEventListener('click',function(){
-    var cur=document.documentElement.getAttribute('data-theme');
-    var mqDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var next = cur ? (cur==='dark'?'light':'dark') : (mqDark?'light':'dark');
-    document.documentElement.setAttribute('data-theme',next);
-    try{localStorage.setItem('kpr-theme',next);}catch(e){}
-    schedule();
-  });
-})();
-function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+"use strict";
+/* ══════════ 상수 — sim/sim.py 와 동일한 값 ══════════ */
+const ORG = [
+  ["경영본부","S",{"기획조정실":10,"미래인재실":8,"재무계약실":14,"성과윤리실":6}],
+  ["정책본부","S",{"정책전략실":11,"원스톱지원실":8,"사업관리실":12,"디지털AI실":9}],
+  ["스케일업본부","N",{"딥테크전략실":12,"민관협력실":11,"대학창업실":14,"창업확산실":16,"대전팁스팀":6}],
+  ["창업촉진본부","N",{"지역전략실":12,"예비재도전실":9,"초기도약실":12}],
+  ["글로벌본부","N",{"글로벌전략실":11,"글로벌허브실":6,"글로벌협력실":10,"글로벌확산TF":9}],
+  ["원장직속","O",{"감사실":4,"홍보실":3}]
+];
+const RANK_MIX = [["1(나)급",4],["2급",11],["3급",29],["4급",40],["5급",107],["공무직",5]];
+const W_CORE=.85, W_1ST=.60, W_2ND=.40, W_MULTI=.10, W_COMMON=.05;
+const GRADE=[["S",.20],["A",.30],["B",.40],["C",.10]], BANDS={S:100,A:90,B:80,C:70};
+const MOVE_MIX=[["잔류",.55],["1월 전보",.12],["7월 전보",.12],["연중 조직개편",.08],["중도 휴직",.07],["중도 파견",.06]];
 
-/* ============ math ============ */
-function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-var _sp=null;
-function gauss(rnd){
-  if(_sp!==null){var v=_sp;_sp=null;return v;}
-  var u,v,s;do{u=rnd()*2-1;v=rnd()*2-1;s=u*u+v*v;}while(s>=1||s===0);
-  var m=Math.sqrt(-2*Math.log(s)/s);_sp=v*m;return u*m;
-}
+const DEPTS=[], DEPT_HQ=[], HQ_TYPES=[];
+ORG.forEach(([hq,ty,ds],h)=>{HQ_TYPES.push(ty);for(const k in ds){DEPT_HQ.push(h);DEPTS.push(ds[k]);}});
+const N_PEOPLE = DEPTS.reduce((a,b)=>a+b,0);
+
+/* ══════════ 수학 ══════════ */
+let _s=20260910>>>0;
+function srand(seed){_s=seed>>>0;}
+function rnd(){_s=(_s+0x6D2B79F5)>>>0;let t=_s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;}
+let _g=null;
+function gauss(){if(_g!==null){const v=_g;_g=null;return v;}let u=0,v=0;while(u===0)u=rnd();while(v===0)v=rnd();const r=Math.sqrt(-2*Math.log(u)),th=2*Math.PI*v;_g=r*Math.sin(th);return r*Math.cos(th);}
 function probit(p){
-  var a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
-  var b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
-  var c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
-  var d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
-  var pl=0.02425,q,r;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  const pl=0.02425;let q,r;
   if(p<pl){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
-  if(p>1-pl){q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
-  q=p-0.5;r=q*q;
-  return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+  if(p>1-pl){q=Math.sqrt(-2*Math.log(1-p));return-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  q=p-.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
 }
-function blomScores(n){var o=[];for(var i=1;i<=n;i++)o.push(probit((i-0.375)/(n+0.25)));return o;}
-function mean(x){var s=0;for(var i=0;i<x.length;i++)s+=x[i];return s/x.length;}
-function pstdev(x){var m=mean(x),s=0;for(var i=0;i<x.length;i++)s+=(x[i]-m)*(x[i]-m);return Math.sqrt(s/x.length);}
-function ranks(v){
-  var idx=v.map(function(_,i){return i;});
-  idx.sort(function(a,b){return v[a]-v[b];});
-  var r=new Array(v.length);
-  for(var p=0;p<idx.length;p++) r[idx[p]]=p+1;
-  return r;
-}
-function spearman(x,y){
-  var rx=ranks(x),ry=ranks(y),mx=mean(rx),my=mean(ry),num=0,dx=0,dy=0;
-  for(var i=0;i<rx.length;i++){num+=(rx[i]-mx)*(ry[i]-my);dx+=(rx[i]-mx)*(rx[i]-mx);dy+=(ry[i]-my)*(ry[i]-my);}
-  var den=Math.sqrt(dx*dy);return den?num/den:0;
-}
-var BANDS={S:[100,90.01],A:[90,80.01],B:[80,70.01],C:[70,60.01]};
-function assignGrades(scores,ratios){
-  var n=scores.length;
-  var keys=['S','A','B','C'];
-  var tot=ratios.S+ratios.A+ratios.B+ratios.C; if(tot<=0) tot=1;
-  var counts=[],acc=0;
-  for(var k=0;k<3;k++){var c=Math.round(n*ratios[keys[k]]/tot);counts.push(c);acc+=c;}
-  counts.push(Math.max(0,n-acc));
-  if(acc>n){ // trim overflow from B backwards
-    var over=acc-n; for(var k2=2;k2>=0&&over>0;k2--){var take=Math.min(over,counts[k2]);counts[k2]-=take;over-=take;}
-    counts[3]=Math.max(0,n-(counts[0]+counts[1]+counts[2]));
-  }
-  var order=scores.map(function(_,i){return i;});
-  order.sort(function(a,b){return scores[b]-scores[a];});
-  var grade=new Array(n),pts=new Array(n),ix=0;
-  for(var g=0;g<4;g++){
-    var cnt=counts[g],hi=BANDS[keys[g]][0];
-    for(var j=0;j<cnt&&ix<n;j++){
-      var i2=order[ix];grade[i2]=keys[g];
-      pts[i2]=cnt>0?hi-(10/cnt)*j:hi;
-      ix++;
-    }
-  }
-  while(ix<n){var i3=order[ix];grade[i3]='C';pts[i3]=60.01;ix++;}
-  return {grade:grade,pts:pts};
+const _blomCache=new Map();
+function blom(n){if(_blomCache.has(n))return _blomCache.get(n);const o=[];for(let i=1;i<=n;i++)o.push(probit((i-.375)/(n+.25)));_blomCache.set(n,o);return o;}
+function ranks(v){const idx=v.map((_,i)=>i).sort((a,b)=>v[a]-v[b]);const r=new Array(v.length);idx.forEach((i,p)=>r[i]=p+1);return r;}
+function spearman(x,y){const rx=ranks(x),ry=ranks(y),n=x.length,m=(n+1)/2;let num=0,dx=0,dy=0;
+  for(let i=0;i<n;i++){const a=rx[i]-m,b=ry[i]-m;num+=a*b;dx+=a*a;dy+=b*b;}
+  const den=Math.sqrt(dx*dy);return den?num/den:0;}
+const clamp=(v,lo=60,hi=100)=>v<lo?lo:v>hi?hi:v;
+
+/* ══════════ 직급 배정 (최대잔여법) ══════════ */
+function rankLabels(n){
+  const tot=RANK_MIX.reduce((a,[,c])=>a+c,0);
+  const q=RANK_MIX.map(([l,c])=>[l,n*c/tot]);
+  const cnt={};let used=0;
+  q.forEach(([l,v])=>{cnt[l]=Math.floor(v);used+=cnt[l];});
+  q.map((x,i)=>[i,q[i][1]-Math.floor(q[i][1])]).sort((a,b)=>b[1]-a[1]).slice(0,n-used)
+    .forEach(([i])=>cnt[q[i][0]]++);
+  const out=[];RANK_MIX.forEach(([l])=>{for(let k=0;k<cnt[l];k++)out.push(l);});
+  for(let i=out.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[out[i],out[j]]=[out[j],out[i]];}
+  return out.slice(0,n);
 }
 
-/* ============ config ============ */
-var DEF={
-  N:107, dmin:3, dmax:9,
-  mixN:25, mixS:25,
-  sdF:7, sdN:2, sdS:13, favor:70,
-  sigma:7,
-  rS:20, rA:30, rB:40, rC:10,
-  move:40, reps:150, seed:20260909
-};
-var CFG=Object.assign({},DEF);
-var SPEC=[
-  {g:'집단 구성'},
-  {k:'N',    t:'피평정 인원',              min:40,max:200,step:1,  unit:'명'},
-  {k:'dmin', t:'부서 최소 인원',           min:2, max:6,  step:1,  unit:'명'},
-  {k:'dmax', t:'부서 최대 인원',           min:6, max:20, step:1,  unit:'명'},
-  {g:'평정자 유형 (나머지는 공정형)'},
-  {k:'mixN', t:'균등형 평정자 비율',        min:0, max:60, step:5,  unit:'%'},
-  {k:'mixS', t:'전략형 평정자 비율',        min:0, max:60, step:5,  unit:'%'},
-  {k:'sdF',  t:'공정형 부여 표준편차',      min:3, max:14, step:0.5,unit:'점'},
-  {k:'sdN',  t:'균등형 부여 표준편차',      min:0.5,max:10,step:0.5,unit:'점'},
-  {k:'sdS',  t:'전략형 부여 표준편차',      min:5, max:22, step:0.5,unit:'점'},
-  {k:'favor',t:'전략형의 선호 반영률',      min:0, max:100,step:5,  unit:'%'},
-  {g:'제도 설정'},
-  {k:'sigma',t:'개선안 목표 표준편차 σ',    min:3, max:14, step:0.5,unit:'점'},
-  {k:'rS',   t:'S등급 비율',               min:0, max:40, step:1,  unit:'%'},
-  {k:'rA',   t:'A등급 비율',               min:0, max:50, step:1,  unit:'%'},
-  {k:'rB',   t:'B등급 비율',               min:0, max:80, step:1,  unit:'%'},
-  {k:'rC',   t:'C등급 비율 (0 = 절대평가 미달자만)', min:0,max:30,step:1,unit:'%'},
-  {g:'실행'},
-  {k:'move', t:'연간 전보율',              min:0, max:100,step:5,  unit:'%'},
-  {k:'reps', t:'반복 횟수',                min:40,max:600,step:20, unit:'회'}
+/* ══════════ 등급 배정 — 규칙 제26조① 직급별 ══════════ */
+function allocGroup(idx,scores,grade,pts,noC){
+  const m=idx.length; if(!m)return;
+  const counts=[];let acc=0;
+  for(let k=0;k<GRADE.length-1;k++){const c=Math.round(m*GRADE[k][1]);counts.push(c);acc+=c;}
+  counts.push(Math.max(0,m-acc));
+  if(noC&&m<10&&counts[3]>0){counts[2]+=counts[3];counts[3]=0;}   // 개정 10⑤
+  const order=idx.slice().sort((a,b)=>scores[b]-scores[a]);
+  let ix=0;
+  for(let k=0;k<GRADE.length;k++){
+    const g=GRADE[k][0],hi=BANDS[g],cnt=counts[k];
+    for(let j=0;j<cnt&&ix<m;j++,ix++){const i=order[ix];grade[i]=g;pts[i]=cnt?hi-(10/cnt)*j:hi;}
+  }
+}
+function assignGrades(scores,rankOf,absolute,noC){
+  const n=scores.length,grade=new Array(n),pts=new Array(n).fill(0);
+  if(!rankOf){allocGroup(scores.map((_,i)=>i),scores,grade,pts,noC);return[grade,pts];}
+  const groups=new Map();
+  for(let i=0;i<n;i++){const k=rankOf(i);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(i);}
+  groups.forEach((idx,lbl)=>{
+    if(absolute&&absolute.indexOf(lbl)>=0){idx.forEach(i=>{grade[i]="B";pts[i]=BANDS.B;});return;}
+    allocGroup(idx,scores,grade,pts,noC);
+  });
+  return[grade,pts];
+}
+
+/* ══════════ 점수 부여 ══════════ */
+function award(members,gtype,sig,mode,P,out){
+  if(!members.length)return;
+  const s=members.map(sig), rk=ranks(s), bl=blom(members.length);
+  let base,sd;
+  if(mode==="reform"){base=P.mean;sd=P.sd;}
+  else if(gtype==="O"){base=P.mean;sd=P.sd;}          // 원장 — 평균 제약 미적용
+  else{base=P.mean;sd=(gtype==="S"?P.ext:P.even);}
+  for(let k=0;k<members.length;k++)out[members[k]]=clamp(base+sd*bl[rk[k]-1]);
+}
+function composite(people,deptTy,dmem,hmem,mode,P){
+  const mkSig=ty=>{const w=(ty==="S"?P.fav:0);
+    return i=>(1-w)*people[i].a+w*people[i].f;};
+  const s1=new Array(people.length),s2=new Array(people.length);
+  for(let d=0;d<dmem.length;d++)award(dmem[d],deptTy[d],mkSig(deptTy[d]),mode,P,s1);
+  for(let h=0;h<hmem.length;h++)award(hmem[h],HQ_TYPES[h],mkSig(HQ_TYPES[h]),mode,P,s2);
+  const out=new Array(people.length);
+  for(let i=0;i<people.length;i++){
+    const multi=clamp(92+4*gauss(),20,100), common=clamp(95+4*gauss(),70,100);
+    out[i]=W_CORE*(W_1ST*s1[i]+W_2ND*s2[i])+W_MULTI*multi+W_COMMON*common;
+  }
+  return out;
+}
+
+/* ══════════ 본 시뮬레이션 — 현행·개선을 같은 조건으로 동시 계산 ══════════ */
+function runSim(P){
+  const modes=["current","reform"], res={};
+  modes.forEach(m=>res[m]={sM:{S:[0,0],N:[0,0]},cM:{S:[0,0],N:[0,0]},sH:{S:[0,0],N:[0,0],O:[0,0]},rho:[]});
+  srand(20260910);
+  for(let r=0;r<P.reps;r++){
+    const deptTy=DEPTS.map(()=>rnd()<P.mix?"S":"N");
+    const people=[],dmem=DEPTS.map(()=>[]),hmem=ORG.map(()=>[]);
+    DEPTS.forEach((sz,d)=>{for(let k=0;k<sz;k++){
+      people.push({a:gauss(),f:gauss(),d:d});
+      dmem[d].push(people.length-1);hmem[DEPT_HQ[d]].push(people.length-1);}});
+    rankLabels(people.length).forEach((g,i)=>people[i].g=g);
+    const ab=people.map(p=>p.a);
+    modes.forEach(m=>{
+      // 개정 2(동점 부여 금지)를 적용하지 않으면 균등형 평정자에게는 순위 신호가 없다
+      const P2=Object.assign({},P,{_noTie:!P.tie&&m==="reform"});
+      // 보정은 점수의 평균·폭만 바로잡는다. 평가자의 선호 자체는 제거하지 못한다
+      // (sim.py 의 FAVOR 는 두 모드 모두에 적용된다).
+      const mkSig=ty=>{const w=(ty==="S"?P.fav:0);
+        return i=>(P2._noTie&&ty==="N")?rnd():(1-w)*people[i].a+w*people[i].f;};
+      const s1=new Array(people.length),s2=new Array(people.length);
+      for(let d=0;d<dmem.length;d++)award(dmem[d],deptTy[d],mkSig(deptTy[d]),m,P,s1);
+      for(let h=0;h<hmem.length;h++)award(hmem[h],HQ_TYPES[h],mkSig(HQ_TYPES[h]),m,P,s2);
+      const total=new Array(people.length);
+      for(let i=0;i<people.length;i++){
+        const mu=clamp(92+4*gauss(),20,100),co=clamp(95+4*gauss(),70,100);
+        total[i]=W_CORE*(W_1ST*s1[i]+W_2ND*s2[i])+W_MULTI*mu+W_COMMON*co;
+      }
+      const abs=(m==="reform"&&P.abs)?["공무직"]:null;
+      const [grade,pts]=assignGrades(total,i=>people[i].g,abs,m==="reform"&&P.noC);
+      const R=res[m];
+      for(let i=0;i<people.length;i++){
+        const mt=deptTy[people[i].d], ht=HQ_TYPES[DEPT_HQ[people[i].d]];
+        R.sM[mt][1]++;R.cM[mt][1]++;R.sH[ht][1]++;
+        if(grade[i]==="S"){R.sM[mt][0]++;R.sH[ht][0]++;}
+        if(grade[i]==="C")R.cM[mt][0]++;
+      }
+      R.rho.push(spearman(ab,pts));
+    });
+  }
+  const pc=o=>o[1]?100*o[0]/o[1]:0, avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
+  const pack=m=>{const R=res[m];return{
+    sExt:pc(R.sM.S),sEven:pc(R.sM.N),cExt:pc(R.cM.S),cEven:pc(R.cM.N),
+    sHqExt:pc(R.sH.S),sHqEven:pc(R.sH.N),rho:avg(R.rho)};};
+  return{current:pack("current"),reform:pack("reform")};
+}
+
+/* ══════════ 전보 시뮬레이션 ══════════ */
+function runTransfer(P){
+  const names=MOVE_MIX.map(x=>x[0]), out={};
+  ["current","reform"].forEach(m=>out[m]=Object.fromEntries(names.map(n=>[n,[0,0,0]])));
+  srand(20260910);
+  for(let r=0;r<P.reps;r++){
+    const nd=DEPTS.length, deptTy=DEPTS.map(()=>rnd()<P.mix?"S":"N"), people=[];
+    DEPTS.forEach((sz,d)=>{for(let k=0;k<sz;k++){
+      let x=rnd(),cum=0,mt=names[names.length-1];
+      for(const [nm,w] of MOVE_MIX){cum+=w;if(x<=cum){mt=nm;break;}}
+      let seg;
+      if(mt==="잔류"||mt==="1월 전보") seg=[[d,1,false,false]];
+      else if(mt==="7월 전보") seg=[[d,.5,true,false],[Math.floor(rnd()*nd),.5,false,false]];
+      else if(mt==="연중 조직개편") seg=[[d,.9,true,false],[Math.floor(rnd()*nd),.1,false,true]];
+      else seg=[[d,.5,true,false]];
+      people.push({a:gauss(),f:gauss(),mt:mt,seg:seg});}});
+    rankLabels(people.length).forEach((g,i)=>people[i].g=g);
+    ["current","reform"].forEach(m=>{
+      const grp=DEPTS.map(()=>[]);
+      people.forEach((p,i)=>p.seg.forEach(([d,w,o,nw])=>grp[d].push([i,w,o,nw])));
+      const part=new Map();
+      grp.forEach((mem,d)=>{
+        if(!mem.length)return;
+        const ty=deptTy[d], w=(ty==="S"?P.fav:0);
+        const sig=mem.map(([i,,o,nw])=>{let s=(1-w)*people[i].a+w*people[i].f;
+          if(m!=="reform"){if(o)s-=P.dep;if(nw)s-=P.nw;}return s;});
+        const rk=ranks(sig), bl=blom(mem.length);
+        const sd=(m==="reform")?P.sd:(ty==="S"?P.ext:P.even);
+        mem.forEach(([i],k)=>part.set(i+"|"+d,clamp(P.mean+sd*bl[rk[k]-1])));
+      });
+      const total=people.map((p,i)=>{
+        let num=0,den=0;p.seg.forEach(([d,w])=>{num+=part.get(i+"|"+d)*w;den+=w;});return num/den;});
+      const [grade,pts]=assignGrades(total,i=>people[i].g,
+        (m==="reform"&&P.abs)?["공무직"]:null, m==="reform"&&P.noC);
+      people.forEach((p,i)=>{const a=out[m][p.mt];a[1]++;a[2]+=pts[i];if(grade[i]==="S")a[0]++;});
+    });
+  }
+  const fin={};
+  ["current","reform"].forEach(m=>{
+    fin[m]={};const base=out[m]["잔류"][2]/out[m]["잔류"][1];
+    names.forEach(n=>{const a=out[m][n];fin[m][n]={s:100*a[0]/a[1],pt:a[2]/a[1],d:a[2]/a[1]-base};});
+  });
+  return fin;
+}
+
+/* ══════════ 차트 ══════════ */
+const SVGNS="http://www.w3.org/2000/svg";
+function el(t,at){const e=document.createElementNS(SVGNS,t);for(const k in at)e.setAttribute(k,at[k]);return e;}
+function txt(x,y,s,cls,anchor){const e=el("text",{x:x,y:y,class:cls||"ax"});if(anchor)e.setAttribute("text-anchor",anchor);e.textContent=s;return e;}
+
+function niceMax(v){
+  if(!(v>0))return 1;
+  const e=Math.pow(10,Math.floor(Math.log10(v))),m=v/e;
+  return (m<=1?1:m<=2?2:m<=2.5?2.5:m<=4?4:m<=5?5:10)*e;
+}
+function groupedBar(svgId,cats,series,opt){
+  const o=Object.assign({w:900,h:300,pl:56,pr:14,pt:26,pb:44,max:null,unit:"%",ref:null,refLabel:""},opt||{});
+  const svg=document.getElementById(svgId); svg.setAttribute("viewBox",`0 0 ${o.w} ${o.h}`);
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const iw=o.w-o.pl-o.pr, ih=o.h-o.pt-o.pb;
+  const max=niceMax(o.max!==null?o.max:Math.max(...series.flatMap(s=>s.v))*1.22||1);
+  const y=v=>o.pt+ih-(v/max)*ih;
+  for(let k=0;k<=4;k++){const v=max*k/4;
+    svg.appendChild(el("line",{x1:o.pl,x2:o.w-o.pr,y1:y(v),y2:y(v),class:"gl"}));
+    svg.appendChild(txt(o.pl-9,y(v)+5,String(Math.round(v*10)/10),"ax","end"));}
+  if(o.ref!==null){
+    svg.appendChild(el("line",{x1:o.pl,x2:o.w-o.pr,y1:y(o.ref),y2:y(o.ref),
+      stroke:"#475569","stroke-width":2.5,"stroke-dasharray":"8 6"}));}
+  const gw=iw/cats.length, bw=Math.min(74,(gw-26)/series.length);
+  cats.forEach((c,i)=>{
+    const gx=o.pl+gw*i+gw/2;
+    series.forEach((s,j)=>{
+      const x=gx-(series.length*bw+ (series.length-1)*6)/2 + j*(bw+6);
+      const v=s.v[i], hh=Math.max(0,y(0)-y(v));
+      svg.appendChild(el("rect",{x:x,y:y(v),width:bw,height:hh,rx:4,fill:s.color,class:"bar"}));
+      // 기준선과 값 라벨이 겹치면 라벨을 더 올린다
+      let ly=y(v)-9;
+      if(o.ref!==null&&Math.abs(y(v)-y(o.ref))<20)ly=y(v)-19;
+      svg.appendChild(txt(x+bw/2,ly,v.toFixed(1)+o.unit,"vl","middle"));
+    });
+    const lines=String(c).split("\n");
+    lines.forEach((ln,k)=>svg.appendChild(txt(gx,o.h-o.pb+22+k*17,ln,"ax","middle")));
+  });
+}
+
+function hBar(svgId,rows,opt){
+  const o=Object.assign({w:900,h:150,pl:120,pr:80,pt:12,gap:12,max:1,fmt:v=>v.toFixed(3)},opt||{});
+  const svg=document.getElementById(svgId); svg.setAttribute("viewBox",`0 0 ${o.w} ${o.h}`);
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const iw=o.w-o.pl-o.pr, bh=(o.h-o.pt*2-o.gap*(rows.length-1))/rows.length;
+  rows.forEach((r,i)=>{
+    const yy=o.pt+i*(bh+o.gap);
+    svg.appendChild(txt(o.pl-12,yy+bh/2+6,r.label,"ax","end"));
+    svg.appendChild(el("rect",{x:o.pl,y:yy,width:iw,height:bh,rx:5,fill:"#EEF1F6"}));
+    svg.appendChild(el("rect",{x:o.pl,y:yy,width:Math.max(2,iw*Math.min(1,r.v/o.max)),height:bh,rx:5,fill:r.color,class:"bar"}));
+    svg.appendChild(txt(o.pl+iw+10,yy+bh/2+6,o.fmt(r.v),"vl","start"));
+  });
+}
+
+function divBar(svgId,cats,series,opt){
+  const o=Object.assign({w:900,h:320,pl:120,pr:70,pt:16,pb:16,gap:10},opt||{});
+  const svg=document.getElementById(svgId); svg.setAttribute("viewBox",`0 0 ${o.w} ${o.h}`);
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const iw=o.w-o.pl-o.pr;
+  const all=series.flatMap(s=>s.v.map(Math.abs));
+  const max=Math.max(0.5,...all)*1.18;
+  const zero=o.pl+iw*0.83;                       // 0 기준선을 오른쪽에 둔다(값이 대부분 음수)
+  const x=v=>zero+(v/max)*(iw*0.8);
+  const rowH=(o.h-o.pt-o.pb)/cats.length, bh=Math.min(20,(rowH-o.gap)/series.length);
+  svg.appendChild(el("line",{x1:zero,x2:zero,y1:o.pt,y2:o.h-o.pb,stroke:"#B9C6DA","stroke-width":2}));
+  cats.forEach((c,i)=>{
+    const cy=o.pt+rowH*i+rowH/2;
+    svg.appendChild(txt(o.pl-14,cy+6,c,"ax","end"));
+    series.forEach((s,j)=>{
+      const v=s.v[i], yy=cy-(series.length*bh+(series.length-1)*4)/2+j*(bh+4);
+      const x1=Math.min(zero,x(v)), w=Math.max(2,Math.abs(x(v)-zero));
+      svg.appendChild(el("rect",{x:x1,y:yy,width:w,height:bh,rx:4,fill:s.color,class:"bar"}));
+      const lab=(v>=0?"+":"")+v.toFixed(2);
+      svg.appendChild(txt(v<0?x1-8:x1+w+8,yy+bh/2+5,lab,"vl",v<0?"end":"start"));
+    });
+  });
+}
+
+/* ══════════ 4번 탭 — 사전 평균제약 17개 기관 (정적 전수 데이터) ══════════ */
+const PRE17=[
+  ["창업진흥원",80,"완충장치 없음 · 규칙에 근거 없음",true],
+  ["한국보건산업진흥원",80,"직책별 · 임금피크자 절대평가",false],
+  ["한국과학기술기획평가원",80,"분포비율 미준수 대체",false],
+  ["예금보험공사",80,"6명 미만 85 · 2명 88 · 1명 91",false],
+  ["한국원자력안전기술원",80,"실무직",false],
+  ["한국주택금융공사",80,"±20% 특이점수 배제",false],
+  ["한전KDN",82,"2차는 사장 절대평가",false],
+  ["한국관광공사",84,"83~85 구간형 · 1인 83~87",false],
+  ["한국가스안전공사",85,"83~87 구간형 · 조정점수 산식",false],
+  ["한국국방연구원",85,"평가집단별 상대평가",false],
+  ["한국무역보험공사",85,"제1·제2평정 각각",false],
+  ["한국교통연구원",85,"±2.5 · 초과 시 사유서",false],
+  ["한국국제협력단",87,"최대 87 · 인사위 결정",false],
+  ["농림수산식품교육문화정보원",90,"95~85점 사이로 부여",false],
+  ["한국농어촌공사",90,"절대평가",false],
+  ["한국학중앙연구원",90,"초과 불가",false],
+  ["한국농수산식품유통공사",90,"해외조직망 · 1인 제외",false]
 ];
-function buildCtrls(){
-  var host=document.getElementById('ctrls');host.innerHTML='';
-  SPEC.forEach(function(s){
-    if(s.g){var d=document.createElement('div');d.className='grpline';d.innerHTML='<h3>'+s.g+'</h3>';host.appendChild(d);return;}
-    var w=document.createElement('div');w.className='ctrl';
-    w.innerHTML='<label for="c_'+s.k+'">'+s.t+' <span class="v" id="v_'+s.k+'"></span></label>'+
-      '<input type="range" id="c_'+s.k+'" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'">';
-    host.appendChild(w);
-    var inp=w.querySelector('input');
-    inp.value=CFG[s.k];
-    document.getElementById('v_'+s.k).textContent=CFG[s.k]+s.unit;
-    inp.addEventListener('input',function(){
-      CFG[s.k]=parseFloat(inp.value);
-      document.getElementById('v_'+s.k).textContent=CFG[s.k]+s.unit;
-      schedule();
+function drawPre17(){
+  const svg=document.getElementById("chD");
+  const W=666,rowH=26,H=PRE17.length*rowH+56;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const pl=176,pr=44,iw=W-pl-pr,lo=76,hi=92;
+  const x=v=>pl+((v-lo)/(hi-lo))*iw;
+  for(let v=78;v<=92;v+=2){
+    svg.appendChild(el("line",{x1:x(v),x2:x(v),y1:16,y2:H-30,class:"gl"}));
+    svg.appendChild(txt(x(v),H-8,v+"점","ax","middle"));
+  }
+  PRE17.forEach(([nm,v,note,me],i)=>{
+    const cy=22+rowH*i+rowH/2;
+    svg.appendChild(txt(pl-12,cy+5,nm,"ax","end")).setAttribute("style",
+      me?"fill:#B91C1C;font-weight:700":"");
+    svg.appendChild(el("line",{x1:x(lo)+2,x2:x(v),y1:cy,y2:cy,
+      stroke:me?"#DC2626":"#B9C6DA","stroke-width":me?4:2.5,"stroke-linecap":"round"}));
+    svg.appendChild(el("circle",{cx:x(v),cy:cy,r:me?8:6,fill:me?"#DC2626":"#2563EB"}));
+    svg.appendChild(txt(x(v)+13,cy+5,v+"",me?"vl":"ax","start")).setAttribute("style",
+      me?"fill:#B91C1C;font-weight:700":"");
+  });
+}
+
+/* ══════════ 수치 카운트업 ══════════ */
+const RM=window.matchMedia("(prefers-reduced-motion: reduce)");
+function countUp(node,to,fmt){
+  const from=parseFloat(node.dataset.v||"0");
+  node.dataset.v=to;
+  if(RM.matches||!isFinite(from)){node.textContent=fmt(to);return;}
+  const t0=performance.now(),dur=420;
+  (function step(t){
+    const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);
+    node.textContent=fmt(from+(to-from)*e);
+    if(k<1)requestAnimationFrame(step);
+  })(t0);
+}
+function flash(id){const t=document.getElementById(id);if(!t||RM.matches)return;
+  t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash");}
+
+/* ══════════ 파라미터 ══════════ */
+const $=id=>document.getElementById(id);
+function P(){return{
+  sd:+$("sSd").value, mean:+$("sMean").value, ext:+$("sExt").value, even:+$("sEven").value,
+  fav:+$("sFav").value, mix:+$("sMix").value/100, reps:+$("sReps").value,
+  tie:$("cTie").checked, abs:$("cAbs").checked, noC:$("cNoC").checked
+};}
+function Pt(){const p=P();p.dep=+$("sDep").value;p.nw=+$("sNew").value;p.reps=Math.min(60,p.reps);return p;}
+
+/* ══════════ 렌더 — 시뮬레이터 ══════════ */
+let rafSim=null;
+function renderSim(){
+  const p=P();
+  $("vSd").textContent=p.sd; $("vMean").textContent=p.mean;
+  $("vExt").textContent=p.ext; $("vEven").textContent=p.even;
+  $("vFav").textContent=p.fav.toFixed(2); $("vMix").textContent=Math.round(p.mix*100)+"%";
+  $("vReps").textContent=p.reps;
+  const t0=performance.now();
+  const R=runSim(p), cur=R.current, ref=R.reform;
+  const ms=Math.round(performance.now()-t0);
+  $("simMeta").textContent=`반복 ${p.reps}회 · ${ms}ms · 213명 22개 평가군`;
+
+  const dev=[Math.abs(cur.sExt-cur.sEven),Math.abs(ref.sExt-ref.sEven)];
+  const hq=[cur.sHqEven?cur.sHqExt/cur.sHqEven:0, ref.sHqEven?ref.sHqExt/ref.sHqEven:0];
+  const dc=[Math.abs(cur.cExt-cur.cEven),Math.abs(ref.cExt-ref.cEven)];
+
+  countUp($("oDev"),dev[1],v=>v.toFixed(1)+"%p");
+  $("oDevD").innerHTML=`현행 <b>${dev[0].toFixed(1)}%p</b> → 개선 <b>${dev[1].toFixed(1)}%p</b>`;
+  countUp($("oHq"),hq[1],v=>v.toFixed(2)+"배");
+  $("oHqD").innerHTML=`현행 <b>${hq[0].toFixed(2)}배</b> → 개선 <b>${hq[1].toFixed(2)}배</b>`;
+  countUp($("oRho"),ref.rho,v=>v.toFixed(3));
+  $("oRhoD").innerHTML=`현행 <b>${cur.rho.toFixed(3)}</b> → 개선 <b>${ref.rho.toFixed(3)}</b> (${(ref.rho-cur.rho>=0?"+":"")}${(ref.rho-cur.rho).toFixed(3)})`;
+  countUp($("oC"),dc[1],v=>v.toFixed(1)+"%p");
+  $("oCD").innerHTML=`현행 <b>${dc[0].toFixed(1)}%p</b> → 개선 <b>${dc[1].toFixed(1)}%p</b>`;
+
+  const good=(a,b)=>b<a;
+  [["tiDev",good(dev[0],dev[1])],["tiHq",Math.abs(hq[1]-1)<Math.abs(hq[0]-1)],
+   ["tiRho",ref.rho>cur.rho],["tiC",good(dc[0],dc[1])]].forEach(([id,ok])=>{
+    const t=$(id);t.classList.toggle("good",ok);t.classList.toggle("bad",!ok);
+    if(id!=="tiRho")t.classList.remove("hi");
+  });
+  ["tiDev","tiHq","tiRho","tiC"].forEach(flash);
+
+  groupedBar("chA",
+    ["극단형 부서장\n아래 부서원","균등형 부서장\n아래 부서원","극단형 본부장\n아래 인원","균등형 본부장\n아래 인원"],
+    [{name:"현행",color:"#EA580C",v:[cur.sExt,cur.sEven,cur.sHqExt,cur.sHqEven]},
+     {name:"개선안",color:"#2563EB",v:[ref.sExt,ref.sEven,ref.sHqExt,ref.sHqEven]}],
+    {ref:20,max:Math.max(34,cur.sExt*1.2)});
+
+  hBar("chB",[
+    {label:"현행",v:cur.rho,color:"#EA580C"},
+    {label:"개선안",v:ref.rho,color:"#2563EB"}],{max:1,h:150});
+}
+function queueSim(){if(rafSim)cancelAnimationFrame(rafSim);
+  $("simMeta").textContent="계산 중…";
+  rafSim=requestAnimationFrame(()=>requestAnimationFrame(renderSim));}
+
+/* ══════════ 렌더 — 전보 ══════════ */
+function renderTransfer(){
+  const p=Pt();
+  $("vDep").textContent=p.dep.toFixed(2); $("vNew").textContent=p.nw.toFixed(2);
+  const R=runTransfer(p), names=MOVE_MIX.map(x=>x[0]);
+  divBar("chC",names,
+    [{name:"현행",color:"#EA580C",v:names.map(n=>R.current[n].d)},
+     {name:"개선안",color:"#2563EB",v:names.map(n=>R.reform[n].d)}],{h:36*names.length+40});
+  let h=`<tr><th>이동 유형</th><th class="n">현행 S획득률</th><th class="n">현행 평정점</th><th class="n">현행 격차</th><th class="n">개선 S획득률</th><th class="n">개선 격차</th></tr>`;
+  names.forEach(n=>{
+    const a=R.current[n],b=R.reform[n];
+    const st=Math.abs(a.d)>1.5?' style="color:#B91C1C;font-weight:700"':'';
+    h+=`<tr><td style="font-weight:600">${n}</td><td class="n">${a.s.toFixed(1)}%</td>`+
+       `<td class="n">${a.pt.toFixed(2)}</td><td class="n"${st}>${a.d>=0?"+":""}${a.d.toFixed(2)}</td>`+
+       `<td class="n">${b.s.toFixed(1)}%</td><td class="n">${b.d>=0?"+":""}${b.d.toFixed(2)}</td></tr>`;
+  });
+  $("mvTbl").innerHTML=h;
+}
+let rafT=null;
+function queueTransfer(){if(rafT)cancelAnimationFrame(rafT);
+  rafT=requestAnimationFrame(()=>requestAnimationFrame(renderTransfer));}
+
+/* ══════════ 정적 표 ══════════ */
+function buildTables(){
+  let h=`<tr><th>본부</th><th>실·팀</th><th class="n">인원</th></tr>`;
+  ORG.forEach(([hq,ty,ds])=>{
+    const ks=Object.keys(ds);
+    ks.forEach((k,i)=>{
+      h+=`<tr>${i===0?`<td rowspan="${ks.length}" style="font-weight:700;vertical-align:top">${hq}<br><span style="color:var(--ink-3);font-weight:500">${ty==="S"?"극단형":ty==="N"?"균등형":"원장 평가"}</span></td>`:""}`+
+         `<td>${k}</td><td class="n">${ds[k]}</td></tr>`;
     });
   });
-}
-function syncCtrls(){
-  SPEC.forEach(function(s){
-    if(s.g)return;
-    var i=document.getElementById('c_'+s.k); if(!i)return;
-    i.value=CFG[s.k];
-    document.getElementById('v_'+s.k).textContent=CFG[s.k]+s.unit;
-  });
+  h+=`<tr><td colspan="2" style="font-weight:700">합계 22개 평가군</td><td class="n" style="font-weight:700">${N_PEOPLE}</td></tr>`;
+  $("orgTbl").innerHTML=h;
+
+  const tot=RANK_MIX.reduce((a,[,c])=>a+c,0);
+  let r=`<tr><th>직급</th><th class="n">인원</th><th class="n">S 정원</th><th class="n">C 정원</th></tr>`;
+  RANK_MIX.forEach(([l,c])=>{
+    const s=Math.round(c*.2), cc=c<10?0:Math.round(c*.1);
+    r+=`<tr><td style="font-weight:600">${l}</td><td class="n">${c}</td><td class="n">${s}</td><td class="n">${cc}${c<10?" *":""}</td></tr>`;});
+  r+=`<tr><td style="font-weight:700">합계</td><td class="n" style="font-weight:700">${tot}</td><td class="n" colspan="2" style="color:var(--ink-3)">2025년 상대평가 대상</td></tr>`;
+  r+=`<tr><td colspan="4" style="color:var(--ink-3);font-size:.94em">* 10명 미만 평가군은 C 미부여(개정 10⑤). 절대평가 대상 54명은 배정에서 제외된다.</td></tr>`;
+  $("rankTbl").innerHTML=r;
 }
 
-/* ============ simulation ============ */
-function deptSizes(rnd,n,dmin,dmax){
-  var s=[],tot=0;
-  while(tot<n){
-    var sz=dmin+Math.floor(rnd()*(dmax-dmin+1));
-    if(tot+sz>n) sz=n-tot;
-    if(sz<dmin && s.length){ s[s.length-1]+=sz; tot+=sz; break; }
-    s.push(sz); tot+=sz;
+/* ══════════ 탭 ══════════ */
+const tabs=[...document.querySelectorAll('[role=tab]')];
+const panes=tabs.map(t=>$(t.getAttribute("aria-controls")));
+function show(k){
+  tabs.forEach((t,i)=>{
+    const on=i===k;
+    t.setAttribute("aria-selected",on?"true":"false");
+    if(on){panes[i].setAttribute("data-on","");panes[i].removeAttribute("hidden");}
+    else{panes[i].removeAttribute("data-on");panes[i].setAttribute("hidden","");}
+  });
+  if(k===1)queueSim();
+  if(k===2)queueTransfer();
+  if(k===3)drawPre17();
+  try{history.replaceState(null,"","#"+(k+1));}catch(e){}
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener("click",()=>{show(i);t.focus();});
+  t.addEventListener("keydown",e=>{
+    const m={ArrowRight:1,ArrowLeft:-1};
+    if(e.key in m){e.preventDefault();const n=(i+m[e.key]+tabs.length)%tabs.length;show(n);tabs[n].focus();}
+    if(e.key==="Home"){e.preventDefault();show(0);tabs[0].focus();}
+    if(e.key==="End"){e.preventDefault();show(tabs.length-1);tabs[tabs.length-1].focus();}
+  });
+});
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea,summary"))return;
+  const n=parseInt(e.key,10);
+  if(n>=1&&n<=tabs.length){show(n-1);tabs[n-1].focus();}
+  if(e.key==="f"||e.key==="F")toggleFS();
+});
+
+/* ══════════ 전체화면 ══════════ */
+function toggleFS(){
+  const d=document.documentElement;
+  if(!document.fullscreenElement){
+    (d.requestFullscreen||d.webkitRequestFullscreen||function(){}).call(d);
+  }else{
+    (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
   }
-  return s;
 }
-function pickType(rnd,mixN,mixS){
-  var r=rnd()*100;
-  if(r<mixN) return 'N';
-  if(r<mixN+mixS) return 'S';
-  return 'F';
-}
-function scoreOnce(people,sizes,dtype,cfg,mode){
-  var sd={F:cfg.sdF,N:cfg.sdN,S:cfg.sdS};
-  var scores=new Array(people.length);
-  for(var d=0;d<sizes.length;d++){
-    var idxs=[];
-    for(var i=0;i<people.length;i++) if(people[i].d===d) idxs.push(i);
-    if(!idxs.length) continue;
-    var ty=dtype[d], w=(ty==='S')?cfg.favor/100:0;
-    var sig=idxs.map(function(i){return (1-w)*people[i].a + w*people[i].f;});
-    var rk=ranks(sig), bl=blomScores(idxs.length);
-    var use=(mode==='reform')?cfg.sigma:sd[ty];
-    for(var k=0;k<idxs.length;k++){
-      var v=80+use*bl[rk[k]-1];
-      scores[idxs[k]]=Math.max(60,Math.min(100,v));
-    }
-  }
-  return scores;
-}
-function ratios(cfg){return {S:cfg.rS,A:cfg.rA,B:cfg.rB,C:cfg.rC};}
+$("fsBtn").addEventListener("click",toggleFS);
+document.addEventListener("fullscreenchange",()=>{
+  $("fsTxt").textContent=document.fullscreenElement?"창모드":"전체화면";
+});
+if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))
+  $("fsBtn").style.display="none";
 
-function runMain(cfg,mode,seed){
-  var rnd=mulberry32(seed);
-  var acc={F:[0,0],N:[0,0],S:[0,0]}, accC={F:[0,0],N:[0,0],S:[0,0]};
-  var zero=0, rho=0, reps=cfg.reps;
-  for(var r=0;r<reps;r++){
-    var sizes=deptSizes(rnd,cfg.N,cfg.dmin,Math.max(cfg.dmin,cfg.dmax));
-    var dtype={};
-    for(var d=0;d<sizes.length;d++) dtype[d]=pickType(rnd,cfg.mixN,cfg.mixS);
-    var people=[];
-    for(var d2=0;d2<sizes.length;d2++)
-      for(var j=0;j<sizes[d2];j++) people.push({d:d2,a:gauss(rnd),f:gauss(rnd)});
-    var sc=scoreOnce(people,sizes,dtype,cfg,mode);
-    var g=assignGrades(sc,ratios(cfg));
-    for(var i=0;i<people.length;i++){
-      var t=dtype[people[i].d];
-      acc[t][1]++; accC[t][1]++;
-      if(g.grade[i]==='S') acc[t][0]++;
-      if(g.grade[i]==='C') accC[t][0]++;
-    }
-    var z=0;
-    for(var d3=0;d3<sizes.length;d3++){
-      var has=false;
-      for(var i2=0;i2<people.length;i2++) if(people[i2].d===d3&&g.grade[i2]==='S'){has=true;break;}
-      if(!has) z++;
-    }
-    zero+=z/sizes.length;
-    rho+=spearman(people.map(function(p){return p.a;}),g.pts);
-  }
-  function pct(o){return o[1]?100*o[0]/o[1]:0;}
-  return {
-    S:{F:pct(acc.F),N:pct(acc.N),S:pct(acc.S)},
-    C:{F:pct(accC.F),N:pct(accC.N),S:pct(accC.S)},
-    zeroS:100*zero/reps, rho:rho/reps
-  };
-}
-var SCHEMES=[
-  {name:'1회', w:[1,0,0]},
-  {name:'현행 2회', w:[0.6,0.4,0]},
-  {name:'3년 50/30/20', w:[0.5,0.3,0.2]},
-  {name:'3년 균등', w:[1/3,1/3,1/3]}
-];
-function runPromotion(cfg,mode,seed){
-  var rnd=mulberry32(seed);
-  var reps=Math.max(40,Math.round(cfg.reps*0.6));
-  var out=SCHEMES.map(function(){return {rho:0,exp:[0,0],non:[0,0]};});
-  for(var r=0;r<reps;r++){
-    var sizes=deptSizes(rnd,cfg.N,cfg.dmin,Math.max(cfg.dmin,cfg.dmax));
-    var nd=sizes.length, dtype={};
-    for(var d=0;d<nd;d++) dtype[d]=pickType(rnd,cfg.mixN,cfg.mixS);
-    var people=[];
-    for(var d2=0;d2<nd;d2++)
-      for(var j=0;j<sizes[d2];j++) people.push({d:d2,a:gauss(rnd),f:gauss(rnd)});
-    var yearly=[],expo=[];
-    for(var y=0;y<3;y++){
-      if(y>0) for(var i=0;i<people.length;i++) if(rnd()*100<cfg.move) people[i].d=Math.floor(rnd()*nd);
-      var cnt={};
-      for(var i2=0;i2<people.length;i2++) cnt[people[i2].d]=(cnt[people[i2].d]||0)+1;
-      var sz2=[];for(var d3=0;d3<nd;d3++) sz2.push(cnt[d3]||0);
-      var sc=scoreOnce(people,sz2,dtype,cfg,mode);
-      yearly.push(assignGrades(sc,ratios(cfg)).pts);
-      expo.push(people.map(function(p){return dtype[p.d];}));
-    }
-    var trueA=people.map(function(p){return p.a;});
-    var exposedN=people.map(function(_,i){
-      for(var y2=0;y2<3;y2++) if(expo[y2][i]==='N') return true;
-      return false;
-    });
-    SCHEMES.forEach(function(s,si){
-      var agg=people.map(function(_,i){return s.w[0]*yearly[0][i]+s.w[1]*yearly[1][i]+s.w[2]*yearly[2][i];});
-      var sorted=agg.slice().sort(function(a,b){return b-a;});
-      var thr=sorted[Math.max(0,Math.floor(0.2*agg.length)-1)];
-      out[si].rho+=spearman(trueA,agg);
-      for(var i3=0;i3<agg.length;i3++){
-        var top=agg[i3]>=thr?1:0;
-        if(exposedN[i3]){out[si].exp[0]+=top;out[si].exp[1]++;}
-        else{out[si].non[0]+=top;out[si].non[1]++;}
-      }
-    });
-  }
-  return out.map(function(o){return {
-    rho:o.rho/reps,
-    exp:o.exp[1]?100*o.exp[0]/o.exp[1]:null,
-    non:o.non[1]?100*o.non[0]/o.non[1]:null
-  };});
-}
-var SENS_X=[0.5,1,2,3,4,5,6,7];
-var SENS_MIX=[15,25,40];
-function runSensitivity(cfg,seed){
-  var reps=Math.max(30,Math.round(cfg.reps*0.25));
-  var res=SENS_MIX.map(function(){return [];});
-  SENS_MIX.forEach(function(mx,mi){
-    SENS_X.forEach(function(sd){
-      var rnd=mulberry32(seed+mi*977+Math.round(sd*13));
-      var hit=0,tot=0;
-      var c=Object.assign({},cfg,{sdN:sd,mixN:mx,reps:reps});
-      for(var r=0;r<reps;r++){
-        var sizes=deptSizes(rnd,c.N,c.dmin,Math.max(c.dmin,c.dmax));
-        var dtype={};
-        for(var d=0;d<sizes.length;d++) dtype[d]=pickType(rnd,c.mixN,c.mixS);
-        var people=[];
-        for(var d2=0;d2<sizes.length;d2++)
-          for(var j=0;j<sizes[d2];j++) people.push({d:d2,a:gauss(rnd),f:gauss(rnd)});
-        var sc=scoreOnce(people,sizes,dtype,c,'current');
-        var g=assignGrades(sc,ratios(c));
-        for(var i=0;i<people.length;i++) if(dtype[people[i].d]==='N'){tot++;if(g.grade[i]==='S')hit++;}
-      }
-      res[mi].push(tot?100*hit/tot:0);
-    });
-  });
-  return res;
-}
+/* 문서 링크 — 어느 호스트에서 열어도 문서 사이트로 간다 */
+(function(){
+  const a=$("docLink");
+  if(location.hostname!=="bigone-kcrew.github.io")
+    a.href="https://bigone-kcrew.github.io/level/diagnosis.html";
+  a.target="_blank"; a.rel="noopener";
+})();
 
-/* ============ charts ============ */
-var tip=document.getElementById('tip');
-function showTip(e,k,v){tip.innerHTML='<span class="tk">'+k+'</span><span class="tv">'+v+'</span>';tip.classList.add('on');moveTip(e);}
-function moveTip(e){
-  var x=e.clientX+14,y=e.clientY+14;
-  var r=tip.getBoundingClientRect();
-  if(x+r.width>window.innerWidth-10) x=e.clientX-r.width-14;
-  if(y+r.height>window.innerHeight-10) y=e.clientY-r.height-14;
-  tip.style.left=x+'px';tip.style.top=y+'px';
-}
-function hideTip(){tip.classList.remove('on');}
-document.addEventListener('scroll',hideTip,{passive:true});
+/* ══════════ 배선 ══════════ */
+["sSd","sMean","sExt","sEven","sFav","sMix","sReps"].forEach(id=>
+  $(id).addEventListener("input",queueSim));
+["cTie","cAbs","cNoC"].forEach(id=>$(id).addEventListener("change",queueSim));
+["sDep","sNew"].forEach(id=>$(id).addEventListener("input",queueTransfer));
 
-function svgEl(tag,attrs){
-  var e=document.createElementNS('http://www.w3.org/2000/svg',tag);
-  for(var k in attrs) e.setAttribute(k,attrs[k]);
-  return e;
-}
-function legend(host,items){
-  host.innerHTML='';
-  items.forEach(function(it){
-    var s=document.createElement('span');
-    var sw = it.line
-      ? '<i style="background:'+it.c+';height:2px;width:14px;border-radius:1px;vertical-align:3px"></i>'
-      : '<i style="background:'+it.c+'"></i>';
-    s.innerHTML=sw+it.t;
-    host.appendChild(s);
-  });
-}
-function barTopPath(x,y,w,h,r){
-  r=Math.min(r,w/2,Math.max(0,h));
-  var y0=y+h;
-  return 'M'+x+' '+y0+'L'+x+' '+(y+r)+'Q'+x+' '+y+' '+(x+r)+' '+y+
-         'L'+(x+w-r)+' '+y+'Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+r)+'L'+(x+w)+' '+y0+'Z';
-}
-function groupedBar(host,spec){
-  host.innerHTML='';
-  var W=Math.max(300,host.clientWidth||host.parentElement.clientWidth||360), H=spec.h||266;
-  var pl=46,pr=14,pt=16,pb=42;
-  var pw=W-pl-pr, ph=H-pt-pb;
-  var yMax=spec.yMax||100;
-  var svg=svgEl('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img'});
-  var ticks=spec.ticks||[0,20,40,60,80,100];
-  ticks.forEach(function(t){
-    var y=pt+ph-(t/yMax)*ph;
-    svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:y,y2:y,stroke:cssv('--line'),'stroke-width':1}));
-    var tx=svgEl('text',{x:pl-8,y:y+4,'text-anchor':'end','font-size':10.5,fill:cssv('--text-3')});
-    tx.textContent=t+(spec.pct?'%':'');
-    svg.appendChild(tx);
-  });
-  if(spec.ref!=null){
-    var yr=pt+ph-(spec.ref/yMax)*ph;
-    svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:yr,y2:yr,stroke:cssv('--text-3'),'stroke-width':1}));
-  }
-  var ng=spec.categories.length, ns=spec.series.length;
-  var gw=pw/ng, bw=Math.min(46,(gw-22)/ns-2);
-  spec.categories.forEach(function(cat,ci){
-    var cx=pl+gw*ci+gw/2;
-    var total=ns*bw+(ns-1)*2;
-    spec.series.forEach(function(se,si){
-      var v=se.data[ci], hh=(v/yMax)*ph;
-      var x=cx-total/2+si*(bw+2), y=pt+ph-hh;
-      var p=svgEl('path',{d:barTopPath(x,y,bw,Math.max(hh,0.6),4),fill:se.c});
-      p.style.cursor='default';
-      p.addEventListener('mouseenter',function(e){showTip(e,cat+' · '+se.t,v.toFixed(1)+'%');});
-      p.addEventListener('mousemove',moveTip);
-      p.addEventListener('mouseleave',hideTip);
-      svg.appendChild(p);
-      if(bw>=21){
-        var vl=svgEl('text',{x:x+bw/2,y:Math.max(pt+9,y-6),'text-anchor':'middle','font-size':bw<28?9.5:10.5,fill:cssv('--text-2')});
-        vl.textContent=v.toFixed(1);
-        svg.appendChild(vl);
-      }
-    });
-    var cl=svgEl('text',{x:cx,y:pt+ph+18,'text-anchor':'middle','font-size':ng>3?10:11.5,fill:cssv('--text-2')});
-    cl.textContent=cat;svg.appendChild(cl);
-    if(spec.sublabels){
-      var sl=svgEl('text',{x:cx,y:pt+ph+32,'text-anchor':'middle','font-size':10,fill:cssv('--text-3')});
-      sl.textContent=spec.sublabels[ci];svg.appendChild(sl);
-    }
-  });
-  svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:pt+ph,y2:pt+ph,stroke:cssv('--line-strong'),'stroke-width':1}));
-  host.appendChild(svg);
-}
-function lineChart(host,spec){
-  host.innerHTML='';
-  var W=Math.max(300,host.clientWidth||host.parentElement.clientWidth||360), H=spec.h||272;
-  var ends=spec.endLabels!==false;
-  var pl=46,pr=ends?54:16,pt=16,pb=42;
-  var pw=W-pl-pr, ph=H-pt-pb;
-  var yMax=spec.yMax||100, yMin=spec.yMin||0;
-  var svg=svgEl('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img'});
-  (spec.ticks||[0,20,40,60,80,100]).forEach(function(t){
-    var y=pt+ph-((t-yMin)/(yMax-yMin))*ph;
-    svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:y,y2:y,stroke:cssv('--line'),'stroke-width':1}));
-    var tx=svgEl('text',{x:pl-8,y:y+4,'text-anchor':'end','font-size':10.5,fill:cssv('--text-3')});
-    tx.textContent=spec.yfmt?spec.yfmt(t):(t+(spec.pct?'%':''));svg.appendChild(tx);
-  });
-  if(spec.ref!=null){
-    var yr=pt+ph-((spec.ref-yMin)/(yMax-yMin))*ph;
-    svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:yr,y2:yr,stroke:cssv('--text-3'),'stroke-width':1}));
-  }
-  var n=spec.xs.length;
-  function X(i){return pl+(n===1?pw/2:(pw*i/(n-1)));}
-  function Y(v){return pt+ph-((v-yMin)/(yMax-yMin))*ph;}
-  spec.series.forEach(function(se){
-    var d='';
-    se.data.forEach(function(v,i){d+=(i?'L':'M')+X(i)+' '+Y(v);});
-    svg.appendChild(svgEl('path',{d:d,fill:'none',stroke:se.c,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
-    se.data.forEach(function(v,i){
-      svg.appendChild(svgEl('circle',{cx:X(i),cy:Y(v),r:5.6,fill:cssv('--surface-1')}));
-      svg.appendChild(svgEl('circle',{cx:X(i),cy:Y(v),r:4,fill:se.c}));
-    });
-    if(ends){
-      var last=se.data.length-1;
-      var el=svgEl('text',{x:X(last)+9,y:Y(se.data[last])+4,'font-size':10.5,fill:cssv('--text-2')});
-      el.textContent=se.t;svg.appendChild(el);
-    }
-  });
-  spec.xs.forEach(function(xv,i){
-    var tx=svgEl('text',{x:X(i),y:pt+ph+18,'text-anchor':'middle','font-size':11,fill:cssv('--text-2')});
-    tx.textContent=xv;svg.appendChild(tx);
-    var hit=svgEl('rect',{x:X(i)-Math.max(12,pw/n/2),y:pt,width:Math.max(24,pw/n),height:ph,fill:'transparent'});
-    hit.addEventListener('mouseenter',function(e){
-      var html=spec.series.map(function(se){return se.t+': '+se.data[i].toFixed(spec.dp==null?1:spec.dp)+(spec.pct?'%':'');}).join('<br>');
-      tip.innerHTML='<span class="tk">'+(spec.xlabel||'')+' '+xv+'</span><span class="tv">'+html+'</span>';
-      tip.classList.add('on');moveTip(e);
-    });
-    hit.addEventListener('mousemove',moveTip);
-    hit.addEventListener('mouseleave',hideTip);
-    svg.appendChild(hit);
-  });
-  if(spec.xlabel){
-    var xl=svgEl('text',{x:pl+pw/2,y:pt+ph+35,'text-anchor':'middle','font-size':10.5,fill:cssv('--text-3')});
-    xl.textContent=spec.xlabel;svg.appendChild(xl);
-  }
-  svg.appendChild(svgEl('line',{x1:pl,x2:pl+pw,y1:pt+ph,y2:pt+ph,stroke:cssv('--line-strong'),'stroke-width':1}));
-  host.appendChild(svg);
-}
-function table(host,head,rows){
-  var h='<table><thead><tr>'+head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>';
-  rows.forEach(function(r){h+='<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>';});
-  host.innerHTML=h+'</tbody></table>';
-}
-
-/* ============ render ============ */
-var LAST=null;
-function render(){
-  var C1=cssv('--s2'), C2=cssv('--s1');
-  var cfg=CFG;
-  var cur=runMain(cfg,'current',cfg.seed);
-  var ref=runMain(cfg,'reform',cfg.seed);
-  var pc=runPromotion(cfg,'current',cfg.seed+7);
-  var pr=runPromotion(cfg,'reform',cfg.seed+7);
-  var sens=runSensitivity(cfg,cfg.seed+31);
-  LAST={cur:cur,ref:ref,pc:pc,pr:pr,sens:sens};
-
-  var tot=cfg.rS+cfg.rA+cfg.rB+cfg.rC||1;
-  var sRef=Math.round(1000*cfg.rS/tot)/10, cRef=Math.round(1000*cfg.rC/tot)/10;
-
-  document.getElementById('tiles').innerHTML=
-    tileHTML('S등급자가 한 명도 없는 부서 비율',cur.zeroS.toFixed(1)+'%',ref.zeroS.toFixed(1)+'%')+
-    tileHTML('실력–평정점 순위상관 (1에 가까울수록 좋음)',cur.rho.toFixed(3),ref.rho.toFixed(3))+
-    tileHTML('S등급 획득률 — 균등형 평정자 부서',cur.S.N.toFixed(1)+'%',ref.S.N.toFixed(1)+'%')+
-    tileHTML('S등급 획득률 — 전략형 평정자 부서',cur.S.S.toFixed(1)+'%',ref.S.S.toFixed(1)+'%');
-
-  var cats=['공정형','균등형','전략형'];
-  var REFC=cssv('--text-3');
-  legend(document.getElementById('lg1'),[{c:C1,t:'현행 (평균 80점 강제)'},{c:C2,t:'개선 (사후 표준화)'},{c:REFC,t:'기준선 '+sRef+'%',line:true}]);
-  legend(document.getElementById('lg2'),[{c:C1,t:'현행 (평균 80점 강제)'},{c:C2,t:'개선 (사후 표준화)'},{c:REFC,t:'기준선 '+cRef+'%',line:true}]);
-  groupedBar(document.getElementById('ch1'),{categories:cats,pct:true,ref:sRef,
-    series:[{t:'현행',c:C1,data:[cur.S.F,cur.S.N,cur.S.S]},{t:'개선',c:C2,data:[ref.S.F,ref.S.N,ref.S.S]}]});
-  groupedBar(document.getElementById('ch2'),{categories:cats,pct:true,ref:cRef,
-    series:[{t:'현행',c:C1,data:[cur.C.F,cur.C.N,cur.C.S]},{t:'개선',c:C2,data:[ref.C.F,ref.C.N,ref.C.S]}]});
-  table(document.getElementById('tb1'),['평정자 유형','현행 (%)','개선 (%)'],
-    cats.map(function(c,i){var k=['F','N','S'][i];return [c,cur.S[k].toFixed(1),ref.S[k].toFixed(1)];}));
-  table(document.getElementById('tb2'),['평정자 유형','현행 (%)','개선 (%)'],
-    cats.map(function(c,i){var k=['F','N','S'][i];return [c,cur.C[k].toFixed(1),ref.C[k].toFixed(1)];}));
-
-  var snames=SCHEMES.map(function(s){return s.name;});
-  legend(document.getElementById('lg3'),[{c:C1,t:'균등형 부서 경험자'},{c:C2,t:'미경험자'},{c:REFC,t:'기준선 20%',line:true}]);
-  legend(document.getElementById('lg4'),[{c:C1,t:'균등형 부서 경험자'},{c:C2,t:'미경험자'},{c:REFC,t:'기준선 20%',line:true}]);
-  var yMaxP=40, tk=[0,10,20,30,40];
-  groupedBar(document.getElementById('ch3'),{categories:snames,pct:true,yMax:yMaxP,ticks:tk,ref:20,
-    series:[{t:'경험자',c:C1,data:pc.map(function(o){return o.exp==null?0:o.exp;})},
-            {t:'미경험자',c:C2,data:pc.map(function(o){return o.non==null?0:o.non;})}]});
-  groupedBar(document.getElementById('ch4'),{categories:snames,pct:true,yMax:yMaxP,ticks:tk,ref:20,
-    series:[{t:'경험자',c:C1,data:pr.map(function(o){return o.exp==null?0:o.exp;})},
-            {t:'미경험자',c:C2,data:pr.map(function(o){return o.non==null?0:o.non;})}]});
-
-  legend(document.getElementById('lg5'),[{c:C1,t:'현행'},{c:C2,t:'개선 (사후 표준화)'}]);
-  lineChart(document.getElementById('ch5'),{xs:snames,yMin:0.5,yMax:0.9,dp:3,
-    ticks:[0.5,0.6,0.7,0.8,0.9],yfmt:function(t){return t.toFixed(1);},xlabel:'반영 방식',
-    series:[{t:'현행',c:C1,data:pc.map(function(o){return o.rho;})},
-            {t:'개선',c:C2,data:pr.map(function(o){return o.rho;})}]});
-  table(document.getElementById('tb3'),['반영 방식','현행 ρ','개선 ρ','현행 경험자(%)','현행 미경험자(%)','개선 경험자(%)','개선 미경험자(%)'],
-    snames.map(function(nm,i){return [nm,pc[i].rho.toFixed(3),pr[i].rho.toFixed(3),
-      pc[i].exp==null?'–':pc[i].exp.toFixed(1),pc[i].non==null?'–':pc[i].non.toFixed(1),
-      pr[i].exp==null?'–':pr[i].exp.toFixed(1),pr[i].non==null?'–':pr[i].non.toFixed(1)];}));
-
-  var O=[cssv('--o1'),cssv('--o2'),cssv('--o3')];
-  legend(document.getElementById('lg6'),SENS_MIX.map(function(m,i){return {c:O[i],t:'균등형 부서 '+m+'%'};})
-    .concat([{c:REFC,t:'기준선 '+sRef+'%',line:true}]));
-  lineChart(document.getElementById('ch6'),{xs:SENS_X.map(function(x){return x+'점';}),pct:true,ref:sRef,endLabels:false,
-    yMax:Math.max(24,sRef+6),ticks:[0,5,10,15,20,25].filter(function(t){return t<=Math.max(24,sRef+6);}),
-    xlabel:'균등형 평정자의 부여 표준편차',
-    series:SENS_MIX.map(function(m,i){return {t:m+'%',c:O[i],data:sens[i]};})});
-  table(document.getElementById('tb4'),['부여 표준편차'].concat(SENS_MIX.map(function(m){return '균등형 '+m+'% (%)';})),
-    SENS_X.map(function(x,xi){return [x+'점'].concat(SENS_MIX.map(function(_,mi){return sens[mi][xi].toFixed(1);}));}));
-}
-function tileHTML(k,a,b){
-  return '<div class="tile"><div class="k">'+k+'</div>'+
-    '<div class="row"><span class="n cur">'+a+'</span><span class="arrow">→</span><span class="n ref">'+b+'</span></div>'+
-    '<div class="lbls"><span>현행</span><span>개선</span></div></div>';
-}
-
-/* ============ scheduling ============ */
-var timer=null, st=document.getElementById('status');
-function schedule(){
-  st.textContent='계산 중…'; st.classList.add('busy');
-  clearTimeout(timer);
-  timer=setTimeout(function(){
-    var t0=performance.now();
-    try{ render(); }catch(e){ st.textContent='오류: '+e.message; st.classList.remove('busy'); throw e; }
-    st.textContent=Math.round(performance.now()-t0)+'ms · 반복 '+CFG.reps+'회';
-    st.classList.remove('busy');
-  },170);
-}
-document.getElementById('resetBtn').addEventListener('click',function(){CFG=Object.assign({},DEF);syncCtrls();schedule();});
-document.getElementById('rerollBtn').addEventListener('click',function(){CFG.seed=Math.floor(Math.random()*1e9);schedule();});
-var rz=null;
-window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){if(LAST)render();},220);});
-buildCtrls(); schedule();
+buildTables();
+const start=Math.max(0,Math.min(tabs.length-1,(parseInt((location.hash||"#1").slice(1),10)||1)-1));
+show(start);
+if(start!==1)queueSim();     // 첫 진입이 1번 탭이어도 미리 계산해 둔다
 </script>
 </body>
 </html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05. 추진계획 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="근무평정제도 개편의 목표·단계·일정·검증기준과 산출물 현황">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html" class="on" aria-current="page">05 계획</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><h1>05. 근무평정제도 개편 추진계획</h1>
+<p>작성 기준일 2026년 9월 10일 · 창업진흥원노동조합</p>
+<hr>
+<h2>1. 배경</h2>
+<p>사용자 측은 2026년 1분기 노사협의회에서 근무평정제도 개선을 제안하고, 노동조합의 3개 제안
+(정량평가 전환 / 평정자·피평정자 일치 / 대소부서 편차 보정)에 대해 개편(안)을 제시했습니다.
+다만 개편(안)에는 구체적 설계가 없습니다.</p>
+<p>노동조합이 개편을 요구하는 이유는 <strong>근무평정 결과에 대한 불신</strong>입니다. 발생 경로는 다음과 같습니다.</p>
+<pre><code>목표설정이 사후(익년 2월)  →  목표가 평가기준이 되지 못함
+        ↓
+사실상 전면 정성평가
+        ↓
++ 사전조정계수(그룹 평균 80점 강제 = 제로섬)
+        ├── 제도 숙지 평정자 → 전략적 극단화(표적화가 제도적으로 가능)
+        └── 이해 부족 평정자 → 균등 배분(판별력 소실)
+        ↓
+점수의 분산이 &#39;직원 간 차이&#39;가 아니라 &#39;평정자 간 차이&#39;에서 발생
+        ↓
++ 승진명부가 최근 2회만 반영  →  특정 부서장의 1~2년이 승진을 결정
+        ↓
+&quot;라인을 타야 승진한다&quot;
+        ↓
++ 평정점·순위 비공개 + 이의신청 심의는 인사위원회 단독  →  검증·구제 불가
+</code></pre>
+<p>→ 상세: <a href="diagnosis.html">01. 제도 진단</a></p>
+<hr>
+<h2>2. 목표</h2>
+<p><strong>차등을 없애는 것이 목표가 아닙니다. 차등이 실제 성과 차이에서 나오게 만드는 것이 목표입니다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>목표 상태</th>
+<th>검증 지표</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평정자 편차 제거</td>
+<td>어느 평정자 아래에 있든 상위·하위 등급 획득 기회가 같다</td>
+<td>평정자 유형별 S등급 획득률 편차가 설정 비율(20%) ±3%p 이내</td>
+</tr>
+<tr>
+<td>승진 예측가능성</td>
+<td>특정 평정자 1인의 영향이 희석된다</td>
+<td>승진명부 반영을 최근 3년 균등으로 확대</td>
+</tr>
+<tr>
+<td>목표관리 정상화</td>
+<td>목표가 평가 이전에 확정된다</td>
+<td>목표설정·합의 완료가 평가대상기간 개시 후 1개월 이내</td>
+</tr>
+<tr>
+<td>검증가능성</td>
+<td>결과에 이의를 제기할 근거가 제공된다</td>
+<td>평정점·직급 내 순위 본인 공개, 평정자 설명 의무</td>
+</tr>
+<tr>
+<td>규범 안정성</td>
+<td>핵심 기준이 원장 재량이 아니라 규정에 있다</td>
+<td>등급별 비율·보정 산식·성과급 지급률의 규정 본문 명시</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>3. 개편 방향 (설계 원칙)</h2>
+<ol>
+<li><strong>사전에 평균을 강제하지 않고, 사후에 평정자 편차를 표준화한다.</strong>
+부서 내 순위는 보존하므로 부서장의 평가 권한은 그대로 유지된다.</li>
+<li><strong>보정 산식과 모수를 규칙 별표에 명시하고 평가 실시 전에 공개한다.</strong>
+통계 보정이 블랙박스가 되면 새로운 불신이 생긴다.</li>
+<li><strong>표준화가 고치지 못하는 것(악의적 표적화)은 사유 기재·반영 회차 확대·재심기구로 보완한다.</strong></li>
+<li><strong>정량평가와 조직 성과는 성과급 트랙(내부평가·경영평가)에서 다루고, 근무평정은 승진용으로 순화한다.</strong></li>
+<li><strong>등급별 비율을 규칙 본문에 명시한다.</strong> 원장 재량 위임은 노사 합의 절차를 우회한다.</li>
+</ol>
+<h3>근거가 이미 마련되어 있는 부분</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기존 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사후 보정</td>
+<td>근무평정규칙 <strong>제9조④</strong> &quot;결과의 신뢰도를 제고하기 위해 평균 등을 적용하여 보정할 수 있으며&quot;</td>
+</tr>
+<tr>
+<td>사전조정계수 폐지</td>
+<td>규칙에 근거 없음 — <strong>연도별 계획(안)에만 존재</strong>하므로 규칙 개정 없이 계획 변경으로 가능</td>
+</tr>
+<tr>
+<td>개편 절차</td>
+<td>단체협약 <strong>제27조①</strong> 인사평가 제도·평가문항 설계·변경 시 사전 조합 <strong>동의</strong></td>
+</tr>
+<tr>
+<td>의결 효력</td>
+<td>근로자참여법 <strong>제24조·제30조2호</strong> 의결 사항 미이행 시 1천만원 이하 벌금</td>
+</tr>
+<tr>
+<td>제도화 필요성</td>
+<td><strong>2025년도 경영평가 보고서</strong> — &quot;등급이 규정화되지 않았다&quot;, &quot;심의위원회를 마련해 등급을 최종확정하는 구조 필요&quot;, &quot;평가 결과 조정 시 위원회 활용&quot;</td>
+</tr>
+</tbody></table></div>
+<p>경영평가단 권고와 노동조합 요구가 일치합니다. <strong>&quot;노조 요구&quot;가 아니라 &quot;경영평가 지적사항 이행&quot;으로
+논의를 구성하는 것이 유효합니다.</strong></p>
+<hr>
+<h2>4. 시행 시점 구분 — 무엇을 언제부터 적용할 수 있는가</h2>
+<p>2026년 평가대상기간은 이미 진행 중입니다. 소급 적용이 가능한 것과 불가능한 것을 나눠야 합니다.</p>
+<h3>4-1. 2026년 평정(2027년 2월 실시)부터 적용 가능</h3>
+<p>평정 <strong>실시 방법</strong>에 해당하므로 평가대상기간 종료 후 개정해도 적용에 무리가 없습니다.</p>
+<ul>
+<li>사전조정계수 폐지 + 사후 평균·표준편차일치법 (제9조의2, 별표 9)</li>
+<li>최고·최저 등급 부여 시 사유 기재, 획일 부여 시 근거 명시 (제4조)</li>
+<li>C등급을 절대평가 기준 미달자에게만 부여 (제26조③)</li>
+<li>평정점·직급 내 순위 본인 공개, 평정자 설명 의무, 근무평정심의위원회 (제28조, 제28조의2)</li>
+<li>다면평가 전원 동일점수 부여 시 산정 제외, 유효응답 요건, 3명 이하 부서 통합 (제22조)</li>
+<li>공통평가(정보보안) 폐지 (제23조·별표 6)</li>
+</ul>
+<h3>4-2. 2027년 평가대상기간부터 적용</h3>
+<p>목표설정을 전제로 하므로 <strong>연도 개시 전에 개정이 끝나야</strong> 합니다.</p>
+<ul>
+<li>목표설정·합의를 평가대상기간 개시 후 1개월 이내로 (제15조②)</li>
+<li>7월 중간점검 면담 의무화, 목표 수정 사유 명문화 (제15조④⑤)</li>
+<li>업적평가 「업무 요청사항 이행정도」 → 「합의된 성과목표 달성도」 대체 (별표 3)</li>
+<li>반영비율 변경: 업적 60 / 역량 20 / 다면·상향 20 (제9조②)</li>
+</ul>
+<blockquote>
+<p><strong>실질 마감은 2026년 12월입니다.</strong> 2027년 1월에 연초 목표설정을 최초 시행하려면
+그전에 규칙 개정이 의결되어야 합니다. 근무평정규칙의 최근 개정이
+2024.11.28. / 2025.12.22. / 2026.1.27.에 이루어진 것도 같은 주기입니다.</p>
+</blockquote>
+<h3>4-3. 경과조치가 필요한 사항</h3>
+<ul>
+<li><strong>승진후보자 서열명부 3년 균등 반영</strong> — 3년치 평정점이 확보되지 않은 대상자 처리</li>
+<li><strong>사용자 측 개편(안)의 확정 시기 변경</strong>(차년도 8월) — 현행 실무는 2월 산출 → 3월 명부 → 4~5월 승진.
+전환기에 승진 심사에 쓸 평정점이 없는 공백이 발생하므로 노사협의회 의결로 확정 필요</li>
+</ul>
+<hr>
+<h2>5. 단계별 추진계획</h2>
+<h3>1단계 — 자료 확보와 안건 성격 규정 (2026년 9~10월)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>과제</th>
+<th>검증 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자료 요구 7건 발송</td>
+<td>접수 확인 및 회신 기한 명시</td>
+</tr>
+<tr>
+<td>평가자별 분포를 <strong>부서 규모 구간별 집계</strong> 형태로 재요구</td>
+<td>개인정보 예외(근참법 제14조 단서)에 해당하지 않음을 명시</td>
+</tr>
+<tr>
+<td>4분기 정기 노사협의회 안건 상정</td>
+<td>의제 통보(근참법 제13조③ 회의 7일 전) 확인</td>
+</tr>
+<tr>
+<td>안건을 <strong>단체협약 제27조① 동의 사항</strong>으로 성격 규정</td>
+<td>회의록에 기재, 상호 서명(단협 제89조②③)</td>
+</tr>
+</tbody></table></div>
+<p>자료 요구 목록 (→ <a href="bargaining.html#6-%EC%9E%90%EB%A3%8C-%EC%9A%94%EA%B5%AC">04. 요구사항</a>)</p>
+<ol>
+<li>최근 3년 평가자별 부여점수 분포 통계 (부서 규모 구간별 평균·표준편차, 개인 식별 불가 형태)</li>
+<li>최근 3년 직급별·부서별 등급 분포</li>
+<li>최근 3년 C등급 2회 이상 반복 부여 인원 수</li>
+<li>최근 3년 이의신청 접수·인정 건수</li>
+<li>승진후보자 서열명부 산식 (원장이 따로 정한 문서)</li>
+<li>내부평가 세부 기준 (미래인재실 성과평가 계획)</li>
+<li>사용자 측 개편(안)의 부서평가 반영 비율·방식·직급별 차등 여부</li>
+</ol>
+<h3>2단계 — 협의 기구 구성과 개정안 협의 (2026년 10~11월)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>과제</th>
+<th>검증 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>노사 동수 평가제도개선위원회</strong> 설치 제안</td>
+<td>단협 제109조 보충협약 또는 노사협의회 의결</td>
+</tr>
+<tr>
+<td>개정안 조문별 협의</td>
+<td>신구대조표 기준 조문별 합의·이견 정리</td>
+</tr>
+<tr>
+<td>자료 확보 시 시뮬레이션 재검증</td>
+<td>실측 분포로 모수(목표 표준편차) 재산정</td>
+</tr>
+</tbody></table></div>
+<p>선례: 한국영상자료원 단체협약 제46조② — &quot;상향평가제도 도입 및 반영, <strong>절대평가제도 전환</strong> 등은
+조합위원장을 포함한 <strong>노사 동수 평가제도개선위원회</strong>를 통해 개선한다&quot;</p>
+<h3>3단계 — 규칙 개정 의결 (2026년 12월)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>과제</th>
+<th>검증 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>근무평정규칙 개정 의결</td>
+<td>노사협의회 출석위원 3분의 2 이상 찬성(근참법 제15조)</td>
+</tr>
+<tr>
+<td>인사규정 제23조(승진명부) 개정</td>
+<td>3년 균등 반영 + 산정 결과 본인 공개</td>
+</tr>
+<tr>
+<td>보수규정 성과급 등급·지급률 명시</td>
+<td>변경 시 노사협의회 의결 조항 포함</td>
+</tr>
+<tr>
+<td>경과조치 확정</td>
+<td>승진 공백 방지 조항 명문화</td>
+</tr>
+</tbody></table></div>
+<h3>4단계 — 시행과 사후 검증 (2027년)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>시점</th>
+<th>과제</th>
+<th>검증 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2027.1</td>
+<td>연초 목표설정 최초 시행</td>
+<td>1월 중 목표 합의 완료율 100%</td>
+</tr>
+<tr>
+<td>2027.2</td>
+<td>2026년 평정에 사후 표준화 최초 적용</td>
+<td>평정자별 보정 전·후 분포 통계 노사협의회 보고</td>
+</tr>
+<tr>
+<td>2027.2~3</td>
+<td>평정점·순위 공개, 심의위원회 운영</td>
+<td>이의신청 처리 결과 서면 통지</td>
+</tr>
+<tr>
+<td>2027.7</td>
+<td>중간점검 면담 최초 시행</td>
+<td>면담 기록 작성률</td>
+</tr>
+<tr>
+<td>2027.12</td>
+<td>1년차 운영 평가</td>
+<td>평정자 유형별 등급 획득률 편차 ±3%p 이내 달성 여부</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>6. 요구사항 요약</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>요구</th>
+<th>대상 규정</th>
+<th>시행 시점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>사전조정계수 폐지 → 사후 평균·표준편차일치법(목표 평균 80점, 표준편차 7점, 축소추정)</td>
+<td>규칙 제9조의2·별표 9 신설</td>
+<td>2026년 평정</td>
+</tr>
+<tr>
+<td>2</td>
+<td>승진명부 반영을 최근 3년 균등으로 확대</td>
+<td>인사규정 제23조</td>
+<td>경과조치 후</td>
+</tr>
+<tr>
+<td>3</td>
+<td>최고·최저 등급 사유 기재, 획일 부여 근거 명시, 평가자 교육 의무화</td>
+<td>규칙 제4조</td>
+<td>2026년 평정</td>
+</tr>
+<tr>
+<td>4</td>
+<td>평정점·순위 공개, 평정자 설명 의무, 노사 동수 심의위원회, 재심의권</td>
+<td>규칙 제28조·제28조의2</td>
+<td>2026년 평정</td>
+</tr>
+<tr>
+<td>5</td>
+<td>C등급을 절대평가 기준 미달자에게만 부여, 제30조 직위해제 요건 완화</td>
+<td>규칙 제26조③·제30조</td>
+<td>2026년 평정</td>
+</tr>
+<tr>
+<td>6</td>
+<td>목표설정 시기 정상화, 7월 중간점검 의무화, 목표 수정 절차</td>
+<td>규칙 제15조</td>
+<td>2027년</td>
+</tr>
+<tr>
+<td>7</td>
+<td>「업무 요청사항 이행정도」 폐지 → 「합의된 성과목표 달성도」</td>
+<td>별표 3</td>
+<td>2027년</td>
+</tr>
+<tr>
+<td>8</td>
+<td>다면평가 개선(동일점수 제외·유효응답·소부서 통합) 및 배점 10%→20%</td>
+<td>규칙 제22조·제9조②</td>
+<td>2026년 평정 / 배점은 2027년</td>
+</tr>
+<tr>
+<td>9</td>
+<td>공통평가(정보보안) 폐지, 내부평가로 이전</td>
+<td>규칙 제23조·별표 6</td>
+<td>2027년</td>
+</tr>
+<tr>
+<td>10</td>
+<td>성과급 등급 비율·지급률의 규정화</td>
+<td>보수규정 제25조</td>
+<td>2026년 내</td>
+</tr>
+</tbody></table></div>
+<p>→ 조문 전문: <a href="amendments.html">02. 규정 개정안</a> · 근거: <a href="benchmark.html">03. 타기관 비교</a></p>
+<hr>
+<h2>7. 사용자 측 개편(안)에 대한 입장</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사측 제안</th>
+<th>입장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>연초 목표설정을 통한 목표관리 실현</td>
+<td><strong>동의</strong> — 중간점검 의무화·목표수정 절차·합의 불성립 시 조정 절차 추가 필요</td>
+</tr>
+<tr>
+<td>다면·상향 평정자를 과거 동일부서까지 확대</td>
+<td><strong>조건부 동의</strong> — 무작위 선별 기준 명문화, 유효응답 요건, &quot;모르면 미평가&quot; 조항 필요</td>
+</tr>
+<tr>
+<td>부서 규모별 평균 허용범위 차등화(5명 이하 75~85)</td>
+<td><strong>방식 이견</strong> — 하한 75는 소부서 평정자 재량을 넓힘. 축소추정 사후 표준화가 같은 목적을 연속적으로 달성</td>
+</tr>
+<tr>
+<td>경영평가 부서평가를 근무평정에 반영</td>
+<td><strong>성과급 트랙은 동의, 승진용 반영은 조건 필요</strong> — 최소한 직급별 차등(노사발전재단식)</td>
+</tr>
+<tr>
+<td>내부평가 성과급 폐지</td>
+<td><strong>반대</strong> — 공공기관에서 폐지한 성과급 항목은 재신설 곤란. 근무평정 비중이 42%→60%로 상승</td>
+</tr>
+<tr>
+<td>근무평정 확정을 차년도 8월로 변경</td>
+<td><strong>경과조치 전제 동의</strong> — 전환기 승진 공백 방지 조항 필요</td>
+</tr>
+</tbody></table></div>
+<p><strong>교섭 구조상 유의점</strong>: 사측 개편(안)은 근무평정 확정 시기 변경 없이는 성립하지 않고,
+시기 변경은 승진 시기 변경을 수반하므로 단체협약 제28조②(정기승진 6월·12월)와 연동됩니다.
+따라서 <strong>시기 조정에 대한 조합 동의가 개편안 성립의 전제</strong>입니다.</p>
+<hr>
+<h2>8. 위험과 대응</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>위험</th>
+<th>영향</th>
+<th>대응</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평정자별 분포 실측 자료 미확보</td>
+<td>사후 표준화 모수를 실측 기반으로 정할 수 없음</td>
+<td>모의 시뮬레이션으로 논의 진행. 자료 제공 시 모수 재산정 조항을 개정안에 포함</td>
+</tr>
+<tr>
+<td>사측이 논의를 &quot;평가 방법&quot;으로 한정</td>
+<td>절차·구제·공개가 의제에서 배제</td>
+<td>경영평가 보고서 권고(심의위원회·규정화·수용도)를 근거로 의제에 포함</td>
+</tr>
+<tr>
+<td>통계 보정이 블랙박스로 인식</td>
+<td>새로운 불신 발생</td>
+<td>산식·모수 사전 공개, 모수 변경 시 노사협의회 의결, 보정 전후 분포 보고를 규칙에 명문화</td>
+</tr>
+<tr>
+<td>2026년 12월 시한 초과</td>
+<td>목표설정 정상화가 1년 지연</td>
+<td>4-1 항목(즉시 적용 가능)과 4-2 항목(연도 개시 전 필요)을 분리 의결</td>
+</tr>
+<tr>
+<td>다면평가 배점만 확대</td>
+<td>담합·인기투표 부작용</td>
+<td>등급 환산표 재설계와 전원 동일점수 제외 조항을 배점 확대의 선행 조건으로 묶음</td>
+</tr>
+<tr>
+<td>자료 전체 공개</td>
+<td>사측이 요구·근거를 사전 열람</td>
+<td>노동조합의 선택. 근거가 규정과 타기관 선례에 기반하므로 공개가 오히려 유리하다고 판단</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>9. 미결 설계 과제</h2>
+<p>협의 전에 노동조합 내부에서 확정해야 할 사항입니다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>과제</th>
+<th>쟁점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>다면평가 등급 환산표 재설계</td>
+<td>현행 S10/A8/B6/C4/D2는 중간등급 부여 시 60점이 되어 목표 평균과 어긋남. 사후 표준화 적용 시 자동 해소되므로 별도 개정 없이 갈지, 환산표를 함께 손볼지</td>
+</tr>
+<tr>
+<td>부서평가 직급별 차등 비율</td>
+<td>승진용 반영을 수용할 경우의 구체값. 노사발전재단은 관리자 100% / 3급 이상 67% / 3급 미만 33%</td>
+</tr>
+<tr>
+<td>목표 표준편차 7점 확정</td>
+<td>하한 5(다면 지배 방지)·상한 8(구간 클리핑) 범위 내 값. 실측 자료 확보 후 재검토 여지</td>
+</tr>
+<tr>
+<td>C등급 절대평가 기준</td>
+<td>「기준 미달」의 구체적 판정 기준(별표 10 신설 내용)</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>10. 산출물 현황</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>상태</th>
+<th>위치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제도 진단</td>
+<td>완료</td>
+<td><a href="diagnosis.html">diagnosis.html</a></td>
+</tr>
+<tr>
+<td>규정 개정안 (신구대조표 14건 + 보정 산식)</td>
+<td>완료</td>
+<td><a href="amendments.html">amendments.html</a></td>
+</tr>
+<tr>
+<td>타기관 비교 (공공기관 40여 곳)</td>
+<td>완료</td>
+<td><a href="benchmark.html">benchmark.html</a></td>
+</tr>
+<tr>
+<td>요구사항과 근거</td>
+<td>완료</td>
+<td><a href="bargaining.html">bargaining.html</a></td>
+</tr>
+<tr>
+<td>인터랙티브 시뮬레이터</td>
+<td>완료</td>
+<td><a href="./">시뮬레이터</a></td>
+</tr>
+<tr>
+<td>재현 스크립트</td>
+<td>완료</td>
+<td><code>sim/sim.py</code></td>
+</tr>
+<tr>
+<td>추진계획</td>
+<td>이 문서</td>
+<td><a href="plan.html">plan.html</a></td>
+</tr>
+<tr>
+<td>노사협의회 제출용 계획(안)</td>
+<td>미작성</td>
+<td>—</td>
+</tr>
+<tr>
+<td>자료 요구 공문</td>
+<td>미작성</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<h3>검증 완료 사항</h3>
+<ul>
+<li>시뮬레이션: 파이썬 재현 스크립트와 웹 시뮬레이터 결과가 몬테카를로 오차 범위 내 일치</li>
+<li>목표 표준편차가 등급 배정에 영향을 주지 않음을 확인(상대평가 단조변환)</li>
+<li>민감도 분석: 균등형 평정자의 부여 표준편차가 4점이어도 S등급 획득률이 기준선에 크게 미달 —
+결론이 가정에 강건함</li>
+<li>상위 지침 적법성: 「공기업·준정부기관 예산운용지침」의 등급 분포 요건은 성과급에 적용되며
+승진용 근무평정을 규율하지 않음 → C등급 완화가 지침과 충돌하지 않음</li>
+</ul>
+<h3>미검증 사항</h3>
+<ul>
+<li>실제 평정 데이터에 기반한 검증은 자료 미확보로 불가. 시뮬레이션은 <strong>제도 규칙만을 입력한 모의 결과</strong>이며
+창업진흥원의 실제 평정 결과가 아님을 모든 자료에 명시하고 있습니다.</li>
+</ul>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>

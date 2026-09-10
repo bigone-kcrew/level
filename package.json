@@ -1,0 +1,12 @@
+{
+  "name": "kised-perf-review",
+  "private": true,
+  "version": "1.0.0",
+  "description": "창업진흥원 근무평정 제도개선 제안자료",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "sim": "python3 sim/sim.py"
+  },
+  "dependencies": { "marked": "^15.0.0" }
+}

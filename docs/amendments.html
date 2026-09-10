@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02. 규정 개정안 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="인사규정은 그대로 두고 근무평정 규칙과 평정계획만 바로잡는 신구대조표">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html" class="on" aria-current="page">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><h1>02. 규정 개정안</h1>
+<h2>§0 이 문서가 무엇을 고치고, 무엇을 고치지 않는가</h2>
+<p><strong>고치지 않는다 — 인사규정.</strong>
+인사규정 제25조는 두 항뿐이다. ①은 &quot;매년 1회 이상 근무평정을 실시한다&quot;, ②는 &quot;근무평정에 관한
+세부 기준 및 절차 등은 <strong>근무평정 규칙에서 정하는 바에 따른다</strong>&quot;. 근무평정의 내용은 전부 규칙에
+위임되어 있다. 그래서 이 개편에 <strong>인사규정 개정은 필요하지 않다.</strong> 이사회 의결도, 중소벤처기업부
+장관 보고도 필요하지 않다.</p>
+<p><strong>고친다 — 근무평정 규칙, 그리고 평정계획.</strong>
+아래 모든 개정안은 규칙과 계획 두 층위에서만 작동한다.</p>
+<blockquote>
+<p><strong>범위 고지</strong> 이 문서는 근무평정 제도개선만 다룬다. 승진제도 개선은 장기과제로 분리했고
+관련 제안은 〈붙임 나〉에 참고로만 적었다. 노동조합 전임자 평가는 <strong>의도적으로 이 문서에서
+제외했다</strong> — 근무평정 개편의 대가로 다루어지지 않기 위해 별도 안건으로 분리한다.</p>
+</blockquote>
+<hr>
+<h2>§1 어느 층위를 고칠 것인가 — 세 갈래</h2>
+<h3>1-1 창진원 규범의 3층 구조</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>층위</th>
+<th>위임 근거</th>
+<th>확정 권한</th>
+<th>절차</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>인사규정</strong> 제25조</td>
+<td>정관</td>
+<td>이사회 심의·의결 + 중기부 장관 보고</td>
+<td>「제규정관리규정」 제5조①1호·제12조①·제5조②</td>
+</tr>
+<tr>
+<td><strong>근무평정 규칙</strong></td>
+<td>인사규정 제25조②</td>
+<td><strong>원장 결재</strong></td>
+<td>「제규정관리규정」 제4조2호·제5조①2호·제12조①</td>
+</tr>
+<tr>
+<td><strong>근무평정 계획</strong></td>
+<td>규칙의 위임 조항 12곳</td>
+<td>원장 결재</td>
+<td>규칙 제31조 등</td>
+</tr>
+</tbody></table></div>
+<p>「제규정관리규정」 제4조2호가 규칙을 이렇게 정의한다 — &quot;&#39;규칙(요령 및 지침을 포함한다)&#39;이라 함은
+규정이 정한 범위에서 그 시행에 필요한 내용 및 부분적 한정적인 업무에 관한 구체적인 기준이나 세부
+절차 등을 정하는 규정형식을 말하며 <strong>원장의 결재를 요한다</strong>&quot;. 제5조①2호도 &quot;원장 : 기타 규정,
+<strong>규칙의 제정 및 개정</strong> 또는 폐지에 관한 사항&quot;이라고 못 박는다. 근무평정 규칙 부칙 제1조 역시 매
+개정마다 &quot;이 규칙은 <strong>원장의 승인을 얻은 날로부터</strong> 시행한다&quot;이다.</p>
+<p><strong>즉 규칙 개정에 이사회는 개입하지 않는다.</strong> 다만 개정 절차에 두 관문이 있다 — 제9조② <strong>일상감사</strong>
+요청 의무, 제11조 <strong>부패영향평가</strong> 신청. 두 절차 모두 감사부서를 거치므로, 노측에는 오히려 검증
+지점이 된다.</p>
+<h3>1-2 세 트랙</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>트랙 A — 계획만</th>
+<th>트랙 B — 규칙 + 계획</th>
+<th>트랙 C — 인사규정까지</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>고치는 것</td>
+<td>근무평정 계획</td>
+<td>근무평정 규칙 + 계획</td>
+<td>인사규정 + 규칙 + 계획</td>
+</tr>
+<tr>
+<td>권한</td>
+<td>원장 결재</td>
+<td>원장 결재</td>
+<td><strong>이사회 의결</strong> + 장관 보고</td>
+</tr>
+<tr>
+<td>소요</td>
+<td>즉시</td>
+<td>수 주 (일상감사·부패영향평가 포함)</td>
+<td>수 개월</td>
+</tr>
+<tr>
+<td>2027년 근평 적용</td>
+<td>가능</td>
+<td><strong>가능</strong></td>
+<td>촉박</td>
+</tr>
+<tr>
+<td>구속력</td>
+<td>원장 재량으로 원상복귀 가능</td>
+<td>규칙 사항으로 승격</td>
+<td>최상</td>
+</tr>
+<tr>
+<td>판단</td>
+<td>최소한</td>
+<td><strong>권고</strong></td>
+<td><strong>불필요</strong></td>
+</tr>
+</tbody></table></div>
+<h3>1-3 트랙 C가 불필요한 이유</h3>
+<p>인사규정 제25조②는 백지위임이다. 규칙에 무엇을 담아도 인사규정과 충돌하지 않는다. 「제규정관리
+규정」 제6조②이 &quot;규정은 규칙에 우선하여 적용&quot;한다고 하지만, 우선할 상위 규범 내용 자체가 없다.
+<strong>인사규정을 여는 것은 얻는 것 없이 이사회 일정과 장관 보고를 감당하는 일이다.</strong></p>
+<h3>1-4 트랙 A만으로는 부족한 이유 — 실제로 되돌려진 적이 있다</h3>
+<p>2025년 근무평정 계획의 노동조합 항목에 이런 문장이 있다.</p>
+<blockquote>
+<p>&quot;사전조정계수가 조정(<strong>85점→80점</strong>)된 만큼 보정하여 종합점수 산출&quot;</p>
+</blockquote>
+<p>사전조정계수의 평균 기준값이 <strong>85점에서 80점으로 내려간 이력</strong>이 계획 문서에 남아 있다. 규칙에
+없는 수치였으므로, 이 5점은 노사 협의를 거치지 않고 바뀌었다. 계획만 고치면 같은 방식으로 다시
+바뀔 수 있다. <strong>그래서 규칙에 올린다.</strong></p>
+<hr>
+<h2>§2 현행 규범 진단</h2>
+<h3>2-1 규칙에 없고 계획에만 있는 것들</h3>
+<p>근무평정 규칙 전문(2026.01.27. 개정)을 검색한 결과 <strong>「사전조정계수」라는 용어도, 「평균 80점」이라는
+수치도 규칙 본문과 별표 어디에도 없다.</strong> 제도의 뼈대가 규칙 밖에 있다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사항</th>
+<th>실제 위치</th>
+<th>규칙 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사전조정계수 — 피평가자 그룹 평균 <strong>80점 이내</strong></td>
+<td>평정계획 〈평가자별 평균 부여 점수〉</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>등급별 비율 — S 20 / A 30 / B 40 / C 10</td>
+<td>평정계획</td>
+<td>제26조③ &quot;원장이 별도로 정하는 바&quot;</td>
+</tr>
+<tr>
+<td>등급별 인원배정 <strong>±5%p 범위 조정 가능</strong></td>
+<td>평정계획</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>본부장의 2개 그룹 분리 적용(부서장 / 부서장 외)</td>
+<td>평정계획</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>다면·상향평가 점수 부여 구간 20~100점, 최고·최저점 제외</td>
+<td>평정계획</td>
+<td>제22조② &quot;구간값 등을 적용할 수 있으며&quot;</td>
+</tr>
+<tr>
+<td>파견 기준 244일, 경영본부장 100% 평가</td>
+<td>평정계획</td>
+<td>제10조는 &quot;인사부서가 속한 본부의 장&quot;</td>
+</tr>
+<tr>
+<td>업무지원자 — 지원 부서 소속으로 <strong>별도 사전조정계수</strong></td>
+<td>평정계획</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>겸직 평정자·피평정자 처리</td>
+<td>평정계획</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>근로시간면제자 처리</td>
+<td>평정계획</td>
+<td><strong>없음</strong></td>
+</tr>
+<tr>
+<td>해외사무소장 — 상향평가 제외, 3항목 100% 환산</td>
+<td>평정계획</td>
+<td>별표1 주4는 &quot;소장은 부서장으로 분류&quot;만</td>
+</tr>
+<tr>
+<td>TF발령·휴복직으로 평가그룹 인원 중복 시 <strong>동일점수 부여</strong></td>
+<td>평정계획</td>
+<td><strong>없음 (규칙 제4조①3호와 충돌)</strong></td>
+</tr>
+</tbody></table></div>
+<h3>2-2 위임 조항이 12곳이다</h3>
+<p>규칙 안에 &quot;원장이 별도로 정하는 바에 따른다&quot;가 다음 12곳에 있다.</p>
+<p>제2조② (본부장·청년인턴) · 제4조② (평가자 교육) · 제7조①6호 (평가 예외 사유) · 제7조② 단서
+(전임자) · <strong>제9조④ (보정)</strong> · 제22조② (다면 구간값) · 제22조의2② (상향 구간값) · 제24조
+(가감평가점수) · <strong>제26조③ (등급별 비율)</strong> · <strong>제27조④ (예외자 평정점)</strong> · 제31조 (규칙시행) ·
+별표1 주3 (기관장 직속 부서·본부 직속 팀)</p>
+<p>이 가운데 <strong>굵게 표시한 세 곳이 제도의 핵심</strong>이다. 보정 방법, 등급 비율, 예외자 평정점 산출은
+피평가자의 승진과 성과급을 직접 결정하는데, 규칙은 이를 전부 원장 재량으로 넘겼다.</p>
+<h3>2-3 규칙 내부의 불정합 5건</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>가</strong></td>
+<td><strong>제3조8호</strong> &quot;종합점수&quot;의 정의가 &quot;업적평가, 역량평가, 다면평가 및 가감평가점수&quot;인데, <strong>제9조①</strong>은 &quot;업적평가, 역량평가, <strong>상향평가</strong>, 다면평가, <strong>공통평가</strong> 및 가감평가점수&quot;를 합산한다고 한다. 2022년 공통평가 신설과 2024년 상향평가 신설 때 정의 조항을 정비하지 않았다.</td>
+</tr>
+<tr>
+<td><strong>나</strong></td>
+<td><strong>제4조①3호</strong> &quot;평가자는 가능한 범위 내에서 피평가자 간 평가점수가 동일하지 아니하도록 평가하여야 한다&quot; ↔ <strong>평정계획</strong> &quot;TF발령, 휴·복직 등으로 평가그룹 내 인원이 중복되는 경우에는 <strong>동일점수 부여</strong>&quot;. 규칙이 금지한 것을 계획이 지시한다.</td>
+</tr>
+<tr>
+<td><strong>다</strong></td>
+<td><strong>제9조④</strong> &quot;근무평정 결과의 신뢰도를 제고하기 위해 평균 등을 적용하여 <strong>보정할 수 있으며</strong>&quot; — 근거가 있는데 제도 시행 이래 <strong>한 번도 실시되지 않았다.</strong></td>
+</tr>
+<tr>
+<td><strong>라</strong></td>
+<td><strong>별표1 주2</strong> &quot;공무직 … 의 경우 4급 이하에 포함&quot; ↔ <strong>제9조⑤</strong> 절대평가 대상 목록(파견자·전문계약직·촉탁계약직·기간제계약직·임금피크제)에 <strong>공무직이 없다</strong> ↔ <strong>실제</strong>로는 2025년 계획에서 공무직 5명이 별도 직급군으로 상대평가되어 S 1명·A 2명·B 2명·C 0명이 배정되었다. 규칙 문언, 절대평가 목록, 실제 운영이 셋 다 다르다.</td>
+</tr>
+<tr>
+<td><strong>마</strong></td>
+<td><strong>제8조②</strong> &quot;평가하기 곤란한 경우에는 원장이 별도로 평가자를 지정한다&quot; — 지정 근거만 있고 <strong>어떤 경우가 &#39;곤란&#39;인지, 언제까지 지정하는지, 피평가자에게 통지하는지가 없다.</strong></td>
+</tr>
+</tbody></table></div>
+<h3>2-4 평가군이 두 개로 갈라져 있다</h3>
+<p>이것이 현행 제도의 작동 원리이자 불신의 진원이다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>단위</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>점수 부여 시 평균 제약</td>
+<td><strong>평가자별 피평가자 그룹</strong> (부서 단위, 3~16명)</td>
+<td>평정계획</td>
+</tr>
+<tr>
+<td>등급 배정</td>
+<td><strong>직급별 전사 단위</strong></td>
+<td>규칙 제26조① &quot;직급별로 배정&quot;</td>
+</tr>
+</tbody></table></div>
+<p>2025년 상대평가 대상 196명의 직급별 규모는 1(나)급 4 · 2급 11 · 3급 29 · 4급 40 · 5급 107 ·
+공무직 5명이다. 부서장은 자기 부서 안에서 평균 80점을 맞추지만, 등급은 그 점수가 <strong>전사 직급
+순위</strong>에 놓인 결과로 결정된다.</p>
+<p>따라서 부서 안에서 균등하게 점수를 부여받은 5급 직원은 <strong>107명 경쟁에서 중간에 뭉친다.</strong> S등급
+21명 안에 들 길이 사실상 막힌다. 반대로 극단적으로 점수를 부여받은 부서의 상위자는 상위로,
+하위자는 하위로 흩어진다. <strong>부서장·본부장의 평가 성향이 등급을 결정하는 구조적 이유가 여기에
+있다.</strong> 실력이 아니라 평가자 성향이 전사 순위상의 위치를 정한다.</p>
+<hr>
+<h2>§3 신구대조표</h2>
+<p>각 항목은 〈현행〉 → 〈개정안〉 → 〈이유〉 → 〈타기관 근거〉 순이다.
+근거로 인용한 조문 원문은 〈붙임 가〉에 실었다.</p>
+<h3>개정 1. 제3조 — 용어 정의 정비</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8. &quot;종합점수&quot;란 업적평가, 역량평가, 다면평가 및 가감평가점수를 비율에 따라 반영한 평가점수를 말한다.</td>
+<td>8. &quot;종합점수&quot;란 업적평가, 역량평가, 다면평가 또는 상향평가, 공통평가 및 가감평가점수를 비율에 따라 반영한 평가점수를 말한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>14. &quot;공통평가&quot;란 기관 고유의 특성을 반영하여 임직원이 준수하여야 하는 사항에 대한 평가를 말한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>15. &quot;보정&quot;이란 평가자별 평가성향의 차이로 발생하는 피평가자 간 유리·불리를 제거하기 위하여 평가점수를 [별표 9]의 방법에 따라 다시 산출하는 것을 말한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>제3조 본문 &quot;이 <strong>규정</strong>에서 사용하는 용어의 정의는&quot;</td>
+<td>제3조 본문 &quot;이 <strong>규칙</strong>에서 사용하는 용어의 정의는&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 2022년 공통평가, 2024년 상향평가를 신설하면서 정의 조항을 정비하지 않아 제3조8호와
+제9조①이 불일치한다. 정의에 없는 항목이 종합점수에 들어가는 상태다. 아울러 &quot;보정&quot;을 정의해야
+개정 6의 의무 규정이 작동한다. 제3조 본문의 &quot;이 규정&quot;은 규칙 제정 당시의 오기다.</p>
+<h3>개정 2. 제4조 — 동점 부여 금지의 실효화</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>①3. 평가자는 <strong>가능한 범위 내에서</strong> 피평가자 간 평가점수가 동일하지 아니하도록 평가하여야 한다.</td>
+<td>①3. 평가자는 피평가자 간 평가점수를 동일하게 부여할 수 없다. 다만 해당 평가자의 피평가자가 1명인 경우에는 그러하지 아니하다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>③ 인사담당부서장은 제1항제3호를 위반한 평가표에 대하여 제12조에 따라 재작성을 요구한다. <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> &quot;가능한 범위 내에서&quot;라는 문구가 의무를 무력화한다. 위원장이 관찰한 균등형 평가 — 피평가자
+전원에게 사실상 같은 점수를 주는 방식 — 은 현행 규칙에서도 바람직하지 않은 것으로 되어 있으나
+제재가 없다. 동시에 평정계획이 &quot;TF발령, 휴·복직 등으로 평가그룹 내 인원이 중복되는 경우에는
+동일점수 부여&quot;라고 규칙과 반대로 지시하고 있어, 이 지시는 삭제해야 한다(§6 참조).
+개정 6의 순위기반 보정은 순위가 매겨져야 작동하므로, 이 조항은 보정의 전제조건이기도 하다.</p>
+<p><strong>타기관 근거</strong> 한국산업기술시험원 「직무역량평가 운영지침」 제8조③ &quot;평가자는 본인이 평가하는
+평가대상자에게 <strong>동점(총점 기준)을 부여할 수 없다</strong>&quot; · 한국방송통신전파진흥원 「역량평가 규칙」
+제14조③ &quot;동일 직급은 <strong>동점을 부여할 수 없으며</strong>&quot; · 한국무역보험공사 「종합평정 시행요강」
+제21조② &quot;동일 평가군 내에 동점은 허용하지 아니한다&quot;</p>
+<h3>개정 3. 제6조 — 전보·조직개편·휴직자의 평가</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 평가는 평가 기준일 소속으로 평가함을 원칙으로 하나 평가대상기간 내 부서 이동 등이 발생한 경우 업적, 역량평가는 평가자와 피평가자 간 <strong>최소 30일 이상 근무한 부서를 기준으로 평가하며 가중치는 부서별 근무기간에 따른 비율</strong>에 의한다.</td>
+<td>① 평가는 평가 기준일 소속 부서의 평가자가 실시한다. 평가대상기간 내 부서 이동 등이 발생한 경우 평가 기준일 소속 부서의 평가자는 <strong>전 소속 부서 평가자의 의견을 들어</strong> 평가한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>② 평가대상기간 중 근무기간이 <strong>60일 미만</strong>인 부서에서 수행한 업무는 평가에 반영하지 아니한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>③ 제1항의 의견 청취는 서면으로 하며, 인사담당부서장이 그 서면을 보관한다. 전 소속 부서 평가자가 퇴직·공석 등으로 의견을 제출할 수 없는 경우에는 그 사유를 기록하고 의견 청취를 생략한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>③ (가중치 산정 시 소수점 처리)</td>
+<td>④ <em>(항 번호만 이동, 내용 유지)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 이것이 위원장이 지적한 핵심 문제의 처방이다. 현행은 <strong>전 부서장이 이미 떠난 직원에게
+직접 점수를 부여</strong>한다. 정기전보가 7월과 1월 두 차례이므로, 1~2월 평정 직후 전보 가는 사람은
+유리하고 <strong>7월 전보자는 &quot;이미 나간 사람&quot;으로 취급되어 불리하다.</strong> 휴직·파견·연중 조직개편도 같다.
+결과적으로 한 부서장 아래 계속 남는 직원이 유리해지고, 이것이 사내 라인 문화를 강화한다.</p>
+<p>개정안은 <strong>점수 부여 권한을 현 부서장에게 일원화하고 전 부서장은 의견만 제출</strong>하게 한다. 이렇게
+하면 &quot;나갈 사람에게 점수를 아끼는&quot; 동기가 원리적으로 사라진다. 이 방식은 공공기관에서 소수가
+아니라 <strong>주류</strong>다.</p>
+<p>또한 30일 기준은 조사한 공공기관 중 <strong>가장 짧다.</strong> 11월 조직개편으로 부서가 바뀐 직원이 한 달치
+근무로 새 부서장에게 평가받는 일이 30일 기준 때문에 발생한다.</p>
+<p><strong>타기관 근거</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>과학기술정책연구원</td>
+<td>제18조 &quot;<strong>현 근무부서장이 전 근무부서장의 의견을 들어</strong> 평가&quot;</td>
+</tr>
+<tr>
+<td>과학기술사업화진흥원</td>
+<td>제7조 &quot;이전 부서장의 의견을 청취하여 <strong>평가시점 기준 현재 부서에서</strong> 평가&quot;</td>
+</tr>
+<tr>
+<td>의료기관평가인증원</td>
+<td>제8조 &quot;평가일 기준 <strong>현재 부서에서</strong> 실시. 단, 변경 전 부서장 의견을 청취&quot;</td>
+</tr>
+<tr>
+<td>해양수산과학기술진흥원</td>
+<td>제16조 &quot;<strong>마지막 소속부서장이</strong> 전 소속부서장 의견을 청취하여 평가&quot;</td>
+</tr>
+<tr>
+<td>한국교육학술정보원</td>
+<td>제9조①② &quot;<strong>현부서의 계통에 따라</strong> 평가하고 필요시 전 부서 평가자 의견 참조&quot;</td>
+</tr>
+<tr>
+<td>장애인기업종합지원센터 <em>(중기부)</em></td>
+<td>제18조② &quot;근무월수 <strong>1개월 미만</strong> 부서의 업무는 평가에 반영하지 아니한다&quot;</td>
+</tr>
+<tr>
+<td>한국양성평등교육진흥원</td>
+<td>제6조 &quot;<strong>2개월 이상</strong> 근무실적에 대해 근무기간 비례 평가&quot;</td>
+</tr>
+<tr>
+<td>한국사회보장정보원</td>
+<td>평정기준일 이전 <strong>2개월 이내</strong> 전보 시 전보 전 본부에서 평정</td>
+</tr>
+<tr>
+<td>한국세라믹기술원</td>
+<td>제12조① 현 부서 <strong>3개월 이내</strong>면 전 근무부서에서 평가</td>
+</tr>
+<tr>
+<td>건설근로자공제회</td>
+<td>제85조③ 평정기준일 전 <strong>3개월 내</strong> 소속 변경 시 종전 부서에서 평정</td>
+</tr>
+</tbody></table></div>
+<h3>개정 4. 제8조 — 평가자 부재·직무대리·사전 평가 금지</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>② 제1항의 규정에 따라 평가하기 곤란한 경우에는 원장이 별도로 평가자를 지정한다.</td>
+<td>② 1차 평가자가 공석이거나 부임 후 30일이 지나지 않아 평가할 수 없는 경우에는 <strong>2차 평가자가 1차 평가를 겸하여 실시</strong>하고, 2차 평가자가 평가할 수 없는 경우에는 그 상위 평가자가 실시한다. 이에 따라서도 평가할 수 없는 경우에는 원장이 평가자를 따로 지정한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>③ <strong>부서장 직무대리 및 겸직자는 평가자가 될 수 없다.</strong> 이 경우 제2항을 적용한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>④ 평가자는 <strong>평가 기준일 이전에 평가를 실시할 수 없다.</strong> <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑤ 제2항부터 제4항까지에 따라 평가자가 변경된 경우 인사담당부서장은 그 사실과 사유를 해당 피평가자에게 통지한다. <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 네 가지를 함께 해결한다.</p>
+<p><strong>첫째, 부재 시 승계 순서가 없다.</strong> 현행은 &quot;원장이 지정한다&quot;뿐이어서, 실제로는 평가자가 없을 때
+어떻게 처리되는지 직원이 알 수 없다.</p>
+<p><strong>둘째, 직무대리가 평가자가 된다.</strong> 현행 별표1 주1은 &quot;부서장 <strong>직무대리 포함</strong>&quot;이라고 명시하여
+직무대리를 평가자로 인정한다. 2025년 계획에는 &quot;스타트업코리아추진단장(직무대리)의 경우 본부장
+으로서 상향평가 피평정 실시&quot;라는 항목까지 있다. 직무대리는 권한 기간이 짧고 인사상 책임 구조가
+불명확하다.</p>
+<p><strong>셋째, 겸직자가 평가자가 된다.</strong> 2025년 계획 &quot;겸직 평정자인 경우, 겸직 소속 부서원에 대한 평가
+실시&quot;.</p>
+<p><strong>넷째, 평가 기준일 전 선평가.</strong> 정기평정 기준일은 12월 말일(제5조1호)이고 평가대상기간은 해당
+회계연도(제3조3호)다. 그런데 임기 종료나 퇴직을 앞둔 평가자가 <strong>평정계획이 확정되기도 전에 미리
+평가를 마치고 떠나는 관행</strong>이 있다는 지적이 있다. 이는 제4조①2호(&quot;평가대상기간을 임의로 소급
+또는 연장하여 평가하지 아니한다&quot;)의 취지에 어긋나지만, 시점을 금지하는 조항이 없어 제재되지
+않는다. 12월 말일 기준 평가를 8월에 마치면 4개월의 실적이 평가에서 사라진다.</p>
+<blockquote>
+<p><strong>자료 요구 연계</strong> 최근 3년간 ①평가자가 평가 기준일 이전에 평가를 완료한 사례 ②직무대리·겸직
+상태에서 평가를 실시한 사례 ③제8조②에 따라 원장이 평가자를 따로 지정한 사례를 각각 요구한다.
+위 개정이 실재하는 문제를 다루는지 여부가 이 자료로 확인된다.</p>
+</blockquote>
+<p><strong>타기관 근거</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>건설근로자공제회</td>
+<td>제85조④ &quot;1차 평정자가 전입 1월 미만이거나 <strong>공석 등으로 평정할 수 없을 경우 2차 평정자가 평정</strong>&quot; · ⑤ &quot;그럼에도 평가할 수 없을 때에는 이사장이 평정자를 따로 지정&quot;</td>
+</tr>
+<tr>
+<td>한국출판문화산업진흥원</td>
+<td>제6조⑥ &quot;<strong>직무대행 및 겸직자는 평정자와 확인자로 정할 수 없다</strong>&quot; · 제6조②3·4호 부재 시 반영비율 승계</td>
+</tr>
+<tr>
+<td>한국조폐공사 제13조② · 근로복지공단 제26조② · 한국지역난방공사 제10조②</td>
+<td>&quot;평정자가 없는 경우 사장(이사장)이 따로 정한다&quot;</td>
+</tr>
+<tr>
+<td>한국세라믹기술원 제12조① · 무역안보관리원 제8조③</td>
+<td>전 부서 <strong>평가자의 퇴직</strong>·부서 폐쇄 등 불가피한 사유 시 현 부서에서 평가</td>
+</tr>
+</tbody></table></div>
+<h3>개정 5. 제9조② — 평가별 반영 비율</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>② 평가별 반영 비율은 업적평가 65퍼센트, 역량평가 20퍼센트, 다면평가 10퍼센트, 공통평가 5퍼센트로 반영하며 …</td>
+<td><strong>현행 유지 (조합 확정)</strong> — 개정 9의 보정·동점금지를 먼저 시행하고, 2027년 근무평정 결과를 검증한 뒤 다면평가 비중 확대를 재협의한다.</td>
+</tr>
+<tr>
+<td></td>
+<td><em>(검토 후 배제)</em> 업적 60 / 역량 15 / 다면 20 / 공통 5 — 보정 없이 비중만 올리면 역효과 우려</td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 위원장 의견은 &quot;승진제도에서 근무평정 비중이 높으니 그것을 조정하기 어렵다면 다면 비중을
+확대하는 것도 좋다&quot;였다. 방향에는 동의하나 <strong>순서를 바꾸는 것이 안전하다.</strong></p>
+<p>다면평가에는 &quot;부서 내에서 껄끄러워지는 것을 피하려고 전원에게 높은 점수를 주는&quot; 경향이 있다는
+관찰이 있다. 실제 분포는 조합이 확인할 수 없다. 만약 그 관찰이 사실이라면, <strong>변별력이 없는 항목의
+비중을 20%로 올리는 것은 업적·역량 80%의 실질 지배력을 오히려 키운다.</strong> 다면평가에 보정과 동점
+금지를 먼저 적용해 변별력을 확보한 뒤 비중을 올리는 것이 순서다.</p>
+<blockquote>
+<p><strong>자료 요구 연계</strong> 최근 3년간 다면평가·상향평가의 <strong>평가자별 부여 점수 분포</strong>(익명 집계, 항목별
+등급 부여 빈도)를 요구한다. 이 자료 없이는 어느 안이 옳은지 판단할 수 없다.</p>
+</blockquote>
+<p><strong>공통평가 5%는 이 개정안에서 건드리지 않는다.</strong> 공통평가 항목(내PC지키미 점검, 정보보안 교육
+이수, 해킹메일 미열람·신고)은 개인이 통제할 수 있는 것들이어서 &quot;통제 불가능한 조직성과의 전가&quot;
+라는 비판이 그대로 적용되지 않는다. 실제 점수 분포를 모르는 상태에서 폐지를 주장하지 않는다.
+대신 개정 11에서 <strong>분포 공개</strong>를 요구한다.</p>
+<h3>개정 6. 제9조④ — 사전 평균제약 폐지와 사후 보정 의무화 ★ 핵심</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>④ 근무평정 결과의 신뢰도를 제고하기 위해 평균 등을 적용하여 <strong>보정할 수 있으며</strong> 세부사항은 원장이 별도로 정하는 바에 따른다.</td>
+<td>④ 인사담당부서장은 평가자별 평가성향의 차이로 인한 피평가자 간 유리·불리를 제거하기 위하여 업적평가 및 역량평가의 1차·2차 평가자별 평가점수를 <strong>[별표 9]의 방법에 따라 보정한다.</strong></td>
+</tr>
+<tr>
+<td>⑤ 상대평가를 원칙으로 하되 … <em>(절대평가)</em></td>
+<td><strong>⑤ 현행 유지 — 항 번호를 바꾸지 않는다.</strong> 제27조제4항이 &quot;제9조제5항&quot;을 인용하고 있어, 항 번호를 옮기면 연쇄개정이 필요해진다. 신설 조항은 뒤에 붙인다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑥ 평가자가 부여하는 점수의 평균값을 특정 수치 이내로 제한하는 기준은 두지 아니한다. 평가자는 <strong>60점부터 100점까지의 범위에서</strong> 피평가자를 평가한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑦ 인사담당부서장은 제4항의 보정에 관하여 다음 각 호를 노사협의회에 보고한다. 1. 평가군별 보정 전·후 평균 및 표준편차 2. 보정에 따른 직급별 순위 변동 건수 3. [별표 9] 제5호를 적용한 평가군의 수 <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 이 개정안의 중심이다.</p>
+<p><strong>(1) 사전 평균제약은 전국 공공기관에서 소수다.</strong> ALIO 경영공시 기관 내규 355개 기관 36,190건을
+조문 단위로 전수 조사한 결과다. 조사 방법과 기관 명단 전체는 <a href="census.html">부록 — 사전·사후 조정 전수 집계</a>에 있다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>기관 수</th>
+<th>비율</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>사후 보정 근거를 규정에 둔 기관</td>
+<td><strong>202</strong></td>
+<td>57%</td>
+</tr>
+<tr>
+<td>그중 보정 산식·기법까지 명문화</td>
+<td><strong>66</strong></td>
+<td>19%</td>
+</tr>
+<tr>
+<td><strong>사전 평균제약</strong>을 둔 기관</td>
+<td><strong>17</strong></td>
+<td><strong>4.8%</strong></td>
+</tr>
+<tr>
+<td>그중 기준을 <strong>80점</strong>으로 묶은 기관</td>
+<td><strong>6</strong></td>
+<td><strong>1.7%</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>(2) 80점을 쓰는 6개 기관 중에서도 창진원만 완충장치가 없다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>기준</th>
+<th>완충장치</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>예금보험공사</td>
+<td>80점 이내</td>
+<td><strong>6명 미만 85점 · 2명 88점 · 1명 91점 이내</strong> (규모별 차등)</td>
+</tr>
+<tr>
+<td>한국주택금융공사</td>
+<td>80점 이내</td>
+<td>66~100점 부여 + <strong>±20% 특이점수 배제 후 재산출</strong></td>
+</tr>
+<tr>
+<td>한국관광공사</td>
+<td>83~85점</td>
+<td><strong>구간형</strong>(하한 있음) + 1인은 83~87점</td>
+</tr>
+<tr>
+<td>한국가스안전공사</td>
+<td>83~87점</td>
+<td><strong>구간형</strong> + 다면·1인 제외 + 조정점수 산식</td>
+</tr>
+<tr>
+<td>한국교통연구원</td>
+<td>85점 ±2.5</td>
+<td><strong>초과 시 사유서 제출</strong></td>
+</tr>
+<tr>
+<td>한국농어촌공사</td>
+<td>90점 초과 불가</td>
+<td>그마저 <strong>절대평가</strong></td>
+</tr>
+<tr>
+<td><strong>창업진흥원</strong></td>
+<td><strong>80점 이내</strong></td>
+<td><strong>없음</strong></td>
+</tr>
+</tbody></table></div>
+<p>나머지 사전제약 기관의 기준은 82점(한전KDN), 85점(한국국방연구원·한국무역보험공사), 87점
+(한국국제협력단), 90점(농림수산식품교육문화정보원·한국학중앙연구원·한국농수산식품유통공사)이다.
+<strong>창진원의 80점은 조사한 355개 기관 중 가장 낮은 수준이며, 유일하게 아무 완충장치가 없다.</strong></p>
+<p><strong>(3) 같은 중소벤처기업부 산하 기관이 이미 사후 보정을 한다.</strong></p>
+<ul>
+<li><strong>소상공인시장진흥공단</strong> 「수행능력평가 운영요령」 제10조② — &quot;평가점수는 <strong>평균-표준편차조정법</strong>
+으로 점수를 조정하여 적용하되, 차수별 평가에 대해 독립적으로 실시한다&quot; (산식 표 포함)</li>
+<li><strong>기술보증기금</strong> 「종합근무평정규정」 제16조 — &quot;평정결과가 기금 전체적인 견지에서 <strong>정규분포</strong>를
+이룰 수 있도록 유의&quot; · &quot;역량평가의 결과가 특별한 사유 없이 지나치게 <strong>양극화·중심화·관대화</strong>되어
+신뢰성이 떨어지는 경우에는 <strong>재평정을 지시</strong>할 수 있다&quot;</li>
+</ul>
+<p>기술보증기금의 &quot;양극화·중심화&quot;는 위원장이 관찰한 극단형·균등형 평가자 문제를 <strong>다른 중기부 기관이
+이미 규정 문언으로 인정하고 시정 권한까지 둔 것</strong>이다.</p>
+<p><strong>(4) 이것은 새 권한을 만드는 것이 아니라 있는 권한을 쓰게 하는 것이다.</strong>
+제9조④에 보정 근거가 이미 있다. 제도 시행 이래 실시되지 않았을 뿐이다. 개정안은 &quot;할 수 있다&quot;를
+&quot;한다&quot;로 바꾸고 방법을 별표로 특정한다.</p>
+<p><strong>(5) 정부 경영평가단 지적사항 이행에 해당한다.</strong>
+2025년도 경영실적 평가보고서는 창진원 근무평정에 대해 등급이 규정화되지 않은 점을 지적하고,
+심의위원회를 통한 등급 최종확정, 평가결과 조정 시 위원회 활용, 평가 수용도 제고를 권고했다.
+개정 6과 개정 10이 이 권고의 직접 이행이다.</p>
+<p><strong>타기관 근거</strong> 〈붙임 가〉에 건강보험심사평가원(제54조③④ 평균 및 표준편차 일치법을 상급자평정과
+다면평정 <strong>모두</strong>에 적용) · 한국농어촌공사(제56조의2⑥ <strong>조정계수 = 80 ÷ 직급별 평균점수</strong>) ·
+한국교육과정평가원(제21조 각 부서장 평정점수의 평균을 동일하게 조정) · 한국양성평등교육진흥원
+(별표3 조정 산식 = 85 + 〔(원점수−평가자 평균점수)/평가자 표준편차〕× 7.5) 등 원문 수록.</p>
+<h3>개정 7. 제9조⑤(→⑦) — 공무직 절대평가</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>⑤ 상대평가를 원칙으로 하되 다음 각 호의 어느 하나에 해당하는 때에는 절대평가를 시행한다. 1. 파견자 2. 전문계약직 3. 촉탁계약직 4. 기간제계약직 5. 임금피크제 대상 직원 6. 그 밖의 원장이 별도로 정하는 직군</td>
+<td>⑤ <em>(항 번호 유지)</em> … 1.~5. <em>(현행 유지)</em> <strong>6. 공무직</strong> 7. 그 밖에 평가 대상 인원이 적거나 수행업무의 특성상 상대평가가 어려운 직군으로서 원장이 별도로 정하는 직군</td>
+</tr>
+<tr>
+<td><strong>별표1 주2</strong> 공무직, 촉탁계약직, 전문계약직(라급 이하)의 경우 4급 이하에 포함</td>
+<td><strong>별표1 주2</strong> 촉탁계약직, 전문계약직(라급 이하)의 경우 4급 이하에 포함. <strong>공무직은 별도의 평가군으로 하며 제9조제5항에 따라 절대평가한다.</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 공무직은 직급이 없다. 시설원과 시설반장으로 나뉘며 <strong>승진제도가 없다.</strong> 그런데 규칙 별표1
+주2는 공무직을 &quot;4급 이하에 포함&quot;한다고 하고, 제9조⑤ 절대평가 목록에는 공무직이 없다. 실제
+2025년 계획에서는 공무직 5명이 <strong>별도 직급군</strong>으로 상대평가되어 S 1명·A 2명·B 2명·C 0명이
+배정되었다. 규칙 문언, 절대평가 목록, 실제 운영이 셋 다 다르다(§2-3 라).</p>
+<p>더 근본적인 문제는 규모다. 공무직 5명이 안전문화팀 하나에 소속되어 있고, 그중 일부가 휴직 중이어서
+<strong>실제 평가 대상은 1~3명에 그친다.</strong> 피평가자가 1~3명인 집단에 상대평가와 20:30:40:10 비율을
+적용하는 것은 통계적으로 의미가 없다. 승진에 쓰이지도 않는 등급을 위해 소수 인원을 강제로 서열화
+하는 것이다.</p>
+<p>또한 절대평가로 전환하면 공무직은 등급별 배정인원에서 제외되므로(제26조① 단서), <strong>일반직 평가군에
+미치는 영향은 없다.</strong> 노사 어느 쪽에도 비용이 발생하지 않는 개정이다.</p>
+<p><strong>타기관 근거</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국장애인개발원</strong></td>
+<td>제9조④ &quot;다만, <strong>평정대상 근로자 수가 적거나</strong> 수행업무 특성상 <strong>상대평가가 어려운 경우에는 절대평가로 운용</strong>할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>한국산림복지진흥원</td>
+<td>제8조④ &quot;단, <strong>공무직 평가결과는 원점수로 한다</strong>&quot; (보정 대상에서 제외)</td>
+</tr>
+<tr>
+<td>한국청소년정책연구원</td>
+<td>제19조④ 무기계약직 등 근무성적평가위원회를 통해 <strong>전체 대상자를 절대평가</strong></td>
+</tr>
+<tr>
+<td>한국직업능력연구원</td>
+<td>&quot;피평정 대상인원이 <strong>1명이거나</strong> 절대평가 시에는 중간등급(A~C) 내에서 평정&quot;</td>
+</tr>
+<tr>
+<td>한국학중앙연구원</td>
+<td>제11조② &quot;직급 내 인원수가 <strong>3인 이하인 경우 차하위 직급과 평가단위를 통합</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국산업기술시험원</td>
+<td>「공무직 운영세칙」 제10조의1① &quot;기능원은 전사 평균 점수인 <strong>B등급(80점)을 적용</strong>&quot;</td>
+</tr>
+<tr>
+<td>소상공인시장진흥공단 <em>(중기부)</em></td>
+<td>계약직원 근무평정을 <strong>정규직과 분리</strong>하여 실시</td>
+</tr>
+</tbody></table></div>
+<h3>개정 8. 제15조·제17조 — 목표설정 시기와 달성기준</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>제15조</strong>① 평가자와 피평가자간에 성과목표에 대한 면담을 실시하여 개인별 목표 및 지표를 설정하며 평가자는 이를 검토하여 피평가자와 목표설정에 대하여 합의를 통해 확정하여야 한다.</td>
+<td>① <em>(현행 유지)</em> 이 경우 성과목표는 <strong>평가대상기간 개시 후 2개월 이내</strong>에 설정·합의하여 확정한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>② 성과목표는 다음 각 호를 포함하여 작성한다. 1. 목표의 내용 2. <strong>달성 여부를 판정할 수 있는 기준</strong> 3. 목표별 가중치 <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>③ 제2항제2호의 기준은 수량·기한 등 계량지표로 정하는 것을 원칙으로 하되, 담당 직무의 특성상 계량지표로 정하기 곤란한 경우에는 <strong>산출물·완료 상태 등 사후에 확인할 수 있는 형태</strong>로 정한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>④ 평가대상기간 중 전보·조직개편·휴복직 등으로 담당업무가 변경된 경우 변경일부터 <strong>30일 이내</strong>에 제1항에 따라 성과목표를 다시 설정한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑤ 제1항의 합의가 이루어지지 아니한 경우 피평가자는 그 이견을 기록하여 제출할 수 있으며, 인사담당부서장은 이를 확인하여 조정한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑥ 인사담당부서장은 <strong>부서 유형별 성과목표 및 달성기준 작성 예시</strong>를 마련하여 배포한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td><strong>제17조</strong>(평가자의 업적평가) 평가자는 평가대상기간에 수행한 피평가자의 업무에 관한 실적 및 성과의 달성도를 평가하되 세부 평가항목 및 배점에 따라 총 100점 만점으로 평가하여야 한다.</td>
+<td>제17조 … 평가하여야 한다. 이 경우 평가자는 <strong>제15조제2항에 따라 합의된 성과목표별로 달성 여부를 확인하고 그 내용을 평가표에 기재</strong>하여야 한다.</td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 노측 제안 1번의 취지는 <strong>목표설정합의가 무의미하게 운영되고 있으니 이를 현실화하여 그
+달성 여부로 점수를 주자</strong>는 것이었다.</p>
+<p>현재 운영은 이렇다. 피평가자가 경영정보시스템(MIS)에 정성·정량 구분 없이 무엇을 했는지 서술식으로
+올리고, 평가자가 목표합의 간편결재를 하면 평가가 이루어진다. <strong>목표설정의 시기 규정이 없고, 목표의
+형식 요건도 없다.</strong> 그 결과 사후 서술 정리가 목표설정을 대신하고, 평가는 전면 정성평가가 된다.
+제5조1호가 정기평정 기준일을 12월 말일로 정하고 있으므로 목표는 그 회계연도 초에 설정되어야
+논리적으로 정합한다.</p>
+<p><strong>계량지표 비율은 규칙에 못 박지 않는다.</strong> 검토 과정에서 조합은 계량 30% 이상을 요건화하는 안을
+검토했으나 채택하지 않았다. <strong>경영지원 부서와 사업 부서의 직무 성격이 근본적으로 다르고, 무엇을
+계량지표로 잡아야 하는지에 대한 합의된 기준이 아직 없다.</strong> 이 상태에서 동일 비율을 일괄 적용하면
+계량화가 아니라 <strong>형식만 채우는 지표</strong>가 양산된다. 목표설정 형해화를 다른 형태로 반복하는 셈이다.</p>
+<p>대신 <strong>검증가능성을 비율이 아니라 형식으로 확보한다.</strong> 개정안의 핵심은 세 가지다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>장치</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>제15조②2호 — 모든 목표에 <strong>달성 여부를 판정할 수 있는 기준</strong>을 붙인다</td>
+<td>계량이든 산출물이든, 연말에 달성 여부를 다툴 수 있게 된다</td>
+</tr>
+<tr>
+<td>2</td>
+<td>제15조③ — 계량을 <strong>원칙</strong>으로 두되 곤란하면 산출물·완료 상태로</td>
+<td>계량이 가능한 직무는 계량으로 가고, 어려운 직무는 배제되지 않는다</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>제17조</strong> — 평가자가 목표별 달성 여부를 확인하고 <strong>평가표에 기재</strong>한다</td>
+<td>목표와 점수가 연결된다. 이것이 없으면 제15조는 다시 형해화된다</td>
+</tr>
+</tbody></table></div>
+<p>세 번째가 실효성의 관건이다. 현행 제17조는 &quot;실적 및 성과의 <strong>달성도</strong>를 평가&quot;한다고 하지만 <strong>어느
+목표에 대한 달성도인지 특정하지 않는다.</strong> 목표설정과 평가가 규칙상 연결되어 있지 않다. 목표를
+연초에 세우게 해도 평가가 목표를 참조하지 않으면 아무것도 바뀌지 않는다.</p>
+<p>제15조⑥의 작성 예시는 &quot;무엇을 잡아야 할지 모르겠다&quot;는 실무의 어려움에 대한 답이다. <strong>비율을 강제
+하는 대신 도구를 만들게 한다.</strong> 부서 유형별 예시가 있으면 계량화 가능한 영역이 자연히 드러나고,
+그 실적을 보고 다음 단계에서 비율 논의를 할 수 있다.</p>
+<p>사측 개선(안)은 이 요구에 대해 <strong>경영평가 부서평가 결과를 근무평정에 반영</strong>하는 방식으로 답했다.
+시기 현실화는 담겼으나, <strong>정량화가 개인 목표의 검증가능성 확보가 아니라 조직지표 대입으로
+대체되었다</strong>(§5 참조). 개인이 통제할 수 없는 수치를 넣는 것은 정량화가 아니다.</p>
+<p><strong>타기관 근거</strong> 한국에너지공단 「직원인사평가내규」 제18조① &quot;3급 이하 피평가자는 <strong>매년초에</strong> 조직
+목표와 연계하여 업적평가 계획을 수립하고 수행직무 평가 역량에 대한 개인별 가중치를 설정하여야
+한다&quot; · 같은 조 ② &quot;<strong>조직개편, 전보, 기타 환경변화</strong> 등으로 연초에 수립한 계획의 조정이 필요한
+경우 … 피평가자와 평가자가 협의하여 평가항목을 조정할 수 있다&quot; · 같은 조 ③ 분기초 점검표에 따른
+중간 점검 · 한국관광공사 제7조② 평가자는 &quot;역량별로 <strong>평가 사유를 작성</strong>하여야 한다&quot;</p>
+<h3>개정 9. 제22조·제22조의2 — 다면·상향평가의 보정과 동점 금지</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제22조② 다면평가의 경우 <strong>구간값 등을 적용할 수 있으며</strong> 세부사항은 원장이 별도로 정하는 바에 따른다.</td>
+<td>제22조② 다면평가 점수는 최고점 및 최저점을 각각 하나씩 제외한 후 <strong>[별표 9]의 방법에 따라 보정한다.</strong></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>제22조④ 평가자는 피평가자 전원에게 동일한 점수를 부여할 수 없다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>제22조⑤ 인사담당부서장은 다면평가의 <strong>평가자별 부여 점수 분포</strong>를 익명으로 집계하여 노사협의회에 보고한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>제22조의2② 상향평가의 경우 <strong>구간 값 등을 적용 할 수 있으며</strong>, 세부사항은 원장이 별도로 정하는 바에 따른다.</td>
+<td>제22조의2② 상향평가 점수는 최고점 및 최저점을 각각 하나씩 제외한 후 [별표 9]의 방법에 따라 보정한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>제22조의2④·⑤ 제22조제4항·제5항을 준용한다. <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 다면평가와 상향평가는 현재 <strong>평균 제약도, 보정도 없다.</strong> 평정계획상 점수 부여 구간은
+20~100점이고 최고·최저점을 제외하는 장치만 있다. 위원장의 관찰대로 부서 내 관계를 고려해 전원에게
+높은 점수를 주는 평가자가 있다면, 다면 10%는 사실상 전원 동점이 되어 <strong>업적·역량 85%가 실질
+100%가 된다.</strong></p>
+<p>보정을 적용하는 데는 명확한 선례가 있다. <strong>건강보험심사평가원</strong>은 인사규정 시행세칙 제54조에서
+상급자평정(③)과 <strong>다면평정(④) 모두</strong>에 평균 및 표준편차 일치법을 적용한다. 한국보훈복지의료공단
+제59조는 다면평가 결과 조정을 위한 독립 조문을 두고 있다.</p>
+<p>제22조③과 제22조의2③의 <strong>개별 평가자 점수 비공개는 유지한다.</strong> 보정은 인사담당부서가 집계 단계에서
+수행하므로 익명성과 양립한다.</p>
+<p><strong>타기관 근거</strong> 건강보험심사평가원 제54조④ · 한국보훈복지의료공단 제59조 &quot;다면평가결과의 공정성 및
+신뢰도 제고를 위하여 … <strong>평균 및 표준편차 일치법</strong>을 적용하여 조정 평균점을 산출&quot; · 한국발명진흥회
+제10조 &quot;다면평가는 평가그룹별로 평균·표준편차 일치법에 의해 조정된 점수를 최종평가결과로 하며&quot; ·
+한국지식재산보호원 제7조⑤ · 국가유산진흥원 제25조3호 &quot;평가자 원점수 최고점 및 최저점을 제외한 후,
+평가자별 평균 및 표준편차 일치 방식으로 조정&quot;</p>
+<h3>개정 10. 제26조③ — 등급별 비율을 규칙에 올린다</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>③ 등급별 세부 비율은 원장이 별도로 정하는 바에 따른다.</td>
+<td>③ 등급별 비율은 S 100분의 20, A 100분의 30, B 100분의 40, C 100분의 10으로 한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>④ 인사담당부서장은 직급별 인원 구성을 고려하여 제3항의 비율을 <strong>5퍼센트포인트 범위</strong>에서 조정할 수 있다. 이 경우 조정 내용과 사유를 노사협의회에 보고한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑤ 직급별 피평가자가 <strong>10명 미만</strong>인 평가군에서는 C등급을 부여하지 아니할 수 있다. 이 경우 그 사유를 기재한다. <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 등급 비율은 승진과 성과급을 직접 결정하는 핵심 수치인데 규칙에 없다. 정부 경영평가단이
+&quot;등급이 규정화되지 않았다&quot;고 지적한 지점이 정확히 이것이다.</p>
+<p><strong>제3항의 수치는 현행 운영을 그대로 옮긴 것이다.</strong> 2025년 계획의 배정 비율이 S 20 / A 30 / B 40 /
+C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 비율을 바꾸자는 것이 아니라
+<strong>바꿀 때 협의를 거치게 하자는 것</strong>이다. 위원장 의견도 &quot;차등이 너무 커지는 것도 싫으나 평준화도
+싫다, 가운데 지점을 찾아야 한다&quot;였다. 현행 비율은 그 가운데에 이미 있다.</p>
+<p>제4항의 ±5%p는 평정계획에만 있던 재량(&quot;등급별 인원배정은 ±5%p 범위 이내에서 조정 가능&quot;)을
+규칙으로 올리면서 <strong>보고 의무를 붙인</strong> 것이다. 재량을 빼앗지 않고 검증 가능하게 만든다.</p>
+<p>제5항은 관행의 규칙화다. 2025년에 1(나)급 4명과 공무직 5명에는 C등급이 배정되지 않았다(각 0명).
+소규모 평가군에서 10%를 기계적으로 적용하면 4명 중 0.4명을 반올림하는 문제가 생긴다. 이미 그렇게
+운영되고 있으니 근거를 만든다.</p>
+<p><strong>상위 지침과 충돌하지 않는다.</strong> 「공기업·준정부기관 예산운용지침」의 차등 6개 등급 이상, 최고등급
+10% 이상, 특정등급 50% 초과 금지 등의 기준은 <strong>성과급 지급등급</strong>에 적용되며 승진용 근무평정 등급을
+규율하지 않는다. 창진원도 내부성과평가에서 S~E 6등급 체계를 별도로 운영하고 있다.</p>
+<p><strong>타기관 근거</strong> 중소기업은행 제19조③ &quot;분포비율에 의하여 미흡 또는 부족으로 평정해야 할 경우에는
+<strong>보통 등급까지 상향 평정할 수 있다. 이 경우 사유를 구체적으로 기재</strong>하여야 한다&quot; · 국립암센터
+제8조③ &quot;직렬별·직급별 인원이 소규모일 경우 등 위원회에서 필요하다고 인정하는 경우에는 이를
+적용하지 아니할 수 있다&quot; · 한국학중앙연구원 제11조① 최하 등급 해당자 없으면 상위 등급에 가산</p>
+<h3>개정 11. 제28조 — 검증가능성</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 평가결과는 역량평가, 업적평가, 상향평가·다면평가, 종합점수에 대하여 본인에게 개별적으로 공개하는 것을 원칙으로 하며 <strong>1·2차 평가자별 점수 및 직급 내 순위, 평정점은 공개하지 아니한다.</strong></td>
+<td><strong>조합 확정</strong> ① … 본인에게 개별적으로 공개한다. 이 경우 <strong>제9조제4항에 따른 보정 전·후의 점수와 평정점을 포함</strong>한다. 1·2차 평가자별 점수 및 직급 내 순위는 공개하지 아니한다.</td>
+</tr>
+<tr>
+<td></td>
+<td><em>(검토 후 배제)</em> 직급 내 순위까지 공개 — 저항이 크고, 보정이 도입되면 순위 공개의 실익이 줄어든다</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>④ 인사위원회는 제3항의 심의 시 신청인에게 <strong>의견진술 기회</strong>를 부여한다. <em>(신설)</em></td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>⑤ 인사담당부서장은 매년 다음 각 호를 노사협의회에 보고한다. 1. 이의신청 건수 및 처리 결과 2. 공통평가 항목별 점수 분포 3. 다면평가·상향평가의 평가자별 부여 점수 분포(익명) <em>(신설)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 현행 제28조①은 <strong>평정점을 본인에게도 공개하지 않는다.</strong> 평정점은 승진후보자 서열명부 작성과
+성과급 지급에 직접 쓰이는 수치(제27조③)인데, 정작 당사자가 자기 수치를 모른다. 여기에 일부 인원은
+평가 결과가 시스템에 등록되어 있지도 않다는 지적이 있다.</p>
+<p>이 상태에서는 <strong>이의신청이 성립할 수 없다.</strong> 제28조②는 7일 내 이의신청을 허용하지만, 무엇에 대해
+이의를 제기할지 알 수 없다. 실제로 이의신청은 거의 없다. 제도가 있어도 쓰이지 않는 것이 아니라,
+<strong>쓸 수 있는 정보가 주어지지 않아서 쓰이지 않는다.</strong></p>
+<p>개정안은 <strong>자기 점수와 보정 결과만</strong> 공개한다. 다른 사람과의 비교 정보(순위, 평가자별 점수)는
+닫아 둔다. 이렇게 하면 제29조 비밀유지 의무나 평가자 보호와 충돌하지 않으면서, 보정이 실제로
+적용되었는지 당사자가 확인할 수 있다. 요구의 초점은 <strong>비교</strong>가 아니라 <strong>검증</strong>이다.</p>
+<p>⑤2호와 3호는 개정 5·9에서 판단을 미룬 공통평가·다면평가의 실제 분포를 매년 확인하는 장치다.
+추정으로 제도를 설계하지 않기 위한 조항이다.</p>
+<p><strong>타기관 근거</strong> 예금보험공사 제68조① &quot;해당회차 평가가 완료되는 즉시 평가대상자에게 <strong>평정점을 알려
+주어야 한다</strong>&quot; · 한국관광공사 제7조② 평가자는 &quot;역량별로 <strong>평가 사유를 작성</strong>하여야 한다&quot; ·
+국가유산진흥원 제24조⑥ &quot;평가결과에 대한 공개 요청이 있을 경우 <strong>본인에 한하여</strong> 평가점수를 공개&quot;</p>
+<h3>개정 12. 제31조의2 신설 — 노사협의회 협의</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(없음)</td>
+<td><strong>제31조의2(노사협의회 협의)</strong> 이 규칙 및 이 규칙에 따라 원장이 별도로 정하는 사항 중 다음 각 호를 제정·변경하려는 경우에는 노사협의회의 협의를 거친다. 1. 제9조제2항의 평가별 반영 비율 2. 제26조제3항·제4항의 등급별 비율 및 그 조정 3. [별표 9]의 보정 방법 4. [별표 1]·[별표 2]의 평가자 및 반영비율 5. 제27조제4항에 따른 평정점 산출 방법</td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 이 조항이 트랙 A의 취약점을 막는다. 사전조정계수의 평균 기준값이 85점에서 80점으로 내려간
+전례가 있다(§1-4). 규칙에 수치를 올려도, 규칙 자체가 원장 결재로 바뀌므로 같은 일이 반복될 수 있다.</p>
+<p>근거는 이미 있다. <strong>「근로자참여 및 협력증진에 관한 법률」 제20조①5호</strong>는 &quot;인사·노무관리의
+제도개선&quot;을 협의사항으로 정하고, <strong>창진원 노사협의회 운영규정 제25조①5호</strong>도 같은 내용을 협의사항으로
+두면서 **제25조②에서 &quot;협의회는 제1항 각 호의 사항에 대하여 의결할 수 있다&quot;**고 한다. 근무평정 제도의
+변경은 이미 협의·의결 대상이다. 개정 12는 그 사실을 규칙에 명시하는 것에 그친다.</p>
+<h3>개정 13. 제7조② — 평가 미실시자의 점수 산출</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>② 제1항에 따라 평가를 실시하지 않는 자에 대한 평가점수는 <strong>사유 발생 직전 평가에서 해당자가 득한 종합점수 50퍼센트</strong>와 당해 평가에서 해당자와 동일한 직급인 피평가자 그룹의 평균 종합점수 50퍼센트를 합산하여 산출한다. 단, 신규채용 또는 퇴직된 직원의 경우에는 적용하지 아니하며 노동조합 전임자의 경우 원장이 별도로 정하는 바에 따른다.</td>
+<td>② 제1항에 따라 평가를 실시하지 않는 자에 대한 평가점수는 <strong>당해 평가에서 해당자와 동일한 직급인 피평가자 그룹의 평균 종합점수</strong>로 한다. 단, 신규채용 또는 퇴직된 직원의 경우에는 적용하지 아니하며 노동조합 전임자의 경우 원장이 별도로 정하는 바에 따른다.</td>
+</tr>
+</tbody></table></div>
+<p><strong>이유</strong> 현행 산식은 직전 점수를 50% 승계한다. 그 결과 <strong>한 번 낮은 점수를 받으면 그 점수가 이후
+평가에 계속 계승된다.</strong> 휴직·출산전후휴가·정직·직위해제로 평가를 받지 못한 사람은 직전 상태에
+묶인다. 위원장이 지적한 &quot;휴직 들어가는 사람도 마찬가지&quot;라는 불이익이 이 조항에서 발생한다.</p>
+<p>개정안은 승계를 제거하고 <strong>동일 직급 평균</strong>만 부여한다. 평가받지 못한 기간에 대해 유리하지도
+불리하지도 않은 값이다.</p>
+<p><strong>단서는 그대로 둔다.</strong> 노동조합 전임자에 관한 부분은 이 개정안의 범위가 아니다(§0 범위 고지).
+개정 13은 휴직자·출산전후휴가자 등 일반 미실시자에게만 적용되며, 그 정당성은 전임자 문제와
+독립적으로 성립한다.</p>
+<p><strong>타기관 근거</strong> 새만금개발공사 제13조⑥ &quot;평가에서 제외되는 직원에 대한 근무평가 점수는 <strong>80점으로
+한다</strong>&quot;(직급 평균 부여) · (재)우체국물류지원단 「평가업무세칙」 평정점이 없는 경우 동일직급 평균점 부여</p>
+<hr>
+<h2>§4 신설 별표</h2>
+<h3>[별표 9] 평가자별 평가점수의 보정 방법 <em>(제9조제4항, 제22조제2항, 제22조의2제2항 관련)</em></h3>
+<p><strong>1. 평가군</strong> 보정은 <strong>동일한 평가자가 평가한 동일 평가구분·동일 직급군의 피평가자 집단</strong>을 단위로
+한다. 1차 평가자와 2차 평가자의 점수는 각각 별도로 보정한 후 [별표 2]의 반영비율을 적용한다.</p>
+<p><strong>2. 순위 부여</strong> 평가군 내 피평가자에게 평가점수가 높은 순서로 순위 <em>r</em> 을 부여한다. 평가군의
+인원을 <em>n</em> 이라 한다.</p>
+<p><strong>3. 보정점수 산출</strong></p>
+<pre><code>z = Φ⁻¹( (r − 0.375) / (n + 0.25) )       ※ Φ⁻¹ 은 표준정규분포의 역누적분포함수
+보정점수 = 80 + 7 × z
+</code></pre>
+<p>산출된 보정점수가 60점 미만이면 60점, 100점을 초과하면 100점으로 한다. 소수점 셋째자리에서
+반올림한다.</p>
+<p><strong>4. 기준값</strong> 제3호의 80은 [별표 7] 평정점 구간(60~100점)의 중앙값이고, 7은 ±3 표준편차가 그
+구간을 채우는 값이다.</p>
+<p><strong>5. 예외</strong> 평가군의 인원이 <strong>3명 미만</strong>인 경우에는 보정하지 아니하고 80점을 부여한다. 이 경우
+인사담당부서장은 해당 평가군의 수를 제9조제7항에 따라 보고한다.</p>
+<p><strong>6. 시행 첫해의 병산</strong> 이 별표를 처음 적용하는 해에는 제3호의 방법과 아래 평균·표준편차 일치법을
+<strong>함께 산출</strong>하여 그 결과를 노사협의회에 보고한다.</p>
+<pre><code>보정점수 = 80 + 〔(원점수 − 평가자 평균점수) / 평가자 표준편차〕× 7
+</code></pre>
+<h4>왜 순위기반인가</h4>
+<p>전수 조사에서 확인된 사후 보정 66개 기관의 다수는 <strong>평균·표준편차 일치법</strong>을 쓴다. 그런데 그 산식은
+분모에 <strong>평가자의 표준편차</strong>가 들어간다. 평가자가 피평가자 전원에게 거의 같은 점수를 주면 표준편차가
+0에 가까워져 산식이 붕괴한다.</p>
+<p>창진원에는 이 위험이 실재한다. 조합의 관찰에 따르면 본부장 5명 중 <strong>3명이 균등형</strong>이고 그 아래
+인원이 전체의 60%다. 부서장도 극단형과 균등형으로 갈린다. 균등형 평가자의 표준편차가 작을 때
+평균·표준편차 일치법은 <strong>작은 점수 차를 과도하게 증폭</strong>하거나 계산 자체가 불가능해진다.</p>
+<p>순위기반은 표준편차를 쓰지 않는다. 순위만 있으면 작동하므로 균등형 평가자에게도 안정적이다.
+개정 2의 동점 부여 금지가 순위 부여의 전제를 보장한다.</p>
+<p>제6호의 병산 조항은 이 판단을 검증 가능하게 만든다. 첫해에 두 방식의 결과를 모두 산출해 노사가
+함께 보고, 순위기반이 부적절하다고 판단되면 다음 해에 바꾼다.</p>
+<blockquote>
+<p>이 산식의 효과는 〈04 시뮬레이터〉에서 변수를 직접 조정하며 확인할 수 있다.</p>
+</blockquote>
+<h3>[별표 10] 소규모 평가군의 등급 배정 <em>(제26조제5항 관련)</em></h3>
+<p>직급별 피평가자가 10명 미만인 평가군의 등급별 배정인원은 다음과 같다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>인원</th>
+<th>S</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3명</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4명</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5명</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6명</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7명</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8명</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9명</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<p>2명 이하인 평가군은 제9조제5항에 따라 절대평가한다.</p>
+<p>제26조제5항에 따라 C등급을 부여하지 아니하는 경우 그 인원은 B등급에 가산한다.</p>
+<p><em>(산출 방법 — 제26조제3항의 비율을 인원에 곱한 뒤 반올림하고, 합계가 인원과 다른 경우 제26조
+제2항에 따라 소수점 첫째 자리를 기준으로 조정한 값이다.)</em></p>
+<p><em>(2025년 실제 배정과 대조 — 1(나)급 4명에 S 1·A 1·B 2·C 0, 공무직 5명에 S 1·A 2·B 2·C 0이
+배정되었다. 위 표는 이 관행과 일치한다.)</em></p>
+<hr>
+<h2>§5 사측 개선(안)에 대한 대조</h2>
+<p>2026년 1분기 노사협의회에서 조합이 제안한 3건에 대해 사측이 제시한 개선(안)과 이 문서의 개정안을
+나란히 둔다.</p>
+<h3>사측 1 — 경영평가 부서평가 결과를 근무평정에 반영</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>노측 제안의 취지</td>
+<td>목표설정합의가 무의미하니 <strong>개인 목표를 정량·객관화</strong>하고 그 달성 여부로 점수를 주자. 그러려면 연초에 목표를 설정해야 한다.</td>
+</tr>
+<tr>
+<td>사측 개선(안)</td>
+<td>개인성과평가(12월) 결과에 <strong>차년도 부서성과평가 결과를 반영</strong>하여 근무평정 결과를 차년도 8월에 확정. 내부평가를 폐지하고 개인성과평가로 성과급 지급.</td>
+</tr>
+<tr>
+<td>평가</td>
+<td><strong>시기 현실화는 수용, 정량화는 대체.</strong> 개인 목표의 계량화가 조직지표 대입으로 바뀌었다. 부서성과는 개인이 통제할 수 없다. 조직 기여도 측정이라는 취지는 일리가 있으나, 그것은 이미 경영평가성과급의 부서 40% 반영으로 작동하고 있다. 근무평정에 다시 넣으면 <strong>같은 조직성과가 두 번 계산</strong>된다.</td>
+</tr>
+<tr>
+<td></td>
+<td>또한 확정 시점이 차년도 8월로 늦춰지면, 2월 근무평정 산출 → 3월 승진서열명부 → 4~5월 승진의 현행 일정이 성립하지 않는다. 정기전보(7월·1월)에 맞춘 운용시기 조정과도 충돌한다.</td>
+</tr>
+<tr>
+<td>이 문서의 대안</td>
+<td><strong>개정 8</strong> — 목표설정 시기를 평가대상기간 개시 후 2개월 이내로 규칙에 명시하고, 모든 목표에 <strong>달성 여부를 판정할 수 있는 기준</strong>을 붙이게 하며, <strong>제17조에서 평가자가 목표별 달성 여부를 평가표에 기재</strong>하게 한다. 계량 비율은 강제하지 않는다 — 경영지원 부서와 사업 부서의 직무가 달라 일괄 비율은 형식적 지표를 낳는다. 조직지표 대입 없이 검증가능성을 확보한다.</td>
+</tr>
+</tbody></table></div>
+<h3>사측 2 — 다면·상향평가 대상 확대(과거 동일부서 직원 포함, 무작위 10명)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평가</td>
+<td><strong>방향에 동의한다.</strong> 평정자와 피평정자가 일치하지 않는 불균형을 줄이는 취지가 맞다. 창진원 승진 동료평가에는 이미 무작위 20명·응답률 75%·기피 2명이라는 유사 장치가 있으므로 실행 가능성도 확인되어 있다.</td>
+</tr>
+<tr>
+<td>보완 필요</td>
+<td>대상을 확대해도 <strong>전원에게 동일한 점수를 주는 경향이 남으면 변별력은 개선되지 않는다.</strong> 확대와 함께 개정 9(보정·동점 금지·분포 보고)가 필요하다. 무작위 10명은 부서 규모가 10명 미만인 평가군에서 표본이 지나치게 작아지므로 하한 규정이 필요하다.</td>
+</tr>
+<tr>
+<td>이 문서의 대안</td>
+<td>사측안 수용 + <strong>개정 9</strong> 결합. 비중 확대(개정 5의 2안)는 보정 효과를 2027년에 검증한 후 재협의.</td>
+</tr>
+</tbody></table></div>
+<h3>사측 3 — 부서 규모별 평균 허용범위 차등화 (예: 5명 이하 부서는 75~85 범위)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>평가</td>
+<td><strong>소부서 불이익을 인식한 것은 진전이다.</strong> 규모별 차등에는 선례도 있다 — 예금보험공사는 6명 미만 85점, 2명 88점, 1명 91점 이내로 차등한다.</td>
+</tr>
+<tr>
+<td>그러나</td>
+<td>이 안은 <strong>사전 평균제약을 유지한다.</strong> 그러면 위원장이 지적한 두 번째 문제 — 제도를 잘 아는 평가자가 마음에 들지 않는 사람을 바닥에, 자기를 따르는 사람을 극단적으로 높게 주는 것, 그리고 외부에서 온 본부장이 평균 80점을 맞추려 비슷비슷하게 평가하는 것 — 은 <strong>전혀 해결되지 않는다.</strong> 허용범위를 넓히면 극단형 평가자의 재량이 오히려 커진다.</td>
+</tr>
+<tr>
+<td></td>
+<td>또한 창진원의 평가군은 부서(3~16명)이지만 등급 배정은 직급별 전사 단위다(§2-4). 부서 평균을 손보아도 등급이 결정되는 단위는 그대로다.</td>
+</tr>
+<tr>
+<td>이 문서의 대안</td>
+<td><strong>개정 6</strong> — 사전 제약을 폐지하고 사후 보정으로 전환한다. 사후 보정은 평가군 규모와 무관하게 작동하므로 규모별 차등이라는 별도 장치가 필요하지 않다. 355개 기관 중 202개가 이 방식을 택했다.</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>사측 3안과 개정 6의 효과 차이는 〈04 시뮬레이터〉에서 두 안을 각각 선택해 비교할 수 있다.</p>
+</blockquote>
+<hr>
+<h2>§6 트랙 A만 채택할 경우의 최소 조치</h2>
+<p>규칙 개정에 시간이 걸린다는 이유로 <strong>평정계획만 손보는 선택지</strong>를 사측이 제시할 수 있다. 그 경우
+2027년 근무평정에 반드시 반영해야 하는 최소 항목은 다음과 같다. 모두 규칙 개정 없이, 원장 결재만으로
+가능하다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>계획에서 할 일</th>
+<th>규칙 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>〈평가자별 평균 부여 점수〉 표에서 본부장·부서장의 &quot;<strong>피평가자 그룹 평균 80점 이내</strong>&quot;를 <strong>삭제</strong>하고 점수 부여 구간 60~100점만 남긴다</td>
+<td>규칙에 근거 없음 — 삭제에 개정 불필요</td>
+</tr>
+<tr>
+<td>2</td>
+<td>보정 산식을 [별표 9]와 같은 내용으로 계획에 명시하고 <strong>실시</strong>한다</td>
+<td>제9조④ (기존 위임)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>등급별 비율 S20·A30·B40·C10과 ±5%p 조정 사유를 계획에 명시하고 노사협의회에 보고한다</td>
+<td>제26조③ (기존 위임)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>공무직을 제9조⑤6호 &quot;그 밖의 원장이 별도로 정하는 직군&quot;으로 지정</strong>하여 절대평가한다</td>
+<td>제9조⑤6호 (기존 위임)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>&quot;TF발령, 휴·복직 등으로 평가그룹 내 인원이 중복되는 경우에는 <strong>동일점수 부여</strong>&quot; 항목을 삭제한다</td>
+<td>규칙 제4조①3호 위반 — 삭제가 규칙 정합</td>
+</tr>
+<tr>
+<td>6</td>
+<td>목표설정 시기를 평가대상기간 개시 후 2개월 이내로 정한다</td>
+<td>제15조 (시기 규정 없음 — 계획으로 보충 가능)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>평가자 부재 시 승계 순서, 직무대리·겸직자 배제, 평가 기준일 전 평가 금지를 계획에 명시한다</td>
+<td>제8조② (기존 위임)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>예외자 평정점 산출 방법을 계획에 명시한다</td>
+<td>제27조④ (기존 위임)</td>
+</tr>
+</tbody></table></div>
+<p><strong>다만 트랙 A는 다음 항목을 담을 수 없다.</strong> 이들은 규칙 사항이다.</p>
+<ul>
+<li>사전 평균제약 <strong>금지</strong>의 명문화 (개정 6⑥) — 계획에서 삭제해도 다음 해에 되살릴 수 있다</li>
+<li>동점 부여 <strong>금지</strong>와 재작성 요구 (개정 2)</li>
+<li>전 부서장 의견 청취 방식으로의 전환과 60일 기준 (개정 3)</li>
+<li>계량지표 30% 요건 (개정 8②)</li>
+<li>평정점 <strong>공개</strong> (개정 11) — 제28조①이 명문으로 비공개를 규정하고 있어 계획으로 뒤집을 수 없다</li>
+<li>노사협의회 협의 의무 (개정 12)</li>
+</ul>
+<p><strong>따라서 트랙 A는 2027년 적용을 위한 과도조치로만 의미가 있고, 규칙 개정을 병행해야 한다.</strong>
+구체적으로는 <strong>9월 28일 2분기 노사협의회에서 규칙 개정 방향을 협의사항으로 상정 → 실무소위원회
+회부 → 4분기 정기회의에서 의결 → 원장 결재 → 2027년 근무평정 적용</strong>의 경로를 제안한다.
+노사협의회 운영규정 제11조가 실무소위원회(노사 각 2인)를, 제20조③이 회의 7일 전 의제 통보를,
+제21조가 출석위원 3분의 2 이상 찬성 의결을 정하고 있다.</p>
+<hr>
+<h2>§7 미확정 — 자료를 받은 뒤 확정할 항목</h2>
+<p>추정으로 채우지 않고 비워 둔 것들이다. 〈05 교섭 전략〉의 자료 요구와 연결된다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>확정에 필요한 자료</th>
+<th>영향받는 개정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>최근 3년 <strong>다면·상향평가 평가자별 부여 점수 분포</strong>(익명)</td>
+<td>개정 5 (비중 확대 시점 판단)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>최근 3년 <strong>공통평가 항목별 점수 분포</strong></td>
+<td>공통평가 존치·감점 전환 판단</td>
+</tr>
+<tr>
+<td>3</td>
+<td>최근 3년 <strong>이의신청 건수·처리 결과</strong></td>
+<td>개정 11 (공개 범위 재검토)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>제9조④에 따른 <strong>보정 실시 내역</strong></td>
+<td>개정 6 (미실시 사실 확인)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>평가자가 <strong>평가 기준일 이전에 평가를 완료한 사례</strong>, 직무대리·겸직 평가 사례, 제8조② 지정 사례</td>
+<td>개정 4</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>기간제계약직의 평가군 포함 여부</strong>와 절대평가 적용 실태</td>
+<td>평가군 규모 확정</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>기관장 직속 부서·본부 직속 팀</strong>의 평가자 지정 내역(별표1 주3에 따른 원장 결정 사항)</td>
+<td>별표1 주3 정비</td>
+</tr>
+<tr>
+<td>8</td>
+<td>등급별 인원배정 <strong>±5%p 조정을 실제로 적용한 내역</strong></td>
+<td>개정 10④</td>
+</tr>
+<tr>
+<td>9</td>
+<td>부서 유형별로 <strong>계량지표 설정이 가능한 업무 영역</strong>의 실태 (제15조⑥ 작성 예시 마련 과정에서 파악)</td>
+<td>계량 비율 요건화 여부의 차기 논의</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>붙임 가. 인용 조문 원문</h2>
+<p><em>(전수 조사에서 확인한 타기관 규정 원문. 제3자가 검증할 수 있도록 조문 번호와 문구를 그대로
+싣는다. 출처는 각 기관 ALIO 경영공시 게시본, 확인 기준일 2026-09-10.)</em></p>
+<h3>가-1. 사후 보정</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>건강보험심사평가원</td>
+<td>인사규정 시행세칙 제54조③</td>
+<td>&quot;제2항의 평균점수에 대해 <strong>평균 및 표준편차 일치법을 적용하여 보정한다.</strong> 이 경우 보정 대상, 방법 등 보정에 필요한 사항은 원장이 별도로 정한다.&quot;</td>
+</tr>
+<tr>
+<td>건강보험심사평가원</td>
+<td>같은 조 ④</td>
+<td>&quot;<strong>다면평정</strong>은 평정자가 피평정자를 평정기준에 따라 평정하되, <strong>평균 및 표준편차 일치법을 적용하여 보정한다.</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국농어촌공사</td>
+<td>인사규정 시행세칙 제56조의2⑥</td>
+<td>조정계수 = <strong>80 ÷ 직급별 평균점수</strong></td>
+</tr>
+<tr>
+<td>한국교육과정평가원</td>
+<td>제21조</td>
+<td>&quot;부서간의 형평성 유지와 공정한 평정을 위하여 <strong>각 부서장 평정점수의 평균을 동일하게 조정</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국양성평등교육진흥원</td>
+<td>근무성적평정규칙 별표3</td>
+<td>조정 산식 = <strong>85 + 〔(원점수 − 평가자 평균점수) / 평가자 표준편차〕× 7.5</strong>. 피평가자 1인은 원점수 활용, 2인은 별도 산식</td>
+</tr>
+<tr>
+<td>한국사회적기업진흥원</td>
+<td>개인성과평가지침 제12조②</td>
+<td>&quot;평가결과의 편차를 보정하기 위하여 <strong>평균 및 표준편차 조정방법 등을 활용</strong>하여 점수를 조정할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>한국고용노동교육원</td>
+<td>성과평가 시행규칙 제10조②</td>
+<td>&quot;인사담당부서장은 <strong>평가자별 성향에 따른 편차를 보정하기 위하여</strong> 평가군별로 평균 및 표준편차 보정방법에 따라 … 조정한다. 다만 평가군내 평가자가 1인으로 동일한 경우 및 평가군내 피평가자가 1인인 경우에는 해당 평가자의 원점수를 조정없이 활용한다&quot;</td>
+</tr>
+<tr>
+<td>한국고용노동교육원</td>
+<td>같은 조 ③</td>
+<td>&quot;편차 조정결과는 <strong>근무성적평가조정위원회의 확인</strong>을 받아 확정한다&quot;</td>
+</tr>
+<tr>
+<td>한전KPS(주)</td>
+<td>근무성적평정규정</td>
+<td>조정점수 = 평정자 해당평정점수 × 조정계수, 조정계수 = 평정군별 해당평정점수 평균치 ÷ 평정자 해당평정점수 평균치</td>
+</tr>
+<tr>
+<td>여수광양항만공사</td>
+<td>인사규정 시행세칙</td>
+<td>조정산식 = 본인평정점 × (전직원평균평정점 ÷ 본부별평균평정점)</td>
+</tr>
+<tr>
+<td>한국나노기술원</td>
+<td>근무평정지침</td>
+<td>1) 평가자 성향 보정 = 평정점수 × 전체평균 ÷ 평가자 평균 2) 평가자 편차 보정 = 전체평균 + (평균보정점수 − 평가자 평균보정평균점수) × (전체 평균보정표준편차 ÷ 평가자 평균보정표준편차)</td>
+</tr>
+<tr>
+<td>한국원자력통제기술원</td>
+<td>인사평가요령</td>
+<td>&quot;평가단위별 평가 점수 평균이 80점이 되도록 … 평균 조정식: <strong>피평가자 평가점수 × (80 ÷ 해당 평가단위 평균)</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국세라믹기술원</td>
+<td>인사평가 세부지침 제6조</td>
+<td>&quot;<strong>특정평가자의 관대 혹은 엄격한 평정으로 타부서의 평가점수와 차이가 큰 경우</strong>, 조정계수를 적용하여 조정할 수 있다&quot; · &quot;평가점수는 해당부서(평가자)의 평균점수를 85점, 표준편차를 5로 조정한다&quot;</td>
+</tr>
+<tr>
+<td>한국부동산원</td>
+<td>종합근무평가요강</td>
+<td>&quot;<strong>평균·표준편차를 동일 기준으로 환산한</strong> 근무성적평정 점수의 평균·표준편차에 <strong>일치하도록 보정</strong>&quot;</td>
+</tr>
+<tr>
+<td>노사발전재단</td>
+<td>성과평가 시행기준 제20조③</td>
+<td>평가점수 평균 + 〔(원점수 − 평가자 평가점수 평균) ÷ 평가자 평가점수 표준편차〕 × 전체 평가점수 표준편차</td>
+</tr>
+<tr>
+<td>국립암센터</td>
+<td>직원 평가에 관한 규칙 제8조②</td>
+<td>&quot;<strong>성과관리위원회는</strong> 평가자 및 확인자에 의한 원점수를 평균·표준편차일치법을 적용하여 보정할 수 있다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-2. 중소벤처기업부 소관 기관</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>소상공인시장진흥공단</strong></td>
+<td>수행능력평가 운영요령 제10조②</td>
+<td>&quot;평가점수는 <strong>평균-표준편차조정법으로 점수를 조정하여 적용</strong>하되, 차수별 평가에 대해 독립적으로 실시한다&quot; (조정점수 산식 표 포함)</td>
+</tr>
+<tr>
+<td><strong>소상공인시장진흥공단</strong></td>
+<td>같은 조 ①</td>
+<td>&quot;특정차수 평가자의 피평가자가 <strong>1명인 차수의 평가점수는 생략</strong>할 수 있다&quot;</td>
+</tr>
+<tr>
+<td><strong>기술보증기금</strong></td>
+<td>종합근무평정규정 제16조①</td>
+<td>&quot;평정자는 평정단위별 인력구조 및 업무능력 등을 고려하여 평정결과가 기금 전체적인 견지에서 <strong>정규분포를 이룰 수 있도록 유의</strong>하여야 하며 이를 위해 이사장은 적절한 조치를 실시할 수 있다&quot;</td>
+</tr>
+<tr>
+<td><strong>기술보증기금</strong></td>
+<td>같은 조 ②</td>
+<td>&quot;역량평가의 결과가 특별한 사유 없이 지나치게 <strong>양극화, 중심화, 관대화</strong> 되어 신뢰성이 떨어지는 경우에는 <strong>재평정을 지시</strong>할 수 있다&quot;</td>
+</tr>
+<tr>
+<td><strong>장애인기업종합지원센터</strong></td>
+<td>제18조②</td>
+<td>&quot;근무월수 <strong>1개월 미만</strong> 부서의 업무는 평가에 반영하지 아니한다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-3. 사전 평균제약을 두면서 완충장치를 함께 둔 기관</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>예금보험공사</td>
+<td>개인성과관리 시행지침 제51조③④</td>
+<td>&quot;평정점 평균 : <strong>80점 이내</strong>&quot; · &quot;20명 미만 6명 이상 : 평정점은 평균 80점 이하를 유지하여야 하며, 동일 평정점 구간에 평가대상인원의 60%를 초과하여 평가할 수 없다. <strong>6명 미만 2명 이상</strong> : 평균 80점 이하. <strong>1명</strong> : 평균 <strong>85점</strong> 이하&quot; (별표상 2명 88점·1명 91점 이내)</td>
+</tr>
+<tr>
+<td>한국관광공사</td>
+<td>역량평가규정</td>
+<td>&quot;평가자는 전체 피평가 인원에 대해 평균을 <strong>83점 이상 85점 이하</strong>로 부여하여야 한다. 단, 피평가자가 1인일 경우는 83점 이상 87점 이하로 부여할 수 있다&quot; · 제7조② &quot;역량별로 <strong>평가 사유를 작성</strong>하여야 한다&quot;</td>
+</tr>
+<tr>
+<td>한국가스안전공사</td>
+<td>인사관리요령</td>
+<td>&quot;평정자에게 피평정자의 평정 평균점수를 <strong>83점 이상 87점 이하로 제한</strong>할 수 있다. 단, 다면평정과 &#39;피평정자가 1인인 역량 및 업적평정&#39;의 경우 평정자의 평균점수 구간을 별도로 정하지 아니한다&quot;</td>
+</tr>
+<tr>
+<td>한국교통연구원</td>
+<td>연구활동평가규정</td>
+<td>&quot;하향평가자는 평가대상자에게 부여한 점수의 평균값이 **85점(오차범위±2.5점)**이 되도록 하여야 한다. 단, 평균 87.5점을 초과하여 점수를 부여하고자 하는 경우에는 <strong>사유서를 제출</strong>하여야 한다&quot;</td>
+</tr>
+<tr>
+<td>한국농어촌공사</td>
+<td>인사규정 시행세칙</td>
+<td>&quot;직무성과평가는 <strong>절대평가</strong>로 하되, 각 평정자별 피평정자의 평균점수가 <strong>90점을 초과할 수 없다</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국주택금융공사</td>
+<td>종합근무평정규정</td>
+<td>&quot;평가자는 평가대상자별로 <strong>66점부터 100점까지</strong>의 점수를 부여하되 평가자별 평균은 80점 이내로 해야 한다&quot; · &quot;인사부장은 산술평균과 <strong>±20% 이상 차이가 나는 특이 평가점수를 배제한 후 산술평균을 재산출</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국산업기술시험원</td>
+<td>공무직 운영세칙 제10조의1②</td>
+<td>&quot;센터 내 평가 대상자 점수는 평균 80점으로 보정한다. 이 때 평정자는 <strong>보정된 개인업적평가 점수가 70점 미만인 피평정자에 대해서 합리적인 사유를 구체적으로 기재</strong>하여야 한다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-4. 평가자 부재·직무대리</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>건설근로자공제회</td>
+<td>제85조④</td>
+<td>&quot;1차 평정자가 전입 1월 미만이거나 <strong>공석 등으로 평정할 수 없을 경우 2차 평정자가 평정</strong>한다&quot;</td>
+</tr>
+<tr>
+<td>건설근로자공제회</td>
+<td>같은 조 ⑤</td>
+<td>&quot;그럼에도 평가할 수 없을 때에는 <strong>이사장이 평정자를 따로 지정</strong>한다&quot;</td>
+</tr>
+<tr>
+<td>한국출판문화산업진흥원</td>
+<td>제6조⑥</td>
+<td>&quot;<strong>직무대행 및 겸직자는 평정자와 확인자로 정할 수 없다</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국출판문화산업진흥원</td>
+<td>제6조②3·4호</td>
+<td>평정자·확인자 부재 시 부재인 자의 반영비율을 다른 자에게 동일비율로 반영 / 100% 반영</td>
+</tr>
+<tr>
+<td>한국교육학술정보원</td>
+<td>제9조②</td>
+<td>&quot;평가자가 이동한 경우 현 소속 평가자 중심으로 평가하고 <strong>전임자에게 가평가를 의뢰</strong>하거나 의견 참조&quot;</td>
+</tr>
+<tr>
+<td>무역안보관리원</td>
+<td>제8조③</td>
+<td>&quot;전 근무부서의 <strong>폐쇄 등 불가피한 사유</strong>가 있는 경우 현 근무부서에서 평정&quot;</td>
+</tr>
+<tr>
+<td>한국세라믹기술원</td>
+<td>제12조①</td>
+<td>&quot;<strong>전 근무부서 평가자의 퇴직</strong> 등 불가피한 사유가 있는 경우 현 근무부서에서 평가&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-5. 이동자 평정</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>과학기술정책연구원</td>
+<td>제18조</td>
+<td>&quot;<strong>현 근무부서장이 전 근무부서장의 의견을 들어</strong> 평가한다&quot;</td>
+</tr>
+<tr>
+<td>과학기술사업화진흥원</td>
+<td>제7조</td>
+<td>&quot;이전 부서장의 의견을 청취하여 <strong>평가시점 기준 현재 부서에서</strong> 평가&quot;</td>
+</tr>
+<tr>
+<td>의료기관평가인증원</td>
+<td>제8조</td>
+<td>&quot;평가일 기준 <strong>현재 부서에서</strong> 실시한다. 단, 변경 전 부서장 의견을 청취한다&quot;</td>
+</tr>
+<tr>
+<td>해양수산과학기술진흥원</td>
+<td>제16조</td>
+<td>&quot;개인성과평가는 <strong>마지막 소속부서장이</strong> 전 소속부서장 의견을 청취하여 평가&quot;</td>
+</tr>
+<tr>
+<td>한국양성평등교육진흥원</td>
+<td>제6조</td>
+<td>&quot;<strong>2개월 이상</strong> 근무한 실적에 대해 근무기간에 비례하여 평가&quot;</td>
+</tr>
+<tr>
+<td>한국사회보장정보원</td>
+<td>제24조</td>
+<td>&quot;평정 기준일 이전 <strong>2개월 이내</strong> 전보한 경우 <strong>전보 전 본부에서</strong> 평정&quot;</td>
+</tr>
+<tr>
+<td>한국세라믹기술원</td>
+<td>제12조①</td>
+<td>&quot;현 근무부서 전보기간이 <strong>3개월 이내</strong>인 자는 <strong>전 근무부서에서</strong> 평가&quot;</td>
+</tr>
+<tr>
+<td>건설근로자공제회</td>
+<td>제85조③</td>
+<td>&quot;평정기준일 전 <strong>3개월 내</strong>에 소속이 변경된 경우 종전 부서에서 평정&quot;</td>
+</tr>
+<tr>
+<td>한국에너지공단</td>
+<td>제18조②</td>
+<td>&quot;<strong>조직개편, 전보, 기타 환경변화</strong> 등으로 연초에 수립한 계획의 조정이 필요한 경우 … 피평가자와 평가자가 협의하여 평가항목을 조정할 수 있다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-6. 소규모 평가군·절대평가</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국장애인개발원</strong></td>
+<td>근무평정규칙 제9조④</td>
+<td>&quot;다만, <strong>평정대상 근로자 수가 적거나</strong> 수행업무 특성상 <strong>상대평가가 어려운 경우에는 절대평가로 운용</strong>할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>한국산림복지진흥원</td>
+<td>직무역량평가 운영지침 제8조④</td>
+<td>&quot;평가의 관대화 및 엄격화 경향에 따른 평가결과 왜곡을 방지하기 위하여 평균·표준편차 일치법으로 점수를 조정한다. 단, <strong>공무직 평가결과는 원점수로 한다</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국청소년정책연구원</td>
+<td>제19조④</td>
+<td>무기계약직 등은 근무성적평가위원회를 통해 <strong>전체 대상자를 절대평가</strong></td>
+</tr>
+<tr>
+<td>한국직업능력연구원</td>
+<td></td>
+<td>&quot;피평정 대상인원이 <strong>1명이거나</strong> 절대평가 시에는 중간등급(A~C) 내에서 평정&quot;</td>
+</tr>
+<tr>
+<td>한국학중앙연구원</td>
+<td>제11조②</td>
+<td>&quot;직급 내 인원수가 <strong>3인 이하인 경우 차하위 직급과 평가단위를 통합</strong>&quot;</td>
+</tr>
+<tr>
+<td>중소기업은행</td>
+<td>제19조③</td>
+<td>&quot;분포비율에 의하여 미흡 또는 부족으로 평정해야 할 경우에는 <strong>보통 등급까지 상향 평정할 수 있다.</strong> 이 경우 <strong>사유를 구체적으로 기재</strong>하여야 한다&quot;</td>
+</tr>
+<tr>
+<td>국립암센터</td>
+<td>제8조③</td>
+<td>&quot;<strong>직렬별·직급별 인원이 소규모일 경우</strong> 등 위원회에서 필요하다고 인정하는 경우에는 이를 적용하지 아니할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>새만금개발공사</td>
+<td>제13조⑥</td>
+<td>&quot;평가에서 제외되는 직원에 대한 근무평가 점수는 <strong>80점으로 한다</strong>&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>가-7. 동점 부여 금지</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>한국산업기술시험원</td>
+<td>직무역량평가 운영지침 제8조③</td>
+<td>&quot;평가자는 본인이 평가하는 평가대상자에게 <strong>동점(총점 기준)을 부여할 수 없다</strong>&quot;</td>
+</tr>
+<tr>
+<td>한국방송통신전파진흥원</td>
+<td>역량평가 규칙 제14조③</td>
+<td>&quot;동일 직급은 <strong>동점을 부여할 수 없으며</strong>, 주관부서는 1·2차 평가자가 부여한 점수의 차이가 10점을 초과하는 경우 등 필요시 <strong>재평가를 요구</strong>할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>한국무역보험공사</td>
+<td>종합평정 시행요강 제21조②</td>
+<td>&quot;동일 평가군 내에 <strong>동점은 허용하지 아니한다</strong>&quot;</td>
+</tr>
+<tr>
+<td>새만금개발공사</td>
+<td>제13조③</td>
+<td>조정자는 근무평가 점수를 ±10점 범위 내로 조정할 수 있다. 다만 <strong>비교집단 내 조정점수의 합계는 0이 되도록 한다</strong></td>
+</tr>
+</tbody></table></div>
+<h3>가-8. 평정점 공개</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>예금보험공사</td>
+<td>제68조①</td>
+<td>&quot;해당회차 평가가 완료되는 즉시 평가대상자에게 <strong>평정점을 알려주어야 한다</strong>&quot;</td>
+</tr>
+<tr>
+<td>국가유산진흥원</td>
+<td>제24조⑥</td>
+<td>&quot;평가결과에 대한 공개 요청이 있을 경우 <strong>본인에 한하여</strong> 평가점수를 공개할 수 있다&quot;</td>
+</tr>
+<tr>
+<td>한국관광공사</td>
+<td>제7조②</td>
+<td>&quot;평가를 실시하되, <strong>역량별로 평가 사유를 작성</strong>하여야 한다&quot;</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>붙임 나. 승진제도 관련 제안 <em>(장기과제 — 본안 아님)</em></h2>
+<p>승진제도 개선은 이 개편의 전제가 아니다. 다만 근무평정 개편이 승진에 미치는 영향과, 검토 과정에서
+확인된 사항을 참고로 남긴다. <strong>본안 협의에서 이 항목을 조건으로 삼지 않는다.</strong></p>
+<ol>
+<li><strong>서열명부 산식</strong> 현행은 근무평정 90% + 근속 10%. 근무평정에 보정이 도입되면 서열명부의
+신뢰도도 함께 개선되므로, 산식 자체를 당장 바꿀 필요는 없다.</li>
+<li><strong>반영 회차의 직급 간 불형평</strong> 반영 회차가 총 횟수의 1/2(홀수 올림)로 산술평균되는데, 4급만
+2회가 적용되어 직급 간 형평이 맞지 않는다. 회차 수가 많을수록 평정 잡음이 상쇄되므로, 4급의
+회차를 다른 직급 수준으로 맞추는 것이 방향이다.</li>
+<li><strong>승진자 저평가 관행</strong> 승진 직후 낮은 평가를 받는 경향이 지적된다. 승진자는 최저승진소요연수가
+있어 불만이 적고, 그 결과 같은 부서의 나머지가 이익을 본다. 반대로 승진대상자가 한 부서에
+몰리면 서로 불리해진다. 이는 등급 배정이 직급별 전사 단위인데 점수 부여는 부서 단위인 구조에서
+나오므로, <strong>개정 6의 보정이 도입되면 상당 부분 완화된다.</strong> 별도 승진제도 개정 없이 개선되는
+부분이다.</li>
+<li><strong>동료평가 장치의 전용 가능성</strong> 승진 동료평가에는 이미 무작위 20명·응답률 75%·기피 2명이라는
+장치가 운영되고 있다. 근무평정 다면평가 확대(사측 2안) 설계 시 참조할 수 있다.</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>면책</strong> 이 문서의 개정안은 노동조합의 제안이며 확정된 제도가 아니다. 창업진흥원 규정 인용은
+ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정, 인사규정 2026.05.28. 개정, 제규정관리규정
+2024.05.03. 개정, 노사협의회 운영규정 2025.12.23. 개정)과 2025년 근무평정 계획에 따른다.
+타기관 조문은 각 기관 ALIO 경영공시 게시본이며 확인 기준일은 2026-09-10이다. 평가자 성향에
+관한 서술은 조합의 관찰이며 기관의 공식 자료가 아니다. 개인 식별 정보는 싣지 않았다.</p>
+</blockquote>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>
