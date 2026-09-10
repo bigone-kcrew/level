@@ -12,6 +12,7 @@ const NAV = [
   ['benchmark', '03 타기관'],
   ['bargaining', '04 교섭'],
   ['plan', '05 계획'],
+  ['union', '06 전임자'],
 ];
 
 function frontMatter(src) {

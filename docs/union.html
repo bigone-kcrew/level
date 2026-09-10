@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06. 노동조합 전임자 평정 (별책) — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="근무평정 개편과 분리한 별도 안건. 전임자·근로시간면제자 평정 방식 개선안">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF1F6; --card:#FFFFFF; --card-2:#F7F9FC;
+  --ink:#0F1A2E; --ink-2:#334155; --ink-3:#475569;
+  --line:#D8E0EC; --line-2:#B9C6DA;
+  --brand:#1D4ED8; --brand-soft:#E8EEFD;
+  --accent:#C2410C; --accent-soft:#FDEBE0;
+  --danger:#B91C1C; --ok:#15803D;
+  --shadow:0 1px 2px rgba(15,26,46,.06),0 8px 24px rgba(15,26,46,.07);
+  --font:'IBM Plex Sans KR','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:500;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,26,46,.04);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.bm{display:flex;flex-direction:column;padding:11px 0}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.bm .s{font-size:14px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--brand);border-bottom-color:var(--brand)}
+nav a:focus-visible,.cta:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.cta{
+  font-size:15px;font-weight:700;color:#fff;background:var(--brand);text-decoration:none;
+  border-radius:999px;padding:11px 20px;white-space:nowrap;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+article{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,58px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.3;font-weight:700}
+h1{font-size:clamp(30px,3.4vw,44px);margin:0 0 26px}
+h2{font-size:clamp(23px,2.4vw,31px);margin:52px 0 16px;padding-top:18px;border-top:2px solid var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:34px}
+h3{font-size:clamp(19px,1.8vw,23px);margin:34px 0 12px;color:var(--brand)}
+h4{font-size:19px;margin:24px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:24px 0;padding:18px 22px;background:var(--brand-soft);
+  border-left:5px solid var(--brand);border-radius:0 10px 10px 0;font-size:.97em;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:2px solid var(--line);margin:44px 0}
+a{color:var(--brand);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--brand-soft)}
+code{
+  font-family:var(--mono);font-size:.9em;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;
+}
+pre{
+  background:#0F1A2E;color:#E8EEFD;border-radius:12px;padding:20px 22px;
+  overflow-x:auto;font-size:16px;line-height:1.6;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--card-2);font-weight:700;color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);font-size:15px}
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="bargaining.html">04 교섭</a><a href="plan.html">05 계획</a><a href="union.html" class="on" aria-current="page">06 전임자</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article><h1>06. 노동조합 전임자·근로시간면제자 평정 (별책)</h1>
+<h2>§0 이 문서를 분리한 이유</h2>
+<p><strong>근무평정 제도개선의 대가로 다루어지지 않기 위해 별도 안건으로 분리한다.</strong></p>
+<p>두 안건을 묶으면 사측은 &quot;전임자 처우를 개선해 주는 대신 사전조정계수는 남겨두자&quot;는 교환을 제안할
+수 있다. 근무평정 개편은 213명 전원에게 적용되는 제도의 문제이고, 전임자 평정은 소수 인원의
+처우 문제다. 규모가 다른 두 사안을 등가로 교환하는 것은 조합에 불리하다.</p>
+<p>시급성도 다르다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>근무평정 개편 (본안)</th>
+<th>전임자 평정 (이 문서)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>적용 대상</td>
+<td>상대평가 대상 전원</td>
+<td>전임자·근로시간면제자</td>
+</tr>
+<tr>
+<td>시한</td>
+<td><strong>2026년 안에 결판</strong> — 2027년 근평부터 적용</td>
+<td>후순위 가능</td>
+</tr>
+<tr>
+<td>성격</td>
+<td>제도의 구조 결함</td>
+<td>특정 신분에 대한 산식</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>범위 고지</strong> 이 문서는 조합 임원 개인의 평정 결과를 싣지 않는다. 산식이 만드는 결과는 익명의
+예시로 계산한다. 실제 인원의 평정 이력은 노사협의회에서 당사자가 직접 제시할 사안이다.</p>
+</blockquote>
+<hr>
+<h2>§1 현행</h2>
+<h3>1-1 규칙</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조문</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>근무평정 규칙 <strong>제7조①</strong></td>
+<td>&quot;평가기준일 현재 <strong>노동조합 전임자</strong> … 의 경우에는 평가를 실시하지 아니한다&quot;</td>
+</tr>
+<tr>
+<td>근무평정 규칙 <strong>제7조② 단서</strong></td>
+<td>&quot;<strong>노동조합 전임자의 경우 원장이 별도로 정하는 바에 따른다</strong>&quot;</td>
+</tr>
+<tr>
+<td>근무평정 규칙 <strong>제27조④</strong></td>
+<td>제7조제1항에 해당하는 자의 <strong>평정점 산출은 원장이 별도로 정하는 바</strong>에 따른다</td>
+</tr>
+</tbody></table></div>
+<p><strong>규칙에는 방법이 없다.</strong> 승진과 성과급을 좌우하는 산식이 전부 원장 재량으로 위임되어 있다.</p>
+<h3>1-2 평정계획 (2025년)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>대상</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>전임자</td>
+<td>평가 제외 후 <strong>최근 3회 근무평정 평균값</strong> 적용</td>
+</tr>
+<tr>
+<td></td>
+<td>&quot;사전조정계수가 조정(<strong>85점→80점</strong>)된 만큼 보정하여 종합점수 산출&quot;</td>
+</tr>
+<tr>
+<td>근로시간면제자 (반전임)</td>
+<td>연간 근로기간의 1/2(<strong>183일</strong>) 이상 활동 시 최근 3회 평균</td>
+</tr>
+<tr>
+<td></td>
+<td>183일 미만 시 면제기간을 제외하고 부서 소속기간만 평가하여 가중치 조정</td>
+</tr>
+</tbody></table></div>
+<h3>1-3 3회 평균제의 유래</h3>
+<p>2023년 단체협약 체결 당시 <strong>조합이 스스로 도입</strong>했다. 노조 임원을 위한 제도라는 인상을 주지
+않기 위한 장치였다. 이 문서는 그 취지를 부정하지 않는다. <strong>취지는 유지하면서 부작용만 제거하는
+것이 목표다.</strong></p>
+<hr>
+<h2>§2 문제</h2>
+<h3>2-1 승진 경로가 산술적으로 막힌다</h3>
+<p>이것이 핵심이다. 규정 산식에 값을 넣으면 확인된다.</p>
+<p><strong>전제 — 모두 규정·계획의 실측값이다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>승진후보자 서열명부 = 근무평정 평정점 <strong>90%</strong> + 근속기간 <strong>10%</strong></td>
+<td>2026년 승진평가 계획</td>
+</tr>
+<tr>
+<td>반영 회차 = 최저 승진 소요기간 내 총 횟수 × 1/2 (홀수 올림)</td>
+<td>인사규정 제23조 · 승진평가 계획</td>
+</tr>
+<tr>
+<td>2·3급 승진 — 소요 4년(총 5회) → <strong>최근 3회</strong> 반영</td>
+<td>승진평가 계획</td>
+</tr>
+<tr>
+<td>근속 만점 기준 = 최저 소요기간의 2배 (2·3급 <strong>96개월</strong>)</td>
+<td>승진평가 계획</td>
+</tr>
+<tr>
+<td>평정점 구간 — S 100<del>90.01 / A 90</del>80.01 / B 80<del>70.01 / C 70</del>60.01</td>
+<td>규칙 [별표 7]</td>
+</tr>
+<tr>
+<td>2026년 3급 승진 — 후보 31명 · <strong>T/O 4명</strong> · 심사 대상 24명</td>
+<td>승진평가 계획</td>
+</tr>
+</tbody></table></div>
+<p><strong>계산 — 3급 승진 서열명부(후보 31명)에서 T/O 4명 안에 들기 위해 필요한 평정점</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>근속</th>
+<th>4위 컷 서열명부 점수</th>
+<th>필요 평정점</th>
+<th>해당 등급</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>50개월 (승진 4년차)</td>
+<td>95.16</td>
+<td><strong>99.90</strong></td>
+<td>S등급 최상위</td>
+</tr>
+<tr>
+<td>74개월 (6년차)</td>
+<td>95.16</td>
+<td><strong>97.10</strong></td>
+<td>S등급 상위</td>
+</tr>
+<tr>
+<td>96개월 (만점, 8년차)</td>
+<td>95.16</td>
+<td><strong>94.62</strong></td>
+<td>S등급</td>
+</tr>
+</tbody></table></div>
+<p><strong>근속이 만점이 되어도 평정점 94.62점 — S등급 상위가 필요하다.</strong></p>
+<p>반면 전임자 산식이 만드는 평정점은 어떤 해석을 취하든 그 근처에 가지 않는다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>산식 해석</th>
+<th>결과 평정점</th>
+<th>서열명부 순위 (31명 중)</th>
+<th>T/O 4명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3회 평균을 <strong>종합점수</strong> 기준으로</td>
+<td>약 82</td>
+<td>18위</td>
+<td>불가</td>
+</tr>
+<tr>
+<td>3회 평균을 <strong>평정점</strong> 기준으로</td>
+<td>약 75</td>
+<td><strong>25위 — 심사 대상 24명에서 탈락</strong></td>
+<td>불가</td>
+</tr>
+<tr>
+<td>이 문서의 1안 적용 (동일 직급 평균)</td>
+<td>약 80</td>
+<td>20위</td>
+<td>불가</td>
+</tr>
+</tbody></table></div>
+<p><strong>근속으로 메울 수 있는 최대치는 4.75점</strong>(50개월 → 96개월)인데, S등급 경쟁자와의 격차는
+20점 이상이다. <strong>전임 중에는 승진이 구조적으로 불가능하다.</strong></p>
+<p>이것이 &quot;<strong>승진이 안 되니 전임 희망자가 없다</strong>&quot;의 정확한 기전이다.</p>
+<h3>2-2 어떤 산식이 적용되었는지 당사자도 모른다</h3>
+<p>§2-1의 표에서 해석에 따라 <strong>심사 대상 진입 여부가 갈린다.</strong> 그런데 규칙에는 방법이 없고,
+계획의 &quot;최근 3회 근무평정 평균값&quot;이 <strong>종합점수의 평균인지 평정점의 평균인지 특정되지 않는다.</strong></p>
+<p>여기에 규칙 제28조①의 평정점 비공개가 겹친다. 전임자는 평가 결과가 시스템에 등록되지 않는다는
+지적도 있다. <strong>결과적으로 당사자는 자기 평정점도, 그것이 어떻게 산출되었는지도 확인할 수 없다.</strong></p>
+<h3>2-3 낮은 점수가 고착된다</h3>
+<p>3회 평균은 이동평균이므로 <strong>한 번 낮아진 값이 이후 회차에 계속 계승된다.</strong> 승진 직후 저평정을
+받은 사람이 전임자가 되면 그 값이 재직 내내 따라온다(§4-2 승진자 저평정 관행 참조).</p>
+<p>영향은 승진에 그치지 않는다. 경영평가성과급의 개인성과 부분이 **근무평정 70% + 내부평가 30%**로
+산정되므로 평정점 하락이 성과급 하락으로 직결된다.</p>
+<h3>2-4 규칙에 근거가 없다</h3>
+<p>사전조정계수와 같은 구조다. 평정계획의 &quot;사전조정계수가 조정(<strong>85점→80점</strong>)된 만큼 보정&quot;이라는
+문구가 그 증거다. <strong>기준값이 85점에서 80점으로 내려간 이력이 계획 문서에 남아 있고, 규칙에 없는
+수치였으므로 협의 없이 바뀌었다.</strong> 전임자 산식도 같은 방식으로 언제든 바뀔 수 있다.</p>
+<hr>
+<h2>§3 전수 조사 — 355개 기관</h2>
+<p>ALIO 경영공시 기관 내규 355개 기관 · 규정 파일 36,190건을 조(條) 단위로 전수 조사했다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>전임자·근로시간면제자 평정을 규정한 기관</td>
+<td><strong>55곳</strong></td>
+</tr>
+<tr>
+<td><strong>「최근 N회 평균」 방식</strong></td>
+<td><strong>창업진흥원 외 한 곳도 확인되지 않음</strong></td>
+</tr>
+<tr>
+<td>「S등급 고정 부여」</td>
+<td><strong>확인되지 않음</strong> — 조합 내 통설이나 근거 없음</td>
+</tr>
+</tbody></table></div>
+<p>확인된 방식은 네 갈래다.</p>
+<h3>3-1 직전 점수와 동일 직급 평균 중 유리한 값</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국산업안전보건공단</strong></td>
+<td>「직원 평가에 관한 운영지침」 제16조③ — 능력평가 제외 대상자(근로시간면제자·노동조합 전임)는 &quot;① 파견 직전에 부여받은 점수 ② 동일 직급 내 동일 근속년수자의 해당 평정대상기간의 평균점수&quot; 중 &quot;<strong>가장 높은 점수</strong>를 평정대상기간의 평가점으로 부여&quot;</td>
+</tr>
+<tr>
+<td><strong>한국소비자원</strong></td>
+<td>「업무성과평가요령」 — &quot;노조법에 의한 근로시간 면제자 중 **풀타임 면제자와 파트타임 면제자(750시간 이상인 자)**에 대해서는 직전 연도 종합평가점수와 당해 연도 동일직군·동일직급 평균점수 중 <strong>유리한 결과</strong>를 적용한다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>3-2 동일 직급 평균 부여</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국전력거래소</strong></td>
+<td>「근무성적평정규정」 제④ — &quot;노동조합 대표 및 노동조합활동 전임자에 대하여는 <strong>동일직급, 동일직장의 평균점수를 적용</strong>한다&quot;</td>
+</tr>
+<tr>
+<td><strong>오송첨단의료산업진흥재단</strong></td>
+<td>「근무성적평정 규칙」 제② — &quot;노동조합 풀타임(Full-time) 근로시간 면제자는 단체협약 및 제규정에 따른 평정을 실시하지 아니하되, <strong>동일 직급 전체 평균 점수를 산출하여 부여</strong>한다&quot;</td>
+</tr>
+<tr>
+<td><strong>한국방송광고진흥공사</strong></td>
+<td>「직원평정규정」 제② — 6개월 초과의 연수·파견·<strong>근로시간면제자</strong>·휴직 등으로 평정할 수 없을 때 &quot;각 평가별로 <strong>평가그룹의 평균점수를 부여</strong>&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>3-3 중간등급 고정 부여</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>대한석탄공사</strong></td>
+<td>「종합근무평가규정」 제② — &quot;공상, 휴직, 대외파견, 교육, 출장, <strong>노조전임</strong> 등으로 평가를 할 수 없는 직원은 인사평가 등급을 <strong>B로 간주</strong>한다&quot;</td>
+</tr>
+<tr>
+<td><strong>통일연구원</strong></td>
+<td>&quot;교섭대표 노조전임자 … 는 평가대상에서 제외하고 업무평가 결과의 <strong>중간등급을 부여</strong>한다&quot;</td>
+</tr>
+<tr>
+<td><strong>서울올림픽기념국민체육진흥공단</strong> · 한국스포츠레저(주) · 한국체육산업개발(주)</td>
+<td>「성과급 시행세칙」 — &quot;<strong>노조전임자</strong>, 파견자 및 그 밖에 성과평가가 곤란하다고 인정되는 직원은 <strong>중간 평가등급을 부여</strong>한다&quot;</td>
+</tr>
+<tr>
+<td><strong>한국청소년활동진흥원</strong></td>
+<td>「인사평가 규칙」 — 인사평가 대상에서 제외된 인원(<strong>근로시간면제자</strong> 등)의 승진포인트 등급은 <strong>B등급</strong>을 부여</td>
+</tr>
+</tbody></table></div>
+<h3>3-4 상한점 부여 · 단협 위임</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>조문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국무역보험공사</strong></td>
+<td>「종합평정 시행요강」 제⑥ — &quot;<strong>노조 전임자</strong>로 근무중인 직원 또는 노동이사직을 겸임하는 직원에 대해서는 평정을 생략하고, [별표 2]에서 정한 <strong>1인 평정대상자의 상한점</strong>을 평정점으로 한다&quot;</td>
+</tr>
+<tr>
+<td><strong>한국과학기술기획평가원</strong></td>
+<td>「근무성적평정요령」 제⑥ — &quot;<strong>노동조합 전임자</strong>에 대하여는 <strong>노·사간 단체협약에서 정하는 내용</strong>을 토대로 하여 등급을 분류하여 평가한다&quot;</td>
+</tr>
+</tbody></table></div>
+<h3>3-5 반전임(파트타임)의 기준</h3>
+<p>창진원은 <strong>183일</strong>(연간 근로기간의 1/2)을 기준으로 한다. 타기관의 기준은 다음과 같다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국소비자원</strong></td>
+<td>파트타임 <strong>750시간</strong> 이상 → 풀타임과 동일 취급</td>
+</tr>
+<tr>
+<td><strong>한국원자력안전재단</strong></td>
+<td>근로시간면제자 <strong>1,000시간</strong> 이상 사용</td>
+</tr>
+<tr>
+<td><strong>한전KDN</strong></td>
+<td><strong>3개월</strong> 이상 전임자·근로시간면제자(풀타임 또는 파트타임)</td>
+</tr>
+<tr>
+<td><strong>한국인터넷진흥원</strong></td>
+<td>노동조합 전임자 및 근로시간 면제로 인한 조합근무가 <strong>1년 중 4개월</strong> 이상</td>
+</tr>
+<tr>
+<td><strong>노사발전재단</strong></td>
+<td>평가 예외는 <strong>풀타임 면제자</strong>만 — &quot;<strong>파트타임 면제자의 경우 평가대상에 포함</strong>&quot;</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>§4 개선안</h2>
+<h3>4-1 규칙 개정 — 계획 위임을 끝낸다</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>현행</th>
+<th>개정안</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>제7조②</strong> … 단, 신규채용 또는 퇴직된 직원의 경우에는 적용하지 아니하며 <strong>노동조합 전임자의 경우 원장이 별도로 정하는 바에 따른다.</strong></td>
+<td>② … 단, 신규채용 또는 퇴직된 직원의 경우에는 적용하지 아니한다.</td>
+</tr>
+<tr>
+<td>(없음)</td>
+<td>③ <strong>노동조합 전임자 및 근로시간면제자</strong>에 대한 평가점수는 제2항에도 불구하고 **[별표 11]**에 따라 산출한다. <em>(신설, 이하 항 번호 이동)</em></td>
+</tr>
+<tr>
+<td><strong>제27조④</strong> 제7조제1항 또는 제9조제5항에 해당하는 자의 평정점 산출은 원장이 별도로 정하는 바에 따른다.</td>
+<td>④ … 평정점 산출은 [별표 11] 및 원장이 별도로 정하는 바에 따른다.</td>
+</tr>
+</tbody></table></div>
+<h3>4-2 [별표 11] 신설 — 세 가지 안</h3>
+<p><strong>1. 적용 대상</strong>
+가. 「노동조합 및 노동관계조정법」에 따른 노동조합 전임자
+나. 같은 법에 따른 근로시간면제자로서 <strong>연간 750시간 이상</strong>을 사용한 자
+다. 나목에 해당하지 아니하는 근로시간면제자는 면제 기간을 제외하고 부서 소속기간을 평가하되
+   가중치는 규칙 제6조제1항에 따른다.</p>
+<p><strong>2. 평가점수의 산출</strong> — 다음 세 안 중 하나를 노사협의회 협의로 채택한다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>안</th>
+<th>산식</th>
+<th>성격</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1안</strong></td>
+<td><strong>유리한 값</strong> <em>(권고)</em></td>
+<td>전임 직전 3회 근무평정 평정점의 평균과, 당해 평가에서 <strong>동일 직급 피평가자의 평정점 평균</strong> 중 <strong>높은 값</strong></td>
+<td>하락 고착만 차단. 상향 특혜 아님</td>
+</tr>
+<tr>
+<td><strong>2안</strong></td>
+<td>동일 직급 평균</td>
+<td>당해 평가에서 동일 직급 피평가자의 <strong>평정점 평균</strong></td>
+<td>가장 단순. 유·불리 없음</td>
+</tr>
+<tr>
+<td><strong>3안</strong></td>
+<td>중간등급 고정</td>
+<td><strong>B등급</strong>의 중위 평정점</td>
+<td>가장 단순하나 상위 실력자에게 불리</td>
+</tr>
+</tbody></table></div>
+<p><strong>3. 산출 기준의 명시</strong> 제2호의 평균은 <strong>평정점</strong>을 기준으로 산출한다.</p>
+<p><strong>4. 통지</strong> 인사담당부서장은 이 별표에 따라 산출한 평가점수와 산출 근거를 해당 피평가자에게
+통지한다.</p>
+<p><strong>5. 보고</strong> 인사담당부서장은 이 별표의 적용 인원과 산출 결과를 노사협의회에 보고한다.</p>
+<h3>4-3 1안을 권고하는 이유</h3>
+<p><strong>첫째, 3회 평균제의 취지를 유지한다.</strong> 조합이 2023년에 스스로 도입한 장치를 폐기하지 않는다.
+직전 3회 평균을 그대로 쓰되 <strong>하한만 붙인다.</strong> &quot;노조 임원에게 특혜를 준다&quot;는 반론이 성립하지
+않는다 — 동일 직급 평균보다 유리한 값을 주지 않는다.</p>
+<p><strong>둘째, 선례가 명확하다.</strong> 한국산업안전보건공단과 한국소비자원이 <strong>같은 구조</strong>를 규정에 두고 있고,
+한국소비자원은 파트타임까지 함께 규정한다.</p>
+<p><strong>셋째, 개정 13과 원리가 같다.</strong> 본안의 개정 13은 일반 미실시자(휴직·출산전후휴가 등)의 점수에서
+직전 점수 50% 승계를 폐지하고 동일 직급 평균을 부여한다. <strong>평가받지 못한 기간에 대해 유리하지도
+불리하지도 않은 값을 주자는 것</strong>이 두 안의 공통 원리다.</p>
+<p><strong>넷째, 그럼에도 승진 경로는 열리지 않는다.</strong> §2-1의 계산대로 1안을 적용해도 서열명부 20위,
+T/O 4명 진입은 불가능하다. <strong>이 안은 부당한 하락을 막는 것이지 승진을 보장하는 것이 아니다.</strong>
+이 사실이 &quot;특혜&quot; 반론에 대한 가장 강한 답이다.</p>
+<h3>4-4 승진 경로에 관한 별도 검토 과제</h3>
+<p>1안으로도 해결되지 않는 부분은 승진제도 쪽에 있다. <strong>본안과 이 별책 모두의 범위를 넘으므로
+장기과제로 남긴다.</strong> 확인된 사실만 적는다.</p>
+<ul>
+<li>**1(가)~2급 승진은 인사위원회 심의 100%**이고 근무평정·근속·동료평가는 모두 **참고자료(정성)**다.
+서열명부의 정량 순위가 절대적이지 않다.</li>
+<li><strong>3~4급 승진</strong>은 서열명부로 심사 대상을 걸러낸 뒤 정량 배점으로 결정한다. 평정점의 영향이 크다.</li>
+<li>따라서 전임자의 승진 가능성은 <strong>어느 직급으로 승진하는지에 따라 완전히 달라진다.</strong></li>
+<li>2026년 T/O는 1(가)급 2 · 1(나)급 2 · 2급 3 · 3급 4 · 4급 3명, 합계 <strong>14명 / 후보 126명(11.1%)</strong>
+이다. <strong>T/O가 없으면 서열이 1위여도 승진은 없다.</strong></li>
+</ul>
+<hr>
+<h2>§5 협의 절차</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>시기</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026년 4분기 이후</td>
+<td>본안(근무평정 개편) 의결 <strong>이후</strong> 별도 안건으로 상정</td>
+</tr>
+<tr>
+<td></td>
+<td>근참법 제20조①5호 · 운영규정 제25조①5호 「인사·노무관리의 제도개선」</td>
+</tr>
+<tr>
+<td></td>
+<td>규칙 개정은 본안과 동일한 절차</td>
+</tr>
+</tbody></table></div>
+<p><strong>본안 협의에서 이 안건을 조건으로 삼지 않는다.</strong> 사측이 이 안건을 먼저 제안하는 경우에도
+본안과 분리하여 처리한다.</p>
+<hr>
+<h2>붙임. 자료 요구</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>요구 자료</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>규칙 제7조② 단서·제27조④에 따라 <strong>원장이 별도로 정한 내용</strong>의 전문</td>
+<td>현행 산식 확정</td>
+</tr>
+<tr>
+<td>2</td>
+<td>최근 5년간 전임자·근로시간면제자에게 적용한 <strong>평정점과 그 산출 내역</strong></td>
+<td>§2-2 해석 문제 해소</td>
+</tr>
+<tr>
+<td>3</td>
+<td>&quot;최근 3회 평균&quot;의 대상이 <strong>종합점수인지 평정점인지</strong></td>
+<td>산식 특정</td>
+</tr>
+<tr>
+<td>4</td>
+<td>사전조정계수 기준값이 <strong>85점에서 80점으로 변경된 시점과 근거</strong></td>
+<td>§2-4 확인</td>
+</tr>
+<tr>
+<td>5</td>
+<td>최근 5년간 직급별 <strong>승진 T/O와 서열명부 상위 순위별 승진 여부</strong></td>
+<td>§4-4 검토</td>
+</tr>
+</tbody></table></div>
+<hr>
+<blockquote>
+<p><strong>면책</strong> 이 문서는 창업진흥원 노동조합의 제안이며 확정된 제도가 아니다. 창업진흥원 규정 인용은
+ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정, 인사규정 2026.05.28. 개정)과 2025년
+근무평정 계획·2026년 승진평가 계획에 따른다. 타기관 조문은 각 기관 ALIO 경영공시 게시본이며
+확인 기준일은 2026-09-10이다. §2-1의 계산은 규정 산식에 공개된 실측 모수를 대입한 것이며,
+경쟁자 분포는 2025년 등급 배정 실적을 기준으로 한 추계다. 개인의 평정 이력은 싣지 않았다.</p>
+</blockquote>
+</article></main>
+<footer>창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</footer>
+</body>
+</html>
