@@ -98,8 +98,79 @@
   </div>
 </section>
 
+<!-- ══ 1차·2차가 겹치면 — 실제로 개인이 겪는 격차 ══ -->
+<section class="slide" data-trans="wipe" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="두 평가자가 겹치면">
+  <p class="eyebrow rise">Ⅲ-4<span class="sep">·</span>1차 × 2차</p>
+  <h2 class="title mid rise" style="--d:100ms">
+    한 사람은 <em>두 평가자를 동시에</em> 만납니다
+  </h2>
+  <p class="body rise" style="--d:180ms">
+    부서장(1차)과 본부장(2차)의 성향이 겹칩니다. <b>어느 부서에 배치되는가가 둘을 한꺼번에 결정합니다.</b>
+  </p>
+
+  <div class="fig rise" style="--d:280ms">
+    <svg viewBox="0 0 1180 250" role="img" aria-label="부서장 유형과 본부장 유형의 조합별 S등급 획득률 비교">
+      <text x="250" y="20" font-size="18" font-weight="600" fill="var(--ink-3)" text-anchor="middle">현행</text>
+      <text x="830" y="20" font-size="18" font-weight="600" fill="var(--accent)" text-anchor="middle">개선</text>
+
+      <!-- 좌: 현행 -->
+      <text x="0"   y="62" font-size="17" fill="var(--ink-3)">본부장 →</text>
+      <text x="300" y="62" font-size="17" fill="var(--ink-2)" text-anchor="middle">극단</text>
+      <text x="450" y="62" font-size="17" fill="var(--ink-2)" text-anchor="middle">균등</text>
+      <text x="0"   y="112" font-size="17" fill="var(--ink-2)">극단 부서장</text>
+      <text x="0"   y="182" font-size="17" fill="var(--ink-2)">균등 부서장</text>
+
+      <rect x="230" y="80"  width="140" height="52" fill="var(--series-hi)" opacity=".92"/>
+      <text x="300" y="113" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">34.5%</text>
+      <rect x="380" y="80"  width="140" height="52" fill="var(--series-now)" opacity=".92"/>
+      <text x="450" y="113" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">26.1%</text>
+      <rect x="230" y="150" width="140" height="52" fill="var(--series-now)" opacity=".72"/>
+      <text x="300" y="183" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">20.2%</text>
+      <rect x="380" y="150" width="140" height="52" fill="var(--series-now)" opacity=".26"/>
+      <text x="450" y="183" font-size="24" font-weight="700" fill="var(--ink)" text-anchor="middle">2.9%</text>
+      <text x="375" y="228" font-size="18" font-weight="700" fill="var(--series-hi)" text-anchor="middle">12.08배 차이</text>
+
+      <!-- 우: 개선 -->
+      <text x="620" y="62" font-size="17" fill="var(--ink-3)">본부장 →</text>
+      <text x="880" y="62" font-size="17" fill="var(--ink-2)" text-anchor="middle">극단</text>
+      <text x="1030" y="62" font-size="17" fill="var(--ink-2)" text-anchor="middle">균등</text>
+      <text x="620" y="112" font-size="17" fill="var(--ink-2)">극단 부서장</text>
+      <text x="620" y="182" font-size="17" fill="var(--ink-2)">균등 부서장</text>
+
+      <rect x="810"  y="80"  width="140" height="52" fill="var(--series-new)" opacity=".88"/>
+      <text x="880"  y="113" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">20.4%</text>
+      <rect x="960"  y="80"  width="140" height="52" fill="var(--series-new)" opacity=".80"/>
+      <text x="1030" y="113" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">17.0%</text>
+      <rect x="810"  y="150" width="140" height="52" fill="var(--series-new)" opacity=".82"/>
+      <text x="880"  y="183" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">18.1%</text>
+      <rect x="960"  y="150" width="140" height="52" fill="var(--series-new)" opacity=".92"/>
+      <text x="1030" y="183" font-size="24" font-weight="700" fill="var(--bg)" text-anchor="middle">21.5%</text>
+      <text x="955" y="228" font-size="18" font-weight="700" fill="var(--accent)" text-anchor="middle">1.26배</text>
+    </svg>
+  </div>
+
+  <div class="box warn rise" style="--d:400ms">
+    <p class="body" style="margin:0">
+      부서장만 보면 <b>3배</b>인데, 본부장까지 겹치면 <b>12배</b>가 됩니다.
+      그리고 <b>직원 30퍼센트가 「균등 × 균등」에 있어 S 확률이 2.9퍼센트</b>입니다.
+    </p>
+  </div>
+  <p class="cap rise" style="--d:470ms">
+    본부 5개 중 극단 2 · 균등 3 (조합 관찰). 어느 본부인지는 지정하지 않으며 반복마다 무작위 배정합니다.
+    원장 직속은 평균 제약을 받지 않아 제외했습니다. 모의데이터 계산치이며 실제 평정 결과가 아닙니다.
+  </p>
+
+  <div class="notes">
+    <p><b>이 장에서 가장 강한 숫자입니다.</b> 「부서장 편차 19.5%p」와 「본부 격차 1.89배」를 따로 말하면
+    사측이 <b>「부서장이 극단이어도 본부장이 균등하면 상쇄되지 않느냐」</b>고 받습니다. 이 표가 그 답입니다 —
+    상쇄되지 않고 <b>겹칩니다.</b></p>
+    <p>왼쪽 아래 2.9% 칸을 가리키며 말하십시오. <b>「직원 세 명 중 한 명이 이 칸에 있습니다.」</b></p>
+    <p>개선 후 네 칸이 17~21%로 모입니다. 없애는 것은 등급이 아니라 <b>칸에 따라 달라지는 것</b>입니다.</p>
+  </div>
+</section>
+
 <section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="균등 부서에선 아무 일도 없다">
-  <p class="eyebrow rise">Ⅲ-4<span class="sep">·</span>S와 C의 동시 발생</p>
+  <p class="eyebrow rise">Ⅲ-5<span class="sep">·</span>S와 C의 동시 발생</p>
   <h2 class="title mid rise" style="--d:100ms">균등 성향 부서에서는 아무 일도 일어나지 않습니다</h2>
   <div class="fig rise" style="--d:220ms">
     <svg viewBox="0 0 1040 336" role="img" aria-label="균등 성향 부서장 아래에서는 S 9.9퍼센트 C 2.1퍼센트, 극단 성향 부서장 아래에서는 S 29.4퍼센트 C 16.6퍼센트임을 보여 주는 막대 차트">
@@ -139,7 +210,7 @@
 </section>
 
 <section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="등급 분포 — 두 부서 비교">
-  <p class="eyebrow rise">Ⅲ-5<span class="sep">·</span>등급 전체 분포</p>
+  <p class="eyebrow rise">Ⅲ-6<span class="sep">·</span>등급 전체 분포</p>
   <h2 class="title mid rise" style="--d:100ms">개정 후에는 어느 부서에 있어도 분포가 같아집니다</h2>
   <div class="fig rise" style="--d:220ms">
     <svg viewBox="0 0 1040 396" role="img" aria-label="가운데 축에 S A B C 등급을 두고 왼쪽은 극단 성향 부서, 오른쪽은 균등 성향 부서의 등급 분포를 현행과 개정 후로 나란히 보여 주는 좌우 대칭 막대 차트">
@@ -217,7 +288,7 @@
 </section>
 
 <section class="slide" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="7월에 전보 가면 불리하다">
-  <p class="eyebrow rise">Ⅲ-6<span class="sep">·</span>전보·휴직·조직개편</p>
+  <p class="eyebrow rise">Ⅲ-7<span class="sep">·</span>전보·휴직·조직개편</p>
   <h2 class="title mid rise" style="--d:100ms">7월에 전보 가면 불리합니다</h2>
   <table class="rise" style="--d:200ms">
     <thead>
@@ -249,7 +320,7 @@
 </section>
 
 <section class="slide" data-trans="rise" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="평정점은 본인도 못 본다">
-  <p class="eyebrow rise">Ⅲ-7<span class="sep">·</span>제28조</p>
+  <p class="eyebrow rise">Ⅲ-8<span class="sep">·</span>제28조</p>
   <h2 class="title mid rise" style="--d:100ms">평정점은 본인에게도 공개되지 않습니다</h2>
   <blockquote class="q rise" style="--d:200ms">
     … 1·2차 평가자별 점수 및 직급 내 순위, <b>평정점은 공개하지 아니한다.</b>
