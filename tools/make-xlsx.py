@@ -117,14 +117,14 @@ COL_S, COL_APPLY, COL_REF, COL_JUDGE = 42, 43, 44, 45   # AP AQ AR AS
 
 put(sn, "A1", "④ s(n) 표 — 인원 n일 때 Blom z값들의 표준편차", font=B_TTL)
 put(sn, "A2", "[별표 9] 제3호의 s(n)이다. z가 곧 정규 순서통계량 근사값이므로 s(n)은 그 모표준편차(STDEVP)다. "
-              "17명 이상은 [별표 9] 제3호에 따라 s(n) = 1로 본다.", font=FN_S)
+              "s(n)은 해당 평가군 z값들의 표준편차(=STDEVP)다. 인원이 많아도 1로 보지 아니한다.", font=FN_S)
 put(sn, "A3", "각 셀은 =NORM.S.INV((i−0.375)/(n+0.25)) 이다. 값을 적어 둔 것이 아니라 수식으로 계산한다.", font=FN_S)
 
 hdr(sn, 4, ["n"])
 for i in range(1, 41):
     c = sn.cell(row=4, column=1 + i, value=i)
     c.font, c.fill, c.alignment, c.border = B_HEAD, F_HEAD, CTR, BOX
-for k, lab in enumerate(["s(n) 계산값 = STDEVP", "규정 적용값 (n≥17 → 1)", "[별표 9] 표 참고값", "일치 판정"]):
+for k, lab in enumerate(["s(n) 계산값 = STDEVP", "규정 적용값", "[별표 9] 표 참고값", "일치 판정"]):
     c = sn.cell(row=4, column=COL_S + k, value=lab)
     c.font, c.fill, c.alignment, c.border = B_HEAD, F_HEAD, CTR, BOX
 
@@ -142,7 +142,7 @@ for k in range(SN_N):
                     value="=IF(%s$4<=$A%d,NORM.S.INV((%s$4-0.375)/($A%d+0.25)),\"\")" % (cl, r, cl, r))
         c.font, c.fill, c.number_format = FN, F_CALC, "0.0000"
     put(sn, "%s%d" % (sL, r), "=STDEVP($B%d:$AO%d)" % (r, r), fill=F_CALC, fmt="0.000000")
-    put(sn, "%s%d" % (aL, r), "=IF($A%d>=17,1,%s%d)" % (r, sL, r), fill=F_CALC, fmt="0.0000")
+    put(sn, "%s%d" % (aL, r), "=%s%d" % (sL, r), fill=F_CALC, fmt="0.0000")
     if k + 2 in REF_SN:
         put(sn, "%s%d" % (rL, r), REF_SN[k + 2], fill=F_CALC, fmt="0.0000")
         put(sn, "%s%d" % (jL, r), '=IF(ROUND(%s%d,4)=%s%d,"PASS","FAIL")' % (sL, r, rL, r),
@@ -212,7 +212,7 @@ for (bi, rr) in rows:
     put(gp, "F%d" % rr, raws[k], fill=F_IN, align=CTR, fmt="0.0##")
     put(gp, "G%d" % rr, "=COUNTIF(%s,$A%d)" % (ALL_A, rr), fill=F_CALC, align=CTR)
     put(gp, "H%d" % rr, "=RANK.EQ($F%d,%s,1)" % (rr, blkF), fill=F_CALC, align=CTR)
-    put(gp, "I%d" % rr, "=IF($G%d>=17,1,INDEX(%s,MATCH($G%d,%s,0)))" % (rr, SN_APPLY, rr, SN_NCOL),
+    put(gp, "I%d" % rr, "=INDEX(%s,MATCH($G%d,%s,0))" % (SN_APPLY, rr, SN_NCOL),
         fill=F_CALC, align=CTR, fmt="0.0000")
     put(gp, "J%d" % rr, "=($H%d-0.375)/($G%d+0.25)" % (rr, rr), fill=F_CALC, fmt="0.0000")
     put(gp, "K%d" % rr, "=NORM.S.INV($J%d)" % rr, fill=F_CALC, fmt="0.0000")
@@ -321,8 +321,8 @@ for k, nm in enumerate(PEOPLE):
     put(tt, "M%d" % rr, '=COUNTIFS(%s,">=3")' % P_L, fill=F_CALC, align=CTR)
     put(tt, "N%d" % rr, '=IF($L%d<3,"",COUNTIFS(%s,">=3",%s,"<"&$K%d)+1)' % (rr, P_L, P_K, rr),
         fill=F_CALC, align=CTR)
-    put(tt, "O%d" % rr, '=IF($L%d<3,"",IF($M%d>=17,1,INDEX(%s,MATCH($M%d,%s,0))))'
-        % (rr, rr, SN_APPLY, rr, SN_NCOL), fill=F_CALC, align=CTR, fmt="0.0000")
+    put(tt, "O%d" % rr, '=IF($L%d<3,"",INDEX(%s,MATCH($M%d,%s,0)))'
+        % (rr, SN_APPLY, rr, SN_NCOL), fill=F_CALC, align=CTR, fmt="0.0000")
     put(tt, "P%d" % rr,
         '=IF($L%d<3,80,ROUND(MEDIAN(60,80+7*NORM.S.INV(($N%d-0.375)/($M%d+0.25))/$O%d,100),3))'
         % (rr, rr, rr, rr), fill=F_CALC, align=CTR, fmt="0.000")
@@ -420,10 +420,8 @@ for bi, (gname, ev, kind, rank, names, raws, adjs) in enumerate(BLOCKS):
         put(vv, "D%d" % vr, "=ROUND(AVERAGE(%s),2)" % bL, fill=F_CALC, align=CTR, fmt="0.00")
         put(vv, "E%d" % vr, '=IF($D%d=80,"PASS","FAIL")' % vr, fill=F_CALC, align=CTR)
         put(vv, "F%d" % vr, "=ROUND(STDEVP(%s),2)" % bL, fill=F_CALC, align=CTR, fmt="0.00")
-        # 제3호 후단(17명 이상은 s(n)=1)을 그대로 적용하면 n>=17 평가군의 기대 표준편차는 7×s(n) 이다.
-        put(vv, "G%d" % vr,
-            '=IF($C%d<=16,7,IFERROR(ROUND(7*INDEX(%s,MATCH($C%d,%s,0)),2),"④ 표(n≤40) 확장 필요"))'
-            % (vr, SN_CALC, vr, SN_NCOL), fill=F_CALC, align=CTR, fmt="0.00")
+        # [별표 9] 제3호는 인원과 무관하게 s(n)으로 나눈다. 목표는 언제나 7.00 이다.
+        put(vv, "G%d" % vr, 7, fill=F_CALC, align=CTR, fmt="0.00")
         put(vv, "H%d" % vr, '=IF($F%d=$G%d,"PASS","FAIL")' % (vr, vr), fill=F_CALC, align=CTR)
         put(vv, "I%d" % vr, "=ROUND(7*STDEVP(%s),2)" % bK, fill=F_CALC, align=CTR, fmt="0.00")
     else:
@@ -439,31 +437,31 @@ put(vv, "A%d" % vr, "★ I열이 제4호의 목표 7.00에 미달한다는 것�
                     "F열(실제)과 G열(제3호가 정하는 값)이 일치하면 구현이 규정대로 된 것이다.", font=FN_S)
 vr += 2
 
-# ── 논점 — 제3호 후단(17명 이상 s(n)=1)의 효과 ───────────────────────
-sec(vr, "1-2. 조합이 먼저 밝히는 논점 — 제3호 후단 「17명 이상은 s(n) = 1로 본다」의 효과")
+# ── 논점 — ÷s(n) 이 없으면 어떻게 되는가 ────────────────────────────
+sec(vr, "1-2. ÷ s(n) 이 왜 필요한가 — 1차와 2차의 척도를 맞춘다")
 put(vv, "A%d" % (vr + 1),
-    "1차 평가군(부서 단위)은 창업진흥원에서 3~16명이므로 s(n) 표가 적용되어 표준편차가 정확히 7.00이 된다. "
-    "그러나 2차 평가군(본부 단위)은 통상 17명 이상이어서 제3호 후단에 따라 s(n)=1 이 적용되고, "
-    "표준편차가 7.00에 미달한다. 아래 값은 모두 ④ 시트에서 계산된 것이다.", font=FN, align=WRAP)
+    "[별표 9] 제3호는 인원과 무관하게 z를 s(n)으로 나눈다. 그 결과 1차 평가군(부서 3~16명)과 "
+    "2차 평가군(본부 33~59명)이 모두 표준편차 7.00이 된다. 나눗셈이 없으면 인원이 적을수록 "
+    "표준편차가 작아져 1차와 2차의 척도가 어긋나고, [별표 2]의 60:40 가중이 의도한 비중대로 "
+    "작동하지 않는다. 아래 값은 모두 ④ 시트에서 계산된 것이다.", font=FN, align=WRAP)
 vv.merge_cells(start_row=vr + 1, start_column=1, end_row=vr + 1, end_column=8)
 vv.row_dimensions[vr + 1].height = 44
-hdr(vv, vr + 2, ["평가군 인원 n", "s(n) 실제값 (④ 시트)", "제3호 후단 적용 s(n)",
-                 "그때의 표준편차 = 7×s(n)", "목표 7.00과의 차", "s(n) 표를 그대로 쓰면"])
+hdr(vv, vr + 2, ["평가군 인원 n", "s(n) (④ 시트)", "÷ s(n) 없을 때 표준편차",
+                 "목표 7.00과의 차", "÷ s(n) 적용", "판정"])
 vv.row_dimensions[vr + 2].height = 34
 rX = vr + 3
-for n in (16, 17, 20, 30, 40):
+for n in (3, 10, 16, 20, 30, 40):
     put(vv, "A%d" % rX, n, fill=F_CALC, align=CTR)
     put(vv, "B%d" % rX, "=INDEX(%s,MATCH($A%d,%s,0))" % (SN_CALC, rX, SN_NCOL), fill=F_CALC, align=CTR, fmt="0.0000")
-    put(vv, "C%d" % rX, "=INDEX(%s,MATCH($A%d,%s,0))" % (SN_APPLY, rX, SN_NCOL), fill=F_CALC, align=CTR, fmt="0.0000")
-    put(vv, "D%d" % rX, "=ROUND(7*$B%d/$C%d,2)" % (rX, rX), fill=F_CALC, align=CTR, fmt="0.00")
-    put(vv, "E%d" % rX, "=ROUND($D%d-7,2)" % rX, fill=F_CALC, align=CTR, fmt="+0.00;-0.00;0.00")
-    put(vv, "F%d" % rX, "=ROUND(7*$B%d/$B%d,2)" % (rX, rX), fill=F_CALC, align=CTR, fmt="0.00")
+    put(vv, "C%d" % rX, "=ROUND(7*$B%d,2)" % rX, fill=F_CALC, align=CTR, fmt="0.00")
+    put(vv, "D%d" % rX, "=ROUND($C%d-7,2)" % rX, fill=F_CALC, align=CTR, fmt="+0.00;-0.00;0.00")
+    put(vv, "E%d" % rX, "=ROUND(7*$B%d/$B%d,2)" % (rX, rX), fill=F_CALC, align=CTR, fmt="0.00")
+    put(vv, "F%d" % rX, '=IF($E%d=7,"PASS","FAIL")' % rX, fill=F_CALC, align=CTR)
     rX += 1
 put(vv, "A%d" % rX,
-    "해소 방법 — ④ 시트는 이미 n = 40까지 s(n)을 수식으로 계산해 두었다. [별표 9] 제3호 후단을 삭제하고 "
-    "s(n) 표를 인원 구간 전체로 확대하면 F열처럼 전 구간에서 7.00이 된다(조문 한 줄). "
-    "그대로 두는 경우에도 1차 평가군은 영향을 받지 않으며, 2차 평가군의 표준편차가 약 6.5~6.8점이 되어 "
-    "2차 평가자의 점수 폭이 1차보다 조금 좁아진다는 뜻이다. 어느 쪽을 택할지는 노사 협의 사항이다.", font=FN_S, align=WRAP)
+    "C열이 ÷ s(n) 없이 계산한 표준편차이며 인원이 적을수록 7.00에 미달한다(3명 4.97 · 10명 6.24 · "
+    "16명 6.49 · 본부 규모 6.70~6.83). E열이 [별표 9] 제3호를 적용한 값이며 전 구간에서 7.00이다. "
+    "엑셀에서는 =STDEVP(z값 범위) 한 줄로 산출되므로 표에 없는 인원도 같은 방법으로 계산한다.", font=FN_S, align=WRAP)
 vv.merge_cells(start_row=rX, start_column=1, end_row=rX, end_column=8)
 vv.row_dimensions[rX].height = 58
 vr = rX + 2
@@ -605,7 +603,7 @@ def example_block(row, title, oneline, raws, adj=None, base_ref=None, note=None)
         put(ex, "B%d" % rr, v, fill=F_IN, align=CTR, fmt="0.0##")
         put(ex, "C%d" % rr, "=COUNT($B$%d:$B$%d)" % (d0, d1), fill=F_CALC, align=CTR)
         put(ex, "D%d" % rr, "=RANK.EQ($B%d,$B$%d:$B$%d,1)" % (rr, d0, d1), fill=F_CALC, align=CTR)
-        put(ex, "E%d" % rr, "=IF($C%d>=17,1,INDEX(%s,MATCH($C%d,%s,0)))" % (rr, SN_APPLY, rr, SN_NCOL),
+        put(ex, "E%d" % rr, "=INDEX(%s,MATCH($C%d,%s,0))" % (SN_APPLY, rr, SN_NCOL),
             fill=F_CALC, align=CTR, fmt="0.0000")
         put(ex, "F%d" % rr, "=($D%d-0.375)/($C%d+0.25)" % (rr, rr), fill=F_CALC, align=CTR, fmt="0.0000")
         put(ex, "G%d" % rr, "=NORM.S.INV($F%d)" % rr, fill=F_CALC, align=CTR, fmt="0.0000")
@@ -671,7 +669,7 @@ for k in range(4):
     put(ex, "B%d" % rr, G2_RAW[k], fill=F_IN, align=CTR)
     put(ex, "C%d" % rr, B2_N, fill=F_IN, align=CTR)
     put(ex, "D%d" % rr, B2_N - B2_RANKS[k] + 1, fill=F_IN, align=CTR)
-    put(ex, "E%d" % rr, "=IF($C%d>=17,1,INDEX(%s,MATCH($C%d,%s,0)))" % (rr, SN_APPLY, rr, SN_NCOL),
+    put(ex, "E%d" % rr, "=INDEX(%s,MATCH($C%d,%s,0))" % (SN_APPLY, rr, SN_NCOL),
         fill=F_CALC, align=CTR, fmt="0.0000")
     put(ex, "F%d" % rr, "=ROUND(MEDIAN(60,80+7*NORM.S.INV(($D%d-0.375)/($C%d+0.25))/$E%d,100),3)"
         % (rr, rr, rr), fill=F_CALC, align=CTR, fmt="0.000")

@@ -21,6 +21,7 @@ const GROUPS = [
     ['guide', '08 세부지침'],
     ['method', '09 근거'],
     ['compare', '10 대비'],
+    ['guideline', '11 시행지침'],
     ['census', '부록 전수집계'],
   ]},
   { id: 'inside', label: '조합 내부', note: '교섭 전략 — 협의 전 조합 내부 검토용', items: [

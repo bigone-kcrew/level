@@ -200,7 +200,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
     <span class="t">근무평정 제도개선(안)</span>
     <span class="s">창업진흥원 노동조합</span>
   </div>
-  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html" class="on" aria-current="page">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="census.html">부록 전수집계</a></nav>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html" class="on" aria-current="page">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="guideline.html">11 시행지침</a><a href="census.html">부록 전수집계</a></nav>
   <a class="cta" href="index.html">발표 화면 열기</a>
 </div></header>
 <main><article>
@@ -337,12 +337,12 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tr>
 <tr>
 <td>② 순위 부여</td>
-<td>평가군 내 <strong>고득점 순서로 순위 r</strong>. 평가군 인원 n</td>
+<td>평가군 내 <strong>낮은 순서로 순위 r</strong> — 최저점자가 1위, 최고점자가 n위. 평가군 인원 n</td>
 <td>[별표 9] 제2호</td>
 </tr>
 <tr>
 <td>③ 보정</td>
-<td><code>보정점수 = 80 + 7 × Φ⁻¹((r − 0.375) ÷ (n + 0.25))</code><br>60 미만 → 60, 100 초과 → 100. 소수점 셋째자리 반올림</td>
+<td><code>z = Φ⁻¹((r − 0.375) ÷ (n + 0.25))</code><br><code>보정점수 = 80 + 7 × z ÷ s(n)</code><br>60 미만 → 60, 100 초과 → 100. 소수점 셋째자리 반올림</td>
 <td>[별표 9] 제3호</td>
 </tr>
 <tr>
@@ -382,7 +382,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <h3 id="1-2-예제-A-10명-부서-·-넓게-주는-평가자">1-2 예제 A — 10명 부서 · 넓게 주는 평가자<a class="anchor" href="#1-2-예제-A-10명-부서-·-넓게-주는-평가자" aria-label="이 절 링크">§</a></h3>
 <p><strong>상황</strong> 부서원 10명. 1차 평가자(부서장)가 최고 98점 ~ 최저 60점으로 넓게 부여했다.
 원점수 평균 81.10점, 표준편차 11.99점.</p>
-<p><strong>① 원점수와 ② 순위</strong> (고득점 순)</p>
+<p><strong>① 원점수와 ② 순위</strong> — 표는 읽기 쉽도록 고득점부터 적었으나, <strong>산식에 넣는 순위 r 은 낮은 순서</strong>다</p>
 <div class="tw">
 
 <div class="tw"><table>
@@ -479,8 +479,9 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </tbody></table></div>
 </div>
 
-<p>  * 순위 r 은 고득점 순이지만 Φ⁻¹ 에 넣는 값은 <strong>오름차순 순위</strong>(n − r + 1)다. 1위(98점)는
-  n − 1 + 1 = 10위째 → (10 − 0.375) ÷ 10.25 = 0.9390.</p>
+<p>  * [별표 9] 제2호는 <strong>낮은 순서로 순위를 부여</strong>한다. 98점자는 10명 중 <strong>10위</strong>이므로
+  (10 − 0.375) ÷ 10.25 = 0.9390 이다. 아래 표의 「순위」 열은 읽기 편하도록 고득점부터
+  적은 것이므로 <strong>산식에 넣을 때는 방향을 뒤집어야 한다.</strong></p>
 <p>  ** <strong>s(10) = 0.8920</strong> ([별표 9] 제3호 표). z 를 s(n) 으로 나누는 것은 <strong>평가군 인원이 달라도
   표준편차가 정확히 7.00점이 되게</strong> 하기 위한 것이다. 이 나눗셈이 없으면 10명 평가군은 6.24점이
   되어 제4호가 정한 값에 못 미친다.</p>

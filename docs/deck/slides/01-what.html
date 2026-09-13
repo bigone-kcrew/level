@@ -1,0 +1,83 @@
+<!-- ══ 보정이 무엇인가 — 이 제안의 핵심 개념을 그림 하나로 ══ -->
+<section class="slide" data-trans="wipe" data-ch="Ⅰ. 무엇을 재는가" data-title="보정이란 무엇인가">
+  <p class="eyebrow rise">Ⅰ-4<span class="sep">·</span>말부터 정리합니다</p>
+  <h2 class="title mid rise" style="--d:100ms">
+    <em>보정</em>은 <b>다른 자(尺)를 같은 자로</b> 바꾸는 일입니다
+  </h2>
+
+  <div class="fig rise" style="--d:240ms">
+    <svg viewBox="0 0 1180 300" role="img"
+         aria-label="넓게 주는 부서와 좁게 주는 부서의 점수 분포가 보정 후 같은 폭으로 맞춰지는 그림">
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"/>
+        </marker>
+      </defs>
+
+      <!-- 좌: 보정 전 -->
+      <text x="0" y="18" font-size="19" font-weight="600" fill="var(--ink-3)">보정 전 — 자가 다릅니다</text>
+
+      <!-- 부서 A : 넓게 주는 부서 -->
+      <text x="0" y="72" font-size="18" fill="var(--ink-2)">부서 A</text>
+      <text x="0" y="94" font-size="16" fill="var(--ink-3)">넓게 주는 부서장</text>
+      <line x1="110" y1="78" x2="470" y2="78" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-now)">
+        <circle cx="130" cy="78" r="9"/><circle cx="200" cy="78" r="9"/><circle cx="268" cy="78" r="9"/>
+        <circle cx="340" cy="78" r="9"/><circle cx="402" cy="78" r="9"/><circle cx="455" cy="78" r="9"/>
+      </g>
+      <text x="482" y="84" font-size="16" fill="var(--ink-3)">60~98점</text>
+
+      <!-- 부서 B : 좁게 주는 부서 -->
+      <text x="0" y="172" font-size="18" fill="var(--ink-2)">부서 B</text>
+      <text x="0" y="194" font-size="16" fill="var(--ink-3)">좁게 주는 부서장</text>
+      <line x1="110" y1="178" x2="470" y2="178" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-hi)">
+        <circle cx="286" cy="178" r="9"/><circle cx="298" cy="178" r="9"/><circle cx="310" cy="178" r="9"/>
+        <circle cx="322" cy="178" r="9"/><circle cx="334" cy="178" r="9"/><circle cx="346" cy="178" r="9"/>
+      </g>
+      <path d="M280 196 L352 196" stroke="var(--series-hi)" stroke-width="2"/>
+      <text x="316" y="216" font-size="16" text-anchor="middle" fill="var(--series-hi)">2점 안에 여섯 명</text>
+      <text x="482" y="184" font-size="16" fill="var(--ink-3)">79~81점</text>
+
+      <text x="0" y="252" font-size="17" fill="var(--ink-3)">같은 실력이어도 부서 A 는 벌어지고, 부서 B 는 뭉칩니다.</text>
+      <text x="0" y="278" font-size="17" fill="var(--ink-3)">등급은 전사 순위로 정해지므로 <tspan font-weight="700" fill="var(--ink-2)">부서 B 사람은 위로도 아래로도 못 갑니다.</tspan></text>
+
+      <!-- 화살표 -->
+      <line x1="596" y1="128" x2="660" y2="128" stroke="var(--ink-3)" stroke-width="2" marker-end="url(#arw)"/>
+      <text x="598" y="112" font-size="17" font-weight="600" fill="var(--ink-2)">보정</text>
+
+      <!-- 우: 보정 후 -->
+      <text x="700" y="18" font-size="19" font-weight="600" fill="var(--accent)">보정 후 — 자가 같습니다</text>
+
+      <text x="700" y="72" font-size="18" fill="var(--ink-2)">부서 A</text>
+      <line x1="790" y1="78" x2="1150" y2="78" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-new)">
+        <circle cx="812" cy="78" r="9"/><circle cx="878" cy="78" r="9"/><circle cx="932" cy="78" r="9"/>
+        <circle cx="1000" cy="78" r="9"/><circle cx="1062" cy="78" r="9"/><circle cx="1128" cy="78" r="9"/>
+      </g>
+      <text x="700" y="172" font-size="18" fill="var(--ink-2)">부서 B</text>
+      <line x1="790" y1="178" x2="1150" y2="178" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-new)">
+        <circle cx="812" cy="178" r="9"/><circle cx="878" cy="178" r="9"/><circle cx="932" cy="178" r="9"/>
+        <circle cx="1000" cy="178" r="9"/><circle cx="1062" cy="178" r="9"/><circle cx="1128" cy="178" r="9"/>
+      </g>
+      <text x="700" y="252" font-size="17" fill="var(--ink-3)">두 부서가 <tspan font-weight="700" fill="var(--ink-2)">같은 폭</tspan>이 됩니다. 평균 80점 · 표준편차 7점.</text>
+      <text x="700" y="278" font-size="17" fill="var(--ink-3)"><tspan font-weight="700" fill="var(--ink-2)">부서 안의 순서는 하나도 바뀌지 않습니다.</tspan></text>
+    </svg>
+  </div>
+
+  <div class="box ac rise" style="--d:420ms">
+    <p class="body" style="margin:0">
+      <b>부서장이 1등으로 놓은 사람은 보정 후에도 1등입니다.</b><br>
+      보정이 바꾸는 것은 <b>순서가 아니라 눈금</b>입니다.
+      누가 잘했는지는 부서장이 정합니다.
+    </p>
+  </div>
+
+  <div class="notes">
+    <p>이 장이 발표 전체에서 가장 중요한 한 장입니다. 「보정」이라는 말이 낯설면 뒤의 모든 설명이
+    막힙니다. <b>자(尺) 비유를 꼭 쓰십시오</b> — 「부서마다 다른 자로 재고 있으니 같은 자로 바꾸자」.</p>
+    <p>사측이 「부서장 재량을 뺏는 것 아니냐」고 하면 오른쪽 아래 문장을 그대로 읽으십시오 —
+    <b>순서는 부서장이 정하고, 보정은 눈금만 바꿉니다.</b></p>
+  </div>
+</section>

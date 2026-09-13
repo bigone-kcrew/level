@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11. 운영 세부지침(안) — 공문서 — 창업진흥원 근무평정 제도개선</title>
+<meta name="description" content="설명을 배제하고 규범만 담은 시행용 문서. 근무평정 규칙 제31조에 따라 원장이 정하는 세부지침">
+<meta name="theme-color" content="#FBFAF9">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="compare.css">
+<style>
+/* 토큰 이름은 발표덱(docs/deck/deck.css)과 같은 체계를 쓴다.
+   문서는 오래 읽는 것이므로 밝은 바탕을 기본으로 하고, 시스템 설정이
+   어두운 화면이면 자동으로 뒤집는다. 본문 대비는 두 모드 모두 7:1 이상. */
+:root{
+  color-scheme:light dark;
+  --bg:#FBFAF9; --card:#FFFFFF; --card-2:#F4F4F6;
+  --bg-2:#F1F1F4;
+  --ink:#111114;    /* 18.9:1 */
+  --ink-2:#36363C;  /* 12.0:1 */
+  --ink-3:#4A4A52;  /*  8.8:1 */
+  --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
+  --line:var(--hair-2); --line-2:var(--hair);
+  --accent:#005075;      /*  8.7:1 */
+  --accent-2:#003F5C;
+  --accent-soft:#EAF1F6;
+  --brand:var(--accent); --brand-soft:var(--accent-soft);
+  --danger:#96201A; --ok:#136B30;
+  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --chip-ink:#FFFFFF;
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
+         "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
+  --mono:"SF Mono",ui-monospace,"D2Coding",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
+    --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
+    --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
+    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --danger:#FF453A; --ok:#30D158;
+    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
+    --chip-ink:#00131C;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:100px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:19px;font-weight:400;line-height:1.76;letter-spacing:-.004em;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-optical-sizing:auto;
+}
+header{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--hair-2);
+}
+.hin{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px}
+.bm{display:flex;flex-direction:column;padding:11px 0;flex:0 0 auto}
+.bm .t{font-size:19px;font-weight:700;letter-spacing:-.018em;white-space:nowrap}
+.bm .s{font-size:15.5px;color:var(--ink-3);font-weight:400;letter-spacing:.012em;white-space:nowrap}
+nav{display:flex;gap:2px;flex:1 1 0;min-width:0;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  font-size:16.5px;font-weight:600;color:var(--ink-3);text-decoration:none;
+  padding:0 15px;min-height:52px;display:flex;align-items:center;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
+}
+nav a:hover{color:var(--ink);background:var(--card-2)}
+nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
+.cta{
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
+  display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
+}
+.cta:hover{filter:brightness(1.1)}
+main{max-width:1180px;margin:0 auto;padding:38px 22px 96px}
+/* 절이 여섯 개를 넘는 문서에는 목차를 붙인다. 폭이 좁으면 목차를 접는다. */
+body.has-toc footer{max-width:1420px}
+body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr) 254px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
+  font-size:15.5px;line-height:1.5;scrollbar-width:thin}
+.toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0}
+.toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
+  text-decoration:none;border-left:2px solid transparent;border-radius:0 4px 4px 0;
+  letter-spacing:-.002em}
+.toc a:hover{color:var(--ink);background:var(--card-2)}
+.toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
+.toc li.l3>a{padding-left:22px;font-size:15px}
+.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+  background:var(--accent-soft)}
+/* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
+.anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
+  opacity:0;transition:opacity .14s}
+h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--accent)}
+@media (max-width:1100px){
+  body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+  .toc{display:none}
+}
+article{
+  background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
+  padding:clamp(24px,4vw,62px);
+}
+article>*{max-width:80ch}
+article>table,article>.tw{max-width:none}
+h1,h2,h3,h4{font-weight:700}
+h1{font-size:clamp(32px,3.6vw,50px);line-height:1.14;letter-spacing:-.030em;margin:0 0 28px}
+h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
+   margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
+h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
+   margin:36px 0 12px;color:var(--accent)}
+h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
+p{margin:0 0 17px}
+ul,ol{margin:0 0 17px;padding-left:26px}
+li{margin:6px 0}
+blockquote{
+  margin:26px 0;padding:18px 24px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);border-radius:0;font-size:.97em;
+  line-height:1.66;
+}
+blockquote p:last-child{margin:0}
+hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a:hover{background:var(--accent-soft)}
+code{
+  font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
+  border:1px solid var(--hair-2);border-radius:4px;padding:2px 6px;
+  letter-spacing:0;
+}
+pre{
+  background:#111114;color:#F5F5F7;border-radius:6px;padding:22px 24px;
+  overflow-x:auto;font-size:16px;line-height:1.62;letter-spacing:0;
+}
+pre code{background:none;border:0;color:inherit;padding:0;font-size:inherit}
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--hair-2);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:16.5px;background:var(--card)}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--hair-2);vertical-align:top}
+th{background:var(--card-2);font-weight:600;color:var(--ink-3);white-space:nowrap;
+   font-size:15.5px;letter-spacing:.03em}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--card-2)}
+strong,b{font-weight:700}
+/* 하단 메뉴 — 상단 탭에 없는 묶음. 완전히 다른 자리라는 느낌을 준다 */
+.footmenu{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:0 0 34px;padding:30px 0 0;border-top:1px solid var(--hair)}
+.fg-h{margin:0 0 12px;font-size:16.5px;font-weight:700;color:var(--ink);display:flex;
+  flex-direction:column;gap:3px;letter-spacing:-.012em}
+.fg-h span{font-size:15.5px;font-weight:400;color:var(--ink-3);letter-spacing:.010em}
+.fg-l{display:flex;flex-wrap:wrap;gap:8px}
+.fg-l a{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;
+  font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
+.fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
+.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg[data-g="inside"] .fg-l a{border-style:dashed}
+/* 문서 머리의 고지 */
+.warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
+  line-height:1.6;border-left:3px solid}
+.warn-in{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,transparent);
+  color:var(--ink)}
+.warn-ap{border-left-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.fnote{margin:0}
+footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
+  font-size:15.5px;line-height:1.62;letter-spacing:.010em}
+@media (max-width:900px){ .cta{display:none} }
+@media (max-width:760px){
+  body{font-size:17.5px}
+  .bm .t{font-size:17px}
+  main{padding:22px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--card-2:#f4f4f4;--ink:#000;--ink-2:#1a1a1a;--ink-3:#3d3d3d;
+        --hair:rgba(0,0,0,.32);--hair-2:rgba(0,0,0,.15);--accent:#004260;--accent-soft:#f2f6f8}
+  header,footer .no-print,.cta{display:none!important}
+  body{font-size:11.5pt;line-height:1.6}
+  article{border:0;padding:0}
+  h2{break-after:avoid}
+  table,blockquote,pre,.tw{break-inside:avoid}
+  pre{background:#f4f4f4;color:#000;border:1px solid #bbb}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.82em;color:#555}
+}
+</style>
+</head>
+<body class="doc has-toc">
+<header><div class="hin">
+  <div class="bm">
+    <span class="t">근무평정 제도개선(안)</span>
+    <span class="s">창업진흥원 노동조합</span>
+  </div>
+  <nav><a href="diagnosis.html">01 진단</a><a href="amendments.html">02 개정안</a><a href="benchmark.html">03 타기관</a><a href="plan2027.html">07 시행계획</a><a href="guide.html">08 세부지침</a><a href="method.html">09 근거</a><a href="compare.html">10 대비</a><a href="guideline.html" class="on" aria-current="page">11 시행지침</a><a href="census.html">부록 전수집계</a></nav>
+  <a class="cta" href="index.html">발표 화면 열기</a>
+</div></header>
+<main><article>
+<h1>근무평정 운영 세부지침(안)</h1>
+<blockquote>
+<p>이 문서는 근무평정 규칙 제31조에 따라 원장이 정하는 세부지침의 안(案)이다.
+제정 근거·배경·판단은 〈08 세부지침〉에 있고, 이 문서는 시행 문언만 담는다.
+노동조합이 작성한 제안이며 확정된 규범이 아니다.</p>
+</blockquote>
+<hr>
+<h2 id="제1장-총칙">제1장 총칙<a class="anchor" href="#제1장-총칙" aria-label="이 절 링크">§</a></h2>
+<h3 id="제1조목적">제1조(목적)<a class="anchor" href="#제1조목적" aria-label="이 절 링크">§</a></h3>
+<p>이 지침은 「근무평정 규칙」(이하 「규칙」이라 한다) 제31조에 따라 규칙에 정하지 아니한 사항과 규칙의 시행에 필요한 사항을 정하는 것을 목적으로 한다.</p>
+<h3 id="제2조적용범위">제2조(적용범위)<a class="anchor" href="#제2조적용범위" aria-label="이 절 링크">§</a></h3>
+<p>① 이 지침은 규칙 제2조에 따른 피평가자의 근무평정에 대하여 적용한다.</p>
+<p>② 근로시간면제자의 평정에 관하여는 이 지침에서 정하지 아니하며, 규칙 [별표 11]에 따른다.</p>
+<p>③ 청년인턴에 대하여는 이 지침을 적용하지 아니한다.</p>
+<h3 id="제3조용어의-정의">제3조(용어의 정의)<a class="anchor" href="#제3조용어의-정의" aria-label="이 절 링크">§</a></h3>
+<p>이 지침에서 사용하는 용어의 뜻은 다음과 같다.</p>
+<ol>
+<li>「원점수」란 평가자가 피평가자에게 부여한 평가점수로서 보정 및 조정을 하기 전의 점수를 말한다.</li>
+<li>「평가군」이란 보정의 단위가 되는 피평가자의 집단으로서 동일한 평가자가 평가한 동일 평가구분·동일 직급군의 피평가자 집단을 말한다.</li>
+<li>「보정」이란 평가자별 평가성향의 차이로 발생하는 피평가자 간 유리·불리를 제거하기 위하여 원점수를 [별표 1]의 방법에 따라 다시 산출하는 것을 말한다.</li>
+<li>「조정」이란 1차 평가자가 보정점수를 제18조에 따라 가감하는 것을 말한다.</li>
+<li>「공통평가」란 기관 고유의 특성을 반영하여 임직원이 준수하여야 하는 사항에 대한 평가를 말한다.</li>
+<li>「평정점」이란 등급별 구간 안에서 등급 내 순위에 따라 제22조에 따라 산출한 점수를 말한다.</li>
+<li>「유효 응답」이란 다면평가 또는 상향평가에서 지정된 평가자가 실제로 제출한 평가를 말한다.</li>
+</ol>
+<hr>
+<h2 id="제2장-평가의-준비">제2장 평가의 준비<a class="anchor" href="#제2장-평가의-준비" aria-label="이 절 링크">§</a></h2>
+<h3 id="제4조평가군의-편성">제4조(평가군의 편성)<a class="anchor" href="#제4조평가군의-편성" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 평가에 앞서 평가군을 편성한다.</p>
+<p>② 업적평가 및 역량평가의 평가군은 동일한 평가자가 평가한 동일 평가구분·동일 직급군의 피평가자 집단으로 한다. 1차 평가자의 평가군과 2차 평가자의 평가군은 각각 별도로 편성한다.</p>
+<p>③ 2차 평가자는 소속 피평가자를 부서장과 부서장 외의 두 평가군으로 구분하여 평가한다.</p>
+<p>④ 다면평가 및 상향평가의 보정은 기관 전체를 하나의 평가군으로 하여 실시한다.</p>
+<p>⑤ 공무직은 별도의 평가군으로 하며 절대평가한다.</p>
+<p>⑥ 규칙 제9조제5항에 따른 절대평가 대상자에 대하여는 보정을 실시하지 아니하고 원점수를 사용한다. 이 경우에도 점수 부여 구간은 제11조제1항에 따른다.</p>
+<h3 id="제5조평가자의-지정">제5조(평가자의 지정)<a class="anchor" href="#제5조평가자의-지정" aria-label="이 절 링크">§</a></h3>
+<p>① 평가자는 규칙 [별표 1]에 따른다.</p>
+<p>② 1차 평가자가 공석이거나 부임 후 30일이 지나지 아니하여 평가할 수 없는 경우에는 2차 평가자가 1차 평가를 겸하여 실시한다.</p>
+<p>③ 2차 평가자도 평가할 수 없는 경우에는 그 상위 평가자가 실시하고, 이에 따라서도 평가할 수 없는 경우에는 원장이 평가자를 따로 지정한다.</p>
+<p>④ 부서장 직무대리 및 겸직자는 평가자가 될 수 없다. 이 경우 제2항 및 제3항을 적용한다.</p>
+<p>⑤ 평가자가 평가 기준일까지 재직하는 경우에는 그 평가자가 평가하며, 평가 기준일 전에 퇴직하여 공석이 된 경우에는 제2항 및 제3항을 적용한다.</p>
+<p>⑥ 제2항부터 제5항까지에 따라 평가자가 변경된 경우 인사담당부서장은 그 사실과 사유를 해당 피평가자에게 통지한다.</p>
+<h3 id="제6조다면평가-평가자의-선정">제6조(다면평가 평가자의 선정)<a class="anchor" href="#제6조다면평가-평가자의-선정" aria-label="이 절 링크">§</a></h3>
+<p>① 다면평가는 피평가자와 평정대상기간 중 3개월 이상 함께 근무하고 업무상 관련이 있었던 동료 4인 이상이 실시한다.</p>
+<p>② 업적평가 및 역량평가의 1차 평가자는 다면평가자가 되지 아니한다.</p>
+<p>③ 다면평가 평가자는 다음 각 호의 순서에 따라 선정한다.</p>
+<ol>
+<li>피평가자는 평정대상기간 중 업무상 관련이 있었던 동료 5인 이상을 12월 10일까지 추천한다.</li>
+<li>부서장은 추천 명단의 업무 접점 유무를 12월 20일까지 확인하여 인사담당부서장에게 제출한다.</li>
+<li>인사담당부서장은 12월 말일까지 다면평가 평가자를 지정한다.</li>
+</ol>
+<p>④ 업무상 관련이 없는 자를 평가자로 지정하여서는 아니 된다.</p>
+<p>⑤ 부서장은 제3항제2호의 확인에서 업무 접점 유무만을 확인하며, 접점이 있는 자를 다른 이유로 배제할 수 없다. 추천된 자를 제외하는 경우에는 그 사유를 기재하고, 제외된 인원만큼 피평가자에게 추가 추천의 기회를 부여한다.</p>
+<p>⑥ 피평가자가 소속한 부서의 인원이 부족하여 제3항제1호의 추천 인원을 채울 수 없는 경우에는 인사담당부서장이 협업 이력을 확인하여 관련 부서에서 보충 지정한다.</p>
+<p>⑦ 피평가자가 추천을 거부하거나 제출하지 아니한 경우에는 인사담당부서장이 협업 이력을 확인하여 평가자를 지정한다. 추천을 제출하지 아니한 사실을 피평가자에게 불이익하게 적용하여서는 아니 된다.</p>
+<p>⑧ 평정대상기간 중 접점이 있었던 동료가 다른 부서에 소속한 경우에도 평가자로 지정한다.</p>
+<p>⑨ 제1항에 따른 4인을 확보할 수 없는 경우에는 인원을 채우기 위하여 업무상 관련이 없는 자를 지정하지 아니하고, 제19조제3항에 따라 처리한다.</p>
+<p>⑩ 평가자 명단 및 개별 부여점수는 공개하지 아니한다.</p>
+<p>⑪ 상향평가 평가자의 선정에 관하여는 규칙 제22조의2에 따른다.</p>
+<h3 id="제7조평가자-교육">제7조(평가자 교육)<a class="anchor" href="#제7조평가자-교육" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 평가를 실시하기 전에 평가자에 대한 교육을 실시한다.</p>
+<p>② 평가자는 제1항의 교육을 이수하고 평가방법을 숙지한 후 평가를 실시하여야 한다.</p>
+<h3 id="제8조성과목표의-설정">제8조(성과목표의 설정)<a class="anchor" href="#제8조성과목표의-설정" aria-label="이 절 링크">§</a></h3>
+<p>① 성과목표는 평가대상기간 개시 후 2개월 이내에 평가자와 피평가자의 면담과 합의를 거쳐 확정한다.</p>
+<p>② 성과목표는 다음 각 호를 포함하여 작성한다.</p>
+<ol>
+<li>목표의 내용</li>
+<li>달성 여부를 판정할 수 있는 기준</li>
+<li>목표별 가중치</li>
+</ol>
+<p>③ 제2항제2호의 기준은 수량·기한 등 계량지표로 정하는 것을 원칙으로 하되, 담당 직무의 특성상 계량지표로 정하기 곤란한 경우에는 산출물·완료 상태 등 사후에 확인할 수 있는 형태로 정한다.</p>
+<p>④ 평가대상기간 중 전보·조직개편·휴복직 등으로 담당업무가 변경된 경우에는 변경일부터 30일 이내에 성과목표를 다시 설정한다. 다시 설정하지 아니한 경우에는 종전의 성과목표로 평가한다.</p>
+<p>⑤ 제1항의 합의가 이루어지지 아니한 경우 피평가자는 그 이견을 기록하여 2월 말일까지 제출할 수 있으며, 인사담당부서장은 이를 확인하여 조정한다.</p>
+<p>⑥ 인사담당부서장은 부서 유형별 성과목표 및 달성기준의 작성 예시를 마련하여 1월 10일까지 배포한다.</p>
+<p>⑦ 피평가자는 대내외 개인포상을 평가기간 중에 인사담당부서에 신고하여야 하며, 신고하지 아니한 포상은 가점으로 인정하지 아니한다.</p>
+<hr>
+<h2 id="제3장-평가의-실시">제3장 평가의 실시<a class="anchor" href="#제3장-평가의-실시" aria-label="이 절 링크">§</a></h2>
+<h3 id="제9조평가의-일정">제9조(평가의 일정)<a class="anchor" href="#제9조평가의-일정" aria-label="이 절 링크">§</a></h3>
+<p>① 정기평정의 평가 기준일은 규칙 제5조제1호에 따른다.</p>
+<p>② 평가자는 평가 기준일 이전에 평가를 실시할 수 없다.</p>
+<p>③ 평가자는 평가대상기간을 임의로 소급하거나 연장하여 평가하지 아니한다.</p>
+<p>④ 평가의 기한은 다음 각 호와 같다.</p>
+<ol>
+<li>본인평가 입력, 다면평가·상향평가의 실시, 공통평가 및 가감점의 집계: 평가 기준일이 속한 연도의 다음 해 1월 10일</li>
+<li>1차 평가 및 전 소속 부서 평가자의 의견 청취: 1월 20일</li>
+<li>2차 평가: 1월 25일</li>
+<li>보정의 실시: 1월 28일</li>
+<li>조정 및 그 사유의 기재: 1월 30일</li>
+<li>종합점수·등급·평정점의 산출: 1월 31일</li>
+</ol>
+<p>⑤ 제4항제1호의 기한까지 입력하지 아니한 본인평가는 입력된 부분만을 평가에 반영하고, 제출되지 아니한 다면평가·상향평가는 유효 응답만으로 점수를 산출한다.</p>
+<p>⑥ 제4항제5호의 기한까지 조정하지 아니한 경우에는 조정 없이 확정한다.</p>
+<h3 id="제10조동점-부여의-금지">제10조(동점 부여의 금지)<a class="anchor" href="#제10조동점-부여의-금지" aria-label="이 절 링크">§</a></h3>
+<p>① 평가자는 피평가자 간 평가점수를 동일하게 부여할 수 없다. 다만 해당 평가자의 피평가자가 1명인 경우에는 그러하지 아니하다.</p>
+<p>② 다면평가 및 상향평가의 평가자는 피평가자 전원에게 동일한 점수를 부여할 수 없다.</p>
+<p>③ 전보·발령·휴복직 등으로 피평가자가 둘 이상의 평가군에 중복되는 경우에도 동일한 점수를 부여하지 아니하며, 각 평가군에서 순위를 부여하고 근무기간에 따라 가중한다.</p>
+<h3 id="제11조평가표의-작성">제11조(평가표의 작성)<a class="anchor" href="#제11조평가표의-작성" aria-label="이 절 링크">§</a></h3>
+<p>① 평가자는 60점부터 100점까지의 범위에서 원점수를 부여한다.</p>
+<p>② 평가자가 부여하는 점수의 평균값을 특정 수치 이내로 제한하는 기준은 두지 아니하며, 평가자는 평가군의 평균을 맞추지 아니한다.</p>
+<p>③ 평가자는 피평가자의 직무, 목표의 난이도 및 책임의 정도를 고려하여 평가한다.</p>
+<p>④ 평가자는 제8조제2항에 따라 합의된 성과목표별로 달성 여부를 확인하고 그 내용을 평가표에 기재하여야 한다.</p>
+<p>⑤ 1차 평가자는 제18조에 따라 조정한 피평가자에 대하여 그 사유를 평가표에 기재하여야 한다.</p>
+<h3 id="제12조재작성의-요구">제12조(재작성의 요구)<a class="anchor" href="#제12조재작성의-요구" aria-label="이 절 링크">§</a></h3>
+<p>인사담당부서장은 제10조를 위반한 평가표에 대하여 규칙 제12조에 따라 재작성을 요구한다.</p>
+<h3 id="제13조부서-이동자의-평가">제13조(부서 이동자의 평가)<a class="anchor" href="#제13조부서-이동자의-평가" aria-label="이 절 링크">§</a></h3>
+<p>① 평가는 평가 기준일 소속 부서의 평가자가 실시한다.</p>
+<p>② 1월 정기전보의 경우 평가 기준일 소속 부서의 평가자가 평가대상기간 1년 전체를 평가한다.</p>
+<p>③ 7월 정기전보 및 평가대상기간 중의 부서 이동의 경우 평가 기준일 소속 부서의 평가자는 전 소속 부서 평가자의 의견을 들어 평가한다.</p>
+<p>④ 제3항의 의견 청취는 서면으로 하며, 인사담당부서장이 그 서면을 보관한다.</p>
+<p>⑤ 전 소속 부서 평가자가 퇴직·공석 등으로 의견을 제출할 수 없는 경우에는 그 사유를 기록하고 의견 청취를 생략한다.</p>
+<p>⑥ 평가대상기간 중 근무기간이 60일 미만인 부서에서 수행한 업무는 평가에 반영하지 아니한다. 연중 조직개편의 경우에도 같다.</p>
+<h3 id="제14조휴직·파견·복직자의-평가">제14조(휴직·파견·복직자의 평가)<a class="anchor" href="#제14조휴직·파견·복직자의-평가" aria-label="이 절 링크">§</a></h3>
+<p>① 휴직·출산전후휴가·정직·직위해제로 근무하지 아니한 기간이 평가대상기간의 3분의 2 이상인 경우에는 평가를 실시하지 아니한다. 이 경우 평가점수는 당해 평가에서 해당자와 동일한 직급인 피평가자 그룹의 평균 종합점수로 한다.</p>
+<p>② 제1항은 신규채용된 직원과 퇴직한 직원에 대하여는 적용하지 아니한다.</p>
+<p>③ 근무하지 아니한 기간이 평가대상기간의 3분의 2 미만인 휴직자는 휴직 직전 소속 부서의 평가자가 평가하고, 출산전후휴가자는 평가 기준일 소속 부서의 평가자가 근무기간의 업무에 대하여 평가한다.</p>
+<p>④ 복직자는 평가 기준일 소속 부서의 평가자가 평가하되, 복직 후 근무기간이 60일 미만인 경우에는 해당 부서에서 수행한 업무를 평가에 반영하지 아니한다.</p>
+<p>⑤ 파견기간이 평가대상기간의 3분의 2 이상인 파견자는 인사담당부서가 소속한 본부의 장이 1차 평가와 2차 평가를 모두 실시한다.</p>
+<p>⑥ 파견기간이 평가대상기간의 3분의 2 미만인 파견자는 발령 전 또는 복귀 후 소속 부서의 계통에 따라 평가한다.</p>
+<p>⑦ 업무지원을 받은 인원은 지원 부서 소속으로 평가한다.</p>
+<hr>
+<h2 id="제4장-점수의-산출">제4장 점수의 산출<a class="anchor" href="#제4장-점수의-산출" aria-label="이 절 링크">§</a></h2>
+<h3 id="제15조보정의-실시">제15조(보정의 실시)<a class="anchor" href="#제15조보정의-실시" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 업적평가 및 역량평가의 1차·2차 평가자별 원점수를 [별표 1]의 방법에 따라 보정한다.</p>
+<p>② 보정은 1차 평가와 2차 평가가 완료된 직후 종합점수를 산출하기 전에 실시한다.</p>
+<p>③ 1차 평가자의 원점수와 2차 평가자의 원점수는 각각 별도로 보정한 후 규칙 [별표 2]의 반영비율을 적용한다.</p>
+<p>④ 보정은 평가자가 실시하지 아니한다.</p>
+<h3 id="제16조보정점수의-산출">제16조(보정점수의 산출)<a class="anchor" href="#제16조보정점수의-산출" aria-label="이 절 링크">§</a></h3>
+<p>① 보정점수는 [별표 1]에 따라 산출한다.</p>
+<p>② 순위는 평가군 내에서 원점수가 낮은 순서로 부여하며, 최저점자를 1위로 하고 최고점자를 해당 평가군의 인원수에 해당하는 순위로 한다.</p>
+<p>③ 산출된 보정점수가 60점 미만인 경우에는 60점으로, 100점을 초과하는 경우에는 100점으로 한다.</p>
+<p>④ 보정점수는 소수점 셋째자리에서 반올림한다.</p>
+<p>⑤ 인사담당부서장은 해당 회차에 적용한 s(n) 값을 노사협의회에 함께 보고한다.</p>
+<h3 id="제17조소규모-평가군">제17조(소규모 평가군)<a class="anchor" href="#제17조소규모-평가군" aria-label="이 절 링크">§</a></h3>
+<p>① 평가군의 인원이 6명 미만인 경우에는 제16조에 따른 보정을 실시하지 아니하며, 해당 피평가자의 업적평가 및 역량평가 점수는 2차 평가자의 보정점수를 100퍼센트 반영하여 산출한다.</p>
+<p>② 제1항의 경우에도 1차 평가자는 제18조에 따른 조정을 할 수 있다.</p>
+<p>③ 2차 평가자의 평가군 인원도 6명 미만인 경우에는 80점을 부여한다.</p>
+<p>④ 인사담당부서장은 이 조를 적용한 평가군의 수를 노사협의회에 보고한다.</p>
+<h3 id="제18조조정">제18조(조정)<a class="anchor" href="#제18조조정" aria-label="이 절 링크">§</a></h3>
+<p>① 1차 평가자는 제16조에 따라 산출된 보정점수(제17조를 적용한 경우에는 같은 조에 따라 산출된 점수)를 ±5점의 범위에서 조정할 수 있다.</p>
+<p>② 해당 평가군 내 조정점수의 합계는 0이 되도록 한다.</p>
+<p>③ 1차 평가자는 조정한 피평가자에 대하여 그 사유를 평가표에 기재한다.</p>
+<p>④ 2차 평가자는 조정을 할 수 없다.</p>
+<p>⑤ 합계를 0으로 맞추는 과정에서 잔차가 발생하는 경우 인사담당부서장은 다음 각 호의 순서에 따라 배분한다.</p>
+<ol>
+<li>조정하지 아니한 피평가자에게 균등하게 배분한다.</li>
+<li>조정하지 아니한 피평가자가 없는 경우에는 조정량의 절댓값이 작은 순서로 균등하게 배분한다.</li>
+<li>배분 후에도 제1항의 ±5점 범위를 벗어나는 경우에는 그 범위 안에서만 배분하고, 남은 잔차는 기재하여 보고한다.</li>
+</ol>
+<h3 id="제19조다면평가-점수의-산출">제19조(다면평가 점수의 산출)<a class="anchor" href="#제19조다면평가-점수의-산출" aria-label="이 절 링크">§</a></h3>
+<p>① 다면평가의 유효 응답이 6인 이상인 경우에는 최고점 및 최저점을 각각 하나씩 제외한 후 점수를 산출한다.</p>
+<p>② 제1항에 따라 산출한 점수는 기관 전체를 하나의 평가군으로 하여 [별표 1]의 방법에 따라 보정한다.</p>
+<p>③ 유효 응답이 3인 미만인 경우 해당 인원의 다면평가 점수는 80점으로 하고, 업적평가 및 역량평가의 배점을 그 비율만큼 가산한다.</p>
+<p>④ 상향평가 점수의 산출에 관하여는 제1항부터 제3항까지를 준용한다.</p>
+<p>⑤ 다면평가 및 상향평가의 개별 평가자 점수는 누구에게도 공개하지 아니한다.</p>
+<h3 id="제20조종합점수">제20조(종합점수)<a class="anchor" href="#제20조종합점수" aria-label="이 절 링크">§</a></h3>
+<p>① 부서장 외의 피평가자에 대한 평가별 반영비율은 업적평가 60퍼센트, 역량평가 15퍼센트, 다면평가 20퍼센트, 공통평가 5퍼센트로 한다.</p>
+<p>② 제1항의 피평가자에 대한 업적평가 및 역량평가의 평가자별 반영비율은 1차 평가자 60퍼센트, 2차 평가자 40퍼센트로 한다.</p>
+<p>③ 4급 이상 부서장에 대한 평가별 반영비율은 업적평가 65퍼센트, 역량평가 20퍼센트, 상향평가 10퍼센트, 공통평가 5퍼센트로 하고, 평가자별 반영비율은 1차 평가자 50퍼센트, 2차 평가자 50퍼센트로 한다.</p>
+<p>④ 종합점수는 제1항부터 제3항까지의 반영비율에 따라 산출한 점수에 가점을 가산하고 감점을 감산하여 확정한다.</p>
+<p>⑤ 해외사무소장에 대하여는 상향평가를 실시하지 아니하며, 업적평가·역량평가 및 공통평가를 합산한 후 100퍼센트로 환산한다.</p>
+<h3 id="제21조등급의-배정">제21조(등급의 배정)<a class="anchor" href="#제21조등급의-배정" aria-label="이 절 링크">§</a></h3>
+<p>① 등급은 직급별로 기관 전체를 단위로 배정한다.</p>
+<p>② 등급별 비율은 S 20퍼센트, A 30퍼센트, B 40퍼센트, C 10퍼센트로 한다.</p>
+<p>③ 등급별 배정인원은 직급별 피평가자 수에 제2항의 비율을 곱한 값의 정수부를 먼저 배정하고, 남은 자리를 소수부가 큰 등급의 순서로 하나씩 배정하여 산출한다.</p>
+<p>④ 인사담당부서장은 직급별 인원 구성을 고려하여 제2항의 비율을 5퍼센트포인트의 범위에서 조정할 수 있다. 이 경우 조정 내용과 사유를 배정 전에 노사협의회에 보고한다.</p>
+<p>⑤ 직급별 피평가자가 10명 미만인 평가군의 등급별 배정인원은 [별표 2]에 따른다.</p>
+<p>⑥ 직급별 피평가자가 10명 미만인 평가군에서는 C등급을 부여하지 아니할 수 있다. 이 경우 인사담당부서장은 그 사유를 기재하고, 그 인원을 B등급에 가산한다.</p>
+<p>⑦ 제6항에 따라 C등급을 부여하지 아니한 평가군과 [별표 2]에 따라 C등급 배정인원이 없는 평가군에서 종합점수가 해당 직급 하위 10퍼센트에 해당하는 자에 대하여는 등급과 별도로 그 사유를 기재하고 성과개선에 필요한 조치를 검토한다.</p>
+<p>⑧ 절대평가 대상자는 등급별 배정인원에서 제외한다.</p>
+<h3 id="제22조평정점">제22조(평정점)<a class="anchor" href="#제22조평정점" aria-label="이 절 링크">§</a></h3>
+<p>① 평정점은 다음 산식에 따라 산출한다.</p>
+<pre><code>평정점 = 등급 구간 최고점 − (10 ÷ 등급별 인원수) × (등급 내 순위 − 1)
+</code></pre>
+<p>② 종합점수가 같은 경우에는 다음 각 호의 순서에 따라 순위를 정한다.</p>
+<ol>
+<li>상급자 평정점이 높은 자</li>
+<li>다면평가 평정점이 높은 자</li>
+<li>현 직급 임용일이 빠른 자</li>
+<li>입사일이 빠른 자</li>
+</ol>
+<p>③ 중징계 처분을 받은 자에 대하여는 감점 여부와 관계없이 최하위 등급 및 그에 따른 평정점을 부여한다.</p>
+<hr>
+<h2 id="제5장-결과의-처리">제5장 결과의 처리<a class="anchor" href="#제5장-결과의-처리" aria-label="이 절 링크">§</a></h2>
+<h3 id="제23조결과의-공개">제23조(결과의 공개)<a class="anchor" href="#제23조결과의-공개" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 평가결과가 확정된 즉시 피평가자 본인에게 다음 각 호를 개별적으로 통지한다.</p>
+<ol>
+<li>역량평가·업적평가·다면평가 또는 상향평가 및 공통평가의 점수</li>
+<li>제15조에 따른 보정 전의 점수와 보정 후의 점수</li>
+<li>종합점수 및 평정점</li>
+</ol>
+<p>② 1차·2차 평가자별 점수 및 직급 내 순위는 공개하지 아니한다.</p>
+<p>③ 본인에게 본인의 점수를 통지하는 것은 규칙 제29조의 비밀 누설에 해당하지 아니한다.</p>
+<h3 id="제24조이의신청">제24조(이의신청)<a class="anchor" href="#제24조이의신청" aria-label="이 절 링크">§</a></h3>
+<p>① 피평가자는 평가결과에 이의가 있는 경우 통지받은 날부터 7일 이내에 이의신청서를 인사담당부서장에게 제출할 수 있다.</p>
+<p>② 제1항의 기한이 지난 후에는 이의신청을 접수하지 아니한다.</p>
+<p>③ 인사담당부서장은 신청일부터 14일 이내에 인사위원회에 상정한다.</p>
+<p>④ 인사위원회는 심의 시 신청인에게 의견진술의 기회를 부여한다.</p>
+<p>⑤ 인사담당부서장은 심의 결과를 신청인에게 통지한다.</p>
+<h3 id="제25조평정-통계의-산출과-제공">제25조(평정 통계의 산출과 제공)<a class="anchor" href="#제25조평정-통계의-산출과-제공" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 매 평정 회차가 종료된 후 다음 각 호의 통계를 산출하여 보관한다.</p>
+<ol>
+<li>평가자별 부여점수의 평균 및 표준편차</li>
+<li>1차 평가자와 2차 평가자 간 순위 일치도(스피어만 순위상관)</li>
+<li>다면평가 평가자 간 일치도</li>
+<li>직급별 C등급 반복 부여 인원</li>
+</ol>
+<p>② 제1항의 통계는 개인을 식별할 수 없는 형태로 노사협의회에 제공한다.</p>
+<h3 id="제26조노사협의회-보고">제26조(노사협의회 보고)<a class="anchor" href="#제26조노사협의회-보고" aria-label="이 절 링크">§</a></h3>
+<p>① 인사담당부서장은 평가결과를 확정하기 전에 다음 각 호를 노사협의회에 보고한다.</p>
+<ol>
+<li>평가군별 보정 전·후의 평균 및 표준편차</li>
+<li>보정에 따른 직급별 순위 변동 건수</li>
+<li>제17조를 적용한 평가군의 수</li>
+<li>제21조제4항에 따른 등급비율 조정의 내용 및 사유</li>
+</ol>
+<p>② 인사담당부서장은 매년 다음 각 호를 노사협의회에 보고한다.</p>
+<ol>
+<li>이의신청 건수 및 처리 결과</li>
+<li>공통평가 항목별 점수 분포</li>
+<li>다면평가·상향평가의 평가자별 부여 점수 분포</li>
+</ol>
+<p>③ 이 조의 보고는 모두 집계 통계의 형태로 하며, 개인을 식별할 수 있는 형태로 보고하지 아니한다.</p>
+<h3 id="제27조기록의-보존">제27조(기록의 보존)<a class="anchor" href="#제27조기록의-보존" aria-label="이 절 링크">§</a></h3>
+<p>인사담당부서장은 다음 각 호의 문서를 보존한다.</p>
+<ol>
+<li>성과목표 및 달성기준과 그 합의 이력</li>
+<li>제8조제5항에 따른 이견 기록</li>
+<li>평가표(원점수 및 조정 사유를 포함한다)</li>
+<li>제13조제4항에 따른 전 소속 부서 평가자의 서면 의견</li>
+<li>제13조제5항에 따른 의견 청취 생략 사유</li>
+<li>평가군별 보정 전·후의 원자료</li>
+<li>제5조제6항에 따른 평가자 변경 통지</li>
+<li>이의신청서 및 심의 결과</li>
+</ol>
+<h3 id="제28조비밀의-유지">제28조(비밀의 유지)<a class="anchor" href="#제28조비밀의-유지" aria-label="이 절 링크">§</a></h3>
+<p>평가자·피평가자 및 인사담당부서에 종사하는 자는 평가과정에서 알게 된 일체의 내용에 대하여 비밀을 엄수하여야 한다.</p>
+<hr>
+<h2 id="제6장-보칙">제6장 보칙<a class="anchor" href="#제6장-보칙" aria-label="이 절 링크">§</a></h2>
+<h3 id="제29조예외-사항의-처리">제29조(예외 사항의 처리)<a class="anchor" href="#제29조예외-사항의-처리" aria-label="이 절 링크">§</a></h3>
+<p>① 이 지침의 본문에 규정되지 아니한 예외 사항의 처리는 [별표 3]에 따른다.</p>
+<p>② 징계·포상 등에 따른 가감점의 처리는 다음 각 호에 따른다.</p>
+<ol>
+<li>둘 이상의 징계에 해당하는 경우에는 그중 중한 것 하나만을 감점한다.</li>
+<li>경고·주의가 복수인 경우에는 10점의 한도에서 합산한다.</li>
+<li>재심이 진행 중인 경우에는 재심절차가 완료된 후 최초 1회에 한하여 부여한다.</li>
+</ol>
+<p>③ [별표 3]에 정하지 아니한 사항은 인사담당부서장이 규칙과 이 지침의 취지에 따라 처리하고 그 내용을 기록한다.</p>
+<h3 id="제30조협의를-거쳐야-하는-사항">제30조(협의를 거쳐야 하는 사항)<a class="anchor" href="#제30조협의를-거쳐야-하는-사항" aria-label="이 절 링크">§</a></h3>
+<p>원장이 다음 각 호를 제정하거나 변경하려는 경우에는 노사협의회의 협의를 거친다.</p>
+<ol>
+<li>제20조의 평가별 반영비율 및 평가자별 반영비율</li>
+<li>제21조제2항·제4항의 등급별 비율 및 그 조정</li>
+<li>[별표 1]의 보정 방법</li>
+<li>평가자 및 반영비율에 관한 규칙 [별표 1]·[별표 2]</li>
+<li>제22조의 평정점 산출 방법</li>
+</ol>
+<h3 id="제31조시행일">제31조(시행일)<a class="anchor" href="#제31조시행일" aria-label="이 절 링크">§</a></h3>
+<p>이 지침은 2027년 1월 1일부터 시행한다.</p>
+<h3 id="제32조경과조치">제32조(경과조치)<a class="anchor" href="#제32조경과조치" aria-label="이 절 링크">§</a></h3>
+<p>① 이 지침을 처음 적용하는 회차에는 [별표 1] 제3호의 방법과 다음 산식에 따른 평균·표준편차 일치법을 함께 산출하여 그 결과를 노사협의회에 보고한다.</p>
+<pre><code>보정점수 = 80 + 〔(원점수 − 평가자 평균점수) ÷ 평가자 표준편차〕× 7
+</code></pre>
+<p>② 이 지침 시행 전에 설정된 성과목표는 제8조에 따라 설정된 것으로 본다.</p>
+<hr>
+<h2 id="별표">별표<a class="anchor" href="#별표" aria-label="이 절 링크">§</a></h2>
+<h3 id="별표-1-보정-산식과-sn-표-제16조-관련">[별표 1] 보정 산식과 s(n) 표 <em>(제16조 관련)</em><a class="anchor" href="#별표-1-보정-산식과-sn-표-제16조-관련" aria-label="이 절 링크">§</a></h3>
+<ol>
+<li><p>보정은 평가군을 단위로 한다. 1차 평가자와 2차 평가자의 원점수는 각각 별도로 보정한다.</p>
+</li>
+<li><p>평가군 내 피평가자에게 원점수가 낮은 순서로 순위 <em>r</em> 을 부여한다. 최저점자가 1위, 최고점자가 <em>n</em> 위가 된다. 평가군의 인원을 <em>n</em> 이라 한다.</p>
+</li>
+<li><p>보정점수는 다음 산식에 따라 산출한다.</p>
+</li>
+</ol>
+<pre><code>z = Φ⁻¹( (r − 0.375) ÷ (n + 0.25) )
+보정점수 = 80 + 7 × z ÷ s(n)
+</code></pre>
+<p>  가. Φ⁻¹ 은 표준정규분포의 역누적분포함수로서 <code>NORM.S.INV()</code> 로 산출한다.
+  나. s(n) 은 해당 평가군의 <em>z</em> 값 <em>n</em> 개의 표준편차로서 <code>=STDEVP()</code> 로 산출한다.</p>
+<ol start="4">
+<li>s(n) 의 값은 다음과 같다.</li>
+</ol>
+<div class="tw"><table>
+<thead>
+<tr>
+<th><em>n</em></th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s(n)</td>
+<td>.5895</td>
+<td>.7099</td>
+<td>.7714</td>
+<td>.8097</td>
+<td>.8361</td>
+<td>.8555</td>
+<td>.8704</td>
+<td>.8823</td>
+<td>.8920</td>
+<td>.9001</td>
+<td>.9070</td>
+<td>.9129</td>
+<td>.9181</td>
+<td>.9226</td>
+<td>.9266</td>
+</tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th><em>n</em></th>
+<th>20</th>
+<th>25</th>
+<th>30</th>
+<th>35</th>
+<th>40</th>
+<th>45</th>
+<th>50</th>
+<th>60</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s(n)</td>
+<td>.9390</td>
+<td>.9493</td>
+<td>.9564</td>
+<td>.9617</td>
+<td>.9658</td>
+<td>.9690</td>
+<td>.9716</td>
+<td>.9757</td>
+</tr>
+</tbody></table></div>
+<ol start="5">
+<li><p>표에 없는 인원의 s(n) 은 제3호나목에 따라 산출한다. 인원이 많은 평가군에 대하여 s(n) 을 1로 보지 아니한다.</p>
+</li>
+<li><p>산출된 보정점수가 60점 미만이면 60점, 100점을 초과하면 100점으로 하고, 소수점 셋째자리에서 반올림한다.</p>
+</li>
+<li><p>제3호의 기준값은 평정점 구간 60~100점의 중앙값인 80으로 하고, 목표 표준편차는 7로 한다.</p>
+</li>
+<li><p>평가군의 인원이 6명 미만인 경우의 처리는 제17조에 따른다.</p>
+</li>
+</ol>
+<h3 id="별표-2-평가군-규모별-등급-배정-제21조제5항-관련">[별표 2] 평가군 규모별 등급 배정 <em>(제21조제5항 관련)</em><a class="anchor" href="#별표-2-평가군-규모별-등급-배정-제21조제5항-관련" aria-label="이 절 링크">§</a></h3>
+<p>직급별 피평가자가 10명 미만인 평가군의 등급별 배정인원은 다음과 같다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>인원</th>
+<th>S</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3명</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4명</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5명</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6명</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7명</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8명</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9명</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<ol>
+<li>인원이 2명 이하인 평가군은 절대평가한다.</li>
+<li>인원이 6명 미만인 평가군의 1차 평가에 대하여는 제17조에 따라 보정을 실시하지 아니한다.</li>
+<li>C등급을 부여하지 아니하는 경우 그 인원은 B등급에 가산한다.</li>
+<li>C등급 배정인원이 없는 평가군에서도 종합점수가 해당 직급 하위 10퍼센트에 해당하는 자에 대하여는 제21조제7항에 따라 사유를 기재하고 성과개선에 필요한 조치를 검토한다.</li>
+</ol>
+<h3 id="별표-3-예외사항-처리-기준-제29조-관련">[별표 3] 예외사항 처리 기준 <em>(제29조 관련)</em><a class="anchor" href="#별표-3-예외사항-처리-기준-제29조-관련" aria-label="이 절 링크">§</a></h3>
+<p>가. 부서 이동·이탈</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사유</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1월 정기전보</td>
+<td>평가 기준일 소속 부서의 평가자가 1년 전체를 평가한다</td>
+</tr>
+<tr>
+<td>7월 정기전보</td>
+<td>평가 기준일 소속 부서의 평가자가 전 소속 부서 평가자의 서면 의견을 들어 평가한다</td>
+</tr>
+<tr>
+<td>연중 조직개편</td>
+<td>평가 기준일 소속 부서의 평가자가 평가하고, 신 부서 근무기간이 60일 미만이면 신 부서에서 수행한 업무를 반영하지 아니한다</td>
+</tr>
+<tr>
+<td>전 소속 부서 평가자의 퇴직·공석</td>
+<td>사유를 기록하고 의견 청취를 생략한다</td>
+</tr>
+<tr>
+<td>중도 휴직(3분의 2 미만)</td>
+<td>휴직 직전 소속 부서의 평가자가 평가한다</td>
+</tr>
+<tr>
+<td>중도 복직</td>
+<td>평가 기준일 소속 부서의 평가자가 평가하고, 복직 후 근무기간이 60일 미만이면 해당 부서의 업무를 반영하지 아니한다</td>
+</tr>
+<tr>
+<td>출산전후휴가(3분의 2 미만)</td>
+<td>평가 기준일 소속 부서의 평가자가 근무기간의 업무를 평가한다</td>
+</tr>
+<tr>
+<td>파견(3분의 2 이상)</td>
+<td>인사담당부서가 소속한 본부의 장이 1차·2차 평가를 모두 실시한다</td>
+</tr>
+<tr>
+<td>파견(3분의 2 미만)</td>
+<td>발령 전 또는 복귀 후 소속 부서의 계통에 따라 평가한다</td>
+</tr>
+<tr>
+<td>업무지원</td>
+<td>지원 부서 소속으로 평가한다</td>
+</tr>
+<tr>
+<td>평가군이 절대평가와 상대평가로 변경된 경우</td>
+<td>기간별로 별도 평정한 후 근무기간에 따라 일할 계산한다</td>
+</tr>
+</tbody></table></div>
+<p>나. 평가 미실시</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사유</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>휴직·출산전후휴가·정직·직위해제로 근무하지 아니한 기간이 3분의 2 이상</td>
+<td>평가를 실시하지 아니하고 동일 직급 피평가자 그룹의 평균 종합점수를 부여한다</td>
+</tr>
+<tr>
+<td>신규채용 후 3분의 2 이상 미근무</td>
+<td>평가를 실시하지 아니하며 평균 종합점수를 부여하지 아니한다</td>
+</tr>
+<tr>
+<td>퇴직</td>
+<td>평가를 실시하지 아니하며 평균 종합점수를 부여하지 아니한다</td>
+</tr>
+<tr>
+<td>근로시간면제자</td>
+<td>규칙 [별표 11]에 따른다</td>
+</tr>
+</tbody></table></div>
+<p>다. 평가자</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사유</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1차 평가자의 공석 또는 부임 30일 미만</td>
+<td>2차 평가자가 1차 평가를 겸하여 실시한다</td>
+</tr>
+<tr>
+<td>2차 평가자도 평가할 수 없는 경우</td>
+<td>그 상위 평가자가 실시한다</td>
+</tr>
+<tr>
+<td>그에 따라서도 평가할 수 없는 경우</td>
+<td>원장이 평가자를 따로 지정한다</td>
+</tr>
+<tr>
+<td>부서장 직무대리</td>
+<td>평가자가 될 수 없으며 제5조제2항·제3항을 적용한다</td>
+</tr>
+<tr>
+<td>겸직자</td>
+<td>평가자가 될 수 없으며 제5조제2항·제3항을 적용한다</td>
+</tr>
+<tr>
+<td>겸직 피평가자</td>
+<td>원 소속 부서에서 평가받는다</td>
+</tr>
+<tr>
+<td>평가자의 변경</td>
+<td>인사담당부서장이 그 사실과 사유를 본인에게 통지한다</td>
+</tr>
+<tr>
+<td>평가 기준일 이전의 평가 요구</td>
+<td>실시할 수 없다</td>
+</tr>
+<tr>
+<td>피평가자가 1명인 평가자</td>
+<td>동점 부여 금지를 적용하지 아니한다</td>
+</tr>
+</tbody></table></div>
+<p>라. 직군·신분</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>대상</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>공무직</td>
+<td>별도 평가군으로 절대평가하고 등급 배정에서 제외한다</td>
+</tr>
+<tr>
+<td>기간제계약직·촉탁계약직·전문계약직·파견자·임금피크제 대상 직원</td>
+<td>절대평가하고 등급 배정에서 제외한다</td>
+</tr>
+<tr>
+<td>본부장·단장</td>
+<td>원장이 100퍼센트 평가하고 절대평가하며, 평정점 구간에 따라 등급을 산출한다</td>
+</tr>
+<tr>
+<td>청년인턴</td>
+<td>이 지침을 적용하지 아니한다</td>
+</tr>
+<tr>
+<td>해외사무소장</td>
+<td>상향평가를 실시하지 아니하고 업적·역량·공통평가를 합산하여 100퍼센트로 환산하며, 부서장으로 분류한다</td>
+</tr>
+<tr>
+<td>기관장 직속 부서</td>
+<td>원장이 2차 평가자가 되며, 보정을 실시한다</td>
+</tr>
+<tr>
+<td>절대평가 대상자</td>
+<td>보정을 실시하지 아니하고 원점수를 사용하며, 점수 부여 구간은 60점부터 100점까지로 한다</td>
+</tr>
+</tbody></table></div>
+<p>마. 다면평가 평가자의 선정</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사유</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>유효 응답이 3인 미만</td>
+<td>다면평가 점수를 80점으로 하고 업적·역량평가의 배점을 그 비율만큼 가산한다</td>
+</tr>
+<tr>
+<td>피평가자가 추천을 거부하거나 제출하지 아니한 경우</td>
+<td>인사담당부서장이 협업 이력을 확인하여 지정하며, 추천 미제출을 불이익하게 적용하지 아니한다</td>
+</tr>
+<tr>
+<td>추천자 전원이 같은 사업을 담당하는 경우</td>
+<td>그대로 지정한다</td>
+</tr>
+<tr>
+<td>접점이 있는 동료가 다른 부서에 소속한 경우</td>
+<td>다른 부서 소속이라도 지정한다</td>
+</tr>
+<tr>
+<td>추천 인원이 5인 미만인 소규모 부서</td>
+<td>인사담당부서장이 협업 이력을 확인하여 관련 부서에서 보충 지정하고, 4인을 채울 수 없으면 유효 응답 3인 미만의 예에 따른다</td>
+</tr>
+<tr>
+<td>부서장이 추천 명단의 일부를 제외하는 경우</td>
+<td>사유를 기재하고 제외된 인원만큼 추가 추천의 기회를 부여한다</td>
+</tr>
+<tr>
+<td>파견·휴직으로 접점이 부족한 경우</td>
+<td>파견·휴직 전에 접점이 있었던 동료를 지정하고, 4인 미만이면 유효 응답 3인 미만의 예에 따른다</td>
+</tr>
+</tbody></table></div>
+<p>바. 가감점과 제재</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>사유</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>중징계 처분자</td>
+<td>감점 여부와 관계없이 최하위 등급 및 그에 따른 평정점을 부여한다</td>
+</tr>
+<tr>
+<td>둘 이상의 징계</td>
+<td>중한 것 하나만 감점한다</td>
+</tr>
+<tr>
+<td>경고·주의가 복수인 경우</td>
+<td>10점의 한도에서 합산한다</td>
+</tr>
+<tr>
+<td>재심 진행 중</td>
+<td>재심절차가 완료된 후 최초 1회에 한하여 부여한다</td>
+</tr>
+<tr>
+<td>포상 미신고</td>
+<td>가점으로 인정하지 아니한다</td>
+</tr>
+<tr>
+<td>4회 연속 C등급</td>
+<td>본인에게 통지하고 역량강화교육을 실시하며, 인사위원회의 의결로 직위해제할 수 있다</td>
+</tr>
+</tbody></table></div>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#제1장-총칙">제1장 총칙</a></li><li class="l3"><a href="#제1조목적">제1조(목적)</a></li><li class="l3"><a href="#제2조적용범위">제2조(적용범위)</a></li><li class="l3"><a href="#제3조용어의-정의">제3조(용어의 정의)</a></li><li class="l2"><a href="#제2장-평가의-준비">제2장 평가의 준비</a></li><li class="l3"><a href="#제4조평가군의-편성">제4조(평가군의 편성)</a></li><li class="l3"><a href="#제5조평가자의-지정">제5조(평가자의 지정)</a></li><li class="l3"><a href="#제6조다면평가-평가자의-선정">제6조(다면평가 평가자의 선정)</a></li><li class="l3"><a href="#제7조평가자-교육">제7조(평가자 교육)</a></li><li class="l3"><a href="#제8조성과목표의-설정">제8조(성과목표의 설정)</a></li><li class="l2"><a href="#제3장-평가의-실시">제3장 평가의 실시</a></li><li class="l3"><a href="#제9조평가의-일정">제9조(평가의 일정)</a></li><li class="l3"><a href="#제10조동점-부여의-금지">제10조(동점 부여의 금지)</a></li><li class="l3"><a href="#제11조평가표의-작성">제11조(평가표의 작성)</a></li><li class="l3"><a href="#제12조재작성의-요구">제12조(재작성의 요구)</a></li><li class="l3"><a href="#제13조부서-이동자의-평가">제13조(부서 이동자의 평가)</a></li><li class="l3"><a href="#제14조휴직·파견·복직자의-평가">제14조(휴직·파견·복직자의 평가)</a></li><li class="l2"><a href="#제4장-점수의-산출">제4장 점수의 산출</a></li><li class="l3"><a href="#제15조보정의-실시">제15조(보정의 실시)</a></li><li class="l3"><a href="#제16조보정점수의-산출">제16조(보정점수의 산출)</a></li><li class="l3"><a href="#제17조소규모-평가군">제17조(소규모 평가군)</a></li><li class="l3"><a href="#제18조조정">제18조(조정)</a></li><li class="l3"><a href="#제19조다면평가-점수의-산출">제19조(다면평가 점수의 산출)</a></li><li class="l3"><a href="#제20조종합점수">제20조(종합점수)</a></li><li class="l3"><a href="#제21조등급의-배정">제21조(등급의 배정)</a></li><li class="l3"><a href="#제22조평정점">제22조(평정점)</a></li><li class="l2"><a href="#제5장-결과의-처리">제5장 결과의 처리</a></li><li class="l3"><a href="#제23조결과의-공개">제23조(결과의 공개)</a></li><li class="l3"><a href="#제24조이의신청">제24조(이의신청)</a></li><li class="l3"><a href="#제25조평정-통계의-산출과-제공">제25조(평정 통계의 산출과 제공)</a></li><li class="l3"><a href="#제26조노사협의회-보고">제26조(노사협의회 보고)</a></li><li class="l3"><a href="#제27조기록의-보존">제27조(기록의 보존)</a></li><li class="l3"><a href="#제28조비밀의-유지">제28조(비밀의 유지)</a></li><li class="l2"><a href="#제6장-보칙">제6장 보칙</a></li><li class="l3"><a href="#제29조예외-사항의-처리">제29조(예외 사항의 처리)</a></li><li class="l3"><a href="#제30조협의를-거쳐야-하는-사항">제30조(협의를 거쳐야 하는 사항)</a></li><li class="l3"><a href="#제31조시행일">제31조(시행일)</a></li><li class="l3"><a href="#제32조경과조치">제32조(경과조치)</a></li><li class="l2"><a href="#별표">별표</a></li><li class="l3"><a href="#별표-1-보정-산식과-sn-표-제16조-관련">[별표 1] 보정 산식과 s(n) 표 (제16조 관련)</a></li><li class="l3"><a href="#별표-2-평가군-규모별-등급-배정-제21조제5항-관련">[별표 2] 평가군 규모별 등급 배정 (제21조제5항 관련)</a></li><li class="l3"><a href="#별표-3-예외사항-처리-기준-제29조-관련">[별표 3] 예외사항 처리 기준 (제29조 관련)</a></li></ol></aside></main>
+<footer>
+<div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
+<p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
+</footer>
+<script>
+/* 지금 읽고 있는 절을 목차에서 표시한다.
+   화면 위쪽 경계를 지난 마지막 제목을 현재 절로 본다 — 관측 밴드 방식보다
+   놓치는 경우가 없다. 목차가 없으면 아무 일도 하지 않는다. */
+(function(){
+  var toc = document.querySelector('.toc'); if (!toc) return;
+  var items = [];
+  toc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (el) items.push({ a: a, el: el });
+  });
+  if (!items.length) return;
+
+  var cur = null, queued = false;
+  function update(){
+    queued = false;
+    var line = 118;                       // 고정 머리띠 아래 기준선
+    var pick = items[0];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= line) pick = items[i]; else break;
+    }
+    // 문서 끝에 닿으면 마지막 절을 현재로 본다
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4)
+      pick = items[items.length - 1];
+    if (pick.a === cur) return;
+    if (cur) cur.classList.remove('on');
+    pick.a.classList.add('on'); cur = pick.a;
+    var r = pick.a.getBoundingClientRect(), t = toc.getBoundingClientRect();
+    if (r.top < t.top || r.bottom > t.bottom) pick.a.scrollIntoView({ block: 'nearest' });
+  }
+  function onScroll(){ if (!queued) { queued = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>

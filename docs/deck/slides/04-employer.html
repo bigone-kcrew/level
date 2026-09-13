@@ -1,5 +1,5 @@
 <!-- ══ Ⅳ. 조합만의 손해가 아니다 ══ -->
-<section class="slide divider" data-trans="deep" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="장 구분 — 조합만의 손해가 아니다" data-fx="constellation">
+<section class="slide divider" data-trans="deep" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="장 구분 — 조합만의 손해가" data-fx="constellation">
   <p class="num materialize">Ⅳ</p>
   <h2 class="title rise" style="--d:160ms">사측이 원하는 것도<br>지금은 작동하지 않습니다</h2>
   <p class="lead rise" style="--d:280ms">여기까지는 조합의 손해였습니다. 이 장은 사측의 손해입니다.</p>
@@ -10,7 +10,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="blur" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="실력 하위 10%가 C를 받을 확률">
+<section class="slide" data-trans="blur" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="하위 10%가 C를 받을 확률">
   <p class="eyebrow rise">Ⅳ-1<span class="sep">·</span>실력 하위 10%가 받는 등급</p>
   <div class="vs">
     <div class="side rise" style="--d:120ms">
@@ -40,26 +40,67 @@
   <p class="eyebrow rise">Ⅳ-2<span class="sep">·</span>산술</p>
   <h2 class="title rise" style="--d:60ms">부서장의 <em>의지</em> 문제가 아닙니다</h2>
   <p class="lead rise" style="--d:120ms">부서 평균 80점과 좁은 부여폭이 막고 있습니다.</p>
-  <ul class="gj rise" style="--d:200ms">
-    <li>부여폭 <b>2점</b> 부서의 최하위자 — 부서 평균에서 약 3점 아래, 곧 <b>약 77점</b></li>
-    <li>부여폭 <b>13점</b> 부서의 최하위자 — <b>60점</b></li>
-    <li>C 정원은 <b>직급별 전사 10%</b>로 배정된다
-      <ul>
-        <li>따라서 <b>C는 거의 전부 극단 성향 부서에서 나온다</b></li>
-        <li>균등 성향 부서장이 아무리 낮게 주려 해도, 부서 평균 80점 제약 안에서
-          2점 폭으로는 <b>전사 하위 10%에 넣을 방법이 없다</b></li>
-      </ul>
-    </li>
-  </ul>
+
+  <div class="fig rise" style="--d:220ms">
+    <svg viewBox="0 0 1180 286" role="img"
+         aria-label="점수 60점에서 100점까지의 가로축 위에, 넓게 주는 부서의 점 여섯 개는 60점부터 98점까지 흩어져 있고 좁게 주는 부서의 점 여섯 개는 79점에서 81점 사이에 뭉쳐 있으며, 전사 하위 10퍼센트 커트라인을 나타내는 세로 점선의 왼쪽에는 넓게 주는 부서의 점만 놓여 있는 그림">
+      <defs>
+        <marker id="arw-cut" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--series-hi)"/>
+        </marker>
+      </defs>
+
+      <!-- 커트라인 -->
+      <line x1="480" y1="38" x2="480" y2="238" stroke="var(--series-hi)" stroke-width="2" stroke-dasharray="8 8"/>
+      <text x="468" y="26" text-anchor="end" font-size="18" font-weight="700" fill="var(--series-hi)">← 이 왼쪽만 C</text>
+      <text x="492" y="26" font-size="17" fill="var(--ink-3)">전사 하위 10% 커트라인</text>
+
+      <!-- 넓게 주는 부서 -->
+      <text x="0" y="70" font-size="18" fill="var(--ink-2)">넓게 주는 부서 <tspan fill="var(--ink-3)">— 극단 성향 · 부여폭 13점</tspan></text>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="120" cy="100" r="10"/><circle cx="312" cy="100" r="10"/><circle cx="504" cy="100" r="10"/>
+        <circle cx="720" cy="100" r="10"/><circle cx="888" cy="100" r="10"/><circle cx="1032" cy="100" r="10"/>
+      </g>
+
+      <!-- 좁게 주는 부서 -->
+      <text x="0" y="152" font-size="18" fill="var(--ink-2)">좁게 주는 부서 <tspan fill="var(--ink-3)">— 균등 성향 · 부여폭 2점</tspan></text>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="576" cy="182" r="10"/><circle cx="585.6" cy="182" r="10"/><circle cx="595.2" cy="182" r="10"/>
+        <circle cx="604.8" cy="182" r="10"/><circle cx="614.4" cy="182" r="10"/><circle cx="624" cy="182" r="10"/>
+      </g>
+      <text x="648" y="188" font-size="17" fill="var(--ink-3)">여섯 명 전원이 79~81점</text>
+
+      <!-- 닿지 않는다 -->
+      <line x1="568" y1="216" x2="492" y2="216" stroke="var(--series-hi)" stroke-width="2" marker-end="url(#arw-cut)"/>
+      <text x="582" y="222" font-size="18" fill="var(--ink-2)">한 명도 이 선을 넘지 못합니다</text>
+
+      <!-- 점수 축 -->
+      <line x1="120" y1="238" x2="1080" y2="238" stroke="var(--hair)" stroke-width="1"/>
+      <g font-size="17" fill="var(--ink-3)" text-anchor="middle">
+        <text x="120" y="266">60</text><text x="360" y="266">70</text><text x="600" y="266">80</text>
+        <text x="840" y="266">90</text><text x="1080" y="266">100점</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="body rise" style="--d:340ms">
+    C 정원은 <b>직급별 전사 10%</b>로 배정됩니다. 균등 성향 부서장이 아무리 낮게 주려 해도,
+    부서 평균 80점 제약 안에서 <b>2점 폭으로는 전사 하위 10%에 넣을 방법이 없습니다.</b>
+    그래서 <b>C는 거의 전부 극단 성향 부서에서 나옵니다.</b>
+  </p>
   <div class="box warn rise" style="--d:320ms">
     <p class="body" style="margin:0">
       <b>지켜야 할 선</b> — 사측이 말하는 「조직문화를 해치는 직원」은 업적·역량이 아니라
-      <b style="white-space:nowrap">태도·품행</b>의 문제이며, 그것은 근무평정이 아니라 <b>성과관리·징계 절차</b>로 다룰 일입니다.
+      <b style="white-space:nowrap">태도·품행</b>의 문제입니다. 그것은 근무평정이 아니라 <b>성과관리·징계 절차</b>로 다룰 일입니다.
     </p>
   </div>
   <div class="notes">
     <p>「부서장이 의지가 없다」는 말로 들리지 않게 조심합니다. 의지가 아니라 산수가 막는다는 것이
-    이 장면의 전부입니다. 2점 폭 안에서는 전사 하위 10%에 도달할 수 없습니다.</p>
+    이 장면의 전부입니다.</p>
+    <p><b>그림에서 손으로 짚을 순서</b> — ① 세로 점선을 먼저 짚고 「이 왼쪽이 C입니다」.
+    ② 위쪽 줄의 왼쪽 두 점을 짚고 「넓게 주는 부서에서는 여기까지 내려갑니다」.
+    ③ 마지막으로 아래쪽 뭉친 점 여섯 개를 손으로 감싸고 <b>「여기서는 한 명도 선을 넘지 못합니다」</b>.
+    이 한 동작이 이 장의 결론입니다.</p>
     <p>지켜야 할 선은 여기서 한 번만 짚고 넘어갑니다. 태도·품행을 평정으로 처리하자는 요구는
     받지 않겠다는 뜻을 분명히 하되 길게 논쟁하지 않습니다.</p>
   </div>
@@ -94,12 +135,15 @@
   </div>
 </section>
 
-<section class="slide" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="만약 부서 간 실력 차이가 있다면">
+<section class="slide" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="부서 간 실력 차이가 있다면">
   <p class="eyebrow rise">Ⅳ-4<span class="sep">·</span>조건부 계산</p>
   <h2 class="title mid rise" style="--d:60ms">만약 부서 간 실력 차이가 <em>있다면</em></h2>
   <p class="body rise" style="--d:120ms">
     배치는 인사부서와 본부장의 <b>정성적 판단</b>이고, <b>피평가자는 자기 부서를 선택할 수 없습니다.</b>
     조합에는 편중 여부에 관한 자료가 없으므로, 편중을 주장하지 않고 <b>조건부로만</b> 계산했습니다.
+  </p>
+  <p class="cap rise" style="--d:160ms">
+    <b>제거율</b>이란 — 없앨 수 있는 불공정 가운데 몇 퍼센트를 없앴는가를 뜻합니다.
   </p>
   <table class="rise" style="--d:200ms">
     <thead>

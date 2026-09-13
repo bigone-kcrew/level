@@ -86,6 +86,9 @@
       </ul>
     </li>
   </ul>
+  <p class="cap rise" style="--d:420ms">
+    쉽게 말하면 — <b>내가 어떻게 할 수 없는 것</b>입니다. 어느 부서에 있는지, 부서장이 누구인지.
+  </p>
   <div class="notes">
     <p>이 장을 먼저 두는 이유 — 조합이 「S가 안 나온다」로 시작하면 사측은 「등급 더 달라는 얘기」로
     정리합니다. 목적을 먼저 세워야 뒤의 모든 수치가 그 목적에 대한 측정치로 읽힙니다.</p>
@@ -105,6 +108,10 @@
       이 지표는 <b>「같은 실력인데 평정점이 평균 몇 점 벌어진다」</b>를 점수 단위로 직접 줍니다.
     </p>
   </div>
+  <p class="cap rise" style="--d:360ms">
+    <b>표준편차</b>는 점수가 얼마나 퍼져 있는지를 나타내는 값입니다.
+    <b>순위상관</b>은 실력 순서와 점수 순서가 얼마나 같은지를 나타냅니다 — 1에 가까울수록 같습니다.
+  </p>
   <p class="cap rise" style="--d:380ms">낮을수록 좋습니다. 모의데이터 계산치이며 창업진흥원의 실제 평정 결과가 아닙니다.</p>
   <div class="notes"><p>지표를 먼저 합의하지 않으면 뒤에서 유리한 숫자만 골라 쓴다는 지적을 받습니다.</p></div>
 </section>
@@ -136,6 +143,91 @@
   </div>
 </section>
 
+<!-- ══ 01-what.html ══ -->
+<!-- ══ 보정이 무엇인가 — 이 제안의 핵심 개념을 그림 하나로 ══ -->
+<section class="slide" data-trans="wipe" data-ch="Ⅰ. 무엇을 재는가" data-title="보정이란 무엇인가">
+  <p class="eyebrow rise">Ⅰ-4<span class="sep">·</span>말부터 정리합니다</p>
+  <h2 class="title mid rise" style="--d:100ms">
+    <em>보정</em>은 <b>다른 자(尺)를 같은 자로</b> 바꾸는 일입니다
+  </h2>
+
+  <div class="fig rise" style="--d:240ms">
+    <svg viewBox="0 0 1180 300" role="img"
+         aria-label="넓게 주는 부서와 좁게 주는 부서의 점수 분포가 보정 후 같은 폭으로 맞춰지는 그림">
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"/>
+        </marker>
+      </defs>
+
+      <!-- 좌: 보정 전 -->
+      <text x="0" y="18" font-size="19" font-weight="600" fill="var(--ink-3)">보정 전 — 자가 다릅니다</text>
+
+      <!-- 부서 A : 넓게 주는 부서 -->
+      <text x="0" y="72" font-size="18" fill="var(--ink-2)">부서 A</text>
+      <text x="0" y="94" font-size="16" fill="var(--ink-3)">넓게 주는 부서장</text>
+      <line x1="110" y1="78" x2="470" y2="78" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-now)">
+        <circle cx="130" cy="78" r="9"/><circle cx="200" cy="78" r="9"/><circle cx="268" cy="78" r="9"/>
+        <circle cx="340" cy="78" r="9"/><circle cx="402" cy="78" r="9"/><circle cx="455" cy="78" r="9"/>
+      </g>
+      <text x="482" y="84" font-size="16" fill="var(--ink-3)">60~98점</text>
+
+      <!-- 부서 B : 좁게 주는 부서 -->
+      <text x="0" y="172" font-size="18" fill="var(--ink-2)">부서 B</text>
+      <text x="0" y="194" font-size="16" fill="var(--ink-3)">좁게 주는 부서장</text>
+      <line x1="110" y1="178" x2="470" y2="178" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-hi)">
+        <circle cx="286" cy="178" r="9"/><circle cx="298" cy="178" r="9"/><circle cx="310" cy="178" r="9"/>
+        <circle cx="322" cy="178" r="9"/><circle cx="334" cy="178" r="9"/><circle cx="346" cy="178" r="9"/>
+      </g>
+      <path d="M280 196 L352 196" stroke="var(--series-hi)" stroke-width="2"/>
+      <text x="316" y="216" font-size="16" text-anchor="middle" fill="var(--series-hi)">2점 안에 여섯 명</text>
+      <text x="482" y="184" font-size="16" fill="var(--ink-3)">79~81점</text>
+
+      <text x="0" y="252" font-size="17" fill="var(--ink-3)">같은 실력이어도 부서 A 는 벌어지고, 부서 B 는 뭉칩니다.</text>
+      <text x="0" y="278" font-size="17" fill="var(--ink-3)">등급은 전사 순위로 정해지므로 <tspan font-weight="700" fill="var(--ink-2)">부서 B 사람은 위로도 아래로도 못 갑니다.</tspan></text>
+
+      <!-- 화살표 -->
+      <line x1="596" y1="128" x2="660" y2="128" stroke="var(--ink-3)" stroke-width="2" marker-end="url(#arw)"/>
+      <text x="598" y="112" font-size="17" font-weight="600" fill="var(--ink-2)">보정</text>
+
+      <!-- 우: 보정 후 -->
+      <text x="700" y="18" font-size="19" font-weight="600" fill="var(--accent)">보정 후 — 자가 같습니다</text>
+
+      <text x="700" y="72" font-size="18" fill="var(--ink-2)">부서 A</text>
+      <line x1="790" y1="78" x2="1150" y2="78" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-new)">
+        <circle cx="812" cy="78" r="9"/><circle cx="878" cy="78" r="9"/><circle cx="932" cy="78" r="9"/>
+        <circle cx="1000" cy="78" r="9"/><circle cx="1062" cy="78" r="9"/><circle cx="1128" cy="78" r="9"/>
+      </g>
+      <text x="700" y="172" font-size="18" fill="var(--ink-2)">부서 B</text>
+      <line x1="790" y1="178" x2="1150" y2="178" stroke="var(--hair)" stroke-width="1"/>
+      <g fill="var(--series-new)">
+        <circle cx="812" cy="178" r="9"/><circle cx="878" cy="178" r="9"/><circle cx="932" cy="178" r="9"/>
+        <circle cx="1000" cy="178" r="9"/><circle cx="1062" cy="178" r="9"/><circle cx="1128" cy="178" r="9"/>
+      </g>
+      <text x="700" y="252" font-size="17" fill="var(--ink-3)">두 부서가 <tspan font-weight="700" fill="var(--ink-2)">같은 폭</tspan>이 됩니다. 평균 80점 · 표준편차 7점.</text>
+      <text x="700" y="278" font-size="17" fill="var(--ink-3)"><tspan font-weight="700" fill="var(--ink-2)">부서 안의 순서는 하나도 바뀌지 않습니다.</tspan></text>
+    </svg>
+  </div>
+
+  <div class="box ac rise" style="--d:420ms">
+    <p class="body" style="margin:0">
+      <b>부서장이 1등으로 놓은 사람은 보정 후에도 1등입니다.</b><br>
+      보정이 바꾸는 것은 <b>순서가 아니라 눈금</b>입니다.
+      누가 잘했는지는 부서장이 정합니다.
+    </p>
+  </div>
+
+  <div class="notes">
+    <p>이 장이 발표 전체에서 가장 중요한 한 장입니다. 「보정」이라는 말이 낯설면 뒤의 모든 설명이
+    막힙니다. <b>자(尺) 비유를 꼭 쓰십시오</b> — 「부서마다 다른 자로 재고 있으니 같은 자로 바꾸자」.</p>
+    <p>사측이 「부서장 재량을 뺏는 것 아니냐」고 하면 오른쪽 아래 문장을 그대로 읽으십시오 —
+    <b>순서는 부서장이 정하고, 보정은 눈금만 바꿉니다.</b></p>
+  </div>
+</section>
+
 <!-- ══ 02-facts.html ══ -->
 <!-- ══ Ⅱ. 먼저 사실부터 ══ -->
 <section class="slide divider" data-trans="deep" data-ch="Ⅱ. 먼저 사실부터" data-title="장 구분 — 먼저 사실부터" data-fx="constellation">
@@ -158,6 +250,11 @@
   <p class="body rise" style="--d:300ms">
     이 수치가 있는 곳은 <b>연도별 근무평정 계획</b>의 〈평가자별 평균 부여 점수〉 한 곳입니다.
   </p>
+  <div class="box rise" style="--d:380ms">
+    <p class="body" style="margin:0">
+      <b>사전조정계수</b>란 — 점수를 매기기 <b>전에</b> 부서 평균을 80점으로 묶어 두는 장치입니다.
+    </p>
+  </div>
   <div class="notes">
     <p>여기서 잠깐 멈추고 확인을 요청합니다. 「혹시 규칙 어디에 있는지 알고 계신 분이 있으면
     말씀해 주십시오」라고 열어 두면, 부인할 수 없는 사실로 확정됩니다.</p>
@@ -176,6 +273,9 @@
   <p class="body rise" style="--d:300ms">
     규칙이 정한 것은 <b>미리 평균을 제한하는 일</b>이 아니라 <b>결과를 사후에 보정하는 일</b>입니다.
     방향이 반대입니다.
+  </p>
+  <p class="cap rise" style="--d:380ms">
+    <b>사후 보정</b>이란 — 점수를 다 매긴 <b>뒤에</b> 부서 간 눈금을 맞추는 것입니다.
   </p>
   <div class="notes">
     <p>원문을 소리 내어 읽습니다. 「평균 등을 적용하여 보정할 수 있으며」 — 이 한 구절이 오늘
@@ -238,9 +338,10 @@
     <cite>2025년 근무평정 계획 — 노동조합 항목</cite>
   </blockquote>
   <p class="body rise" style="--d:300ms">
-    2023년까지는 평균 85점 이내 · 부서장 부여구간 78~92점이었고, 2024년부터 평균 80점 이내 ·
-    구간 60~100점이 되었습니다. <b>규칙에 없는 수치였으므로 이 5점은 노사 협의를 거치지 않았습니다.</b>
-    계획만 고치면 <b>다음 해에 또 바뀔 수 있습니다</b> — 개정 12(노사협의 의무)를 두는 이유입니다.
+    2023년까지는 평균 85점 이내 · 부서장 부여구간 78~92점이었습니다.
+    2024년부터 평균 80점 이내 · 구간 60~100점이 되었습니다.
+    <b>규칙에 없는 수치였으므로 이 5점은 노사 협의를 거치지 않았습니다.</b>
+    계획만 고치면 <b>다음 해에 또 바뀔 수 있습니다.</b> 개정 12(노사협의 의무)를 두는 이유입니다.
   </p>
   <div class="notes">
     <p>이 문장이 계획 문서에 그대로 남아 있다는 점을 강조합니다. 조합이 추정한 것이 아니라 사측 문서에
@@ -262,7 +363,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="wipe" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="평균은 부서에서, 등급은 직급에서">
+<section class="slide" data-trans="wipe" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="평균은 부서, 등급은 직급">
   <p class="eyebrow rise">Ⅲ-1<span class="sep">·</span>제도의 핵심 결함</p>
   <h2 class="title mid rise" style="--d:100ms">평균은 <em>부서</em>에서, 등급은 <em>전사 직급</em>에서 정해집니다</h2>
   <div class="fig rise" style="--d:220ms">
@@ -285,7 +386,7 @@
     </svg>
   </div>
   <p class="body rise" style="--d:320ms">
-    부서장은 자기 부서 안에서 평균을 맞추지만, 등급은 그 점수가 전사 직급 순위에 놓인 결과로 결정됩니다.
+    부서장은 자기 부서 안에서 평균을 맞춥니다. 그런데 등급은 그 점수가 전사 직급 순위에 놓인 결과로 정해집니다.
     <b>두 단위가 다른 것이 이 제도의 핵심 결함입니다.</b>
   </p>
   <div class="notes">
@@ -303,10 +404,13 @@
     <div class="stat materialize" style="--d:280ms">107<span class="u">명</span></div>
     <div class="statlab">5급 — 하나의 등급배정군</div>
   </div>
+  <p class="cap rise" style="--d:340ms">
+    <b>평가군</b>이란 — 한 평가자가 점수를 매기는 사람들의 묶음입니다.
+  </p>
   <p class="body rise" style="--d:380ms">
     직급별 인원은 1(나)급 4 · 2급 11 · 3급 29 · 4급 40 · <b>5급 107</b> · 공무직 5명입니다
-    (상대평가 196명). 부서 안에서 <b>균등하게 부여받은 직원은 107명 가운데 중간에 밀집</b>해,
-    S등급 정원 안에 들 길이 사실상 막힙니다.
+    (상대평가 196명). 부서 안에서 <b>균등하게 부여받은 직원은 107명 가운데 중간에 밀집</b>합니다.
+    그래서 S등급 정원 안에 들 길이 사실상 막힙니다.
   </p>
   <p class="cap rise" style="--d:440ms">2025년 근무평정 계획 〈직급별 배정 현황〉 · 등급 배정 단위는 규칙 제26조①.</p>
   <div class="notes">
@@ -348,7 +452,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="균등 성향 부서에서는 아무 일도 없다">
+<section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="균등 부서에선 아무 일도 없다">
   <p class="eyebrow rise">Ⅲ-4<span class="sep">·</span>S와 C의 동시 발생</p>
   <h2 class="title mid rise" style="--d:100ms">균등 성향 부서에서는 아무 일도 일어나지 않습니다</h2>
   <div class="fig rise" style="--d:220ms">
@@ -388,7 +492,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="등급 분포 — 개정 후 두 부서가 같아진다">
+<section class="slide" data-trans="fade" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="등급 분포 — 두 부서 비교">
   <p class="eyebrow rise">Ⅲ-5<span class="sep">·</span>등급 전체 분포</p>
   <h2 class="title mid rise" style="--d:100ms">개정 후에는 어느 부서에 있어도 분포가 같아집니다</h2>
   <div class="fig rise" style="--d:220ms">
@@ -483,8 +587,8 @@
     </tbody>
   </table>
   <p class="body rise" style="--d:300ms">
-    <b>원인은 규정이 아닙니다.</b> 전 부서장이 나갈 사람에게, 신 부서장이 온 지 얼마 안 된 사람에게
-    낮게 준다는 <b>행동 하나</b>입니다. 같은 계산에서 <b>낙인을 0으로 두면 유형 간 격차가 사라집니다.</b>
+    <b>원인은 규정이 아닙니다.</b> 전 부서장은 나갈 사람에게, 신 부서장은 온 지 얼마 안 된 사람에게
+    낮게 줍니다. <b>이 행동 하나</b>가 원인입니다. 같은 계산에서 <b>낙인을 0으로 두면 유형 간 격차가 사라집니다.</b>
   </p>
   <p class="cap rise" style="--d:380ms">
     낙인 가정 — 전 부서장 0.6σ · 신 부서장 0.8σ(미확인 가정값). 개정 후는 전 유형이 ±0.2 이내입니다.
@@ -498,7 +602,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="rise" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="평정점은 본인에게도 공개되지 않는다">
+<section class="slide" data-trans="rise" data-ch="Ⅲ. 무슨 일이 생기는가" data-title="평정점은 본인도 못 본다">
   <p class="eyebrow rise">Ⅲ-7<span class="sep">·</span>제28조</p>
   <h2 class="title mid rise" style="--d:100ms">평정점은 본인에게도 공개되지 않습니다</h2>
   <blockquote class="q rise" style="--d:200ms">
@@ -523,7 +627,7 @@
 
 <!-- ══ 04-employer.html ══ -->
 <!-- ══ Ⅳ. 조합만의 손해가 아니다 ══ -->
-<section class="slide divider" data-trans="deep" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="장 구분 — 조합만의 손해가 아니다" data-fx="constellation">
+<section class="slide divider" data-trans="deep" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="장 구분 — 조합만의 손해가" data-fx="constellation">
   <p class="num materialize">Ⅳ</p>
   <h2 class="title rise" style="--d:160ms">사측이 원하는 것도<br>지금은 작동하지 않습니다</h2>
   <p class="lead rise" style="--d:280ms">여기까지는 조합의 손해였습니다. 이 장은 사측의 손해입니다.</p>
@@ -534,7 +638,7 @@
   </div>
 </section>
 
-<section class="slide" data-trans="blur" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="실력 하위 10%가 C를 받을 확률">
+<section class="slide" data-trans="blur" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="하위 10%가 C를 받을 확률">
   <p class="eyebrow rise">Ⅳ-1<span class="sep">·</span>실력 하위 10%가 받는 등급</p>
   <div class="vs">
     <div class="side rise" style="--d:120ms">
@@ -564,26 +668,67 @@
   <p class="eyebrow rise">Ⅳ-2<span class="sep">·</span>산술</p>
   <h2 class="title rise" style="--d:60ms">부서장의 <em>의지</em> 문제가 아닙니다</h2>
   <p class="lead rise" style="--d:120ms">부서 평균 80점과 좁은 부여폭이 막고 있습니다.</p>
-  <ul class="gj rise" style="--d:200ms">
-    <li>부여폭 <b>2점</b> 부서의 최하위자 — 부서 평균에서 약 3점 아래, 곧 <b>약 77점</b></li>
-    <li>부여폭 <b>13점</b> 부서의 최하위자 — <b>60점</b></li>
-    <li>C 정원은 <b>직급별 전사 10%</b>로 배정된다
-      <ul>
-        <li>따라서 <b>C는 거의 전부 극단 성향 부서에서 나온다</b></li>
-        <li>균등 성향 부서장이 아무리 낮게 주려 해도, 부서 평균 80점 제약 안에서
-          2점 폭으로는 <b>전사 하위 10%에 넣을 방법이 없다</b></li>
-      </ul>
-    </li>
-  </ul>
+
+  <div class="fig rise" style="--d:220ms">
+    <svg viewBox="0 0 1180 286" role="img"
+         aria-label="점수 60점에서 100점까지의 가로축 위에, 넓게 주는 부서의 점 여섯 개는 60점부터 98점까지 흩어져 있고 좁게 주는 부서의 점 여섯 개는 79점에서 81점 사이에 뭉쳐 있으며, 전사 하위 10퍼센트 커트라인을 나타내는 세로 점선의 왼쪽에는 넓게 주는 부서의 점만 놓여 있는 그림">
+      <defs>
+        <marker id="arw-cut" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--series-hi)"/>
+        </marker>
+      </defs>
+
+      <!-- 커트라인 -->
+      <line x1="480" y1="38" x2="480" y2="238" stroke="var(--series-hi)" stroke-width="2" stroke-dasharray="8 8"/>
+      <text x="468" y="26" text-anchor="end" font-size="18" font-weight="700" fill="var(--series-hi)">← 이 왼쪽만 C</text>
+      <text x="492" y="26" font-size="17" fill="var(--ink-3)">전사 하위 10% 커트라인</text>
+
+      <!-- 넓게 주는 부서 -->
+      <text x="0" y="70" font-size="18" fill="var(--ink-2)">넓게 주는 부서 <tspan fill="var(--ink-3)">— 극단 성향 · 부여폭 13점</tspan></text>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="120" cy="100" r="10"/><circle cx="312" cy="100" r="10"/><circle cx="504" cy="100" r="10"/>
+        <circle cx="720" cy="100" r="10"/><circle cx="888" cy="100" r="10"/><circle cx="1032" cy="100" r="10"/>
+      </g>
+
+      <!-- 좁게 주는 부서 -->
+      <text x="0" y="152" font-size="18" fill="var(--ink-2)">좁게 주는 부서 <tspan fill="var(--ink-3)">— 균등 성향 · 부여폭 2점</tspan></text>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="576" cy="182" r="10"/><circle cx="585.6" cy="182" r="10"/><circle cx="595.2" cy="182" r="10"/>
+        <circle cx="604.8" cy="182" r="10"/><circle cx="614.4" cy="182" r="10"/><circle cx="624" cy="182" r="10"/>
+      </g>
+      <text x="648" y="188" font-size="17" fill="var(--ink-3)">여섯 명 전원이 79~81점</text>
+
+      <!-- 닿지 않는다 -->
+      <line x1="568" y1="216" x2="492" y2="216" stroke="var(--series-hi)" stroke-width="2" marker-end="url(#arw-cut)"/>
+      <text x="582" y="222" font-size="18" fill="var(--ink-2)">한 명도 이 선을 넘지 못합니다</text>
+
+      <!-- 점수 축 -->
+      <line x1="120" y1="238" x2="1080" y2="238" stroke="var(--hair)" stroke-width="1"/>
+      <g font-size="17" fill="var(--ink-3)" text-anchor="middle">
+        <text x="120" y="266">60</text><text x="360" y="266">70</text><text x="600" y="266">80</text>
+        <text x="840" y="266">90</text><text x="1080" y="266">100점</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="body rise" style="--d:340ms">
+    C 정원은 <b>직급별 전사 10%</b>로 배정됩니다. 균등 성향 부서장이 아무리 낮게 주려 해도,
+    부서 평균 80점 제약 안에서 <b>2점 폭으로는 전사 하위 10%에 넣을 방법이 없습니다.</b>
+    그래서 <b>C는 거의 전부 극단 성향 부서에서 나옵니다.</b>
+  </p>
   <div class="box warn rise" style="--d:320ms">
     <p class="body" style="margin:0">
       <b>지켜야 할 선</b> — 사측이 말하는 「조직문화를 해치는 직원」은 업적·역량이 아니라
-      <b style="white-space:nowrap">태도·품행</b>의 문제이며, 그것은 근무평정이 아니라 <b>성과관리·징계 절차</b>로 다룰 일입니다.
+      <b style="white-space:nowrap">태도·품행</b>의 문제입니다. 그것은 근무평정이 아니라 <b>성과관리·징계 절차</b>로 다룰 일입니다.
     </p>
   </div>
   <div class="notes">
     <p>「부서장이 의지가 없다」는 말로 들리지 않게 조심합니다. 의지가 아니라 산수가 막는다는 것이
-    이 장면의 전부입니다. 2점 폭 안에서는 전사 하위 10%에 도달할 수 없습니다.</p>
+    이 장면의 전부입니다.</p>
+    <p><b>그림에서 손으로 짚을 순서</b> — ① 세로 점선을 먼저 짚고 「이 왼쪽이 C입니다」.
+    ② 위쪽 줄의 왼쪽 두 점을 짚고 「넓게 주는 부서에서는 여기까지 내려갑니다」.
+    ③ 마지막으로 아래쪽 뭉친 점 여섯 개를 손으로 감싸고 <b>「여기서는 한 명도 선을 넘지 못합니다」</b>.
+    이 한 동작이 이 장의 결론입니다.</p>
     <p>지켜야 할 선은 여기서 한 번만 짚고 넘어갑니다. 태도·품행을 평정으로 처리하자는 요구는
     받지 않겠다는 뜻을 분명히 하되 길게 논쟁하지 않습니다.</p>
   </div>
@@ -618,12 +763,15 @@
   </div>
 </section>
 
-<section class="slide" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="만약 부서 간 실력 차이가 있다면">
+<section class="slide" data-ch="Ⅳ. 조합만의 손해가 아니다" data-title="부서 간 실력 차이가 있다면">
   <p class="eyebrow rise">Ⅳ-4<span class="sep">·</span>조건부 계산</p>
   <h2 class="title mid rise" style="--d:60ms">만약 부서 간 실력 차이가 <em>있다면</em></h2>
   <p class="body rise" style="--d:120ms">
     배치는 인사부서와 본부장의 <b>정성적 판단</b>이고, <b>피평가자는 자기 부서를 선택할 수 없습니다.</b>
     조합에는 편중 여부에 관한 자료가 없으므로, 편중을 주장하지 않고 <b>조건부로만</b> 계산했습니다.
+  </p>
+  <p class="cap rise" style="--d:160ms">
+    <b>제거율</b>이란 — 없앨 수 있는 불공정 가운데 몇 퍼센트를 없앴는가를 뜻합니다.
   </p>
   <table class="rise" style="--d:200ms">
     <thead>
@@ -653,7 +801,7 @@
 
 <!-- ══ 05-benchmark.html ══ -->
 <!-- ══ Ⅴ. 공공기관 355곳 ══ -->
-<section class="slide divider" data-trans="deep" data-ch="Ⅴ. 공공기관 355곳" data-title="장 구분 — 다른 기관은 어떻게 하는가" data-fx="constellation">
+<section class="slide divider" data-trans="deep" data-ch="Ⅴ. 공공기관 355곳" data-title="장 구분 — 다른 기관은 어떻게" data-fx="constellation">
   <p class="num materialize">Ⅴ</p>
   <h2 class="title rise" style="--d:160ms">다른 기관은<br>어떻게 하는가</h2>
   <p class="lead rise" style="--d:280ms">
@@ -789,8 +937,8 @@
     <span>굵은 선은 <b>구간형</b> 기준(하한~상한)</span>
   </div>
   <p class="cap rise" style="--d:320ms">
-    가로축은 규정에 적힌 <b>사전 평균 기준값</b>입니다. 80점에 묶은 곳은 <b>6곳</b>이고, 그중
-    <b>완충장치가 전혀 없는 곳은 창업진흥원뿐</b>입니다. 각 기관 ALIO 경영공시 게시본.
+    가로축은 규정에 적힌 <b>사전 평균 기준값</b>입니다. 80점에 묶은 곳은 <b>6곳</b>입니다.
+    그중 <b>완충장치가 전혀 없는 곳은 창업진흥원뿐</b>입니다. 각 기관 ALIO 경영공시 게시본.
   </p>
   <div class="notes">
     <p>기관명을 그대로 읽습니다. 공개된 내규이므로 문제되지 않습니다. 「저희가 요구하는 것은
@@ -877,23 +1025,45 @@
   <p class="eyebrow rise">Ⅵ-1<span class="sep">·</span>개정 층위</p>
   <h2 class="title mid rise" style="--d:100ms"><em>인사규정</em>은 열지 않습니다</h2>
   <p class="lead rise" style="--d:200ms">
-    고치는 층위는 <b>규칙과 연도별 계획</b>뿐입니다. 인사규정 제25조②가 세부 기준과 절차를 규칙에
-    백지위임하고 있으므로 <b>이사회를 열 필요가 없습니다.</b>
+    고치는 층위는 <b>규칙과 연도별 계획</b>뿐입니다. 인사규정 제25조②가 세부 기준과 절차를
+    규칙에 백지위임하고 있습니다. 그래서 <b>이사회를 열 필요가 없습니다.</b>
   </p>
-  <table class="rise" style="--d:320ms">
-    <thead><tr><th>층위</th><th>위임 근거</th><th>소요</th><th>이번 개편에서</th></tr></thead>
-    <tbody>
-      <tr><td>연도별 평정계획</td><td>규칙의 위임 조항 12곳</td><td>즉시</td><td>8항목 정비</td></tr>
-      <tr class="hl"><td>근무평정 규칙</td><td>인사규정 제25조②</td><td>수 주 · 원장 결재</td><td>개정 16건</td></tr>
-      <tr><td>인사규정</td><td>정관</td><td>수 개월 · 이사회</td><td><b>고치지 않음</b></td></tr>
-    </tbody>
-  </table>
+
+  <div class="fig rise" style="--d:320ms">
+    <svg viewBox="0 0 1180 320" role="img"
+         aria-label="세 층위의 개정 소요 시간을 길이가 다른 가로 막대로 견준 그림. 연도별 평정계획은 즉시, 근무평정 규칙은 수 주, 인사규정은 수 개월이 걸리며 인사규정 막대는 흐리게 처리되고 가운데에 선이 그어져 이번 개편에서 열지 않음을 나타낸다.">
+      <text x="360" y="18" font-size="16" fill="var(--ink-3)">걸리는 시간 →</text>
+
+      <!-- 연도별 평정계획 — 즉시 -->
+      <text x="0" y="54" font-size="21" font-weight="600" fill="var(--ink)">연도별 평정계획</text>
+      <text x="0" y="80" font-size="17" fill="var(--ink-3)">8항목 정비</text>
+      <rect x="360" y="30" width="90" height="44" fill="var(--series-new)"/>
+      <text x="466" y="60" font-size="18" fill="var(--ink-2)">즉시</text>
+
+      <!-- 근무평정 규칙 — 수 주 -->
+      <text x="0" y="164" font-size="21" font-weight="600" fill="var(--ink)">근무평정 규칙</text>
+      <text x="0" y="190" font-size="17" fill="var(--ink-3)">개정 16건</text>
+      <rect x="360" y="140" width="270" height="44" fill="var(--series-new)"/>
+      <text x="646" y="170" font-size="18" fill="var(--ink-2)">수 주 · 원장 결재</text>
+
+      <!-- 인사규정 — 수 개월 · 열지 않는다 -->
+      <text x="0" y="274" font-size="21" font-weight="600" fill="var(--ink-3)">인사규정</text>
+      <text x="0" y="300" font-size="17" font-weight="700" fill="var(--ink)">열지 않습니다</text>
+      <rect x="360" y="250" width="620" height="44" fill="var(--hair)"/>
+      <line x1="360" y1="272" x2="980" y2="272" stroke="var(--ink-3)" stroke-width="2"/>
+      <text x="996" y="280" font-size="18" fill="var(--ink-3)">수 개월 · 이사회</text>
+    </svg>
+  </div>
+
   <p class="cap rise" style="--d:420ms">
+    위임 근거는 각각 <b>규칙의 위임 조항 12곳 · 인사규정 제25조② · 정관</b>입니다.
     규칙 개정은 일상감사와 부패영향평가를 경유합니다(제규정관리규정 제9조②·제11조).
     소관부처 보고도 필요하지 않습니다.
   </p>
   <div class="notes">
     <p>사측의 첫 반론은 거의 항상 「규정 개정에 시간이 걸린다」입니다. 이 장을 먼저 두어 그 답을 미리 놓습니다.</p>
+    <p><b>그림에서는 막대 길이만 보여 주면 됩니다</b> — 「짧은 두 개만 손대고, 가장 긴 것은 아예 열지 않습니다」.
+    흐리게 처리되고 선이 그어진 세 번째 막대를 손으로 짚으면서 말합니다.</p>
     <p>인사규정 제25조②는 백지위임입니다. 규칙에 무엇을 담아도 인사규정과 충돌하지 않습니다.</p>
   </div>
 </section>
@@ -911,6 +1081,9 @@
       <tr><td>핵-5</td><td>제28조① 개정 + 제9조⑥ 신설 — 공개 · 통계</td><td>실시 여부의 검증</td></tr>
     </tbody>
   </table>
+  <p class="cap rise" style="--d:200ms">
+    <b>순위기반 보정</b>이란 — 점수는 버리고 순서만 남겨, 그 순서로 점수를 다시 매기는 것입니다.
+  </p>
   <div class="box ac rise" style="--d:280ms">
     <p class="lead" style="margin:0">
       어느 하나가 빠지면 <b>나머지 4건도 철회합니다.</b>
@@ -945,8 +1118,8 @@
     </p>
   </div>
   <p class="cap rise" style="--d:420ms">
-    실행 조건이 다르면 제거율의 기준선이 달라집니다 — 다면 모형은 8.513점, 본표는 8.225점을 기준으로 한
-    비율이므로 두 계열의 절대값을 직접 더하거나 비교하지 않습니다.
+    실행 조건이 다르면 제거율의 기준선이 달라집니다. 다면 모형은 8.513점, 본표는 8.225점이 기준입니다.
+    그래서 두 계열의 절대값을 직접 더하거나 비교하지 않습니다.
     모의데이터 계산치이며 창업진흥원의 실제 평정 결과가 아닙니다.
   </p>
   <div class="notes">
@@ -959,25 +1132,84 @@
 <section class="slide" data-ch="Ⅵ. 개정안" data-title="[별표 9] 산식">
   <p class="eyebrow rise">Ⅵ-4<span class="sep">·</span>[별표 9]</p>
   <h2 class="title mid rise" style="--d:100ms">산식은 <em>네 줄</em>입니다</h2>
-  <div class="box rise" style="--d:200ms">
-    <p class="h">보정 산식 — [별표 9] 제2호 · 제3호</p>
-    <p class="body" style="margin:0"><code style="font-family:var(--mono)">① 평가점수가 낮은 사람부터 1위 … 최고점자가 n위</code></p>
-    <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">② z = Φ⁻¹( (r − 0.375) / (n + 0.25) )</code></p>
-    <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">③ 보정점수 = 80 + 7 × z ÷ s(n)</code></p>
-    <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">④ 60점 미만은 60점, 100점 초과는 100점</code></p>
+  <div class="cols c2 rise" style="--d:200ms">
+    <div>
+      <div class="box">
+        <p class="h">보정 산식 — [별표 9] 제2호 · 제3호</p>
+        <p class="body" style="margin:0"><code style="font-family:var(--mono)">① 평가점수가 낮은 사람부터 1위 … 최고점자가 n위</code></p>
+        <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">② z = Φ⁻¹( (r − 0.375) / (n + 0.25) )</code></p>
+        <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">③ 보정점수 = 80 + 7 × z ÷ s(n)</code></p>
+        <p class="body" style="margin:6px 0 0"><code style="font-family:var(--mono)">④ 60점 미만은 60점, 100점 초과는 100점</code></p>
+      </div>
+    </div>
+    <div>
+      <div class="box ac">
+        <p class="body" style="margin:0">
+          <code style="font-family:var(--mono)">=NORM.S.INV((순위−0.375)/(인원+0.25))</code><br>
+          <b>엑셀 한 줄로 검산됩니다.</b> 실무자가 재현할 수 없는 산식은 규정에 담을 수 없습니다.
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="box ac rise" style="--d:320ms">
-    <p class="body" style="margin:0">
-      <code style="font-family:var(--mono)">=NORM.S.INV((순위−0.375)/(인원+0.25))</code><br>
-      <b>엑셀 한 줄로 검산됩니다.</b> 실무자가 재현할 수 없는 산식은 규정에 담을 수 없습니다.
-    </p>
+
+  <div class="fig rise" style="--d:340ms">
+    <svg viewBox="0 0 1180 286" role="img"
+         aria-label="10명 평가군의 원점수 열 개와 보정점수 열 개를 같은 점수 축 위 두 줄에 놓고 같은 사람끼리 선으로 이은 그림. 열 개의 선이 서로 한 번도 엇갈리지 않아 순위가 그대로 보존됨을 보여 준다.">
+      <!-- 원점수 -->
+      <text x="0" y="88" font-size="18" fill="var(--ink-2)">원점수</text>
+      <g font-size="17" fill="var(--ink-3)" text-anchor="middle">
+        <text x="120" y="54">60</text><text x="270" y="54">66</text><text x="420" y="54">72</text>
+        <text x="520" y="54">76</text><text x="620" y="54">80</text><text x="720" y="54">84</text>
+        <text x="820" y="54">88</text><text x="920" y="54">92</text><text x="995" y="54">95</text>
+        <text x="1070" y="54">98</text>
+      </g>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="120" cy="82" r="9"/><circle cx="270" cy="82" r="9"/><circle cx="420" cy="82" r="9"/>
+        <circle cx="520" cy="82" r="9"/><circle cx="620" cy="82" r="9"/><circle cx="720" cy="82" r="9"/>
+        <circle cx="820" cy="82" r="9"/><circle cx="920" cy="82" r="9"/><circle cx="995" cy="82" r="9"/>
+        <circle cx="1070" cy="82" r="9"/>
+      </g>
+
+      <!-- 같은 사람끼리 잇는 선 -->
+      <g stroke="var(--series-new)" stroke-width="2">
+        <line x1="120" y1="92" x2="316.5" y2="194"/>
+        <line x1="270" y1="92" x2="423.75" y2="194"/>
+        <line x1="420" y1="92" x2="491.5" y2="194"/>
+        <line x1="520" y1="92" x2="546.25" y2="194"/>
+        <line x1="620" y1="92" x2="596" y2="194"/>
+        <line x1="720" y1="92" x2="644" y2="194"/>
+        <line x1="820" y1="92" x2="693.75" y2="194"/>
+        <line x1="920" y1="92" x2="748.5" y2="194"/>
+        <line x1="995" y1="92" x2="816.25" y2="194"/>
+        <line x1="1070" y1="92" x2="923.5" y2="194"/>
+      </g>
+
+      <!-- 보정점수 -->
+      <g fill="var(--series-new)" stroke="var(--bg)" stroke-width="2">
+        <circle cx="316.5" cy="204" r="9"/><circle cx="423.75" cy="204" r="9"/><circle cx="491.5" cy="204" r="9"/>
+        <circle cx="546.25" cy="204" r="9"/><circle cx="596" cy="204" r="9"/><circle cx="644" cy="204" r="9"/>
+        <circle cx="693.75" cy="204" r="9"/><circle cx="748.5" cy="204" r="9"/><circle cx="816.25" cy="204" r="9"/>
+        <circle cx="923.5" cy="204" r="9"/>
+      </g>
+      <text x="0" y="210" font-size="18" fill="var(--ink-2)">보정점수</text>
+      <g font-size="16" fill="var(--ink-3)" text-anchor="middle">
+        <text x="316.5" y="234">67.86</text><text x="491.5" y="234">74.86</text><text x="596" y="234">79.04</text>
+        <text x="693.75" y="234">82.95</text><text x="816.25" y="234">87.85</text>
+        <text x="423.75" y="258">72.15</text><text x="546.25" y="258">77.05</text><text x="644" y="258">80.96</text>
+        <text x="748.5" y="258">85.14</text><text x="923.5" y="258">92.14</text>
+      </g>
+    </svg>
   </div>
-  <p class="cap rise" style="--d:420ms">
-    10명 평가군이면 최저점자 <span class="chip">67.86점</span> · 최고점자 <span class="chip ac">92.14점</span>.
+
+  <p class="cap rise" style="--d:440ms">
+    <b>열 개의 선이 한 번도 엇갈리지 않습니다</b> — 순위가 그대로라는 뜻입니다. 폭만 좁아집니다.
     80은 평정점 구간 60~100점의 중앙값이고, 7은 검산 재현성이 보장되는 정수입니다.
   </p>
   <div class="notes">
     <p>「중학생도 아는 방식」이라는 말을 여기서 씁니다. 순위를 매기고, 순위를 점수로 바꾸고, 끝입니다.</p>
+    <p><b>그림에서는 선을 손가락으로 훑습니다</b> — 「위에서 아래로 내려오는 선이 한 번도 엇갈리지 않습니다.
+    1등은 그대로 1등, 꼴찌는 그대로 꼴찌입니다」. 그다음 양 끝을 짚고 「폭만 좁아집니다 —
+    최저 67.86점, 최고 92.14점」.</p>
     <p>혼합효과 모형·경험베이즈 같은 기법을 검토했으나 전부 폐기했습니다. 엑셀로 검산할 수 없기 때문이고,
     355개 기관 중 개인 근무평정에 그 계열을 규정에 둔 기관이 0곳인 이유도 같다고 봅니다.</p>
     <p>7점은 노사 협의로 달리 정할 수 있다고 먼저 말합니다. 5~10점에서 결과가 0.9%p 안에서 같습니다.</p>
@@ -1004,7 +1236,7 @@
   <div class="box ac rise" style="--d:420ms">
     <p class="body" style="margin:0">
       <b>효과 손실은 0입니다.</b> 외부요인 제거율 24.0% → 24.0%, 실력–평정점 순위상관 0.647 → 0.646.
-      <b>1차와 2차의 척도를 맞추는 일</b>이기도 합니다 — 척도가 어긋나면 [별표 2]의 60:40 가중이 의도한 비중대로 작동하지 않습니다.
+      <b>1차와 2차의 척도를 맞추는 일</b>이기도 합니다. 척도가 어긋나면 [별표 2]의 60:40 가중이 의도한 비중대로 작동하지 않습니다.
     </p>
   </div>
   <div class="notes">
@@ -1073,6 +1305,41 @@
           <b>평가군 내 조정점수의 합계는 0</b>이 되도록 하며, 조정한 경우 <b>사유를 평가표에 기재</b>한다.
         </p>
       </div>
+      <div class="fig">
+        <svg viewBox="0 0 560 230" role="img"
+             aria-label="열 명의 조정점수를 기준선 위아래 막대로 그린 그림. 위로 올린 막대 넷과 아래로 내린 막대 넷의 넓이가 서로 같아 합계가 0이 된다.">
+          <text x="0" y="22" font-size="17" fill="var(--ink-3)">10명의 ±5점 조정</text>
+          <text x="560" y="22" text-anchor="end" font-size="17" font-weight="700" fill="var(--series-new)">합계 0 — 부서 평균 그대로</text>
+
+          <!-- 올린 쪽 -->
+          <g fill="var(--series-new)">
+            <rect x="36" y="70" width="30" height="60"/>
+            <rect x="86" y="94" width="30" height="36"/>
+            <rect x="136" y="106" width="30" height="24"/>
+            <rect x="186" y="118" width="30" height="12"/>
+          </g>
+          <!-- 조정하지 않은 두 명 -->
+          <g fill="var(--ink-3)">
+            <rect x="236" y="128" width="30" height="3"/>
+            <rect x="286" y="128" width="30" height="3"/>
+          </g>
+          <!-- 내린 쪽 -->
+          <g fill="var(--series-now)">
+            <rect x="336" y="130" width="30" height="12"/>
+            <rect x="386" y="130" width="30" height="24"/>
+            <rect x="436" y="130" width="30" height="36"/>
+            <rect x="486" y="130" width="30" height="60"/>
+          </g>
+
+          <line x1="20" y1="130" x2="540" y2="130" stroke="var(--hair)" stroke-width="1"/>
+
+          <g font-size="16" fill="var(--ink-3)" text-anchor="middle">
+            <text x="51" y="62">+5</text><text x="101" y="86">+3</text><text x="151" y="98">+2</text><text x="201" y="110">+1</text>
+            <text x="251" y="120">0</text><text x="301" y="120">0</text>
+            <text x="351" y="160">−1</text><text x="401" y="172">−2</text><text x="451" y="184">−3</text><text x="501" y="208">−5</text>
+          </g>
+        </svg>
+      </div>
     </div>
     <div>
       <div class="box warn">
@@ -1095,6 +1362,9 @@
   </p>
   <div class="notes">
     <p>부서장을 적으로 만들지 않는 것이 이 협의의 조건입니다. 순위 보존과 ±5점 조정을 함께 말합니다.</p>
+    <p><b>그림에서는 위와 아래를 손으로 덮어 보입니다</b> — 「올린 넓이와 내린 넓이가 같습니다.
+    그래서 부서 평균은 조금도 움직이지 않습니다」. 부서장 재량을 빼앗는 것이 아니라
+    <b>규정 안에 통로를 내는 것</b>이라는 말로 닫습니다.</p>
     <p>「우수자가 손해를 본다」는 우려는 성립합니다. 조합이 그것을 먼저 인정하고 처방까지 제시한 것이
     이 협의에서 가장 강한 카드입니다.</p>
     <p>±10점을 택하지 않은 이유도 준비해 둡니다 — 정상 사용의 이득은 ±5점에서 멈추고 남용 위험만 커집니다.</p>
@@ -1335,7 +1605,8 @@ window.DECK_HOOKS["sim"] = function () {
           </tbody>
         </table>
         <p class="cap" style="margin-top:14px">
-          두 분포가 <b>겹치지 않습니다.</b> 통계 한 줄이 회피 평가군을 식별하므로 <b>사측에게도 이로운 조항</b>입니다.
+          두 분포가 <b>겹치지 않습니다.</b> 통계 한 줄이 회피 평가군을 가려냅니다.
+          <b>사측에게도 이로운 조항</b>입니다.
         </p>
       </div>
     </div>
@@ -1369,17 +1640,60 @@ window.DECK_HOOKS["sim"] = function () {
     운영규정 제20조③은 <b>회의 개최 7일 전까지 의제를 통보</b>하도록 정합니다.
     9월 28일 회의이므로 그 전주 월요일이 마감입니다.
   </p>
-  <table class="rise" style="--d:320ms">
-    <thead><tr><th>시기</th><th>할 일</th><th>근거</th></tr></thead>
-    <tbody>
-      <tr class="hl"><td><b>9월 21일</b></td><td>의제 통보 · 자료 요구서 제출</td><td>운영규정 제20조③ · 근참법 제14조</td></tr>
-      <tr><td>9월 28일</td><td>2분기 정기회의 — 협의 개시</td><td>운영규정 제19조①</td></tr>
-      <tr><td>10~11월</td><td>실무소위원회 — 조문과 산식 확정</td><td>운영규정 제11조②③ (노사 각 2인 · 7일 전 통보)</td></tr>
-      <tr><td>12월</td><td>4분기 정기회의 의결 → 규칙 개정</td><td>운영규정 제21조 · 제28조①</td></tr>
-      <tr><td>2027년 1월</td><td>연도별 평정계획 수립에 반영 · 목표설정</td><td>개정 8①</td></tr>
-      <tr><td>2027년 12월</td><td>정기평정 적용 (기준일 12월 말일)</td><td>규칙 제5조1호</td></tr>
-    </tbody>
-  </table>
+  <div class="fig rise" style="--d:320ms">
+    <svg viewBox="0 0 1180 262" role="img"
+         aria-label="9월 21일 의제 통보에서 2027년 12월 정기평정 적용까지 여섯 단계를 왼쪽에서 오른쪽으로 늘어놓은 가로 타임라인. 맨 앞의 9월 21일이 굵게 표시되어 실질 마감임을 나타낸다.">
+      <defs>
+        <marker id="arw-tl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--hair)"/>
+        </marker>
+      </defs>
+
+      <!-- 실질 마감 표시 -->
+      <text x="90" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="var(--series-hi)">실질 마감</text>
+      <line x1="90" y1="44" x2="90" y2="100" stroke="var(--series-hi)" stroke-width="2" stroke-dasharray="6 6"/>
+
+      <!-- 축 -->
+      <line x1="50" y1="170" x2="1152" y2="170" stroke="var(--hair)" stroke-width="2" marker-end="url(#arw-tl)"/>
+
+      <!-- 날짜 -->
+      <g text-anchor="middle" font-size="19" fill="var(--ink-2)">
+        <text x="90" y="128" font-size="22" font-weight="700" fill="var(--series-hi)">9월 21일</text>
+        <text x="296" y="128">9월 28일</text>
+        <text x="502" y="128">10~11월</text>
+        <text x="708" y="128">12월</text>
+        <text x="914" y="128">2027년 1월</text>
+        <text x="1120" y="128">2027년 12월</text>
+      </g>
+
+      <!-- 마디 -->
+      <circle cx="90" cy="170" r="16" fill="var(--series-hi)" stroke="var(--bg)" stroke-width="3"/>
+      <g fill="var(--series-now)" stroke="var(--bg)" stroke-width="3">
+        <circle cx="296" cy="170" r="10"/><circle cx="502" cy="170" r="10"/><circle cx="708" cy="170" r="10"/>
+        <circle cx="914" cy="170" r="10"/><circle cx="1120" cy="170" r="10"/>
+      </g>
+
+      <!-- 할 일 -->
+      <g text-anchor="middle" font-size="17" fill="var(--ink-3)">
+        <text x="90" y="212" fill="var(--ink-2)" font-weight="600">의제 통보</text>
+        <text x="90" y="236" fill="var(--ink-2)" font-weight="600">자료 요구서 제출</text>
+        <text x="296" y="212">2분기 정기회의</text>
+        <text x="296" y="236">협의 개시</text>
+        <text x="502" y="212">실무소위원회</text>
+        <text x="502" y="236">조문과 산식 확정</text>
+        <text x="708" y="212">4분기 정기회의 의결</text>
+        <text x="708" y="236">규칙 개정</text>
+        <text x="914" y="212">연도별 평정계획 반영</text>
+        <text x="914" y="236">목표설정</text>
+        <text x="1120" y="212">정기평정 적용</text>
+        <text x="1120" y="236">기준일 12월 말일</text>
+      </g>
+    </svg>
+  </div>
+  <p class="cap rise" style="--d:380ms">
+    근거는 차례로 <b>운영규정 제20조③ · 근참법 제14조</b> / 제19조① / 제11조②③(노사 각 2인 · 7일 전 통보) /
+    제21조 · 제28조① / 개정 8① / 규칙 제5조1호입니다.
+  </p>
   <div class="box warn rise" style="--d:420ms">
     <p class="body" style="margin:0">
       평가대상기간이 <b>해당 회계연도</b>이므로, <b>한 해를 넘기면 2년이 밀립니다.</b>
@@ -1388,6 +1702,8 @@ window.DECK_HOOKS["sim"] = function () {
   </div>
   <div class="notes">
     <p>일정 이야기를 감정 없이 사실로만 전달합니다. 「올해 안에」가 조합의 희망이 아니라 규칙의 구조라는 점을 보입니다.</p>
+    <p><b>그림에서는 맨 왼쪽 큰 점부터 짚습니다</b> — 「여기가 오늘 기준의 실질 마감입니다」.
+    그다음 손가락을 오른쪽 끝까지 한 번에 훑으면서 <b>「이 줄을 한 칸이라도 놓치면 통째로 한 해가 밀립니다」</b>로 닫습니다.</p>
     <p>협의가 정체되면 운영규정 제20조②의 임시회의 소집 요구권이 있습니다. 오늘 말하지는 않고 남겨 둡니다.</p>
   </div>
 </section>
@@ -1396,8 +1712,8 @@ window.DECK_HOOKS["sim"] = function () {
   <p class="eyebrow rise">Ⅷ-2<span class="sep">·</span>정족수</p>
   <h2 class="title mid rise" style="--d:100ms">의결에는 <em>4명</em>의 찬성이 필요합니다</h2>
   <p class="lead rise" style="--d:200ms">
-    근로자위원 3명 · 사용자위원 3명, 출석위원 3분의 2 이상 찬성으로 의결합니다.
-    즉 <b>사측 1명 이상의 찬성이 반드시 필요합니다 — 합의만이 유일한 경로입니다.</b>
+    근로자위원 3명 · 사용자위원 3명이고, 출석위원 3분의 2 이상 찬성으로 의결합니다.
+    즉 <b>사측 1명 이상의 찬성이 반드시 필요합니다.</b> <b>합의만이 유일한 경로입니다.</b>
   </p>
   <table class="rise" style="--d:320ms">
     <thead><tr><th>근거</th><th>내용</th></tr></thead>
@@ -1423,22 +1739,31 @@ window.DECK_HOOKS["sim"] = function () {
 <section class="slide" data-trans="rise" data-ch="Ⅷ. 절차" data-title="오늘 요청하는 것 3가지">
   <p class="eyebrow rise">Ⅷ-3<span class="sep">·</span>요청</p>
   <h2 class="title mid rise" style="--d:100ms">오늘 요청하는 것은 <em>셋</em>입니다</h2>
-  <p class="lead rise" style="--d:200ms">
-    <span class="chip ac">①</span> <b>핵심 5건을 하나의 안으로</b> 협의를 개시해 주십시오.
-  </p>
-  <p class="lead rise" style="--d:280ms">
-    <span class="chip ac">②</span> <b>집계 자료를 제공해 주십시오</b> — 개인 식별 불가 형태, 목록은 별도 서면으로 드립니다.
-  </p>
-  <p class="lead rise" style="--d:360ms">
-    <span class="chip ac">③</span> <b>실무소위원회를 구성해 주십시오</b> — 산식 확정과 2027년 계획 반영 일정을 정합니다.
-  </p>
+  <div class="cols c3">
+    <div class="rise" style="--d:200ms">
+      <p style="font-size:var(--fs-huge);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--accent);margin:0">1</p>
+      <p class="lead" style="margin:14px 0 0"><b>협의를 시작해 주십시오</b></p>
+      <p class="cap">핵심 5건을 하나의 안으로 다룹니다.</p>
+    </div>
+    <div class="rise" style="--d:300ms">
+      <p style="font-size:var(--fs-huge);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--accent);margin:0">2</p>
+      <p class="lead" style="margin:14px 0 0"><b>자료를 주십시오</b></p>
+      <p class="cap">개인을 알아볼 수 없는 집계 형태입니다. 목록은 서면으로 드립니다.</p>
+    </div>
+    <div class="rise" style="--d:400ms">
+      <p style="font-size:var(--fs-huge);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--accent);margin:0">3</p>
+      <p class="lead" style="margin:14px 0 0"><b>실무소위를 만들어 주십시오</b></p>
+      <p class="cap">산식을 확정하고 2027년 반영 일정을 정합니다.</p>
+    </div>
+  </div>
   <div class="box ac materialize" style="--d:520ms">
     <p class="lead" style="margin:0">
       등급을 후하게 만들자는 것이 아니라, <b>등급이 실제 성과를 따라가게 만들자는 것</b>입니다.
     </p>
   </div>
   <div class="notes">
-    <p>마지막 장입니다. 세 줄을 천천히 읽고, 마지막 문장으로 닫습니다. 그 뒤에 덧붙이지 않습니다.</p>
+    <p>마지막 장입니다. <b>번호 하나에 문장 하나씩</b>, 세 번 끊어 읽고 마지막 문장으로 닫습니다.
+    그 뒤에 덧붙이지 않습니다.</p>
     <p>세 가지 모두 오늘 답을 받을 수 있는 것으로만 구성했습니다. ①은 협의 개시이고 ②는 자료이며 ③은 기구 구성입니다.
     조문 합의는 오늘 요청하지 않습니다.</p>
   </div>
@@ -1489,8 +1814,9 @@ window.DECK_HOOKS["sim"] = function () {
   </div>
   <div class="box warn rise" style="--d:320ms">
     <p class="body" style="margin:0">
-      우연이 아니라 평균이라는 연산의 성질입니다. C 확률도 함께 떨어지므로 정확한 표현은 하나입니다 —
-      <b>이 산식은 중간 등급 고정 장치이며, 승진에 필요한 상위 등급 도달을 봉쇄합니다.</b>
+      우연이 아니라 평균이라는 연산의 성질입니다. C 확률도 함께 떨어집니다.
+      그래서 정확한 표현은 하나입니다 — <b>이 산식은 중간 등급 고정 장치입니다.</b>
+      <b>승진에 필요한 상위 등급 도달을 봉쇄합니다.</b>
     </p>
   </div>
   <p class="cap rise" style="--d:420ms">
@@ -1520,13 +1846,13 @@ window.DECK_HOOKS["sim"] = function () {
     </div>
   </div>
   <p class="body rise" style="--d:320ms">
-    창업진흥원이 휴직자 · 출산전후휴가자에게 <b>이미 적용하는 본문 산식</b>
-    (직전 종합점수 50% + 당해 동일 직급 평균 50%)을 근로시간면제자에게도 적용하라는 것입니다.
-    <b>새로 만드는 것이 하나도 없습니다.</b>
+    창업진흥원은 휴직자 · 출산전후휴가자에게 <b>이미 본문 산식을 적용</b>하고 있습니다
+    (직전 종합점수 50% + 당해 동일 직급 평균 50%).
+    그 산식을 근로시간면제자에게도 적용하라는 것입니다. <b>새로 만드는 것이 하나도 없습니다.</b>
   </p>
   <div class="box ac rise" style="--d:420ms">
     <p class="body" style="margin:0">
-      이 요구는 <b>본안이 통과된 뒤 단서 한 문장을 지우는 것</b>이며, <b>본안 의제에 끼워 넣지 않습니다.</b>
+      이 요구는 <b>본안이 통과된 뒤 단서 한 문장을 지우는 것</b>입니다. <b>본안 의제에 끼워 넣지 않습니다.</b>
       결과는 직급 평균 수준이고 상위 등급을 보장하지 않습니다. 그래서 조합은
       <b>「동일 직급 평균을 현저히 상회하지 않도록」 하는 상한 조항을 스스로 제안합니다.</b>
     </p>
