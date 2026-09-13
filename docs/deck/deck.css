@@ -461,6 +461,39 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.14); }
 input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 38%, transparent); }
 
+/* ── 세로가 짧은 화면 ────────────────────────────────────────────────────
+   1366×768·1280×720 같은 회의실 노트북에서는 요소가 많은 슬라이드가 넘친다.
+   글자 크기는 건드리지 않고 여백만 줄인다 — 가독성이 먼저다. */
+@media (max-height: 800px) {
+  :root { --pad-y: 5.2vh; }
+  .lead   { margin-top: 18px; }
+  .body   { margin-top: 14px; }
+  .cap    { margin-top: 11px; }
+  .gj     { margin-top: 16px; }
+  .gj > li { margin-bottom: 10px; }
+  .gj ul > li { margin-bottom: 6px; }
+  .box    { margin-top: 16px; padding: 14px 20px; }
+  .box .h { margin-bottom: 7px; }
+  table   { margin-top: 16px; }
+  thead th { padding: 7px 14px; }
+  tbody td { padding: 8px 14px; }
+  .fig    { margin-top: 16px; }
+  .legend { margin-top: 10px; }
+  .cols   { margin-top: 18px; }
+  blockquote.q { margin-top: 18px; }
+  .diff   { margin-top: 16px; }
+  .slide:not(.cover)::before { top: 2.6vh; }
+  .pageno { top: max(4px, calc(2.6vh - 1.9em)); }
+}
+@media (max-height: 730px) {
+  :root { --pad-y: 4.4vh; }
+  .box    { margin-top: 12px; padding: 12px 18px; }
+  .gj > li { margin-bottom: 8px; }
+  table   { margin-top: 12px; }
+  tbody td { padding: 6px 14px; }
+  .eyebrow { margin-bottom: 14px; }
+}
+
 /* ── 접근성 ─────────────────────────────────────────────────────────────
    움직임을 줄이라는 설정은 「피드백을 없애라」가 아니라
    「전정기관을 자극하지 말라」는 뜻이다. 교차 페이드로 바꾼다. */
