@@ -97,10 +97,18 @@ for (const f of fs.readdirSync(DOCS)) {
     return `<${tag}${attr || ''}${has ? '' : ` id="${id}"`}>${inner}<a class="anchor" href="#${id}" aria-label="이 절 링크">§</a></${tag}>`;
   });
   // 절이 6개 미만이면 목차를 만들지 않는다 — 짧은 문서에는 방해가 된다
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+    'stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/></svg>';
   const tocHtml = toc.filter(t => t.lv === 2).length < 6 ? '' :
-    '<aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol>' +
+    '<aside class="toc" id="toc" aria-label="이 문서의 목차">' +
+    '<p class="toc-h">이 문서 안에서' +
+    `<button type="button" class="toc-x" id="tocHide" title="목차 접기 (H)" aria-label="목차 접기">${ICON}</button>` +
+    '</p><ol>' +
     toc.map(t => `<li class="l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('') +
     '</ol></aside>';
+  const tocBtn = tocHtml
+    ? `<button type="button" id="tocOpen" title="목차 펼치기 (H)" aria-label="목차 펼치기" hidden>${ICON}</button>`
+    : '';
   const group = GROUP_OF[key] || 'share';
   const link = ([k, label]) =>
     `<a href="${k}.html"${k === key ? ' class="on" aria-current="page"' : ''}>${label}</a>`;
@@ -125,6 +133,7 @@ for (const f of fs.readdirSync(DOCS)) {
     .replace('__FOOTMENU__', foot)
     .replace('__BANNER__', banner)
     .replace('__TOC__', tocHtml)
+    .replace('__TOCBTN__', tocBtn)
     .replace('__BODYCLASS__', tocHtml ? ' has-toc' : '')
     .replace('__CONTENT__', html);
   fs.writeFileSync(path.join(DOCS, path.basename(f, '.md') + '.html'), out);

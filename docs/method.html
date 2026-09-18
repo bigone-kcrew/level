@@ -89,7 +89,30 @@ body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:m
 .toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
   font-size:15.5px;line-height:1.5;scrollbar-width:thin}
 .toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
-  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+/* 목차 접기·펼치기 — 발표 화면의 H 키와 같은 조작이다 */
+.toc-x{appearance:none;background:none;border:0;padding:6px;margin:-6px -6px -6px 0;
+  cursor:pointer;color:var(--ink-3);border-radius:6px;display:grid;place-items:center;
+  min-width:32px;min-height:32px;transition:color .14s,background .14s}
+.toc-x:hover{color:var(--ink);background:var(--card-2)}
+.toc-x svg{width:17px;height:17px}
+/* 페이지 바탕과 카드 색이 거의 같아 얇은 테두리만으로는 탭이 보이지 않는다.
+   테두리를 진하게 하고 왼쪽에 강조색 띠를 둔다. */
+#tocOpen{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;
+  width:34px;height:64px;cursor:pointer;display:grid;place-items:center;
+  background:var(--card-2);border:1px solid var(--hair);border-right:0;
+  border-left:3px solid var(--accent);
+  border-radius:12px 0 0 12px;color:var(--ink-2);
+  transition:color .14s,background .14s}
+#tocOpen:hover{color:var(--ink);background:var(--accent-soft)}
+#tocOpen:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toc-x:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#tocOpen svg{width:18px;height:18px}
+#tocOpen[hidden]{display:none}
+body.toc-off.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+body.toc-off.has-toc footer{max-width:1180px}
+body.toc-off .toc{display:none}
 .toc ol{list-style:none;margin:0;padding:0}
 .toc li{margin:0}
 .toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
@@ -107,7 +130,9 @@ h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--ac
 @media (max-width:1100px){
   body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
   .toc{display:none}
+  #tocOpen{display:none}
 }
+@media print{ .toc-x,#tocOpen{display:none} }
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -1037,7 +1062,8 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <p><strong>자료를 받으면 모수를 재산정하고 결론을 수정한다.</strong> 이 자세를 먼저 밝히는 것이, 사측이
 「모의데이터일 뿐이다」로 문서 전체를 무력화하려 할 때의 답이다 — <strong>조합은 실측을 거부하지
 않는다. 실측 자료가 없어서 모의로 계산했을 뿐이다.</strong></p>
-</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#1-무엇을-재는가-지표의-정의와-선택-이유">§1 무엇을 재는가 — 지표의 정의와 선택 이유</a></li><li class="l3"><a href="#1-1-대표-지표-같은-실력-십분위-내-평정점-표준편차">1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★</a></li><li class="l3"><a href="#1-2-보조-지표-실력평정점-순위상관-Spearman-ρ">1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)</a></li><li class="l3"><a href="#1-3-보조-지표-분산분해-FWL-정리">1-3 보조 지표 — 분산분해 (FWL 정리)</a></li><li class="l3"><a href="#1-4-보조-지표-등급-획득률과-규모격차">1-4 보조 지표 — 등급 획득률과 규모격차</a></li><li class="l2"><a href="#2-산식-개정안이-쓰는-계산">§2 산식 — 개정안이 쓰는 계산</a></li><li class="l3"><a href="#2-1-순위기반-표준화-Blom-정규-순서통계량">2-1 순위기반 표준화 — Blom 정규 순서통계량</a></li><li class="l3"><a href="#2-2-Φ¹의-계산-Acklam-근사">2-2 Φ⁻¹의 계산 — Acklam 근사</a></li><li class="l3"><a href="#2-3-등급-배정-최대잔여법">2-3 등급 배정 — 최대잔여법</a></li><li class="l3"><a href="#2-4-별표-9-제7호-합계-0-조정">2-4 [별표 9] 제7호 — 합계 0 조정</a></li><li class="l2"><a href="#3-시뮬레이션-절차">§3 시뮬레이션 절차</a></li><li class="l3"><a href="#3-1-반복-횟수와-난수">3-1 반복 횟수와 난수</a></li><li class="l2"><a href="#4-실행-조건-어느-표가-어느-조건에서-나왔는가">§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★</a></li><li class="l3"><a href="#4-1-별도-조건-별표-9-제7호-조정-폭-검증">4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증</a></li><li class="l2"><a href="#5-실측값과-가정값-무엇이-확인된-것이고-무엇이-아닌가">§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가</a></li><li class="l3"><a href="#5-1-실측값-출처-확인됨">5-1 실측값 (출처 확인됨)</a></li><li class="l3"><a href="#5-2-가정값-미확인-실측-자료-확보-시-재산정-대상">5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★</a></li><li class="l3"><a href="#5-3-조합이-먼저-인정하는-한계">5-3 조합이 먼저 인정하는 한계</a></li><li class="l2"><a href="#6-두-구현체의-차이-문서와-화면의-값이-다른-이유">§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유</a></li><li class="l2"><a href="#7-검산-방법-사측이-직접-확인할-수-있는가">§7 검산 방법 — 사측이 직접 확인할 수 있는가</a></li><li class="l2"><a href="#8-요구하는-자료-어느-가정값을-대체하는가">§8 요구하는 자료 — 어느 가정값을 대체하는가</a></li></ol></aside></main>
+</article><aside class="toc" id="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서<button type="button" class="toc-x" id="tocHide" title="목차 접기 (H)" aria-label="목차 접기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/></svg></button></p><ol><li class="l2"><a href="#1-무엇을-재는가-지표의-정의와-선택-이유">§1 무엇을 재는가 — 지표의 정의와 선택 이유</a></li><li class="l3"><a href="#1-1-대표-지표-같은-실력-십분위-내-평정점-표준편차">1-1 대표 지표 — 같은 실력 십분위 내 평정점 표준편차 ★</a></li><li class="l3"><a href="#1-2-보조-지표-실력평정점-순위상관-Spearman-ρ">1-2 보조 지표 — 실력–평정점 순위상관 (Spearman ρ)</a></li><li class="l3"><a href="#1-3-보조-지표-분산분해-FWL-정리">1-3 보조 지표 — 분산분해 (FWL 정리)</a></li><li class="l3"><a href="#1-4-보조-지표-등급-획득률과-규모격차">1-4 보조 지표 — 등급 획득률과 규모격차</a></li><li class="l2"><a href="#2-산식-개정안이-쓰는-계산">§2 산식 — 개정안이 쓰는 계산</a></li><li class="l3"><a href="#2-1-순위기반-표준화-Blom-정규-순서통계량">2-1 순위기반 표준화 — Blom 정규 순서통계량</a></li><li class="l3"><a href="#2-2-Φ¹의-계산-Acklam-근사">2-2 Φ⁻¹의 계산 — Acklam 근사</a></li><li class="l3"><a href="#2-3-등급-배정-최대잔여법">2-3 등급 배정 — 최대잔여법</a></li><li class="l3"><a href="#2-4-별표-9-제7호-합계-0-조정">2-4 [별표 9] 제7호 — 합계 0 조정</a></li><li class="l2"><a href="#3-시뮬레이션-절차">§3 시뮬레이션 절차</a></li><li class="l3"><a href="#3-1-반복-횟수와-난수">3-1 반복 횟수와 난수</a></li><li class="l2"><a href="#4-실행-조건-어느-표가-어느-조건에서-나왔는가">§4 실행 조건 — 어느 표가 어느 조건에서 나왔는가 ★</a></li><li class="l3"><a href="#4-1-별도-조건-별표-9-제7호-조정-폭-검증">4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증</a></li><li class="l2"><a href="#5-실측값과-가정값-무엇이-확인된-것이고-무엇이-아닌가">§5 실측값과 가정값 — 무엇이 확인된 것이고 무엇이 아닌가</a></li><li class="l3"><a href="#5-1-실측값-출처-확인됨">5-1 실측값 (출처 확인됨)</a></li><li class="l3"><a href="#5-2-가정값-미확인-실측-자료-확보-시-재산정-대상">5-2 가정값 (미확인 — 실측 자료 확보 시 재산정 대상) ★</a></li><li class="l3"><a href="#5-3-조합이-먼저-인정하는-한계">5-3 조합이 먼저 인정하는 한계</a></li><li class="l2"><a href="#6-두-구현체의-차이-문서와-화면의-값이-다른-이유">§6 두 구현체의 차이 — 문서와 화면의 값이 다른 이유</a></li><li class="l2"><a href="#7-검산-방법-사측이-직접-확인할-수-있는가">§7 검산 방법 — 사측이 직접 확인할 수 있는가</a></li><li class="l2"><a href="#8-요구하는-자료-어느-가정값을-대체하는가">§8 요구하는 자료 — 어느 가정값을 대체하는가</a></li></ol></aside></main>
+<button type="button" id="tocOpen" title="목차 펼치기 (H)" aria-label="목차 펼치기" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/></svg></button>
 <footer>
 <div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
 <p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
@@ -1076,6 +1102,41 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   update();
+
+  /* ── 목차 접기·펼치기 ────────────────────────────────────────────
+     발표 화면과 같은 H 키를 쓴다. 접은 상태는 이 브라우저에만 남으며,
+     차단·비공개 창에서는 저장이 실패할 수 있으므로 감싸 둔다. */
+  var hide = document.getElementById('tocHide');
+  var open = document.getElementById('tocOpen');
+  if (!hide || !open) return;
+  var KEY = 'kised.toc.off';
+
+  function apply(off){
+    document.body.classList.toggle('toc-off', off);
+    open.hidden = !off;
+    try { localStorage.setItem(KEY, off ? '1' : '0'); } catch (e) {}
+    onScroll();
+  }
+  function toggle(from){
+    var off = !document.body.classList.contains('toc-off');
+    apply(off);
+    (off ? open : hide).focus();
+    if (from === 'key') return;
+  }
+  hide.addEventListener('click', function(){ toggle('btn'); });
+  open.addEventListener('click', function(){ toggle('btn'); });
+  addEventListener('keydown', function(e){
+    if (e.key !== 'h' && e.key !== 'H') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (innerWidth <= 1100) return;            // 이 폭에서는 목차가 없다
+    e.preventDefault(); toggle('key');
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === '1') apply(true); else open.hidden = true;
 })();
 </script>
 </body>

@@ -89,7 +89,30 @@ body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:m
 .toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
   font-size:15.5px;line-height:1.5;scrollbar-width:thin}
 .toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
-  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+/* 목차 접기·펼치기 — 발표 화면의 H 키와 같은 조작이다 */
+.toc-x{appearance:none;background:none;border:0;padding:6px;margin:-6px -6px -6px 0;
+  cursor:pointer;color:var(--ink-3);border-radius:6px;display:grid;place-items:center;
+  min-width:32px;min-height:32px;transition:color .14s,background .14s}
+.toc-x:hover{color:var(--ink);background:var(--card-2)}
+.toc-x svg{width:17px;height:17px}
+/* 페이지 바탕과 카드 색이 거의 같아 얇은 테두리만으로는 탭이 보이지 않는다.
+   테두리를 진하게 하고 왼쪽에 강조색 띠를 둔다. */
+#tocOpen{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;
+  width:34px;height:64px;cursor:pointer;display:grid;place-items:center;
+  background:var(--card-2);border:1px solid var(--hair);border-right:0;
+  border-left:3px solid var(--accent);
+  border-radius:12px 0 0 12px;color:var(--ink-2);
+  transition:color .14s,background .14s}
+#tocOpen:hover{color:var(--ink);background:var(--accent-soft)}
+#tocOpen:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toc-x:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#tocOpen svg{width:18px;height:18px}
+#tocOpen[hidden]{display:none}
+body.toc-off.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+body.toc-off.has-toc footer{max-width:1180px}
+body.toc-off .toc{display:none}
 .toc ol{list-style:none;margin:0;padding:0}
 .toc li{margin:0}
 .toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
@@ -107,7 +130,9 @@ h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--ac
 @media (max-width:1100px){
   body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
   .toc{display:none}
+  #tocOpen{display:none}
 }
+@media print{ .toc-x,#tocOpen{display:none} }
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -207,6 +232,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 </div></header>
 <main><article>__BANNER__
 __CONTENT__</article>__TOC__</main>
+__TOCBTN__
 <footer>
 <div class="footmenu">__FOOTMENU__</div>
 <p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
@@ -245,6 +271,41 @@ __CONTENT__</article>__TOC__</main>
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   update();
+
+  /* ── 목차 접기·펼치기 ────────────────────────────────────────────
+     발표 화면과 같은 H 키를 쓴다. 접은 상태는 이 브라우저에만 남으며,
+     차단·비공개 창에서는 저장이 실패할 수 있으므로 감싸 둔다. */
+  var hide = document.getElementById('tocHide');
+  var open = document.getElementById('tocOpen');
+  if (!hide || !open) return;
+  var KEY = 'kised.toc.off';
+
+  function apply(off){
+    document.body.classList.toggle('toc-off', off);
+    open.hidden = !off;
+    try { localStorage.setItem(KEY, off ? '1' : '0'); } catch (e) {}
+    onScroll();
+  }
+  function toggle(from){
+    var off = !document.body.classList.contains('toc-off');
+    apply(off);
+    (off ? open : hide).focus();
+    if (from === 'key') return;
+  }
+  hide.addEventListener('click', function(){ toggle('btn'); });
+  open.addEventListener('click', function(){ toggle('btn'); });
+  addEventListener('keydown', function(e){
+    if (e.key !== 'h' && e.key !== 'H') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (innerWidth <= 1100) return;            // 이 폭에서는 목차가 없다
+    e.preventDefault(); toggle('key');
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === '1') apply(true); else open.hidden = true;
 })();
 </script>
 </body>

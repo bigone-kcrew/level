@@ -89,7 +89,30 @@ body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:m
 .toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;
   font-size:15.5px;line-height:1.5;scrollbar-width:thin}
 .toc-h{margin:0 0 12px;font-size:15.5px;font-weight:700;color:var(--ink-3);
-  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2)}
+  letter-spacing:.04em;padding-bottom:10px;border-bottom:1px solid var(--hair-2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+/* 목차 접기·펼치기 — 발표 화면의 H 키와 같은 조작이다 */
+.toc-x{appearance:none;background:none;border:0;padding:6px;margin:-6px -6px -6px 0;
+  cursor:pointer;color:var(--ink-3);border-radius:6px;display:grid;place-items:center;
+  min-width:32px;min-height:32px;transition:color .14s,background .14s}
+.toc-x:hover{color:var(--ink);background:var(--card-2)}
+.toc-x svg{width:17px;height:17px}
+/* 페이지 바탕과 카드 색이 거의 같아 얇은 테두리만으로는 탭이 보이지 않는다.
+   테두리를 진하게 하고 왼쪽에 강조색 띠를 둔다. */
+#tocOpen{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;
+  width:34px;height:64px;cursor:pointer;display:grid;place-items:center;
+  background:var(--card-2);border:1px solid var(--hair);border-right:0;
+  border-left:3px solid var(--accent);
+  border-radius:12px 0 0 12px;color:var(--ink-2);
+  transition:color .14s,background .14s}
+#tocOpen:hover{color:var(--ink);background:var(--accent-soft)}
+#tocOpen:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toc-x:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#tocOpen svg{width:18px;height:18px}
+#tocOpen[hidden]{display:none}
+body.toc-off.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
+body.toc-off.has-toc footer{max-width:1180px}
+body.toc-off .toc{display:none}
 .toc ol{list-style:none;margin:0;padding:0}
 .toc li{margin:0}
 .toc a{display:block;padding:8px 10px;min-height:40px;color:var(--ink-3);
@@ -107,7 +130,9 @@ h2:hover .anchor,h3:hover .anchor,.anchor:focus-visible{opacity:1;color:var(--ac
 @media (max-width:1100px){
   body.has-toc main{max-width:1180px;grid-template-columns:minmax(0,1fr)}
   .toc{display:none}
+  #tocOpen{display:none}
 }
+@media print{ .toc-x,#tocOpen{display:none} }
 article{
   background:var(--card);border:1px solid var(--hair-2);border-radius:6px;
   padding:clamp(24px,4vw,62px);
@@ -862,7 +887,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 <td>본인에게 통지하고 역량강화교육을 실시하며, 인사위원회의 의결로 직위해제할 수 있다</td>
 </tr>
 </tbody></table></div>
-</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#제1장-총칙">제1장 총칙</a></li><li class="l3"><a href="#제1조목적">제1조(목적)</a></li><li class="l3"><a href="#제2조적용범위">제2조(적용범위)</a></li><li class="l3"><a href="#제3조용어의-정의">제3조(용어의 정의)</a></li><li class="l2"><a href="#제2장-평가의-준비">제2장 평가의 준비</a></li><li class="l3"><a href="#제4조평가군의-편성">제4조(평가군의 편성)</a></li><li class="l3"><a href="#제5조평가자의-지정">제5조(평가자의 지정)</a></li><li class="l3"><a href="#제6조다면평가-평가자의-선정">제6조(다면평가 평가자의 선정)</a></li><li class="l3"><a href="#제7조평가자-교육">제7조(평가자 교육)</a></li><li class="l3"><a href="#제8조성과목표의-설정">제8조(성과목표의 설정)</a></li><li class="l2"><a href="#제3장-평가의-실시">제3장 평가의 실시</a></li><li class="l3"><a href="#제9조평가의-일정">제9조(평가의 일정)</a></li><li class="l3"><a href="#제10조동점-부여의-금지">제10조(동점 부여의 금지)</a></li><li class="l3"><a href="#제11조평가표의-작성">제11조(평가표의 작성)</a></li><li class="l3"><a href="#제12조재작성의-요구">제12조(재작성의 요구)</a></li><li class="l3"><a href="#제13조부서-이동자의-평가">제13조(부서 이동자의 평가)</a></li><li class="l3"><a href="#제14조휴직·파견·복직자의-평가">제14조(휴직·파견·복직자의 평가)</a></li><li class="l2"><a href="#제4장-점수의-산출">제4장 점수의 산출</a></li><li class="l3"><a href="#제15조보정의-실시">제15조(보정의 실시)</a></li><li class="l3"><a href="#제16조보정점수의-산출">제16조(보정점수의 산출)</a></li><li class="l3"><a href="#제17조소규모-평가군">제17조(소규모 평가군)</a></li><li class="l3"><a href="#제18조조정">제18조(조정)</a></li><li class="l3"><a href="#제19조다면평가-점수의-산출">제19조(다면평가 점수의 산출)</a></li><li class="l3"><a href="#제20조종합점수">제20조(종합점수)</a></li><li class="l3"><a href="#제21조등급의-배정">제21조(등급의 배정)</a></li><li class="l3"><a href="#제22조평정점">제22조(평정점)</a></li><li class="l2"><a href="#제5장-결과의-처리">제5장 결과의 처리</a></li><li class="l3"><a href="#제23조결과의-공개">제23조(결과의 공개)</a></li><li class="l3"><a href="#제24조이의신청">제24조(이의신청)</a></li><li class="l3"><a href="#제25조평정-통계의-산출과-제공">제25조(평정 통계의 산출과 제공)</a></li><li class="l3"><a href="#제26조노사협의회-보고">제26조(노사협의회 보고)</a></li><li class="l3"><a href="#제27조기록의-보존">제27조(기록의 보존)</a></li><li class="l3"><a href="#제28조비밀의-유지">제28조(비밀의 유지)</a></li><li class="l2"><a href="#제6장-보칙">제6장 보칙</a></li><li class="l3"><a href="#제29조예외-사항의-처리">제29조(예외 사항의 처리)</a></li><li class="l3"><a href="#제30조협의를-거쳐야-하는-사항">제30조(협의를 거쳐야 하는 사항)</a></li><li class="l3"><a href="#제31조시행일">제31조(시행일)</a></li><li class="l3"><a href="#제32조경과조치">제32조(경과조치)</a></li><li class="l2"><a href="#별표">별표</a></li><li class="l3"><a href="#별표-1-보정-산식과-sn-표-제16조-관련">[별표 1] 보정 산식과 s(n) 표 (제16조 관련)</a></li><li class="l3"><a href="#별표-2-평가군-규모별-등급-배정-제21조제5항-관련">[별표 2] 평가군 규모별 등급 배정 (제21조제5항 관련)</a></li><li class="l3"><a href="#별표-3-예외사항-처리-기준-제29조-관련">[별표 3] 예외사항 처리 기준 (제29조 관련)</a></li></ol></aside></main>
+</article><aside class="toc" id="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서<button type="button" class="toc-x" id="tocHide" title="목차 접기 (H)" aria-label="목차 접기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/></svg></button></p><ol><li class="l2"><a href="#제1장-총칙">제1장 총칙</a></li><li class="l3"><a href="#제1조목적">제1조(목적)</a></li><li class="l3"><a href="#제2조적용범위">제2조(적용범위)</a></li><li class="l3"><a href="#제3조용어의-정의">제3조(용어의 정의)</a></li><li class="l2"><a href="#제2장-평가의-준비">제2장 평가의 준비</a></li><li class="l3"><a href="#제4조평가군의-편성">제4조(평가군의 편성)</a></li><li class="l3"><a href="#제5조평가자의-지정">제5조(평가자의 지정)</a></li><li class="l3"><a href="#제6조다면평가-평가자의-선정">제6조(다면평가 평가자의 선정)</a></li><li class="l3"><a href="#제7조평가자-교육">제7조(평가자 교육)</a></li><li class="l3"><a href="#제8조성과목표의-설정">제8조(성과목표의 설정)</a></li><li class="l2"><a href="#제3장-평가의-실시">제3장 평가의 실시</a></li><li class="l3"><a href="#제9조평가의-일정">제9조(평가의 일정)</a></li><li class="l3"><a href="#제10조동점-부여의-금지">제10조(동점 부여의 금지)</a></li><li class="l3"><a href="#제11조평가표의-작성">제11조(평가표의 작성)</a></li><li class="l3"><a href="#제12조재작성의-요구">제12조(재작성의 요구)</a></li><li class="l3"><a href="#제13조부서-이동자의-평가">제13조(부서 이동자의 평가)</a></li><li class="l3"><a href="#제14조휴직·파견·복직자의-평가">제14조(휴직·파견·복직자의 평가)</a></li><li class="l2"><a href="#제4장-점수의-산출">제4장 점수의 산출</a></li><li class="l3"><a href="#제15조보정의-실시">제15조(보정의 실시)</a></li><li class="l3"><a href="#제16조보정점수의-산출">제16조(보정점수의 산출)</a></li><li class="l3"><a href="#제17조소규모-평가군">제17조(소규모 평가군)</a></li><li class="l3"><a href="#제18조조정">제18조(조정)</a></li><li class="l3"><a href="#제19조다면평가-점수의-산출">제19조(다면평가 점수의 산출)</a></li><li class="l3"><a href="#제20조종합점수">제20조(종합점수)</a></li><li class="l3"><a href="#제21조등급의-배정">제21조(등급의 배정)</a></li><li class="l3"><a href="#제22조평정점">제22조(평정점)</a></li><li class="l2"><a href="#제5장-결과의-처리">제5장 결과의 처리</a></li><li class="l3"><a href="#제23조결과의-공개">제23조(결과의 공개)</a></li><li class="l3"><a href="#제24조이의신청">제24조(이의신청)</a></li><li class="l3"><a href="#제25조평정-통계의-산출과-제공">제25조(평정 통계의 산출과 제공)</a></li><li class="l3"><a href="#제26조노사협의회-보고">제26조(노사협의회 보고)</a></li><li class="l3"><a href="#제27조기록의-보존">제27조(기록의 보존)</a></li><li class="l3"><a href="#제28조비밀의-유지">제28조(비밀의 유지)</a></li><li class="l2"><a href="#제6장-보칙">제6장 보칙</a></li><li class="l3"><a href="#제29조예외-사항의-처리">제29조(예외 사항의 처리)</a></li><li class="l3"><a href="#제30조협의를-거쳐야-하는-사항">제30조(협의를 거쳐야 하는 사항)</a></li><li class="l3"><a href="#제31조시행일">제31조(시행일)</a></li><li class="l3"><a href="#제32조경과조치">제32조(경과조치)</a></li><li class="l2"><a href="#별표">별표</a></li><li class="l3"><a href="#별표-1-보정-산식과-sn-표-제16조-관련">[별표 1] 보정 산식과 s(n) 표 (제16조 관련)</a></li><li class="l3"><a href="#별표-2-평가군-규모별-등급-배정-제21조제5항-관련">[별표 2] 평가군 규모별 등급 배정 (제21조제5항 관련)</a></li><li class="l3"><a href="#별표-3-예외사항-처리-기준-제29조-관련">[별표 3] 예외사항 처리 기준 (제29조 관련)</a></li></ol></aside></main>
+<button type="button" id="tocOpen" title="목차 펼치기 (H)" aria-label="목차 펼치기" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/></svg></button>
 <footer>
 <div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
 <p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>
@@ -901,6 +927,41 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   update();
+
+  /* ── 목차 접기·펼치기 ────────────────────────────────────────────
+     발표 화면과 같은 H 키를 쓴다. 접은 상태는 이 브라우저에만 남으며,
+     차단·비공개 창에서는 저장이 실패할 수 있으므로 감싸 둔다. */
+  var hide = document.getElementById('tocHide');
+  var open = document.getElementById('tocOpen');
+  if (!hide || !open) return;
+  var KEY = 'kised.toc.off';
+
+  function apply(off){
+    document.body.classList.toggle('toc-off', off);
+    open.hidden = !off;
+    try { localStorage.setItem(KEY, off ? '1' : '0'); } catch (e) {}
+    onScroll();
+  }
+  function toggle(from){
+    var off = !document.body.classList.contains('toc-off');
+    apply(off);
+    (off ? open : hide).focus();
+    if (from === 'key') return;
+  }
+  hide.addEventListener('click', function(){ toggle('btn'); });
+  open.addEventListener('click', function(){ toggle('btn'); });
+  addEventListener('keydown', function(e){
+    if (e.key !== 'h' && e.key !== 'H') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (innerWidth <= 1100) return;            // 이 폭에서는 목차가 없다
+    e.preventDefault(); toggle('key');
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === '1') apply(true); else open.hidden = true;
 })();
 </script>
 </body>
