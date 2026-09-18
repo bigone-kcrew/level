@@ -361,12 +361,12 @@ z  = Φ⁻¹( (r − 0.375) ÷ (n + 0.25) )
 반올림」을 정하므로 상수가 무한소수면 실무자가 6.67로 계산할 때와 6.6667로 계산할 때 값이
 달라진다. 7은 누가 계산해도 같은 값을 낸다.</p>
 <p><strong>그리고 이 값은 제도의 성능을 좌우하지 않는다.</strong> 5점부터 10점까지 두 배로 바꿔도 외부요인
-제거율은 <strong>29.7%~30.6%로 0.9%p 안에서만 변하고, 전 구간에서 절단이 한 건도 발생하지 않는다</strong>
+제거율은 <strong>29.4%~30.2%로 0.8%p 안에서만 변하고, 전 구간에서 절단이 한 건도 발생하지 않는다</strong>
 (§5-2 목표 표준편차 민감도표). 부서장 선호(외부요인)도 목표 표준편차와 함께 비례해 커지므로
 신호 대 잡음 비가 거의 변하지 않기 때문이다.</p>
 <blockquote>
 <p><strong>따라서 이 상수는 노사 협의로 달리 정할 수 있다.</strong> 「±3 표준편차가 구간 60~100점을 정확히
-채우는 값」을 원하면 20/3 ≈ 6.667이고 결과는 7점과 소수 첫째 자리까지 같다(제거율 30.2%).
+채우는 값」을 원하면 20/3 ≈ 6.667이고 결과는 7점과 소수 첫째 자리까지 같다(제거율 29.8%).
 다만 무한소수는 위의 검산 재현성 문제를 낳는다.</p>
 </blockquote>
 </li>
@@ -481,7 +481,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <td>순수 잡음</td>
 <td>없음</td>
 <td>없음</td>
-<td><strong>8.225</strong></td>
+<td><strong>8.226</strong></td>
 <td>2.363</td>
 <td>5.862</td>
 </tr>
@@ -499,7 +499,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <td>동료 4인 관측</td>
 <td>0.3σ</td>
 <td>0.9σ</td>
-<td><strong>8.513</strong></td>
+<td><strong>8.502</strong></td>
 <td>2.386</td>
 <td>6.127</td>
 </tr>
@@ -508,7 +508,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <td>접점/무접점 혼합</td>
 <td>0.3σ</td>
 <td>0.9σ</td>
-<td><strong>8.513</strong></td>
+<td><strong>8.502</strong></td>
 <td>2.386</td>
 <td>6.127</td>
 </tr>
@@ -524,28 +524,46 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 </thead>
 <tbody><tr>
 <td>①</td>
-<td>진단의 근본 목적 절(제거율 30.2%) · 배치 편중 절 · 사측 이익 절(등급 획득률)</td>
-<td><code>sim/sim.py</code> · <code>placement.py</code> · <code>lowperf.py</code></td>
+<td>진단의 근본 목적 절(제거율 29.8%) · 배치 편중 절 · 사측 이익 절(등급 획득률) · 목표 표준편차 민감도표 · 1차×2차 결합표</td>
+<td><code>sim/sim.py</code> · <code>sim/studies/</code>{<code>placement</code>, <code>lowperf</code>, <code>sdsweep</code>, <code>joint</code>}<code>.py</code></td>
 </tr>
 <tr>
 <td>②</td>
 <td>「검토했으나 채택하지 않은 안」의 1차:2차 비율표 · 고급 통계보정 5종 비교표</td>
-<td><code>observer/drive1~3.py</code> · <code>methods.py</code> · <code>mrun.py</code></td>
+<td><code>sim/studies/</code>{<code>drive1</code>~`drive3<code>, </code>methods<code>, </code>mrun<code>, </code>mcompare<code>}</code>.py`</td>
 </tr>
 <tr>
 <td>③</td>
-<td>개정 14 다면 배점 곡선(10%→32.5% / 20%→40.9%)</td>
-<td><code>observer/drive4.py</code> · <code>sweep.py</code></td>
+<td>개정 14 다면 배점 곡선(10%→31.6% / 20%→39.7%)</td>
+<td><code>sim/studies/</code>{<code>drive4</code>, <code>sweep</code>}<code>.py</code></td>
 </tr>
 <tr>
 <td>④</td>
 <td>개정 14 접점 비율표 · 개정 15 평가자 선정 방식 비교표</td>
-<td><code>observer/mix.py</code></td>
+<td><code>sim/studies/mix.py</code></td>
+</tr>
+<tr>
+<td>별</td>
+<td>사후보정 방식별 이상치 민감도 (일치법 vs 순위환산)</td>
+<td><code>sim/studies/outlier.py</code></td>
 </tr>
 </tbody></table></div>
+<blockquote>
+<p><strong>2026-09-18 — 계산 정본을 저장소로 옮기고 <code>÷ s(n)</code>을 반영했다.</strong> 두 가지 문제가 있었다.</p>
+<p><strong>하나.</strong> 위 스크립트들이 저장소에 없었다. 임시 디렉터리에만 있어서, 이 문서가 출처로
+적어 둔 수치를 아무도 재현할 수 없는 상태였다. <code>sim/studies/</code>로 옮기고 경로를 고쳤다.
+원본이 없던 두 표(목표 표준편차 민감도 · 1차×2차 결합)는 <strong>새로 작성했다</strong>(<code>sdsweep.py</code>,
+<code>joint.py</code>). 결합표의 인원 비중이 종전 공표값과 거의 같아 모형·시드가 같음을 확인했으나,
+재작성이므로 종전 값과의 차이에 <code>÷ s(n)</code> 외의 요인이 섞여 있을 수 있다.</p>
+<p><strong>둘.</strong> [별표 9] 제3호가 정한 <code>÷ s(n)</code>이 계산 정본에 반영되어 있지 않았다. 나누지 않으면
+부여폭이 <code>s(n)</code>배로 줄어 어느 평가군도 목표 표준편차에 도달하지 못한다. <strong>현행 모드에도
+같이 적용했다</strong> — <code>SPREAD</code>가 「부여점수 표준편차」라고 적혀 있으므로 상수가 뜻하는 대로
+작동시키는 것이 맞고, 개선안에만 적용하면 비교가 개선안 쪽으로 기울기 때문이다.
+그 결과 본표 제거율은 <strong>30.2% → 29.8%로 내려갔다.</strong> 조합에 유리한 방향이 아니다.</p>
+</blockquote>
 <p><strong>조건이 다른 제거율을 같은 표에 섞어 쓰지 않는다.</strong> 예를 들어 「보정 도입 24.0%」(조건 ②)와
-「다면 20% 40.9%」(조건 ③)는 기준선이 다르므로 직접 더할 수 없다. 두 값을 비교할 때는
-<strong>같은 조건 안에서 비교한 수치만 쓴다</strong> — 개정 14의 비교(다면 10% 32.5% vs 20% 40.9%)는
+「다면 20% 39.7%」(조건 ③)는 기준선이 다르므로 직접 더할 수 없다. 두 값을 비교할 때는
+<strong>같은 조건 안에서 비교한 수치만 쓴다</strong> — 개정 14의 비교(다면 10% 31.6% vs 20% 39.7%)는
 모두 조건 ③이다.</p>
 <h3 id="4-1-별도-조건-별표-9-제7호-조정-폭-검증">4-1 별도 조건 — [별표 9] 제7호 조정 폭 검증<a class="anchor" href="#4-1-별도-조건-별표-9-제7호-조정-폭-검증" aria-label="이 절 링크">§</a></h3>
 <p>제7호의 조정 폭(±3 / ±5 / ±10점)을 고른 근거표는 <strong>또 다른 조건</strong>에서 나왔다.</p>
@@ -699,7 +717,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <td>목표 표준편차</td>
 <td>7점</td>
 <td><strong>정수 · 검산 재현성</strong></td>
-<td><strong>아래 표 — 5~10점에서 0.9%p 이내</strong></td>
+<td><strong>아래 표 — 5~10점에서 0.8%p 이내</strong></td>
 </tr>
 <tr>
 <td>7</td>
@@ -748,7 +766,7 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <td>부서 간 <strong>실제 실력 격차</strong></td>
 <td>0 (기본)</td>
 <td><strong>노사 모두 자료 없음</strong></td>
-<td>0.8σ까지 넣어도 개선효과는 30.2% → 27.5% (분모는 g=0으로 고정)</td>
+<td>0.8σ까지 넣어도 개선효과는 29.8% → 27.1% (분모는 g=0으로 고정)</td>
 </tr>
 <tr>
 <td>14</td>
@@ -773,69 +791,70 @@ C 10%)을 곱하면 정수가 되지 않으므로 배분 규칙이 필요하다.
 <th>지표2</th>
 <th>제거율</th>
 <th>ρ</th>
-<th>절단(상/하)</th>
+<th>절단(하/상)</th>
 <th>±3σ 구간</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>5점</td>
-<td>6.484</td>
-<td>29.7%</td>
-<td>0.700</td>
+<td>6.504</td>
+<td>29.4%</td>
+<td>0.698</td>
 <td><strong>0 / 0</strong></td>
 <td>65~95</td>
 </tr>
 <tr>
 <td>6점</td>
-<td>6.467</td>
-<td>30.0%</td>
-<td>0.703</td>
+<td>6.489</td>
+<td>29.6%</td>
+<td>0.700</td>
 <td><strong>0 / 0</strong></td>
 <td>62~98</td>
 </tr>
 <tr>
 <td>6.667점</td>
-<td>6.457</td>
-<td>30.2%</td>
-<td>0.704</td>
+<td>6.481</td>
+<td>29.8%</td>
+<td>0.701</td>
 <td><strong>0 / 0</strong></td>
 <td><strong>60~100</strong></td>
 </tr>
 <tr>
 <td><strong>7점 (개정안)</strong></td>
-<td><strong>6.453</strong></td>
-<td><strong>30.2%</strong></td>
-<td><strong>0.704</strong></td>
+<td><strong>6.477</strong></td>
+<td><strong>29.8%</strong></td>
+<td><strong>0.701</strong></td>
 <td><strong>0 / 0</strong></td>
 <td>59~101</td>
 </tr>
 <tr>
 <td>8점</td>
-<td>6.444</td>
-<td>30.4%</td>
-<td>0.705</td>
+<td>6.470</td>
+<td>29.9%</td>
+<td>0.702</td>
 <td><strong>0 / 0</strong></td>
 <td>56~104</td>
 </tr>
 <tr>
 <td>9점</td>
-<td>6.436</td>
-<td>30.5%</td>
-<td>0.706</td>
+<td>6.463</td>
+<td>30.1%</td>
+<td>0.703</td>
 <td><strong>0 / 0</strong></td>
 <td>53~107</td>
 </tr>
 <tr>
 <td>10점</td>
-<td>6.430</td>
-<td>30.6%</td>
-<td>0.707</td>
+<td>6.453</td>
+<td>30.2%</td>
+<td>0.704</td>
 <td><strong>0 / 0</strong></td>
 <td>50~110</td>
 </tr>
 </tbody></table></div>
-<p><em>(조건 ① · 반복 400회. 현행 8.225와 이상적 하한 2.363은 목표 표준편차와 무관하므로 분모가 고정된다.)</em></p>
-<p><strong>값을 두 배로 바꿔도 결과가 0.9%p 안에서 같고, 절단은 전 구간에서 발생하지 않는다.</strong> 평가군
+<p>*(조건 ① · 반복 400회 · 계산 정본 <code>sim/studies/sdsweep.py</code>. 현행 8.226와 이상적 하한 2.363은
+목표 표준편차와 무관하므로 분모가 고정된다. 절단은 1차 평가군 부여값 <strong>85,200건 중 0건</strong>이다.)*</p>
+<p><strong>값을 두 배로 바꿔도 결과가 0.8%p 안에서 같고, 절단은 전 구간에서 발생하지 않는다.</strong> 평가군
 인원이 3~16명이므로 순위기반 보정의 최대 편차가 ±1.77 표준편차에 그치기 때문이다.</p>
 <p><strong>9번이 가장 중요하다.</strong> 본부장이 실력을 얼마나 정확히 관측하는지 아무도 모르기 때문에
 1차:2차 비율을 이번에 정할 수 없었고, 그래서 <strong>개정 16(평정 통계 산출·제공)에서 그 값을

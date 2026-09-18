@@ -137,6 +137,18 @@ def blom(n):
     return [probit((i - 0.375) / (n + 0.25)) for i in range(1, n + 1)]
 
 
+def s_norm(n):
+    """[별표 9] 제3호 — 정규 순서통계량 n개의 모집단 표준편차 s(n).
+
+    이 값으로 나누지 않으면 부여폭이 s(n)배로 줄어든다. s(n)<1 이고 n 이 작을수록
+    작아지므로, 나누지 않으면 규정이 정한 표준편차에 어느 평가군도 도달하지 못하고
+    소규모 평가군이 특히 압축된다. 조문이 나눗셈을 명시한 이유다.
+    """
+    b = blom(n)
+    m = sum(b) / n
+    return math.sqrt(sum((x - m) ** 2 for x in b) / n) or 1.0
+
+
 def ranks(vals):
     order = sorted(range(len(vals)), key=lambda i: vals[i])
     r = [0] * len(vals)
@@ -244,8 +256,9 @@ def award(members, gtype, signal_of, mode, mean_cap_slack=0.0, adjust=False):
     else:
         base = TARGET_MEAN - (random.uniform(0, mean_cap_slack) if mean_cap_slack else 0.0)
         sd = SPREAD[gtype]
+    sn = s_norm(len(members))          # [별표 9] 제3호 — 목표 표준편차에 실제로 도달시킨다
     for k, i in enumerate(members):
-        out[i] = clamp(base + sd * bl[rk[k] - 1])
+        out[i] = clamp(base + sd * bl[rk[k] - 1] / sn)
     # [별표 9] 제7호 — 합계 0 조정. 1차 평가자에게만 적용한다.
     if mode == "reform" and adjust and ADJ_BAND > 0 and len(members) > 1:
         m = st.mean(sig)
@@ -387,10 +400,10 @@ def exp_transfer(mode, depart=DEPART_PENALTY, newcomer=NEWCOMER_PENALTY, reps=RE
                     if out: s -= depart
                     if new: s -= newcomer
                 sig.append(s)
-            rk = ranks(sig); bl = blom(len(mem))
+            rk = ranks(sig); bl = blom(len(mem)); sn = s_norm(len(mem))
             sd = TARGET_SD if mode == "reform" else SPREAD[ty]
             for k, (i, _, _, _) in enumerate(mem):
-                part[(i, d)] = clamp(TARGET_MEAN + sd * bl[rk[k] - 1])
+                part[(i, d)] = clamp(TARGET_MEAN + sd * bl[rk[k] - 1] / sn)
         total = []
         for i, p in enumerate(people):
             num = sum(part[(i, d)] * w for (d, w, _, _) in p["seg"])
