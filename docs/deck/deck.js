@@ -116,7 +116,7 @@ function toggleNotes(){
   }
 }
 function toggleSide(){ if (innerWidth <= 900) { setSide(!document.body.classList.contains("side-on")); return; }
-  const hid = document.body.classList.toggle("hide-side");
+  const hid = document.body.classList.toggle("side-off");   // CSS 의 body.side-off 와 이름을 맞춘다
   document.getElementById("sideOpen").hidden = !hid;
   if (hid) document.getElementById("sideOpen").focus();
   else document.getElementById("btnSide").focus();

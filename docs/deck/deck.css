@@ -423,6 +423,26 @@ tbody tr.hl td:first-child { font-weight: 700; }
 }
 .slide.cover .pageno { display: none; }
 
+/* ── 표지 고유 효과 — 분포 정렬 ────────────────────────────────────────────
+   흩어져 있던 막대가 정규분포로 모인다. 이 덱이 제안하는 것이 바로 그것이므로,
+   표지가 장식이 아니라 주장의 축약이 된다. 순수 CSS 이고 합성 속성만 건드린다. */
+.cover-fx {
+  width: min(560px, 62vw); height: auto; margin: clamp(18px, 3.2vh, 34px) 0 0;
+  overflow: visible; color: var(--accent);
+}
+.cover-fx rect { fill: currentColor; transform-origin: 50% 100%; }
+.cover-fx .base { fill: var(--hair-2); }
+
+.slide.cover.is-active .cover-fx rect:not(.base) {
+  animation: settle 900ms var(--ease-o) both;
+  animation-delay: calc(760ms + var(--i) * 22ms);
+}
+@keyframes settle {
+  from { transform: scaleY(var(--s0, 1)); }
+  to   { transform: scaleY(1); }
+}
+
+
 .push { margin-top: auto; }
 .notes { display: none; }
 
@@ -509,6 +529,7 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px 
   .slide.is-active .rise,
   .slide.is-active .materialize,
   .slide.is-active .draw { animation: fadeOnly 220ms linear both; animation-delay: 0s; }
+  .slide.cover.is-active .cover-fx rect:not(.base) { animation: none; transform: none; }
   @keyframes fadeOnly { from { opacity: 0; } to { opacity: 1; } }
   #side, .deck, #prog, #prog span { transition: none; }
 }
@@ -721,6 +742,7 @@ body.notes-on #notes-drawer { transform: none; }
           --hair:rgba(0,0,0,.3); --hair-2:rgba(0,0,0,.14);
           --accent:#005C87; --series-now:#5E6C82; --series-new:#0071A8; }
   #side, #sideOpen, #prog, #notes-drawer { display: none !important; }
+  .cover-fx rect { animation: none !important; transform: none !important; }
   .deck { position: static; inset: auto; }
   .slide { position: static; inset: auto; opacity: 1 !important; visibility: visible !important;
            transform: none !important; break-after: page; min-height: 100vh; }
