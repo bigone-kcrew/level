@@ -22,12 +22,13 @@
   --ink-3:#4A4A52;  /*  8.8:1 */
   --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
   --line:var(--hair-2); --line-2:var(--hair);
-  --accent:#005075;      /*  8.7:1 */
-  --accent-2:#003F5C;
-  --accent-soft:#EAF1F6;
+  --accent:#A81D1A;      /*  7.35:1 — 괘선·테두리 등 그래픽 */
+  --accent-ink:#9C1B18;  /*  8.13 / 7.21:1 — 본문 글자 */
+  --accent-2:#8E1A16;
+  --accent-soft:#FBEDED;
   --brand:var(--accent); --brand-soft:var(--accent-soft);
   --danger:#96201A; --ok:#136B30;
-  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --series-now:#8C97A8; --series-new:#A81D1A; --series-hi:#704005;
   --chip-ink:#FFFFFF;
   --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
          "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
@@ -38,10 +39,11 @@
     --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
     --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
     --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
-    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --accent:#FF5C5C; --accent-ink:#FF8A8A; --accent-2:#E8323C;
+    --accent-soft:rgba(255,92,92,.10);
     --danger:#FF453A; --ok:#30D158;
-    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
-    --chip-ink:#00131C;
+    --series-now:#6B7C96; --series-new:#FF5C5C; --series-hi:#FF9F0A;
+    --chip-ink:#000000;
   }
 }
 *{box-sizing:border-box}
@@ -72,10 +74,10 @@ nav a{
   border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
 }
 nav a:hover{color:var(--ink);background:var(--card-2)}
-nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a.on{color:var(--accent-ink);border-bottom-color:var(--accent);font-weight:700}
 nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
 .cta{
-  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent-ink);
   text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
   display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
 }
@@ -96,7 +98,7 @@ body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:m
 .toc a:hover{color:var(--ink);background:var(--card-2)}
 .toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
 .toc li.l3>a{padding-left:22px;font-size:15px}
-.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+.toc a.on{color:var(--accent-ink);border-left-color:var(--accent);font-weight:700;
   background:var(--accent-soft)}
 /* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
 .anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
@@ -118,7 +120,7 @@ h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
    margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
 h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
 h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
-   margin:36px 0 12px;color:var(--accent)}
+   margin:36px 0 12px;color:var(--accent-ink)}
 h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
 p{margin:0 0 17px}
 ul,ol{margin:0 0 17px;padding-left:26px}
@@ -130,7 +132,7 @@ blockquote{
 }
 blockquote p:last-child{margin:0}
 hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
-a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
 a:hover{background:var(--accent-soft)}
 code{
   font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
@@ -161,8 +163,8 @@ strong,b{font-weight:700}
   font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
   border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
 .fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
-.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
-.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg-l a.on{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--accent-ink)}
 .fg[data-g="inside"] .fg-l a{border-style:dashed}
 /* 문서 머리의 고지 */
 .warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
@@ -1554,8 +1556,8 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 </tr>
 <tr>
 <td><strong>부산항만공사</strong></td>
-<td>인사규정 시행세칙 제35조의3①1호</td>
-<td>&quot;평가기간 내 피평가자가 소속했던 부서의 부서원(<strong>평가기간의 절반 이상을 동시에 근무한 경우에 한</strong>…)&quot;</td>
+<td>인사규정 시행세칙 제35조의3제1항·제3항 <em>(2026.3.30.)</em></td>
+<td>&quot;① … 1. 평가기간 내 피평가자가 소속했던 부서의 부서원(<strong>평가기간의 절반 이상을 동시에 근무한 경우에 한한다.</strong>) 2. … 피평가자가 담당했던 직무와 <strong>밀접한 연관이 있는 직무를 담당한 직원</strong><br>③ 평가자는 본인이 피평가자를 <strong>잘 알지 못한다고 판단하는 경우 평가를 회피하여야 한다.</strong>&quot; ★ <strong>근무기간 기준 + 회피 의무를 함께 둔 유일한 조문</strong></td>
 </tr>
 <tr>
 <td><strong>한국지식재산보호원</strong></td>
@@ -1571,6 +1573,36 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 <p><strong>근무기간 요건은 6개월·4개월·3개월·「기간의 절반 이상」이 모두 실재한다.</strong> 개정안이 <strong>3개월</strong>을
 택한 것은 그중 가장 짧은 기준이며, <strong>연중 전보자가 평가자 명단에서 통째로 빠지는 것을 막기
 위한 선택</strong>이다.</p>
+<p><strong>요건을 「의무」로 둔 형식도 실재한다.</strong> 부산항만공사 제35조의3제1항은 평가자 범위를 <strong>근무기간과
+직무 연관</strong>으로 한정하고, 같은 조 제3항은 평가자 본인에게 <strong>회피 의무</strong>까지 지운다. 개정안 제3항은
+이를 <strong>지정권자에 대한 금지</strong>로 뒤집어 둔 것인데, 다면평가자를 인사담당부서장이 지정하는 구조
+(제2항)에서는 금지의 수범자를 지정권자로 두는 편이 실효가 있기 때문이다. 같은 취지의 조문이
+두 곳 더 있다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>규정·조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>소상공인시장진흥공단</strong> <em>(중기부)</em></td>
+<td>「수행능력평가 운영요령」 제13조제1항</td>
+<td>&quot;평가자는 피평가자의 <strong>업무유관자</strong> 중에서 선정한다. 이때, 업무유관자란 <strong>최근 3년간 동일한 부서 등에서 함께 근무한 경험이 있는 자</strong>를 말한다&quot;</td>
+</tr>
+<tr>
+<td><strong>한국광해광업공단</strong></td>
+<td>「직원근무성적평정 규정」 제19조제1항</td>
+<td>&quot;평가자는 평가대상 직원과의 <strong>업무 연관성을 고려하여</strong> 공정하고 객관적으로 평가할 수 있는 직원으로 선정한다&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>소관 부처가 같은 소상공인시장진흥공단이 「업무유관자」를 정의 규정으로 두고 있다는 점이 특히
+쓸모가 있다.</strong> 개정 15가 요구하는 것은 그 정의를 창진원 규칙에 두자는 것이다.</p>
+<p><strong>다만 개정 15의 두 가지는 선례가 없다 — 조합이 먼저 밝힌다.</strong> <strong>피평가자가 5인 이상을 추천</strong>하는
+절차(제2항)와 <strong>업적·역량평가 1차 평가자를 다면평가자에서 배제</strong>하는 것(제1항 후단)은 위 기관
+조문에 없다. 배제 조항의 근거는 선례가 아니라 <strong>같은 성향이 두 경로로 반영되는 구조</strong>(위 현행
+조문 표)를 끊는 데 있다.</p>
 <blockquote>
 <p><strong>사측 2026년 개편(안)의 「무작위 10명 선별」에 반대해야 한다.</strong> 사측 준비 문서에는 다면평가
 평가자를 무작위로 선별하는 안이 담겨 있다. 무작위 지정은 <strong>접점을 고려하지 않으므로 같은
@@ -1918,6 +1950,79 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 </tbody></table></div>
 <p><em>(표에 없는 인원은 <code>=STDEVP</code> 로 산출한다. 인사담당부서장은 해당 회차에 적용한 s(n) 값을
 제9조제6항에 따라 함께 보고한다.)</em></p>
+<h4>왜 정규분포인가 — 선형 환산과 비교했다</h4>
+<p>「순위만 남기고 점수는 규정이 계산한다」는 구조에는 <strong>명확한 선례가 있다.</strong> 다만 그 선례들은
+모두 <strong>선형(등간) 환산</strong>을 쓴다. 사측이 「선례대로 선형으로 하자」고 할 수 있으므로 미리 측정했다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>환산 방식</th>
+<th>외부요인 제거율</th>
+<th>실력–평정점 ρ</th>
+<th><strong>규모격차</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>정규환산 + ÷ s(n)</strong> <em>(개정안)</em></td>
+<td><strong>29.8%</strong></td>
+<td>0.701</td>
+<td><strong>+0.22점</strong></td>
+</tr>
+<tr>
+<td>선형 · 표준편차 7 맞춤</td>
+<td>29.6%</td>
+<td>0.700</td>
+<td>−1.30점</td>
+</tr>
+<tr>
+<td>선형 · 60~100 등간 <em>(전파진흥원식)</em></td>
+<td>30.3%</td>
+<td>0.705</td>
+<td>−1.62점</td>
+</tr>
+</tbody></table></div>
+<p><em>(규모격차 = 실력 상위 20% 중 16명 이상 부서 소속자의 평균 평정점 − 3명 이하 부서 소속자의 평균.
+0에 가까울수록 부서 규모의 영향이 없다. 반복 400회.)</em></p>
+<p><strong>외부요인 제거 효과는 셋이 사실상 같다 — 0.7%p 안에 있다.</strong> 조합은 이 사실을 숨기지 않는다.
+<strong>정규환산을 택한 이유는 효과가 커서가 아니라 부서 규모의 영향을 없애기 위해서다.</strong></p>
+<p>선형 등간 환산은 <strong>3명 부서의 1위와 16명 부서의 1위에게 같은 점수를 준다.</strong> 그 결과 큰 부서가
+<strong>1.3~1.6점 불리</strong>해진다. 창업진흥원 부서는 3~16명으로 다섯 배 차이가 나므로 이 영향이 작지 않다.
+정규환산에 ÷ s(n) 을 더하면 그 격차가 <strong>+0.22점</strong>으로 줄어든다.</p>
+<blockquote>
+<p><strong>따라서 이 항목은 협의 대상이다.</strong> 사측이 선례를 이유로 선형 환산을 원하면 조합은 받을 수 있다.
+다만 그때는 <strong>부서 규모에 따른 유·불리가 남는다는 점을 함께 기록</strong>해야 한다.</p>
+</blockquote>
+<p><strong>타기관 근거 — 「순위만 정하고 점수는 규정이 계산한다」</strong> 전수 조사에서 이 구조의 선례를 두 곳
+확인했다. 둘 다 <strong>선형(등간) 환산</strong>이라는 점까지 함께 밝힌다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>규정·조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국방송통신전파진흥원</strong></td>
+<td>「역량평가 규칙」 제14조제2항 <em>(개정 2021.2.23.)</em> · 제16조의2 <em>(본조신설 2020.2.19.)</em></td>
+<td>제14조② — &quot;2급 이상의 하향평가는 12월 31일 기준 직급으로 평가자가 절대평가를 하되 확인자가 정한 직위별 평가순위에 따라 환산한 점수를 평가점수로 한다. 이 경우 <strong>평가자가 정한 동일직위 평가순위는 확인자가 바꿀 수 없다.</strong><br>평가점수 = 60점 + (40점 ÷ 피평가자인원) × (피평가자인원 - 평가순위 + 1)&quot;<br>제16조② — &quot;평정위원회는 <strong>평가자가 부여한 순위는 바꿀 수 없다.</strong>&quot;<br>제14조⑤ — &quot;상향평가 및 동료평가는 평가자가 절대평가를 하되 다음 <strong>평균․표준편차 일치법</strong>을 적용하여 평가 단위별 성향을 보정한 점수를 평가점수로 한다. … 평가점수 = 목표평균(85점) + [(평가단위별 평균점수 - 전체 평균점수) ÷ 전체 표준편차] × 표준편차(2)&quot;</td>
+</tr>
+<tr>
+<td><strong>한국산업안전보건공단</strong></td>
+<td>「인사규정 시행규칙」 제64조제1항 <em>(개정 2026.4.30.)</em> · 「직원 평가에 관한 운영지침」 제10조제1항 <em>(2026.4.30.)</em></td>
+<td>시행규칙 제64조① — &quot;능력평가 점수는 다음의 산식에 따라 직급·직렬별로 환산하여 부여한다. 평가점수 = 50 - (50-30) X (피평가자순위-해당 직급(직렬) 내 최고순위) / (해당 직급(직렬) 내 최하위순위-해당 직급(직렬) 내 최고순위)&quot;<br>운영지침 제10조① — &quot;1차 평가 결과를 참고하여 <strong>평가 단위별 피평가자 순위에 따른 변환 점수</strong>를 부여하며 인원 및 순위에 관한 변환 점수 세부 기준은 별표 4와 같다.&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>두 조문이 제2호와 제3호를 각각 뒷받침한다.</strong> 전파진흥원 제14조제2항 후단과 제16조제2항은
+<strong>평가자가 정한 순위를 상급자·위원회가 바꿀 수 없다</strong>고 못박았는데, 이는 순위를 보정의 유일한
+입력으로 삼는 제2호와 같은 취지다. 산업안전보건공단은 순위에 따른 <strong>변환 점수표</strong>를 별표로 두어
+제3호와 같은 방식으로 작동한다.</p>
+<p><strong>다만 환산 방식은 다르다 — 조합이 먼저 밝힌다.</strong> 두 기관 모두 선형(등간) 환산이고, 순위를
+정규분포 점수로 되돌리는 방식(제3호)은 <strong>355개 기관 내규에서 한 건도 확인되지 않았다.</strong>
+<b>「정규분포」</b>를 쓰는 기관 <strong>28곳</strong>, <b>「표준점수/T점수/Z점수」</b>를 쓰는 기관 <strong>40곳</strong>을 전수로
+확인했으나, 정규분포는 전부 <strong>등급별 인원 배분비율</strong>을 정당화하는 데 쓰이고 표준점수는 전부
+<strong>원점수를 입력으로 하는 z변환</strong>이다. 순위를 입력으로 정규 역함수를 적용한 사례, <code>NORM.S.INV</code>·
+<b>「순서통계량」</b> 문언, 표본크기 보정항 s(n)에 해당하는 장치는 <strong>한 건도 없다.</strong></p>
 <blockquote>
 <p><strong>인원이 많다고 s(n)을 1로 두어서는 안 된다.</strong> n이 커지면 s(n)이 1에 가까워지지만 <strong>도달하지는
 않는다.</strong> 창업진흥원 2차 평가군(본부)은 33~59명이므로 s(n) = 1을 적용하면 실제 표준편차가
@@ -2153,6 +2258,15 @@ C 10이었고 실제 배정은 19.9 / 30.1 / 40.3 / 9.7%였다. 이 개정은 �
 얹는 구조로, 개정 6과 정확히 같은 설계다. <strong>전수 조사에서 이 조문은 355개 기관 중 새만금개발공사가
 유일하다.</strong> 사유 기재 의무는 한국산업기술시험원 「공무직 운영세칙」 제10조의1②(보정 후 70점 미만자에
 대해 사유 기재)와 중소기업은행 제19조③(상향 평정 시 사유 구체 기재)에 선례가 있다.</p>
+<p><strong>완화형 선례 — 예금보험공사</strong> 「개인성과관리 시행지침」 제15조제2항 <em>(개정 2017.9.26.)</em> — &quot;② 확인자는
+평가군별로 … <strong>평균 및 분포비율 유지 등을 위하여</strong> … 개별 평정점을 <strong>±10점 범위내에서 조정할 수
+있다.</strong>&quot; <strong>조정 폭은 같으나 합계 0 제약이 없다.</strong> 그 결과 조정이 평가군 평균을 움직일 수 있고
+<strong>사후 검산이 불가능하다.</strong> 개정안이 합계 0 제약을 반드시 함께 두는 이유가 이 대비에 있다.</p>
+<p><strong>조정 주체는 선례와 다르다 — 조합이 먼저 밝힌다.</strong> 새만금개발공사는 <b>「조정자」</b>, 예금보험공사는
+<b>「확인자」</b>가 조정한다. 조정 주체를 <strong>1차 평가자</strong>로 둔 사례는 전수 조사에서 확인되지 않았다.
+제7호가 1차 평가자를 주체로 삼는 것은 위 「제7호를 두는 이유」에서 밝힌 대로 <strong>2차 평가자가 관측하지
+못한 사정을 교정하는 재량</strong>을 목적으로 하기 때문이며, 합계 0 제약과 사유 기재 의무가 그 재량의
+통제 장치다.</p>
 <h4>조합이 먼저 밝히는 잔여 취약점</h4>
 <p>제7호로도 해소되지 않는 것이 둘 있다.</p>
 <p><strong>첫째, 부서 간 실제 실력 격차가 지워진다.</strong> 순위기반 보정은 모든 평가군의 분포를 같게 만든다.

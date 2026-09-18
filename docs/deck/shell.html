@@ -49,6 +49,22 @@
 <!--SLIDES-->
 </div>
 
+<!-- 목차를 열었을 때 뒤를 덮는 막 (좁은 화면) -->
+<div id="sideScrim" hidden></div>
+
+<!-- 모바일 이동 바 — 키보드가 없는 환경의 이동 수단 -->
+<nav id="mbar" aria-label="슬라이드 이동">
+  <button type="button" id="mPrev" aria-label="이전 슬라이드">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    <span>이전</span>
+  </button>
+  <button type="button" id="mMenu" aria-label="목차 열기"><span id="mCount">1 / 1</span></button>
+  <button type="button" id="mNext" aria-label="다음 슬라이드">
+    <span>다음</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+</nav>
+
 <div id="prog"><span></span></div>
 <div id="notes-drawer" aria-live="polite">
   <div class="hd">발표 노트 — N 키로 닫기</div>

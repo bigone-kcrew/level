@@ -22,12 +22,13 @@
   --ink-3:#4A4A52;  /*  8.8:1 */
   --hair:rgba(17,17,20,.20); --hair-2:rgba(17,17,20,.09);
   --line:var(--hair-2); --line-2:var(--hair);
-  --accent:#005075;      /*  8.7:1 */
-  --accent-2:#003F5C;
-  --accent-soft:#EAF1F6;
+  --accent:#A81D1A;      /*  7.35:1 — 괘선·테두리 등 그래픽 */
+  --accent-ink:#9C1B18;  /*  8.13 / 7.21:1 — 본문 글자 */
+  --accent-2:#8E1A16;
+  --accent-soft:#FBEDED;
   --brand:var(--accent); --brand-soft:var(--accent-soft);
   --danger:#96201A; --ok:#136B30;
-  --series-now:#8C97A8; --series-new:#004D70; --series-hi:#704005;
+  --series-now:#8C97A8; --series-new:#A81D1A; --series-hi:#704005;
   --chip-ink:#FFFFFF;
   --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,
          "Apple SD Gothic Neo","Noto Sans KR",system-ui,"Malgun Gothic","맑은 고딕",sans-serif;
@@ -38,10 +39,11 @@
     --bg:#000000; --card:#0B0B0D; --card-2:#16161A; --bg-2:#16161A;
     --ink:#F5F5F7; --ink-2:#C6C6CC; --ink-3:#A4A4AC;
     --hair:rgba(245,245,247,.16); --hair-2:rgba(245,245,247,.075);
-    --accent:#64D2FF; --accent-2:#0A84FF; --accent-soft:rgba(100,210,255,.09);
+    --accent:#FF5C5C; --accent-ink:#FF8A8A; --accent-2:#E8323C;
+    --accent-soft:rgba(255,92,92,.10);
     --danger:#FF453A; --ok:#30D158;
-    --series-now:#6B7C96; --series-new:#64D2FF; --series-hi:#FF9F0A;
-    --chip-ink:#00131C;
+    --series-now:#6B7C96; --series-new:#FF5C5C; --series-hi:#FF9F0A;
+    --chip-ink:#000000;
   }
 }
 *{box-sizing:border-box}
@@ -72,10 +74,10 @@ nav a{
   border-bottom:3px solid transparent;white-space:nowrap;transition:color .18s,border-color .18s,background .18s;
 }
 nav a:hover{color:var(--ink);background:var(--card-2)}
-nav a.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+nav a.on{color:var(--accent-ink);border-bottom-color:var(--accent);font-weight:700}
 nav a:focus-visible,.cta:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
 .cta{
-  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent);
+  font-size:15px;font-weight:700;color:var(--chip-ink);background:var(--accent-ink);
   text-decoration:none;border-radius:6px;padding:12px 20px;min-height:48px;
   display:flex;align-items:center;white-space:nowrap;flex:0 0 auto;transition:filter .18s;
 }
@@ -96,7 +98,7 @@ body.has-toc main{max-width:1420px;display:grid;gap:34px;grid-template-columns:m
 .toc a:hover{color:var(--ink);background:var(--card-2)}
 .toc li.l2>a{font-weight:600;color:var(--ink-2);margin-top:8px}
 .toc li.l3>a{padding-left:22px;font-size:15px}
-.toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:700;
+.toc a.on{color:var(--accent-ink);border-left-color:var(--accent);font-weight:700;
   background:var(--accent-soft)}
 /* 절 제목 옆의 링크 표시 — 마우스를 올릴 때만 보인다 */
 .anchor{margin-left:.4em;color:var(--hair);text-decoration:none;font-weight:400;
@@ -118,7 +120,7 @@ h2{font-size:clamp(24px,2.5vw,33px);line-height:1.24;letter-spacing:-.022em;
    margin:58px 0 16px;padding-top:20px;border-top:1px solid var(--hair)}
 h2:first-of-type{border-top:0;padding-top:0;margin-top:36px}
 h3{font-size:clamp(20px,1.9vw,24px);line-height:1.34;letter-spacing:-.016em;
-   margin:36px 0 12px;color:var(--accent)}
+   margin:36px 0 12px;color:var(--accent-ink)}
 h4{font-size:19.5px;line-height:1.44;letter-spacing:-.010em;margin:26px 0 8px}
 p{margin:0 0 17px}
 ul,ol{margin:0 0 17px;padding-left:26px}
@@ -130,7 +132,7 @@ blockquote{
 }
 blockquote p:last-child{margin:0}
 hr{border:0;border-top:1px solid var(--hair);margin:48px 0}
-a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
 a:hover{background:var(--accent-soft)}
 code{
   font-family:var(--mono);font-size:max(15.5px,.9em);background:var(--card-2);
@@ -161,8 +163,8 @@ strong,b{font-weight:700}
   font-size:16px;font-weight:600;text-decoration:none;color:var(--ink-2);
   border:1px solid var(--hair);border-radius:6px;transition:color .16s,border-color .16s,background .16s}
 .fg-l a:hover{color:var(--ink);border-color:var(--ink-3);background:var(--card-2)}
-.fg-l a.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
-.fg[data-g="inside"] .fg-h{color:var(--danger)}
+.fg-l a.on{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+.fg[data-g="inside"] .fg-h{color:var(--accent-ink)}
 .fg[data-g="inside"] .fg-l a{border-style:dashed}
 /* 문서 머리의 고지 */
 .warn-in,.warn-ap{margin:0 0 30px;padding:16px 20px;border-radius:6px;font-size:16.5px;
@@ -815,7 +817,218 @@ footer{max-width:1180px;margin:0 auto;padding:0 22px 60px;color:var(--ink-3);
 S~E 6등급 체계를 별도로 운영하고 있다. 따라서 근무평정 등급 비율을 규칙에 명시하는 것(개정 10)은
 상위 지침과 충돌하지 않는다.</p>
 <hr>
-<h2 id="9-창업진흥원의-위치-요약">§9 창업진흥원의 위치 — 요약<a class="anchor" href="#9-창업진흥원의-위치-요약" aria-label="이 절 링크">§</a></h2>
+<h2 id="9-제안-요소별-선례-조합-제안의-요소는-어디에-이미-있는가">§9 제안 요소별 선례 — 조합 제안의 요소는 어디에 이미 있는가<a class="anchor" href="#9-제안-요소별-선례-조합-제안의-요소는-어디에-이미-있는가" aria-label="이 절 링크">§</a></h2>
+<p>§1~§8이 「창진원이 어디에 서 있는가」를 본 것이라면, 이 절은 <strong>조합 제안의 요소 하나하나가 다른
+기관 내규에 이미 있는가</strong>를 본 것이다. 대상·방법·기준일은 §0과 같다 — <strong>355개 기관 · 규정 파일
+36,190건 전수</strong>, 기준일 2026-09-10.</p>
+<p>각 항목마다 <strong>창진원 제안과 같은 점 / 다른 점</strong>을 함께 적는다. 협의에서 선례를 제시할 때 사측이
+「그 기관은 우리와 다르다」로 되받을 수 있으므로, 다른 점은 조합이 먼저 밝힌다.</p>
+<h3 id="9-1-①-평가자는-순위만-정하고-점수는-규정이-계산한다">9-1 ① 평가자는 순위만 정하고 점수는 규정이 계산한다<a class="anchor" href="#9-1-①-평가자는-순위만-정하고-점수는-규정이-계산한다" aria-label="이 절 링크">§</a></h3>
+<p>개정안 <b>[별표 9]</b> 제2호·제3호에 해당한다. <strong>이 구조에는 명확한 선례가 있다.</strong></p>
+<p><strong>한국방송통신전파진흥원</strong> 「역량평가 규칙」 — 제14조제2항 <em>(개정 2021.2.23.)</em> · 제16조의2
+<em>(본조신설 2020.2.19.)</em></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>제14조②</strong></td>
+<td>&quot;2급 이상의 하향평가는 12월 31일 기준 직급으로 평가자가 절대평가를 하되 확인자가 정한 직위별 평가순위에 따라 환산한 점수를 평가점수로 한다. 이 경우 <strong>평가자가 정한 동일직위 평가순위는 확인자가 바꿀 수 없다.</strong><br>평가점수 = 60점 + (40점 ÷ 피평가자인원) × (피평가자인원 - 평가순위 + 1)&quot;</td>
+</tr>
+<tr>
+<td><strong>제16조②</strong></td>
+<td>&quot;평정위원회는 <strong>평가자가 부여한 순위는 바꿀 수 없다.</strong>&quot;</td>
+</tr>
+<tr>
+<td><strong>제14조⑤</strong></td>
+<td>&quot;상향평가 및 동료평가는 평가자가 절대평가를 하되 다음 <strong>평균․표준편차 일치법</strong>을 적용하여 평가 단위별 성향을 보정한 점수를 평가점수로 한다. … 평가점수 = 목표평균(85점) + [(평가단위별 평균점수 - 전체 평균점수) ÷ 전체 표준편차] × 표준편차(2)&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>한국산업안전보건공단</strong> 「인사규정 시행규칙」 제64조제1항 <em>(개정 2026.4.30.)</em> · 「직원 평가에
+관한 운영지침」 제10조제1항 <em>(2026.4.30.)</em></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>시행규칙 제64조①</strong></td>
+<td>&quot;능력평가 점수는 다음의 산식에 따라 직급·직렬별로 환산하여 부여한다. 평가점수 = 50 - (50-30) X (피평가자순위-해당 직급(직렬) 내 최고순위) / (해당 직급(직렬) 내 최하위순위-해당 직급(직렬) 내 최고순위)&quot;</td>
+</tr>
+<tr>
+<td><strong>운영지침 제10조①</strong></td>
+<td>&quot;1차 평가 결과를 참고하여 <strong>평가 단위별 피평가자 순위에 따른 변환 점수</strong>를 부여하며 인원 및 순위에 관한 변환 점수 세부 기준은 별표 4와 같다.&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>같은 점</strong> 평가자는 순위만 정하고 <strong>점수는 규정의 산식이 계산한다.</strong> 개정안 <b>[별표 9]</b>
+제2호·제3호와 같은 구조다. 전파진흥원은 여기에 더해 <strong>상급자·평정위원회가 그 순위를 바꿀 수
+없다</strong>고 두 곳에 못박았는데, 이는 개정안이 순위를 보정의 유일한 입력으로 삼는 것과 같은 취지다.</p>
+<p><strong>다른 점</strong> 두 기관 모두 <strong>선형(등간) 환산</strong>이다 — 전파진흥원은 60~100점을 인원으로 등분하고,
+산업안전보건공단은 최고순위와 최하위순위 사이를 50~30점에 등간 배분한다. 개정안은 <strong>정규분포
+환산에 ÷ s(n)</strong> 을 더한다. 적용 범위도 다르다 — 전파진흥원은 2급 이상 하향평가, 산업안전보건공단은
+능력평가에 대한 것이고, 개정안은 업적·역량평가 전부와 다면·상향평가에 적용한다.</p>
+<h3 id="9-2-②-평균·표준편차-일치법">9-2 ② 평균·표준편차 일치법<a class="anchor" href="#9-2-②-평균·표준편차-일치법" aria-label="이 절 링크">§</a></h3>
+<p>개정안 <b>[별표 9]</b> 제6호(시행 첫해의 병산)가 쓰는 방식이다. §1-4에 적은 선행 조사 41곳에 더해
+다음이 확인되었다. <strong>선례가 매우 많은 쪽이다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>규정·조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>한국여성정책연구원</strong></td>
+<td>「직원평정규정」 제13조·별표 2 <em>(개정 2024.12.11.)</em> — 2단계 표준화</td>
+<td>&quot;① 평균차이조정 : 두 집단의 평균점수를 동일하게 해주는 조정임. ② 분포차이조정 : 집단별 분포가 같도록 하는 조정임. ③ 최종점수 = [평정대상자의 표준점수] × [두 집단의 전체 표준편차] + [두 집단의 전체 평균점수]&quot;</td>
+</tr>
+<tr>
+<td><strong>한국남부발전(주)</strong></td>
+<td>「다면평가 운영 기준」 제9조제1항·제4항 <em>(2026.4.2.)</em> — <strong>다면평가에 적용</strong></td>
+<td>&quot;① 다면평가의 점수는 … 변환표준점수로 계산하며 <strong>평가결과의 활용은 변환표준점수를 사용한다.</strong> ④ 변환표준점수(S) = Zσt + Mt ∴ Z = (m-M)/σ&quot;</td>
+</tr>
+<tr>
+<td><strong>한국전력기술주식회사</strong></td>
+<td>「근무성적평정규정」 제12조 <em>(2026.2.24.)</em> — 부서 내 표준화 + 순위 재환산, <strong>3인 이하 예외</strong></td>
+<td>&quot;개인표준점수 = (개인 평정점수 - 피평정집단(<strong>3인 이하시 회사 전체</strong>)의 평정점수의 평균) / … 표준편차&quot;</td>
+</tr>
+<tr>
+<td><strong>대한석탄공사</strong></td>
+<td>「종합근무평가규정」 제16조제2항·제17조제1항 <em>(2017.1.1.)</em> · 별표9-2 — <b>「정규분포」</b> 명시</td>
+<td>별표9-2 — &quot;평가군 차원의 평가결과 일관성 확보: 서로 다른 성향의 평가자들로 인하여 발생 가능한(<strong>관대화, 중심화, 가혹화</strong>) 피평가자 개인의 왜곡된 평가점수의 상대적 차이를 제거하고자 함 … 평가결과는 <strong>정규분포를 이루도록 함.</strong>&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>같은 점</strong> 평가자별 성향 차이를 <strong>규정에 적힌 산식으로</strong> 제거한다는 목적이 개정 6과 같다.
+한국남부발전은 <strong>다면평가에까지</strong> 적용하고(개정 9·15와 같다), 한국전력기술은 <strong>3인 이하 평가군의
+예외</strong>를 두었는데 이는 개정안 <b>[별표 9]</b> 제5호(6명 미만 면제)와 같은 계열이다. 대한석탄공사는
+관대화·중심화·가혹화를 규정 문언으로 지목한다.</p>
+<p><strong>다른 점</strong> 이 방식은 분모에 <strong>평가자의 표준편차</strong>가 들어간다. 균등형 평가자에게는 그 값이 0에
+가까워져 산식이 불안정해지므로, 개정안은 순위기반을 본안으로 두고 이 방식은 제6호의 <strong>첫해 병산</strong>
+대상으로만 쓴다. 전파진흥원도 하향평가는 순위 환산, 상향·동료평가는 평균·표준편차 일치법으로
+<strong>두 방식을 나누어 쓴다.</strong></p>
+<h3 id="9-3-③-N점-조정-합계-0">9-3 ③ ±N점 조정 + 합계 0<a class="anchor" href="#9-3-③-N점-조정-합계-0" aria-label="이 절 링크">§</a></h3>
+<p>개정안 <b>[별표 9]</b> 제7호에 해당한다. <strong>전수 검색상 합계 0 제약을 둔 조문은 하나뿐이다.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>규정·조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>새만금개발공사</strong></td>
+<td>「인사규정 시행세칙」 제13조제2항·제3항 <em>(개정 2021.12.9.)</em></td>
+<td>&quot;③ … 근무평가 점수를 <strong>±10점 범위 내로 조정할 수 있다. 다만, 평가 단위인 비교집단 내의 조정점수의 합계는 0이 되도록 한다.</strong>&quot;</td>
+</tr>
+<tr>
+<td><strong>예금보험공사</strong> <em>(완화형)</em></td>
+<td>「개인성과관리 시행지침」 제15조제2항 <em>(개정 2017.9.26.)</em></td>
+<td>&quot;② 확인자는 평가군별로 … <strong>평균 및 분포비율 유지 등을 위하여</strong> … 개별 평정점을 <strong>±10점 범위내에서 조정할 수 있다.</strong>&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>같은 점</strong> 보정 산식 위에 <strong>조정 여유를 얹는 2단 구조</strong>이며, 새만금개발공사는 <strong>합계 0 제약</strong>까지
+같다. 예금보험공사는 조정 폭은 같으나 합계 0 제약이 없어 <strong>사후 검산이 불가능하다</strong> — 조합이
+합계 0을 반드시 함께 두어야 한다고 보는 이유가 이 대비에 있다.</p>
+<p><strong>다른 점</strong> 폭이 다르다(선례 ±10점, 개정안 ±5점). <strong>조정 주체가 다르다</strong> — 새만금은 「조정자」,
+예금보험공사는 「확인자」이고, 개정안은 <strong>1차 평가자</strong>다. 조정 주체를 1차 평가자로 둔 사례는
+전수 조사에서 확인되지 않았다. 사유 기재 의무도 두 기관 조문에는 없다.</p>
+<h3 id="9-4-④-다면평가-업무-관련자-요건">9-4 ④ 다면평가 업무 관련자 요건<a class="anchor" href="#9-4-④-다면평가-업무-관련자-요건" aria-label="이 절 링크">§</a></h3>
+<p>개정 15 제1항·제3항에 해당한다. §1-3·개정 15의 25곳 표에 더해, <strong>의무 규정 형식과 근무기간
+기준</strong>을 함께 둔 조문이 확인되었다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>기관</th>
+<th>규정·조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>부산항만공사</strong></td>
+<td>「인사규정 시행세칙」 제35조의3제1항·제3항 <em>(2026.3.30.)</em></td>
+<td>&quot;① … 1. 평가기간 내 피평가자가 소속했던 부서의 부서원(<strong>평가기간의 절반 이상을 동시에 근무한 경우에 한한다.</strong>) 2. … 피평가자가 담당했던 직무와 <strong>밀접한 연관이 있는 직무를 담당한 직원</strong><br>③ 평가자는 본인이 피평가자를 <strong>잘 알지 못한다고 판단하는 경우 평가를 회피하여야 한다.</strong>&quot;</td>
+</tr>
+<tr>
+<td><strong>소상공인시장진흥공단</strong> <em>(중기부)</em></td>
+<td>「수행능력평가 운영요령」 제13조제1항</td>
+<td>&quot;평가자는 피평가자의 <strong>업무유관자</strong> 중에서 선정한다. 이때, 업무유관자란 <strong>최근 3년간 동일한 부서 등에서 함께 근무한 경험이 있는 자</strong>를 말한다&quot;</td>
+</tr>
+<tr>
+<td><strong>한국광해광업공단</strong></td>
+<td>「직원근무성적평정 규정」 제19조제1항</td>
+<td>&quot;평가자는 평가대상 직원과의 <strong>업무 연관성을 고려하여</strong> 공정하고 객관적으로 평가할 수 있는 직원으로 선정한다&quot;</td>
+</tr>
+</tbody></table></div>
+<p><strong>같은 점</strong> 「업무 관련자가 평가한다」가 <strong>규정 문언으로 실재한다.</strong> 부산항만공사는 관련성을
+<strong>근무기간</strong>(평가기간의 절반 이상)과 <strong>직무 연관</strong>으로 객관화했고, 소상공인시장진흥공단은
+「업무유관자」를 최근 3년 함께 근무한 경험으로 정의했다. 개정 15가 3개월이라는 기간 요건을 쓰는
+방식과 같은 설계다.</p>
+<p><strong>다른 점</strong> 부산항만공사 제3항은 <strong>평가자 본인의 회피 의무</strong>인데 개정안 제3항은 <strong>지정권자에 대한
+금지</strong>다. 그리고 개정 15의 <strong>피평가자 5인 추천</strong>과 <strong>업적·역량평가 1차 평가자의 다면평가자 배제</strong>는
+위 세 기관 조문에 없다.</p>
+<h3 id="9-5-⑤-노동조합에-평가자료-제공">9-5 ⑤ 노동조합에 평가자료 제공<a class="anchor" href="#9-5-⑤-노동조합에-평가자료-제공" aria-label="이 절 링크">§</a></h3>
+<p>개정 16에 해당한다. <strong>전수 조사에서 확인된 선례는 한 곳뿐이다.</strong></p>
+<p><strong>에너지경제연구원</strong> 「업무평가규정」 제42조 <em>(개정 2019.12.30.)</em></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>조문</th>
+<th>원문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>제42조</strong></td>
+<td>&quot;제42조(평가자료의 노동조합 제공) 연구원은 <strong>노동조합이 요구할 경우 익명처리한 일체의 평가자료를 제공한다.</strong> 단, 원장가점에 대한 평가자료는 제외한다.&quot;</td>
+</tr>
+<tr>
+<td><strong>제40조②</strong></td>
+<td>&quot;평가결과 통보시 <strong>평가부문 별 평가자 점수, 동일그룹 평균점수</strong> 등 세부내용을 피평가자에게 제공한다.&quot;</td>
+</tr>
+</tbody></table></div>
+<p>이 조항은 규정에 그치지 않고 <strong>단체협약·노사협약서(2023.10.5. · 2024.11.18. · 2025.7.22. ·
+2026.6.15.)로 반복 확인</strong>되어 있다.</p>
+<p><strong>같은 점</strong> 평가자료를 <strong>익명 처리하여 노동조합에 제공</strong>하는 것이 규정 사항으로 존재한다.
+제40조제2항은 평가자별 점수와 동일그룹 평균을 <strong>피평가자 본인에게</strong> 제공하는데, 이는 개정 11의
+평정점 공개와 같은 방향이다.</p>
+<p><strong>다른 점</strong> 에너지경제연구원은 <strong>요구가 있을 때 원자료를 제공</strong>하는 방식이고, 개정 16은 <strong>산출할
+통계 항목을 특정해 정기적으로 제공</strong>하게 한다. 개정 16 제1항 제2호의 「1차·2차 평가자 간 순위
+일치도」와 제1호의 「평가자별 평균·표준편차」를 항목으로 못박은 규정은 전수 조사에서 확인되지
+않았다.</p>
+<h3 id="9-6-선례가-확인되지-않은-것-조합이-먼저-밝힌다">9-6 선례가 확인되지 않은 것 — 조합이 먼저 밝힌다<a class="anchor" href="#9-6-선례가-확인되지-않은-것-조합이-먼저-밝힌다" aria-label="이 절 링크">§</a></h3>
+<p><strong>선례 조사는 유리한 것만 싣지 않는다.</strong> 아래 셋은 355개 기관 내규에서 한 건도 확인되지 않았다.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>확인 결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Blom 정규 순서통계량으로 순위를 정규분포 점수로 되돌리는 방식</strong> <br><em>(<b>[별표 9]</b> 제3호)</em></td>
+<td><b>355개 기관 내규 어디에도 없다.</b> <b>「정규분포」</b>를 쓰는 기관 <strong>28곳</strong>, <b>「표준점수/T점수/Z점수」</b>를 쓰는 기관 <strong>40곳</strong>을 전수로 확인했으나, 정규분포는 전부 <strong>등급별 인원 배분비율</strong>을 정당화하는 데 쓰이고 표준점수는 전부 <strong>원점수를 입력으로 하는 z변환</strong>이다. 순위를 입력으로 정규 역함수를 적용한 사례, <code>NORM.S.INV</code>·<b>「순서통계량」</b> 문언, 표본크기 보정항 s(n)에 해당하는 장치는 <strong>한 건도 없다</strong></td>
+</tr>
+<tr>
+<td><strong>평정 통계 항목의 특정·정기 제공</strong> <br><em>(개정 16 제1항 제1호·제2호)</em></td>
+<td><b>「1차·2차 평가자 간 순위 일치도」</b>·<b>「평가자별 평균·표준편차」</b>를 산출 통계 항목으로 <strong>특정하여 정기 제공</strong>하도록 한 규정은 없다. 에너지경제연구원은 <strong>요구 시 원자료 제공</strong>이다</td>
+</tr>
+<tr>
+<td><strong>조정 주체를 1차 평가자로 둔 것</strong> <br><em>(<b>[별표 9]</b> 제7호)</em></td>
+<td>없다. 새만금개발공사는 <b>「조정자」</b>, 예금보험공사는 <b>「확인자」</b>다</td>
+</tr>
+</tbody></table></div>
+<p><strong>이것이 곧 협의의 쟁점이 된다.</strong> 순위 기반 구조 자체는 선례가 있으나 <strong>정규환산은 조합의 새
+설계</strong>이며, 선례는 전부 선형(등간) 환산이다. 조합은 두 방식의 효과를 나란히 측정해 두었고
+그 결과는 <a href="amendments.html">02. 규정 개정안</a> <b>[별표 9]</b> 제3호에 있다 — <strong>외부요인 제거
+효과는 0.7%p 안에서 같고, 정규환산의 이점은 규모 중립성뿐이다.</strong></p>
+<hr>
+<h2 id="10-창업진흥원의-위치-요약">§10 창업진흥원의 위치 — 요약<a class="anchor" href="#10-창업진흥원의-위치-요약" aria-label="이 절 링크">§</a></h2>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -886,7 +1099,7 @@ S~E 6등급 체계를 별도로 운영하고 있다. 따라서 근무평정 등�
 2026-09-10이다. 전수 집계의 방법과 기관 명단은 <a href="census.html">부록</a>에 있다. 창업진흥원 규정
 인용은 ALIO 경영공시 게시본(근무평정 규칙 2026.01.27. 개정)과 2025년 근무평정 계획에 따른다.</p>
 </blockquote>
-</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-조사-방법">§0 조사 방법</a></li><li class="l2"><a href="#1-사전-평균제약과-사후-보정-핵심-비교">§1 사전 평균제약과 사후 보정 — 핵심 비교</a></li><li class="l3"><a href="#1-1-전수-집계">1-1 전수 집계</a></li><li class="l3"><a href="#1-2-사전-평균제약-17개-기관-전수">1-2 사전 평균제약 17개 기관 전수</a></li><li class="l3"><a href="#1-3-중소벤처기업부-소관-형제기관">1-3 중소벤처기업부 소관 형제기관</a></li><li class="l3"><a href="#1-4-사후-보정-산식-조문-원문">1-4 사후 보정 산식 — 조문 원문</a></li><li class="l3"><a href="#1-5-조정-여유-합계-0-방식">1-5 조정 여유 — 합계 0 방식</a></li><li class="l2"><a href="#2-이동자-평정-창진원과-다수-기관의-차이">§2 이동자 평정 — 창진원과 다수 기관의 차이</a></li><li class="l3"><a href="#2-1-점수를-누가-부여하는가">2-1 점수를 누가 부여하는가</a></li><li class="l3"><a href="#2-2-최소-근무기간-기준">2-2 최소 근무기간 기준</a></li><li class="l3"><a href="#2-3-목표의-재설정">2-3 목표의 재설정</a></li><li class="l2"><a href="#3-평가자-부재와-직무대리">§3 평가자 부재와 직무대리</a></li><li class="l2"><a href="#4-소규모-평가군과-절대평가">§4 소규모 평가군과 절대평가</a></li><li class="l2"><a href="#5-동점-부여-금지와-재평가-요구">§5 동점 부여 금지와 재평가 요구</a></li><li class="l2"><a href="#6-평정-결과-공개">§6 평정 결과 공개</a></li><li class="l2"><a href="#7-노동조합-근로시간면제자-평정">§7 노동조합 근로시간면제자 평정</a></li><li class="l2"><a href="#8-상위-지침-무엇을-규율하고-무엇을-규율하지-않는가">§8 상위 지침 — 무엇을 규율하고 무엇을 규율하지 않는가</a></li><li class="l2"><a href="#9-창업진흥원의-위치-요약">§9 창업진흥원의 위치 — 요약</a></li></ol></aside></main>
+</article><aside class="toc" aria-label="이 문서의 목차"><p class="toc-h">이 문서 안에서</p><ol><li class="l2"><a href="#0-조사-방법">§0 조사 방법</a></li><li class="l2"><a href="#1-사전-평균제약과-사후-보정-핵심-비교">§1 사전 평균제약과 사후 보정 — 핵심 비교</a></li><li class="l3"><a href="#1-1-전수-집계">1-1 전수 집계</a></li><li class="l3"><a href="#1-2-사전-평균제약-17개-기관-전수">1-2 사전 평균제약 17개 기관 전수</a></li><li class="l3"><a href="#1-3-중소벤처기업부-소관-형제기관">1-3 중소벤처기업부 소관 형제기관</a></li><li class="l3"><a href="#1-4-사후-보정-산식-조문-원문">1-4 사후 보정 산식 — 조문 원문</a></li><li class="l3"><a href="#1-5-조정-여유-합계-0-방식">1-5 조정 여유 — 합계 0 방식</a></li><li class="l2"><a href="#2-이동자-평정-창진원과-다수-기관의-차이">§2 이동자 평정 — 창진원과 다수 기관의 차이</a></li><li class="l3"><a href="#2-1-점수를-누가-부여하는가">2-1 점수를 누가 부여하는가</a></li><li class="l3"><a href="#2-2-최소-근무기간-기준">2-2 최소 근무기간 기준</a></li><li class="l3"><a href="#2-3-목표의-재설정">2-3 목표의 재설정</a></li><li class="l2"><a href="#3-평가자-부재와-직무대리">§3 평가자 부재와 직무대리</a></li><li class="l2"><a href="#4-소규모-평가군과-절대평가">§4 소규모 평가군과 절대평가</a></li><li class="l2"><a href="#5-동점-부여-금지와-재평가-요구">§5 동점 부여 금지와 재평가 요구</a></li><li class="l2"><a href="#6-평정-결과-공개">§6 평정 결과 공개</a></li><li class="l2"><a href="#7-노동조합-근로시간면제자-평정">§7 노동조합 근로시간면제자 평정</a></li><li class="l2"><a href="#8-상위-지침-무엇을-규율하고-무엇을-규율하지-않는가">§8 상위 지침 — 무엇을 규율하고 무엇을 규율하지 않는가</a></li><li class="l2"><a href="#9-제안-요소별-선례-조합-제안의-요소는-어디에-이미-있는가">§9 제안 요소별 선례 — 조합 제안의 요소는 어디에 이미 있는가</a></li><li class="l3"><a href="#9-1-①-평가자는-순위만-정하고-점수는-규정이-계산한다">9-1 ① 평가자는 순위만 정하고 점수는 규정이 계산한다</a></li><li class="l3"><a href="#9-2-②-평균·표준편차-일치법">9-2 ② 평균·표준편차 일치법</a></li><li class="l3"><a href="#9-3-③-N점-조정-합계-0">9-3 ③ ±N점 조정 + 합계 0</a></li><li class="l3"><a href="#9-4-④-다면평가-업무-관련자-요건">9-4 ④ 다면평가 업무 관련자 요건</a></li><li class="l3"><a href="#9-5-⑤-노동조합에-평가자료-제공">9-5 ⑤ 노동조합에 평가자료 제공</a></li><li class="l3"><a href="#9-6-선례가-확인되지-않은-것-조합이-먼저-밝힌다">9-6 선례가 확인되지 않은 것 — 조합이 먼저 밝힌다</a></li><li class="l2"><a href="#10-창업진흥원의-위치-요약">§10 창업진흥원의 위치 — 요약</a></li></ol></aside></main>
 <footer>
 <div class="footmenu"><div class="fg" data-g="inside"><p class="fg-h">조합 내부<span>교섭 전략 — 협의 전 조합 내부 검토용</span></p><div class="fg-l"><a href="proposals.html">제시사항 한눈에</a><a href="bargaining.html">04 교섭 전략</a><a href="plan.html">05 협의 계획</a></div></div><div class="fg" data-g="apart"><p class="fg-h">별도 안건<span>본안과 분리해 다루는 안건</span></p><div class="fg-l"><a href="union.html">근로시간면제자 평정</a></div></div></div>
 <p class="fnote">창업진흥원 노동조합이 작성한 제안 자료입니다. 확정된 제도가 아닙니다. 규정 인용은 각 기관 ALIO 경영공시 게시본에 따르며 확인 기준일은 2026-09-10입니다.</p>

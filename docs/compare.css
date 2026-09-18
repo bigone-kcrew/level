@@ -3,7 +3,14 @@
    (tools/layout.html)이 정의한다. 아래는 그 정의가 없을 때의 폴백이다.
    새 색은 만들지 않는다. 그림자는 쓰지 않는다. JS 없이 순수 CSS로 끝낸다. */
 
-.cmp{ --c-now: var(--series-now, #5E6C82); --c-new: var(--series-new, #005075); }
+/* 붉은 강조색은 채도와 대비를 동시에 만족시키지 못하므로
+   그래픽용(--c-new)과 본문용(--c-ink)을 나눈다. 레이아웃이 정의한 토큰을 쓰되
+   단독으로 열렸을 때를 대비해 폴백을 둔다. */
+.cmp{
+  --c-now: var(--series-now, #8C97A8);
+  --c-new: var(--series-new, #A81D1A);
+  --c-ink: var(--accent-ink, #9C1B18);
+}
 
 /* ── 항목 블록 ───────────────────────────────────────────── */
 .cmp{
@@ -65,7 +72,7 @@
   color: var(--ink, #111114);
 }
 .cmp-now .cmp-lbl{ color: var(--ink-2, #36363C); }
-.cmp-new .cmp-lbl{ color: var(--c-new); }
+.cmp-new .cmp-lbl{ color: var(--c-ink); }
 .cmp-lbl span{                  /* 「발췌」 등 꼬리표 */
   font-size: 16px; font-weight: 500; letter-spacing: 0;
   color: var(--ink-2, #36363C);
@@ -114,8 +121,8 @@
   white-space: nowrap;
 }
 .cmp-tag.chg{
-  color: var(--accent, #005075);
-  border: 2px solid var(--accent, #005075);
+  color: var(--accent-ink, #9C1B18);
+  border: 2px solid var(--accent, #A81D1A);
   background: transparent;
 }
 .cmp-tag.same{
@@ -124,9 +131,9 @@
   background: transparent;
 }
 .cmp-tag.new{
-  color: var(--bg-2, #F1F1F4);
-  background: var(--c-new);
-  border: 2px solid var(--c-new);
+  color: var(--chip-ink, #FFFFFF);
+  background: var(--c-ink);
+  border: 2px solid var(--c-ink);
 }
 .cmp-tag.del{
   color: var(--ink-2, #36363C);

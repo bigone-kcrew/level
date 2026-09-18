@@ -34,7 +34,7 @@ const links = [];
     a.href = "#/" + (i + 1);
     a.innerHTML = '<span class="i">' + String(i + 1).padStart(2, "0") + "</span>" +
                   "<span>" + (s.dataset.title || ("슬라이드 " + (i + 1))) + "</span>";
-    a.addEventListener("click", e => { e.preventDefault(); go(i); });
+    a.addEventListener("click", e => { e.preventDefault(); go(i); if (innerWidth <= 900) setSide(false); });
     nav.appendChild(a); links.push(a);
     // 페이지 번호를 슬라이드마다 자동으로 넣는다
     if (!s.querySelector(".pageno")) {
@@ -56,6 +56,7 @@ function go(n){
   links.forEach((a, i) => a.setAttribute("aria-current", i === n ? "true" : "false"));
   idx = n;
   bar.style.width = ((n + 1) / slides.length * 100) + "%";
+  if (mCount) mCount.textContent = (n + 1) + " / " + slides.length;
 
   // 활성 슬라이드의 data-anim 재트리거 (skill 규약)
   slides[n].querySelectorAll("[data-anim]").forEach(el => {
@@ -114,7 +115,7 @@ function toggleNotes(){
     nbody.innerHTML = n ? n.innerHTML : '<p class="micro">이 슬라이드에는 발표 노트가 없습니다.</p>';
   }
 }
-function toggleSide(){
+function toggleSide(){ if (innerWidth <= 900) { setSide(!document.body.classList.contains("side-on")); return; }
   const hid = document.body.classList.toggle("hide-side");
   document.getElementById("sideOpen").hidden = !hid;
   if (hid) document.getElementById("sideOpen").focus();
@@ -133,6 +134,46 @@ if (!(document.documentElement.requestFullscreen || document.documentElement.web
   if (location.hostname !== "bigone-kcrew.github.io" && location.protocol !== "file:")
     a.href = "https://bigone-kcrew.github.io/level/diagnosis.html";
   a.target = "_blank"; a.rel = "noopener";
+})();
+
+/* ─── 모바일 이동 · 터치 스와이프 ─────────────────────────────────
+   휴대폰과 인앱 브라우저에는 키보드가 없다. 손가락만으로 넘길 수 있어야 한다. */
+const scrim = document.getElementById("sideScrim");
+const mCount = document.getElementById("mCount");
+
+function setSide(on){
+  document.body.classList.toggle("side-on", on);
+  if (scrim) scrim.hidden = !on;
+}
+if (scrim) scrim.addEventListener("click", () => setSide(false));
+
+(function mobileBar(){
+  const prev = document.getElementById("mPrev");
+  const next = document.getElementById("mNext");
+  const menu = document.getElementById("mMenu");
+  if (prev) prev.addEventListener("click", () => go(idx - 1));
+  if (next) next.addEventListener("click", () => go(idx + 1));
+  if (menu) menu.addEventListener("click", () => setSide(!document.body.classList.contains("side-on")));
+})();
+
+(function swipe(){
+  const MIN = 45;      // 최소 가로 이동(px)
+  const MAX_T = 700;   // 최대 시간(ms) — 느린 드래그는 스크롤 의도로 본다
+  let x0 = null, y0 = 0, t0 = 0;
+  deck.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1) { x0 = null; return; }
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+  }, { passive: true });
+  deck.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - x0, dy = t.clientY - y0;
+    x0 = null;
+    if (Date.now() - t0 > MAX_T) return;
+    // 세로 이동이 크면 스크롤이다
+    if (Math.abs(dx) < MIN || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+    go(dx < 0 ? idx + 1 : idx - 1);
+  }, { passive: true });
 })();
 
 /* ─── 테마 — 어두운 화면이 기본, 밝은 회의실·인쇄는 밝은 화면 ─────── */
